@@ -1,9 +1,12 @@
 package main
 
 import(
-    "unsafe"
+    // "unsafe"
     // "fmt"
     "encoding/binary"
+    "github.com/cimgui-go"
+    "image"
+    "image/color"
 )
 
 type ROGatCell struct {
@@ -17,6 +20,7 @@ type ROGatCell struct {
 
 type ROGatMap struct {
     cells [][]ROGatCell
+    cells2 []byte
     width int
     height int
     // coord ysystem is difeerent from image coords so be carefull
@@ -30,10 +34,10 @@ type ROLGatMap struct {
     height int
 }
 
-func loadGatMap(mapName string){
-	gatMap := parseGat([]byte(readFileString(CurDir()+"data/gats/"+mapName+".gat")))
-	gatMaps[mapName] = gatMap
-}
+// func loadGatMap(mapName string){
+// 	gatMap := parseGat([]byte(readFileString(CurDir()+"data/gats/"+mapName+".gat")))
+// 	gatMaps[mapName] = gatMap
+// }
 
 func loadLGatMap(mapName string){
 	lgatMap := parseLGat([]byte(readFileString(CurDir()+"data/lgats/"+mapName+".lgat")))
@@ -48,29 +52,47 @@ func parseLGat(data []byte) ROLGatMap{
         cell_list[i] = make([]uint8, height)
     }
     index := 4;
-    for x := 0; x < int(width); x++{
     for y := 0; y < int(height); y++{
-        cell_list[x][y] = byte(data[index])
+    for x := 0; x < int(width); x++{
+        cell_list[x][y] = uint8(byte(data[index]))
         index += 1
     }}
     return ROLGatMap{cells : cell_list, width : int(width), height : int(height)}
 }
 
-func parseGat(data []byte) ROGatMap {
-    // var format string = string(data[0:4])
-    // var vermajor byte = *(*byte)(unsafe.Pointer(&data[4]))
-    // var verminor byte = *(*byte)(unsafe.Pointer(&data[5]))
-    var width int32 =  *(*int32)(unsafe.Pointer(&data[6]))
-    var height int32 =  *(*int32)(unsafe.Pointer(&data[10]))
-    cell_list := make([][]ROGatCell, width)
-    for i := range cell_list {
-        cell_list[i] = make([]ROGatCell, height)
-    }
-    var index int32 = 14;
-    for x := int32(0); x < width; x++{
-    for y := int32(0); y < height; y++{
-        cell_list[x][y] = *(*ROGatCell)(unsafe.Pointer(&data[index]))
-        index += int32(unsafe.Sizeof(ROGatCell{}))
+func loadGatTexture(mapName string)  {
+    lgatMap := lgatMaps[mapName]
+    img := image.NewRGBA(image.Rect(0, 0, lgatMap.width, lgatMap.height))
+    for x := 0; x < lgatMap.width; x++{
+    for y := 0; y < lgatMap.height; y++{
+        R := 111; G := 111; B := 111;
+        if lgatMap.cells[x][y] == 0 || lgatMap.cells[x][y] == 3 {
+            R = 255; G = 255; B = 255;
+        }
+        c := color.RGBA{ R:uint8(R), G:uint8(G), B:uint8(B), A:255 }
+        // flip y cause coord system
+        img.SetRGBA(x , (lgatMap.height-1) - y , c)
     }}
-    return ROGatMap{cells : cell_list, width : int(width), height : int(height)}
+    mapTextures[mapName] = imgui.NewTextureFromRgba(img)
 }
+
+// func parseGat(data []byte) ROGatMap {
+//     // var format string = string(data[0:4])
+//     // var vermajor byte = *(*byte)(unsafe.Pointer(&data[4]))
+//     // var verminor byte = *(*byte)(unsafe.Pointer(&data[5]))
+//     var width int32 =  *(*int32)(unsafe.Pointer(&data[6]))
+//     var height int32 =  *(*int32)(unsafe.Pointer(&data[10]))
+//     cell_list := make([][]ROGatCell, width)
+//     for i := range cell_list {
+//         cell_list[i] = make([]ROGatCell, height)
+//     }
+//     var index int32 = 14;
+//     cells2 := []byte{}
+//     for y := int32(0); y < height; y++{
+//     for x := int32(0); x < width; x++{
+//         cell_list[x][y] = *(*ROGatCell)(unsafe.Pointer(&data[index]))
+//         cells2 = append(cells2, byte(data[index+16]))
+//         index += int32(unsafe.Sizeof(ROGatCell{}))
+//     }}
+//     return ROGatMap{cells2: cells2, cells : cell_list, width : int(width), height : int(height)}
+// }

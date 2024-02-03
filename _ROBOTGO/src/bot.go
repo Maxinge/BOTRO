@@ -35,7 +35,6 @@ func loadprofil(){
         targetMobs = append(targetMobs, Stoi(ss[1]))
     }
 
-
     fmt.Printf("route -- %v -- \n", route)
     fmt.Printf("targetMobs -- %v -- \n", targetMobs)
     // fmt.Printf("lockMap -- %v -- \n", lockMap)

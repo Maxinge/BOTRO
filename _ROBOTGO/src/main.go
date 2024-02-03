@@ -7,10 +7,10 @@ import(
     "encoding/json"
     "reflect"
     "github.com/cimgui-go"
+    // "github.com/go-gl/gl/v2.1/gl"
+    // "github.com/go-gl/glfw/v3.3/glfw"
     "io/ioutil"
     "strings"
-    "os"
-    "strconv"
 )
 
 type Packet struct {
@@ -37,21 +37,19 @@ var (
     proxyCo net.Conn
     exit = make(chan bool)
 
-
     mapTextures = map[string]*imgui.Texture{}
     // maskTexture  *imgui.Texture
 
-    gatMaps = map[string]ROGatMap{}
-
+    // gatMaps = map[string]ROGatMap{}
     lgatMaps = map[string]ROLGatMap{}
 
     profil map[string]interface{}
     packetsmap map[string]Packet
 
     curCoord = Coord{X:0, Y:0}
-    nextPoint Coord
-	curMap string
-    lockMap string
+    nextPoint = Coord{X:0, Y:0}
+	curMap = ""
+    lockMap = ""
 
 	curPath = []Coord{}
     pathIndex = 0
@@ -74,45 +72,6 @@ func main() {
     fmt.Println("#--- ROBOTGO START ---#")
     fmt.Printf("current dir -- %v -- \n", CurDir())
 
-
-    maps, _ := ioutil.ReadDir(CurDir()+"data/gats/")
-    for _, m := range maps {
-        if !m.IsDir() {
-            name := strings.Split(m.Name(), ".gat")[0]
-            fmt.Printf("name -- %v -- \n", name)
-            loadGatMap(name)
-        }
-    }
-
-
-    for kk, ggg := range gatMaps {
-
-        fichier, _ := os.Create(CurDir()+"data/lgats/"+kk+".lgat")
-        defer fichier.Close()
-
-        ccc := []byte{}
-        ww := int16ToBitString(ggg.width)
-        ww1,_ := strconv.ParseInt(ww[0:8], 2, 8)
-        ww2,_ := strconv.ParseInt(ww[8:16], 2, 8)
-        bb := []byte{byte(ww1),byte(ww2)}
-        ccc = append(ccc,bb...)
-
-        hh := int16ToBitString(ggg.height)
-        hh1,_ := strconv.ParseInt(hh[0:8], 2, 8)
-        hh2,_ := strconv.ParseInt(hh[8:16], 2, 8)
-        bbb := []byte{byte(hh1),byte(hh2)}
-        ccc = append(ccc,bbb...)
-
-        for x := 0; x < ggg.width; x++{
-        for y := 0; y < ggg.height; y++{
-             ccc = append(ccc,byte(ggg.cells[x][y].cell_type))
-        }}
-
-        fichier.Write(ccc)
-    }
-
-
-
     proxyCo, _ = net.Dial("tcp", "127.0.0.1:6666")
     defer proxyCo.Close()
 
@@ -121,14 +80,14 @@ func main() {
     loadprofil()
     fctpackInit()
 
-    loadLGatMap("morocc")
-    loadLGatMap("payon")
-    loadLGatMap("moc_fild10")
-    loadLGatMap("moc_fild09")
-    loadLGatMap("moc_fild15")
-    loadLGatMap("moc_fild12")
-    loadLGatMap("moc_fild18")
-    loadLGatMap("in_sphinx1")
+    maps, _ := ioutil.ReadDir(CurDir()+"data/lgats/")
+    for _, m := range maps {
+        if !m.IsDir() {
+            name := strings.Split(m.Name(), ".lgat")[0]
+            fmt.Printf("name -- %v -- \n", name)
+            loadLGatMap(name)
+        }
+    }
 
 
     go func() {
@@ -247,31 +206,6 @@ func main() {
         }
     }()
 
-    // ########################
-    backend := imgui.CreateBackend(imgui.NewGLFWBackend())
-    backend.SetAfterCreateContextHook(func () {
-        loadGatTexture("morocc")
-    })
-
-    backend.SetBeforeDestroyContextHook(func () {  })
-    backend.SetBgColor(imgui.NewVec4(0.45, 0.55, 0.6, 1.0))
-    backend.CreateWindow("ROBOTGO", 800, 800)
-
-    backend.Run(func () {
-        basePos := imgui.MainViewport().Pos()
-        baseSize := imgui.MainViewport().Size()
-        imgui.SetNextWindowPosV(imgui.NewVec2(basePos.X, basePos.Y), 0, imgui.NewVec2(0, 0))
-        imgui.SetNextWindowSize(imgui.Vec2{X: baseSize.X, Y: baseSize.Y})
-        imgui.Begin("robot")
-        imgui.Text(fmt.Sprintf("Coords = X : %v / Y : %v", curCoord.X, curCoord.Y ))
-        imgui.Text(fmt.Sprintf("Map : %v", curMap ))
-
-        imgui.ImageV(mapTextures["morocc"].ID(), imgui.NewVec2(float32(baseSize.X/2),float32(baseSize.Y/2)), imgui.NewVec2(0, 0), imgui.NewVec2(1, 1), imgui.NewVec4(1, 1, 1, 1), imgui.NewVec4(0, 0, 0, 0))
-
-        imgui.End()
-        imgui.Render()
-    })
-
 
     // ########################
     go func() {
@@ -281,8 +215,8 @@ func main() {
             // if err != nil { fmt.Printf("err localConn -- %v -- \n", err); return }
             HexID := fmt.Sprintf("%#x", buffer[0:2])
             if _, exist := packetsmap[HexID]; !exist {
-                fmt.Printf("[%v] len [%v] \t -> [%v]\n", HexID, len(buffer[:n]), buffer[:n])
-                fmt.Printf("[%v] len [%v] \t -> [%v]\n", HexID, len(buffer[:n]), string(buffer[:n]))
+                fmt.Printf("## !! [%v] len [%v] \t -> [%v]\n", HexID, len(buffer[:n]), buffer[:n])
+                // fmt.Printf(" !! [%v] len [%v] \t -> [%v]\n", HexID, len(buffer[:n]), string(buffer[:n]))
             }else{
                 function := reflect.ValueOf(fctpack[packetsmap[HexID].Ident])
                 if function.Kind() == reflect.Func && fctpack[packetsmap[HexID].Ident] != nil{
@@ -292,6 +226,35 @@ func main() {
             }
         }
     }()
+
+
+    // ########################
+    backend := imgui.CreateBackend(imgui.NewGLFWBackend())
+    backend.SetAfterCreateContextHook(func () {
+        for kk,_ := range lgatMaps {
+            loadGatTexture(kk)
+        }
+    })
+
+    backend.SetBeforeDestroyContextHook(func () {  })
+    backend.SetBgColor(imgui.NewVec4(0.45, 0.55, 0.6, 1.0))
+    backend.CreateWindow("ROBOTGO", 500, 500)
+
+    backend.Run(func () {
+        basePos := imgui.MainViewport().Pos()
+        baseSize := imgui.MainViewport().Size()
+        imgui.SetNextWindowPosV(imgui.NewVec2(basePos.X, basePos.Y), 0, imgui.NewVec2(0, 0))
+        imgui.SetNextWindowSize(imgui.Vec2{X: baseSize.X, Y: baseSize.Y})
+        imgui.Begin("robot")
+        imgui.Text(fmt.Sprintf("Coords = X : %v / Y : %v", curCoord.X, curCoord.Y ))
+        imgui.Text(fmt.Sprintf("Map : %v", curMap ))
+        if curMap != "" {
+        if _, exist := mapTextures[curMap]; exist {
+            imgui.ImageV(mapTextures[curMap].ID(), imgui.NewVec2(float32(baseSize.X/1.5),float32(baseSize.Y/1.5)), imgui.NewVec2(0, 0), imgui.NewVec2(1, 1), imgui.NewVec4(1, 1, 1, 1), imgui.NewVec4(0, 0, 0, 0))
+        }}
+        imgui.End()
+        imgui.Render()
+    })
 
     <-exit
 }

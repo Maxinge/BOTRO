@@ -4,9 +4,7 @@ import(
     "fmt"
     "strconv"
     "strings"
-    // "bytes"
 )
-
 
 
 func fctpackInit()  {
@@ -98,6 +96,7 @@ func fctpackInit()  {
 
 }
 
+// #######################
 func parseItem(item []byte){
 
     itemID := int(byteArrayToUInt16(item[4:6]))
@@ -111,8 +110,6 @@ func parseItem(item []byte){
     fmt.Printf("amount ->[%v] \n",amount)
 
 }
-
-// #######################
 
 func isMob(bb []byte) bool{
     flags := [][]byte{
