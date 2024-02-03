@@ -119,7 +119,7 @@ func dumpArrayTab(arr []byte) string{
 //     return conn.LocalAddr().String()
 // }
 //
-// func SortedKeysInt(m map[int]string) ([]int) {
+// func SortedKeysInt(m map[int]interface{}) ([]int) {
 //     keys := make([]int, len(m))
 //     i := 0
 //     for k := range m {

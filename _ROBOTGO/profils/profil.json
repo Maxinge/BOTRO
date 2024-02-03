@@ -27,7 +27,8 @@
         "(PICKY)   Mob-ID#1049",
         "(DROPS)   Mob-ID#1113",
         "(PICKY_)   Mob-ID#1050",
-        "(MUKA)   Mob-ID#1055"
+        "(MUKA)   Mob-ID#1055",
+        "(CONDOR)   Mob-ID#1009"
     ],
     "combat":[
         "14::1::10::800::Cold Bolt"

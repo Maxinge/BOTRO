@@ -39,6 +39,11 @@ type ROLGatMap struct {
 // 	gatMaps[mapName] = gatMap
 // }
 
+var(
+    mapTextures = map[string]*imgui.Texture{}
+    maskTexture *imgui.Texture
+)
+
 func loadLGatMap(mapName string){
 	lgatMap := parseLGat([]byte(readFileString(CurDir()+"data/lgats/"+mapName+".lgat")))
 	lgatMaps[mapName] = lgatMap

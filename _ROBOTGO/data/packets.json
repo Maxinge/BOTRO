@@ -6,7 +6,7 @@
 
     "-1":       {  "Ident":"############### UKNW ###############", "Desc":"" },
 
-    "0x1a0b": {  "Ident":"use_emote", "Desc":"???" },
+
     "0x1c0b": {  "Ident":"uknw2", "Desc":"randomly are sended with same velues" },
     "0x1b0b": {  "Ident":"uknw3", "Desc":"randomly are sended with same velues" },
     "0xa401": {  "Ident":"uknw4", "Desc":"" },
@@ -86,6 +86,7 @@
     "0x370a": {  "Ident":"loot_item_confirm", "Desc":"" },
     "0xdd0a": {  "Ident":"item_appear", "Desc":"" },
 
+    "0x1a0b": {  "Ident":"uknw_greed", "Desc":"???" },
 
 
     "0xf40a": {  "Ident":"use_aoe", "Desc":"" },

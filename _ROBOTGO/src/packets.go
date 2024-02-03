@@ -87,28 +87,57 @@ func fctpackInit()  {
         }
     }
 
-    // for k := range packetsmap {
-    //     fctpack[packetsmap[k].Ident] = func (HexID []byte, bb []byte)  {
-    //         fmt.Printf("[%v] \t",fmt.Sprintf("%#x", HexID))
-    //         fmt.Printf("bb -> \t[%v]\n",bb)
-    //     }
-    // }
+    fctpack["use_skill"] = func (HexID []byte, bb []byte)  {
+        fmt.Printf("use_skill [%v] \t",fmt.Sprintf("%#x", HexID))
+        fmt.Printf("bb -> \t[%v]\n",bb)
+    }
+
+    fctpack["item_disappear"] = func (HexID []byte, bb []byte)  {
+        fmt.Printf("item_disappear [%v] \t",fmt.Sprintf("%#x", HexID))
+        fmt.Printf("bb -> \t[%v]\n",bb)
+        for ii := 0; ii < len(bb); ii+=4 {
+            delete(groundItems, int(byteArrayToUInt32(bb[ii:ii+4])))
+        }
+    }
+    fctpack["try_loot_item"] = func (HexID []byte, bb []byte)  {
+        fmt.Printf("try_loot_item [%v] \t",fmt.Sprintf("%#x", HexID))
+        fmt.Printf("bb -> \t[%v]\n",bb)
+
+    }
+    fctpack["loot_item_confirm"] = func (HexID []byte, bb []byte)  {
+        rrr := splitBitsArray(bb,[]byte{74,188,30,0})
+        if len(rrr) > 1{
+            for ii := 1; ii < len(rrr) ; ii++ {
+                fmt.Printf("loot -> \t[%v]\n",rrr[ii][0:4])
+                delete(groundItems, int(byteArrayToUInt32(rrr[ii][0:4])))
+            }
+        }
+    }
+
+    fctpack["uknw_greed"] = func (HexID []byte, bb []byte)  {
+        rr := splitBitsArray(bb,[]byte{74,188,30,0,74,188,30,0})
+        if len(rr) > 2{
+            rrr := splitBitsArray(rr[2],[]byte{74,188,30,0})
+            if len(rrr) > 1{
+                for ii := 1; ii < len(rrr) ; ii++ {
+                    fmt.Printf("loot -> \t[%v]\n",rrr[ii][0:4])
+                    delete(groundItems, int(byteArrayToUInt32(rrr[ii][0:4])))
+                }
+            }
+        }
+    }
 
 }
 
 // #######################
 func parseItem(item []byte){
-
+    // fmt.Printf("mapID -> \t[%v]\n",item[0:4])
+    mapID := int(byteArrayToUInt32(item[0:4]))
     itemID := int(byteArrayToUInt16(item[4:6]))
     x := int(byteArrayToUInt16(item[11:13]))
     y := int(byteArrayToUInt16(item[13:15]))
-    coords := Coord{X:x,Y:y}
     amount := int(byteArrayToUInt16(item[17:19]))
-
-    fmt.Printf("itemID ->[%v] ",itemID)
-    fmt.Printf("coords ->[%v] ",coords)
-    fmt.Printf("amount ->[%v] \n",amount)
-
+    groundItems[mapID] = Item{ ItemID:itemID, Coords:Coord{X:x,Y:y}, Amount:amount}
 }
 
 func isMob(bb []byte) bool{
