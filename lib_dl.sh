@@ -12,7 +12,7 @@ libs=(
     # "golang.org/x/sys/windows"
     # "github.com/go-gl/glfw/v3.3/glfw"
     # "github.com/AllenDang/cimgui-go"
-    "github.com/go-gl/gl/v2.1/gl"
+    # "github.com/go-gl/gl/v2.1/gl"
 )
 export go="/c/Program Files/Go/bin/go.exe"
 # export go="/usr/local/go/bin/go"

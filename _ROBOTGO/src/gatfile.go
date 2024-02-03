@@ -2,6 +2,8 @@ package main
 
 import(
     "unsafe"
+    // "fmt"
+    "encoding/binary"
 )
 
 type ROGatCell struct {
@@ -18,7 +20,40 @@ type ROGatMap struct {
     width int
     height int
     // coord ysystem is difeerent from image coords so be carefull
-    // x / y start from bottom left
+    // x / y start from bottom left, so y reversed
+}
+
+
+type ROLGatMap struct {
+    cells [][]uint8
+    width int
+    height int
+}
+
+func loadGatMap(mapName string){
+	gatMap := parseGat([]byte(readFileString(CurDir()+"data/gats/"+mapName+".gat")))
+	gatMaps[mapName] = gatMap
+}
+
+func loadLGatMap(mapName string){
+	lgatMap := parseLGat([]byte(readFileString(CurDir()+"data/lgats/"+mapName+".lgat")))
+	lgatMaps[mapName] = lgatMap
+}
+
+func parseLGat(data []byte) ROLGatMap{
+    width := int(binary.BigEndian.Uint16(data[0:2]))
+    height := int(binary.BigEndian.Uint16(data[2:4]))
+    cell_list := make([][]uint8, width)
+    for i := range cell_list {
+        cell_list[i] = make([]uint8, height)
+    }
+    index := 4;
+    for x := 0; x < int(width); x++{
+    for y := 0; y < int(height); y++{
+        cell_list[x][y] = byte(data[index])
+        index += 1
+    }}
+    return ROLGatMap{cells : cell_list, width : int(width), height : int(height)}
 }
 
 func parseGat(data []byte) ROGatMap {
@@ -32,9 +67,8 @@ func parseGat(data []byte) ROGatMap {
         cell_list[i] = make([]ROGatCell, height)
     }
     var index int32 = 14;
-    // Image are stored fuckedly / we have to flip, so y first
-    for y := int32(0); y < height; y++{
     for x := int32(0); x < width; x++{
+    for y := int32(0); y < height; y++{
         cell_list[x][y] = *(*ROGatCell)(unsafe.Pointer(&data[index]))
         index += int32(unsafe.Sizeof(ROGatCell{}))
     }}

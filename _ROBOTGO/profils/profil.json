@@ -1,7 +1,7 @@
 {
     "map":{
         "savemap":"morocc",
-        "lockmap":"moc_fild10",
+        "lockmap":"moc_fild12",
         "teleport_search":[1, 5, 1],
         "town_run_weight":69,
         "route":[

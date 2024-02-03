@@ -71,16 +71,23 @@ func fctpackInit()  {
     }
 
     fctpack["item_appear"] = func (HexID []byte, bb []byte)  {
-        fmt.Printf("item_appear [%v] ",fmt.Sprintf("%#x", HexID))
-        fmt.Printf("bb ->[%v] \n",bb)
+        // fmt.Printf("item_appear [%v] \n",fmt.Sprintf("%#x", HexID))
+        rrr := splitBitsArray(bb,[]byte{221,10})
+        for _, vv := range rrr {
+            parseItem(vv)
+        }
     }
 
     fctpack["mob_info"] = func (HexID []byte, bb []byte)  {
-        fmt.Printf("mob_info [%v] \t",fmt.Sprintf("%#x", HexID))
-        fmt.Printf("bb -> \t[%v] \n",bb)
-        fmt.Printf("bb -> \t[%v] \n",string(bb))
+        // fmt.Printf("mob_info [%v] \n",fmt.Sprintf("%#x", HexID))
+        rr := splitBitsArray(bb,[]byte{255,255})
+        if len(rr) > 1{
+            rrr := splitBitsArray(rr[1],[]byte{221,10})
+            for ii := 1; ii < len(rrr) ; ii++ {
+                parseItem(rrr[ii])
+            }
+        }
     }
-
 
     // for k := range packetsmap {
     //     fctpack[packetsmap[k].Ident] = func (HexID []byte, bb []byte)  {
@@ -88,6 +95,20 @@ func fctpackInit()  {
     //         fmt.Printf("bb -> \t[%v]\n",bb)
     //     }
     // }
+
+}
+
+func parseItem(item []byte){
+
+    itemID := int(byteArrayToUInt16(item[4:6]))
+    x := int(byteArrayToUInt16(item[11:13]))
+    y := int(byteArrayToUInt16(item[13:15]))
+    coords := Coord{X:x,Y:y}
+    amount := int(byteArrayToUInt16(item[17:19]))
+
+    fmt.Printf("itemID ->[%v] ",itemID)
+    fmt.Printf("coords ->[%v] ",coords)
+    fmt.Printf("amount ->[%v] \n",amount)
 
 }
 
@@ -131,7 +152,7 @@ func getActorsFromArray(bb []byte) [][]byte{
 }
 
 
-func intToBitString(ii int) string {
+func int16ToBitString(ii int) string {
     ss := ""
 	for i := 16 - 1; i >= 0; i-- {
 		bit := (ii >> uint(i)) & 1
@@ -164,13 +185,13 @@ func coordsTo24Bits(x int, y int /*, direction int*/) []byte {
     // packed in 2 x 10 bits trunks  + 00
     // those are not "bytes-aligned" in the packet
     ss := ""
-    ss += intToBitString(x)[6:16] // 10
-    ss += intToBitString(y)[6:16] // 10
+    ss += int16ToBitString(x)[6:16] // 10
+    ss += int16ToBitString(y)[6:16] // 10
     ss += "0000"
     r1, _ := strconv.ParseInt(ss[0:8], 2, 16)
     r2, _ := strconv.ParseInt(ss[8:16], 2, 16)
     r3, _ := strconv.ParseInt(ss[16:], 2, 16)
-    return([]byte{ byte(int8(r1)), byte(int8(r2)), byte(int8(r3)) })
+    return([]byte{ byte(r1), byte(r2), byte(r3) })
 }
 func bitArrayToBitString(bb []byte) string{
     ss := ""

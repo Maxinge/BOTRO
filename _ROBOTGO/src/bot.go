@@ -42,18 +42,14 @@ func loadprofil(){
 
 }
 
-func loadGatMap(mapName string){
-	gatMap := parseGat([]byte(readFileString(CurDir()+"data/gats/"+mapName+".gat")))
-	gatMaps[mapName] = gatMap
-}
+
 
 func getDist(from Coord, to Coord) float64 {
 	return math.Sqrt(math.Pow(float64(to.X-from.X), 2) + math.Pow(float64(to.Y-from.Y), 2))
 }
 
-
-func isValidCell(cell ROGatCell)  bool{
-	if cell.cell_type == 0 || cell.cell_type == 3 { return true } ; return false
+func isValidCell(cell uint8)  bool{
+	if cell == 0 || cell == 3 { return true } ; return false
 }
 
 func isIn(coord Coord, list []Coord) bool{
@@ -138,21 +134,22 @@ func linearInterpolation(from Coord, to Coord) []Coord {
 }
 
 
-func randomPoint(gatMap ROGatMap, from Coord, dist int) Coord{
+func randomPoint(lgatMap ROLGatMap, from Coord, dist int) Coord{
 
 	for {
 		rand.Seed(time.Now().UnixNano())
-		rX := rand.Intn(gatMap.width)
+		rX := rand.Intn(lgatMap.width)
 		// rand.Seed(time.Now().UnixNano())
-		rY := rand.Intn(gatMap.height)
-		gatCell := gatMap.cells[rX][rY]
+		rY := rand.Intn(lgatMap.height)
+		gatCell := lgatMap.cells[rX][rY]
 		if isValidCell(gatCell) {
 		if getDist(from,Coord{X:rX, Y:rY}) < float64(dist){
 			return Coord{X:rX, Y:rY}
 		}}
 	}
 }
-func cleanPath(coordList []Coord, sighDist int, gatMap ROGatMap) []Coord{
+
+func cleanPath(coordList []Coord, sighDist int, lgatMap ROLGatMap) []Coord{
 	if len(coordList) < sighDist  { return coordList }
 	k := 0
 	cleanPath := []Coord{}
@@ -167,13 +164,13 @@ func cleanPath(coordList []Coord, sighDist int, gatMap ROGatMap) []Coord{
 			beamCellList := linearInterpolation(_curCoord, beamLine)
 			badbeam:
 			for _,beamCell := range beamCellList {
-				if beamCell.X > gatMap.width -1 || beamCell.Y > gatMap.height -1 { break }
+				if beamCell.X > lgatMap.width -1 || beamCell.Y > lgatMap.height -1 { break }
 				if beamCell.X < 0 || beamCell.Y < 0 { break }
-				gatCell := gatMap.cells[beamCell.X][beamCell.Y]
+				gatCell := lgatMap.cells[beamCell.X][beamCell.Y]
 				if !isValidCell(gatCell) { break badbeam }
 				betweens := linearInterpolation(beamCell, coordList[k-1])
 				for _,bw := range betweens {
-					bwgatCell := gatMap.cells[bw.X][bw.Y]
+					bwgatCell := lgatMap.cells[bw.X][bw.Y]
 					if !isValidCell(bwgatCell) { break badbeam }
 				}
 				beamPoints = append(beamPoints,beamCell)
@@ -201,7 +198,7 @@ func cleanPath(coordList []Coord, sighDist int, gatMap ROGatMap) []Coord{
 	return newPath
 }
 
-func pathfind(start Coord, finish Coord, gatMap ROGatMap) []Coord {
+func pathfind(start Coord, finish Coord, lgatMap ROLGatMap) []Coord {
 
 	coordList := []Coord{}
 	visited := []Coord{}
@@ -210,7 +207,7 @@ func pathfind(start Coord, finish Coord, gatMap ROGatMap) []Coord {
 	coordList = append(coordList, start)
 	direction := directionTo(start, finish)
 
-	brainSize := (gatMap.height*gatMap.width) / 2
+	brainSize := (lgatMap.height*lgatMap.width) / 2
 
 	for {
 		_curCoord := coordList[len(coordList)-1]
@@ -219,7 +216,7 @@ func pathfind(start Coord, finish Coord, gatMap ROGatMap) []Coord {
 		if len(visited) > brainSize { visited = visited[1:] }
 		direction = directionTo(_curCoord, finish);
 		nextCell := Coord{X:_curCoord.X + direction.X,Y: _curCoord.Y + direction.Y}
-		gatCell := gatMap.cells[nextCell.X][nextCell.Y]
+		gatCell := lgatMap.cells[nextCell.X][nextCell.Y]
 		if isValidCell(gatCell) {
 		if !isIn(nextCell,visited)	{
 			coordList = append(coordList, nextCell); continue
@@ -227,9 +224,9 @@ func pathfind(start Coord, finish Coord, gatMap ROGatMap) []Coord {
 		allDirections := firstCircle(_curCoord)
 		candidates := []Coord{}
 		for _,v := range allDirections {
-			if v.X > gatMap.width -1 || v.Y > gatMap.height -1 { break }
+			if v.X > lgatMap.width -1 || v.Y > lgatMap.height -1 { break }
 			if v.X < 0 || v.Y < 0 { break }
-			gatCell = gatMap.cells[v.X][v.Y]
+			gatCell = lgatMap.cells[v.X][v.Y]
 			if isValidCell(gatCell) {
 			if !isIn(v,visited)	{
 				candidates = append(candidates, v)
@@ -243,10 +240,10 @@ func pathfind(start Coord, finish Coord, gatMap ROGatMap) []Coord {
 		coordList = append(coordList, rn);
 	}
 
-	path := cleanPath(coordList, 1, gatMap)
-	path = cleanPath(path, 1, gatMap)
-	path = cleanPath(path, 4, gatMap)
-	path = cleanPath(path, 1, gatMap)
+	path := cleanPath(coordList, 1, lgatMap)
+	path = cleanPath(path, 1, lgatMap)
+	path = cleanPath(path, 4, lgatMap)
+	path = cleanPath(path, 1, lgatMap)
 
 	return path
 
