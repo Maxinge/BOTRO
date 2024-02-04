@@ -10,6 +10,13 @@ import(
 func fctpackInit()  {
     fctpack = map[string]func([]byte, []byte){}
 
+    // fctpack["recv_self_move_to"] = func (HexID []byte, bb []byte)  {
+    //     cc := bits48ToCoords(bb[4:])
+    //     curCoord = Coord{X:cc[2],Y:cc[3]}
+    //     // fmt.Printf("recv_self_move_to -> [%v]\n",string(bb))
+    //     fmt.Printf("curCoord -> \t[%v]\n",curCoord)
+    // }
+
     fctpack["mem_coord"] = func (HexID []byte, bb []byte)  {
         // fmt.Printf("mem_coord [%v] \t",fmt.Sprintf("%#x", HexID))
         // fmt.Printf("bb -> \t[%v]\n",bb)
@@ -17,6 +24,7 @@ func fctpackInit()  {
         cy := byteArrayToUInt32(bb[4:8])
         curCoord = Coord{X:int(cx),Y:int(cy)}
     }
+
     fctpack["mem_map"] = func (HexID []byte, bb []byte)  {
         curMap = strings.Split(string(bb), ".rsw")[0]
     }
@@ -80,6 +88,7 @@ func fctpackInit()  {
         // fmt.Printf("mob_info [%v] \n",fmt.Sprintf("%#x", HexID))
         rr := splitBitsArray(bb,[]byte{255,255})
         if len(rr) > 1{
+            //mob dropped items
             rrr := splitBitsArray(rr[1],[]byte{221,10})
             for ii := 1; ii < len(rrr) ; ii++ {
                 parseItem(rrr[ii])
@@ -108,7 +117,7 @@ func fctpackInit()  {
         rrr := splitBitsArray(bb,[]byte{74,188,30,0})
         if len(rrr) > 1{
             for ii := 1; ii < len(rrr) ; ii++ {
-                fmt.Printf("loot -> \t[%v]\n",rrr[ii][0:4])
+                // fmt.Printf("loot -> \t[%v]\n",rrr[ii][0:4])
                 delete(groundItems, int(byteArrayToUInt32(rrr[ii][0:4])))
             }
         }
@@ -120,7 +129,7 @@ func fctpackInit()  {
             rrr := splitBitsArray(rr[2],[]byte{74,188,30,0})
             if len(rrr) > 1{
                 for ii := 1; ii < len(rrr) ; ii++ {
-                    fmt.Printf("loot -> \t[%v]\n",rrr[ii][0:4])
+                    // fmt.Printf("loot -> \t[%v]\n",rrr[ii][0:4])
                     delete(groundItems, int(byteArrayToUInt32(rrr[ii][0:4])))
                 }
             }

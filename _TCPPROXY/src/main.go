@@ -103,13 +103,14 @@ func main() {
             // Y position // 0x00F2EA9C
             err = windows.ReadProcessMemory(processHandle, 0x00F2EA9C, &buffer2[0], uintptr(len(buffer2)), nil)
             bb = append(bb,buffer2[0:4]...)
-            botConn.Write(bb)
+            if botConn != nil { botConn.Write(bb) }
+
             // MAP // 0x00CBACF0
             buffer2 = buffer2[0:40]
             err = windows.ReadProcessMemory(processHandle, 0x00CBACF0, &buffer2[0], uintptr(len(buffer2)), nil)
             bb = []byte{20,21}
             bb = append(bb,buffer2[0:40]...)
-            botConn.Write(bb)
+            if botConn != nil { botConn.Write(bb) }
         }
     }()
 
