@@ -12,7 +12,7 @@ import(
 	"encoding/json"
 	"runtime"
 	// "sort"
-	// "reflect"
+	"reflect"
 	"strconv"
 	// "net"
 	// "time"
@@ -96,6 +96,18 @@ func dumpArrayTab(arr []byte) string{
     return ss + "}"
 }
 
+func printStruct(s interface{}) string{
+    str := ""
+    v := reflect.ValueOf(s)
+    for i := 0; i < v.NumField(); i++ {
+        fieldName := v.Type().Field(i).Name
+        fieldValue := v.Field(i).Interface()
+        str += fmt.Sprintf("%s", fieldName) + " = "
+        str += fmt.Sprintf("%v", fieldValue) + "\n"
+    }
+    return str
+}
+
 // func SortedKeysStr(m map[string]string) ([]string) {
 //     keys := make([]string, len(m))
 //     i := 0
@@ -167,12 +179,10 @@ func dumpArrayTab(arr []byte) string{
 // 	cmd.Run()
 // }
 
-// func StrInArray(str string,arr []string) bool{
-//     for _, v := range arr {
-//         if str == v { return true }
-//     }
-//     return false
-// }
+func StrInArray(str string,arr []string) bool{
+    for _, v := range arr { if str == v { return true } }
+    return false
+}
 //
 //
 func intInArray(i int,ii []int) bool{

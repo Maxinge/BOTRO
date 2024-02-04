@@ -17,6 +17,7 @@ func fctpackInit()  {
     //     fmt.Printf("curCoord -> \t[%v]\n",curCoord)
     // }
 
+
     fctpack["mem_coord"] = func (HexID []byte, bb []byte)  {
         // fmt.Printf("mem_coord [%v] \t",fmt.Sprintf("%#x", HexID))
         // fmt.Printf("bb -> \t[%v]\n",bb)
@@ -37,7 +38,9 @@ func fctpackInit()  {
             if mm, exist := mobList[mapID]; exist {
                 mm.Coords.X = fromto[2]
                 mm.Coords.Y = fromto[3]
+                mu.Lock()
                 mobList[mapID] = mm
+                mu.Unlock()
             }
         }
     }
@@ -58,7 +61,9 @@ func fctpackInit()  {
                 if sliceEqual(vv[0:3], []byte{114,0,5}) { index = 65 }
                 bb := bits24ToCoords(vv[index:index+3])
                 cc.X = bb[0]; cc.Y = bb[1];
+                mu.Lock()
                 mobList[mapID] = Mob{ MobID:mobID, Name:mobName, Coords:cc }
+                mu.Unlock()
             }
         }
     }
@@ -69,11 +74,13 @@ func fctpackInit()  {
         // fmt.Printf("actor_something_happen [%v] \t",fmt.Sprintf("%#x", HexID))
         // fmt.Printf("bb -> \t[%v] \n",bb)
         mapID := int(bb[0])
+        mu.Lock()
         if bb[4] == 1{ // isDead
         if _, exist := mobList[mapID]; exist {
             delete(mobList, mapID)
             // fmt.Printf("mapID is ded-> \t[%v]\n",mapID)
         }}
+        mu.Unlock()
     }
 
     fctpack["item_appear"] = func (HexID []byte, bb []byte)  {

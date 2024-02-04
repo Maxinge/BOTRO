@@ -10,6 +10,8 @@ import(
     // "github.com/go-gl/glfw/v3.3/glfw"
     "io/ioutil"
     "strings"
+    "time"
+    "sync"
 )
 
 type Packet struct {
@@ -35,6 +37,7 @@ var (
     err error
     proxyCo net.Conn
     exit = make(chan bool)
+    mu sync.Mutex
 
     fctpack map[string]func([]byte, []byte)
     // gatMaps = map[string]ROGatMap{}
@@ -82,6 +85,7 @@ func main() {
             n, _ := proxyCo.Read(buffer)
             // if err != nil { fmt.Printf("err localConn -- %v -- \n", err); return }
             HexID := fmt.Sprintf("%#x", buffer[0:2])
+            if len(buffer) < 3 { continue }
             if _, exist := packetsmap[HexID]; !exist {
                 fmt.Printf("## !! [%v] len [%v] \t -> [%v]\n", HexID, len(buffer[:n]), buffer[:n])
                 // fmt.Printf(" !! [%v] len [%v] \t -> [%v]\n", HexID, len(buffer[:n]), string(buffer[:n]))
@@ -95,41 +99,110 @@ func main() {
         }
     }()
 
-
     go botLoop()
     go infoUILoop()
 
     // ########################
     backend := imgui.CreateBackend(imgui.NewGLFWBackend())
-    backend.SetAfterCreateContextHook(func () {
-        // for kk,_ := range lgatMaps { loadGatTexture(kk)  }
-    })
+    backend.SetAfterCreateContextHook(func () {  })
 
     backend.SetBeforeDestroyContextHook(func () {  })
     backend.SetBgColor(imgui.NewVec4(0.45, 0.55, 0.6, 1.0))
-    backend.CreateWindow("ROBOTGO", 500, 500)
+    backend.CreateWindow("ROBOTGO", 500, 800)
+
+    // imgui.CreateWindow("ROBOTGO", 500, 500)
+
+    targetFPS := 10
+	frameTime := time.Second / time.Duration(targetFPS)
+
+	lastFrameTime := time.Now()
+
 
     backend.Run(func () {
+        currentTime := time.Now()
+		elapsedTime := currentTime.Sub(lastFrameTime)
+		if elapsedTime < frameTime {
+            time.Sleep(frameTime - elapsedTime);
+        }
+
         basePos := imgui.MainViewport().Pos()
         baseSize := imgui.MainViewport().Size()
-        imgui.SetNextWindowPosV(imgui.NewVec2(basePos.X, basePos.Y), 0, imgui.NewVec2(0, 0))
-        imgui.SetNextWindowSize(imgui.Vec2{X: baseSize.X, Y: baseSize.Y})
-        imgui.Begin("robot")
-        imgui.Text(fmt.Sprintf("Coords = X : %v / Y : %v", curCoord.X, curCoord.Y ))
-        imgui.Text(fmt.Sprintf("Map : %v", curMap ))
-        imgui.Text(fmt.Sprintf("Mobs --- \n\n%v", strMobs ))
-        imgui.Text(fmt.Sprintf("groundItems --- \n\n%v", strGroundItems ))
 
-        
-        // if curMap != "" {
-        // if _, exist := mapTextures[curMap]; exist {
-        //     imgui.ImageV(mapTextures[curMap].ID(), imgui.NewVec2(float32(baseSize.X/1.5),float32(baseSize.Y/1.5)), imgui.NewVec2(0, 0), imgui.NewVec2(1, 1), imgui.NewVec4(1, 1, 1, 1), imgui.NewVec4(0, 0, 0, 0))
-        // }}
-        // if maskTexture != nil {
-        //     imgui.ImageV(maskTexture.ID(), imgui.NewVec2(float32(baseSize.X/2),float32(baseSize.Y/2)), imgui.NewVec2(0, 0), imgui.NewVec2(1, 1), imgui.NewVec4(1, 1, 1, 1), imgui.NewVec4(0, 0, 0, 0))
-        // }
+        imgui.SetNextWindowPosV(imgui.NewVec2(basePos.X, basePos.Y + 400), 0, imgui.NewVec2(0, 0))
+        imgui.SetNextWindowSize(imgui.Vec2{X: baseSize.X, Y: baseSize.Y - 400})
+        imgui.Begin("Info")
+
+        imgui.Text(fmt.Sprintf("Coords = X : %v / Y : %v", curCoord.X, curCoord.Y ))
+        imgui.Text(fmt.Sprintf("Map : %v - Next point : %v", curMap, nextPoint))
+        imgui.Text(fmt.Sprintf("\n states --- \n%v", printStruct(botStates) ))
+        imgui.Text(fmt.Sprintf("\n Mobs --- \n%v", strMobs ))
+        imgui.Text(fmt.Sprintf("\n groundItems --- \n%v", strGroundItems ))
         imgui.End()
+
+        // drawList := imgui.WindowDrawList()
+        drawList := imgui.BackgroundDrawListNil()
+
+        // imgui.PushStyleColor(imgui.StyleColorBorder, imgui.Vec4{X: 1, Y: 0, Z: 0, W: 1}) // Couleur rouge
+    	// imgui.Button("Mon Carré Rouge")
+    	// imgui.PopStyleColor()
+
+        scale := float32(3)
+        sightDist := float32(66)
+        if _, exist := lgatMaps[curMap]; exist {
+            lgatMap := lgatMaps[curMap]
+            for x := 0; x < lgatMap.width; x++{
+            for y := 0; y < lgatMap.height; y++{
+
+                if getDist(curCoord,(Coord{X:x,Y:y})) > float64(sightDist) { continue }
+                size := float32(1)
+                bbcolor := []byte{111,111,111,255}
+                xpos := float32(x) - float32(curCoord.X)
+                ypos := float32(lgatMap.height - 1 - y) - float32(curCoord.Y*-1)
+
+                xpos = (xpos*scale) + basePos.X
+                ypos = ((ypos - float32(lgatMap.height))*scale) + basePos.Y
+
+                xpos += (sightDist * scale)
+                ypos += (sightDist * scale)
+
+                if lgatMap.cells[x][y] == 0 || lgatMap.cells[x][y] == 3 {
+                    bbcolor[0] = 255; bbcolor[1] = 255; bbcolor[2] = 255;
+                }
+
+                for _,vv := range curPath {
+                    if vv.X == x && vv.Y == y{
+                        bbcolor[0] = 50; bbcolor[1] = 100; bbcolor[2] = 150;
+                    }
+                }
+
+                for _,vv := range targetMobPath {
+                    if vv.X == x && vv.Y == y{
+                        bbcolor[0] = 22; bbcolor[1] = 180; bbcolor[2] = 17;
+                    }
+                }
+
+                if curCoord.X == x && curCoord.Y == y{
+                    bbcolor[0] = 150; bbcolor[1] = 100; bbcolor[2] = 50;
+                    xpos -= float32(2)
+                    ypos -= float32(2)
+                    size = float32(5)
+                }
+
+                mu.Lock()
+                for _,vv := range mobList {
+                    if vv.Coords.X == x && vv.Coords.Y == y{
+                        bbcolor[0] = 33; bbcolor[1] = 200; bbcolor[2] = 220;
+                        xpos -= float32(2)
+                        ypos -= float32(2)
+                        size = float32(5)
+                    }
+                }
+                mu.Unlock()
+                drawList.AddRectFilled(imgui.Vec2{X: xpos, Y:  ypos}, imgui.Vec2{X: xpos+(size*scale),Y: ypos+(size*scale)}, byteArrayToUInt32(bbcolor))
+            }}
+        }
         imgui.Render()
+        lastFrameTime = currentTime
     })
 
     <-exit
