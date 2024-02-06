@@ -47,7 +47,26 @@ func Stoi(s string) int { ss,_:=strconv.Atoi(s); return ss }
 // 	for i := 0; i < exponent; i++ { result *= base }
 // 	return result
 // }
-//
+
+func byteArrayToUInt64(b []byte) uint64 {
+	if len(b) < 4 { return 0 }
+	result := uint64(b[0]) | uint64(b[1])<<8 | uint64(b[2])<<16 | uint64(b[3])<<24 |
+              uint64(b[3])<<32 | uint64(b[3])<<40 | uint64(b[3])<<48 | uint64(b[3])<<56
+	return result
+}
+
+func byteArrayToUInt32(b []byte) uint32 {
+	if len(b) < 4 { return 0 }
+	result := uint32(b[0]) | uint32(b[1])<<8 | uint32(b[2])<<16 | uint32(b[3])<<24
+	return result
+}
+
+func byteArrayToUInt16(b []byte) uint16 {
+	if len(b) < 2 { return 0 }
+	result := uint16(b[0]) | uint16(b[1])<<8
+	return result
+}
+
 func inArrayByte(bb [][]byte,search []byte) bool{
     for _,v := range bb {
         if sliceEqual(v,search) { return true }

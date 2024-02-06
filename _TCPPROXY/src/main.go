@@ -8,6 +8,7 @@ import(
     "strings"
     "unsafe"
     "golang.org/x/sys/windows"
+    "encoding/binary"
 )
 
 
@@ -134,8 +135,8 @@ func routeFromClient(localConn net.Conn, port int){
         for {
             n, err := serverConn.Read(recvbuffer)
             if err != nil { fmt.Printf("err serverConn -- %v -- \n", err); return }
-            HexID := fmt.Sprintf("%#x", recvbuffer[0:2]);
-            fmt.Printf("recv : [%v] len [%v] \n", HexID, len(recvbuffer[:n]))
+            HexID := binary.LittleEndian.Uint16(recvbuffer[0:2]);
+            fmt.Printf("recv : [%04X] len [%v] \n", HexID, len(recvbuffer[:n]))
             localConn.Write(recvbuffer[:n])
             if botConn != nil { botConn.Write(recvbuffer[:n]) }
     	}
@@ -146,8 +147,8 @@ func routeFromClient(localConn net.Conn, port int){
 	for {
         n, err := localConn.Read(sendbuffer)
         if err != nil { fmt.Printf("err localConn -- %v -- \n", err); return }
-        HexID := fmt.Sprintf("%#x", sendbuffer[0:2]);
-        fmt.Printf("send : [%v] len [%v] \n", HexID, len(sendbuffer[:n]))
+        HexID := binary.LittleEndian.Uint16(sendbuffer[0:2]);
+        fmt.Printf("recv : [%04X] len [%v] \n", HexID, len(sendbuffer[:n]))
         if botConn != nil { botConn.Write(sendbuffer[:n]) }
         serverConn.Write(sendbuffer[:n])
 	}

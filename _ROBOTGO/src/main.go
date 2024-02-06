@@ -4,19 +4,19 @@ import(
     "fmt"
     "net"
     "encoding/json"
-    "reflect"
     "github.com/cimgui-go"
-    // "github.com/go-gl/gl/v2.1/gl"
-    // "github.com/go-gl/glfw/v3.3/glfw"
     "io/ioutil"
     "strings"
     "time"
     "sync"
+    "encoding/binary"
+    "reflect"
 )
 
 type Packet struct {
     Ident  string
     Desc  string
+    Size  int
 }
 
 type Mob struct {
@@ -57,10 +57,14 @@ var (
     strGroundItems = ""
 )
 
+
 func main() {
 
     fmt.Println("#--- ROBOTGO START ---#")
     fmt.Printf("current dir -- %v -- \n", CurDir())
+
+    // iiiii := fmt.Sprintf("%04X",binary.LittleEndian.Uint16([]byte{150,1}))
+    // fmt.Printf("kek -- [%v] -- \n", iiiii); return
 
     proxyCo, err = net.Dial("tcp", "127.0.0.1:6666")
     if err != nil { fmt.Printf("err -- %v -- \n", err); return }
@@ -75,29 +79,35 @@ func main() {
     for _, m := range maps {
         if !m.IsDir() {
             name := strings.Split(m.Name(), ".lgat")[0]
-            fmt.Printf("name -- %v -- \n", name)
+            fmt.Printf("read -- %v -- \n", name)
             loadLGatMap(name)
         }
     }
-
 
     // ########################
     go func() {
         buffer := make([]byte, 100000)
         for {
-            n, _ := proxyCo.Read(buffer)
+            n ,_ := proxyCo.Read(buffer)
             // if err != nil { fmt.Printf("err localConn -- %v -- \n", err); return }
-            HexID := fmt.Sprintf("%#x", buffer[0:2])
-            if len(buffer) < 3 { continue }
-            if _, exist := packetsmap[HexID]; !exist {
-                fmt.Printf("## !! [%v] len [%v] \t -> [%v]\n", HexID, len(buffer[:n]), buffer[:n])
-                // fmt.Printf(" !! [%v] len [%v] \t -> [%v]\n", HexID, len(buffer[:n]), string(buffer[:n]))
-            }else{
-                function := reflect.ValueOf(fctpack[packetsmap[HexID].Ident])
-                if function.Kind() == reflect.Func && fctpack[packetsmap[HexID].Ident] != nil{
-                    args := []reflect.Value{reflect.ValueOf(buffer[0:2]),reflect.ValueOf(buffer[2:n])}
-                    function.Call(args)
+            if n < 3 { continue }
+            ii := -1
+            for {
+                ii += 1; if ii >= n { break }
+                HexID := fmt.Sprintf("%04X",binary.LittleEndian.Uint16(buffer[ii:ii+2]));
+                plen := n - ii
+                if _, exist := packetsmap[HexID]; exist {
+                    plen = packetsmap[HexID].Size
+                    if plen < 0 { plen = int(binary.LittleEndian.Uint16(buffer[ii+2:ii+4])) }
+                    if plen < 2 { plen = 2 }
+                    args := []reflect.Value{ reflect.ValueOf(buffer[ii:ii+2]), reflect.ValueOf(buffer[ii+2:ii+2+plen-2]) }
+                    parsePacket(packetsmap[HexID].Ident, args)
+                    ii += plen -1 ;
+                    continue
                 }
+                args := []reflect.Value{ reflect.ValueOf([]byte{255,255}), reflect.ValueOf(buffer[ii:ii+plen]) }
+                parsePacket("uknw_pck", args)
+                break;
             }
         }
     }()
@@ -112,8 +122,6 @@ func main() {
     backend.SetBeforeDestroyContextHook(func () {  })
     backend.SetBgColor(imgui.NewVec4(0.45, 0.55, 0.6, 1.0))
     backend.CreateWindow("ROBOTGO", 500, 800)
-
-    // imgui.CreateWindow("ROBOTGO", 500, 500)
 
     targetFPS := 15
 	frameTime := time.Second / time.Duration(targetFPS)
@@ -147,12 +155,7 @@ func main() {
         imgui.Text(fmt.Sprintf("\n groundItems --- \n%v", strGroundItems ))
         imgui.End()
 
-        // drawList := imgui.WindowDrawList()
         drawList := imgui.BackgroundDrawListNil()
-
-        // imgui.PushStyleColor(imgui.StyleColorBorder, imgui.Vec4{X: 1, Y: 0, Z: 0, W: 1}) // Couleur rouge
-    	// imgui.Button("Mon Carré Rouge")
-    	// imgui.PopStyleColor()
 
         scale := float32(3)
         sightDist := float32(66)
@@ -182,18 +185,6 @@ func main() {
                         bbcolor[0] = 50; bbcolor[1] = 100; bbcolor[2] = 150;
                     }
                 }
-
-                // for _,vv := range targetMobPath {
-                //     if vv.X == x && vv.Y == y{
-                //         bbcolor[0] = 22; bbcolor[1] = 180; bbcolor[2] = 55;
-                //     }
-                // }
-                //
-                // for _,vv := range targetItemPath {
-                //     if vv.X == x && vv.Y == y{
-                //         bbcolor[0] = 200; bbcolor[1] = 50; bbcolor[2] = 200;
-                //     }
-                // }
 
                 if curCoord.X == x && curCoord.Y == y{
                     bbcolor[0] = 150; bbcolor[1] = 100; bbcolor[2] = 50;

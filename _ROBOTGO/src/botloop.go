@@ -100,7 +100,6 @@ func botLoop() {
         // #################################
 
 
-
         if curMap == lockMap { botStates.InLockMap = true }                 else{ botStates.InLockMap = false }
         if curMap == saveMap { botStates.InSaveMap = true }                 else{ botStates.InSaveMap = false }
         if _, exist := route[curMap]; exist { botStates.OnTheRoad = true }  else{ botStates.OnTheRoad = false }
@@ -141,9 +140,6 @@ func botLoop() {
         // }
         //
         // if botStates == (States{InLockMap:true, HasTargetMob:true, InCombat:true}) {
-        //
-
-        //
 
         // }
 
@@ -278,8 +274,8 @@ func botLoop() {
 func infoUILoop() {
     for { time.Sleep(200 * time.Millisecond)
 
-        strMobs = ""
         keys := []int{}
+        strMobs = ""
         MUmobList.Lock()
         for kk,_ := range mobList { keys = append(keys,kk) }
         sort.Ints(keys)
@@ -289,10 +285,14 @@ func infoUILoop() {
         }
         MUmobList.Unlock()
 
+        keys = []int{}
         strGroundItems = ""
         MUgroundItems.Lock()
-        for _,vv := range groundItems {
-            strGroundItems += "("+Itos(vv.Coords.X)+" / "+Itos(vv.Coords.Y)+") "+Itos(vv.ItemID) +" "+Itos(vv.Amount) +"\n"
+        for kk,_ := range groundItems { keys = append(keys,kk) }
+        sort.Ints(keys)
+        for _,kkk := range keys {
+            ii := groundItems[kkk]
+            strGroundItems += "["+Itos(kkk)+"] ("+Itos(ii.Coords.X)+" / "+Itos(ii.Coords.Y)+") "+Itos(ii.ItemID) +" "+Itos(ii.Amount) +"\n"
         }
         MUgroundItems.Unlock()
 
