@@ -42,11 +42,6 @@ func Stoi(s string) int { ss,_:=strconv.Atoi(s); return ss }
 //     return append(slice[:s], slice[s+1:]...)
 // }
 
-// func power(base, exponent int) int {
-// 	result := 1
-// 	for i := 0; i < exponent; i++ { result *= base }
-// 	return result
-// }
 
 func byteArrayToUInt64(b []byte) uint64 {
 	if len(b) < 4 { return 0 }
@@ -146,6 +141,11 @@ func printStruct(s interface{}) string{
         str += fmt.Sprintf("%v", fieldValue) + "\n"
     }
     return str
+}
+
+func prettyPrint(i interface{}) string {
+    s, _ := json.MarshalIndent(i, "", "\t")
+    return string(s)
 }
 
 // func SortedKeysStr(m map[string]string) ([]string) {
@@ -252,14 +252,10 @@ func GetBetween(s string,s1 string,s2 string) []string {
     }
 	return res
 }
-//
-//
+
+
 // func ExtLower(path string) string{
 // 	return strings.ToLower(path[strings.LastIndex(string(path), ".")+1:len(path)])
-// }
-//
-// func GetType(f interface{}) reflect.Type{
-// 	return reflect.ValueOf(f).Type()
 // }
 //
 // func DecodeJSON(s string) interface{}{
@@ -276,18 +272,14 @@ func GetBetween(s string,s1 string,s2 string) []string {
 // 	return string(b)
 // }
 //
-// func Exists(name string) bool {
+// func fileExist(name string) bool {
 //     if _, err := os.Stat(name); err != nil {
 //     	if os.IsNotExist(err) { return false }
 //     }
 //     return true
 // }
 //
-func prettyPrint(i interface{}) string {
-    s, _ := json.MarshalIndent(i, "", "\t")
-    return string(s)
-}
-//
+
 // func CopyFile(src, dst string) (err error) {
 // 	f_src, _ := os.Open(src)
 // 	os.MkdirAll(path.Dir(dst),0777)
@@ -301,7 +293,7 @@ func prettyPrint(i interface{}) string {
 // 	f_dest.Close()
 // 	return
 // }
-//
+
 func readFileString(file_path string) string {
 	data, err := ioutil.ReadFile(file_path)
 	if err != nil { fmt.Printf("err readFileString-- %v -- \n", err) }
@@ -313,7 +305,7 @@ func writeFileString(file_path string,content string) {
     f.WriteString(content)
     f.Close();
 }
-//
+
 // func readRecursDir(dirname string)  {
 //     files, _ := ioutil.ReadDir(dirname)
 // 	// subdir := strings.Replace(dirname+"/", root_dir, "", 1)

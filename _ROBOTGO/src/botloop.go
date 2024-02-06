@@ -32,16 +32,13 @@ var(
     lockMap = ""
     saveMap = ""
 
+    pathIndex = 0
 	curPath = []Coord{}
     nextStep = Coord{}
     minDist = 1
-    // targetMobPath = []Coord{}
-    // targetItemPath = []Coord{}
 
-    pathIndex = 0
-
-    targetMobDead = -1
     targetMob = -1
+    targetMobDead = -1
     targetItem = -1
     targetItemLooted = -1
 
@@ -49,8 +46,6 @@ var(
 
     tpSearch = -1
     tpTime = 5
-    useGreed = -1
-    combatTime = 10
 )
 
 // var states = []string{
@@ -65,12 +60,9 @@ func resetStates(){
     MUgroundItems.Lock()
     mobList = map[int]Mob{}
     MUgroundItems.Unlock()
-
     MUmobList.Lock()
     groundItems = map[int]Item{}
     MUmobList.Unlock()
-    // targetItemPath = []Coord{}
-    // targetMobPath = []Coord{}
 }
 
 func botLoop() {

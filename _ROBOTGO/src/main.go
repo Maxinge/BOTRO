@@ -149,7 +149,6 @@ func main() {
         imgui.Text(fmt.Sprintf("\n timeInState --- %v", timeInState ))
         imgui.Text(fmt.Sprintf("\n targetMob [%v] ---  targetItem[%v]\n", targetMob, targetItem ))
 
-
         imgui.Text(fmt.Sprintf("\n states --- \n%v", printStruct(botStates) ))
         imgui.Text(fmt.Sprintf("\n Mobs --- \n%v", strMobs ))
         imgui.Text(fmt.Sprintf("\n groundItems --- \n%v", strGroundItems ))

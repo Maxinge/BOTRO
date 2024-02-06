@@ -3,20 +3,11 @@
         "savemap":"morocc",
         "lockmap":"moc_fild12",
         "teleport_search":[1, 5],
-        "town_run_weight":66,
         "route":[
             "morocc(160,18)"
         ]
     },
     "items":{
-        "buy_town_run":[
-            "Butcher_morocc(157,72):517 (Meat),10",
-            "507 (Red_Herb)"
-        ],
-        "sell_town_run":[
-        ],
-        "storage_town_run":[
-        ],
         "loot_ignore":[
             "713 (Empty_Bottle)",
             "507 (Red_Herb)"
@@ -26,17 +17,12 @@
         "(PECOPECO_EGG)   Mob-ID#1047",
         "(PICKY)   Mob-ID#1049",
         "(DROPS)   Mob-ID#1113",
-        
         "(CONDOR)   Mob-ID#1009"
     ],
     "combat":{
         "skills":[
             "14::1::10::800::Cold Bolt"
         ],
-        "min_dist":7,
-        "max_combat_time": 15
-    },
-    "loot":{
+        "min_dist":7
     }
-
 }

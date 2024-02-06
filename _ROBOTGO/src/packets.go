@@ -121,34 +121,8 @@ func fctpackInit()  {
         MUmobList.Unlock()
     }
 
-    // fctpack["load_map_data"] = func (HexID []byte, bb []byte)  {
-    //     rr := getActorsFromArray(bb)
-    //     for _,vv := range rr {
-    //         fmt.Printf("vv -> \t[%v]\n",vv)
-    //         parseMob(bb[2:])
-    //     }
-    // }
 
-
-    // fctpack["actor_something_happen"] = func (HexID []byte, bb []byte)  {
-
-    // }
-    //
-
-
-    //
-    // fctpack["use_skill"] = func (HexID []byte, bb []byte)  {
-    //     fmt.Printf("use_skill [%v] \t",fmt.Sprintf("%#x", HexID))
-    //     fmt.Printf("bb -> \t[%v]\n",bb)
-    // }
-    //
-
-    // // fctpack["try_loot_item"] = func (HexID []byte, bb []byte)  {
-    // //     fmt.Printf("try_loot_item [%v] \t",fmt.Sprintf("%#x", HexID))
-    // //     fmt.Printf("bb -> \t[%v]\n",bb)
-    // // }
     fctpack["loot_item_confirm"] = func (HexID []byte, bb []byte)  {
-
         rrr := splitBitsArray(bb,[]byte{74,188,30,0})
         if len(rrr) > 1{
             MUgroundItems.Lock()
