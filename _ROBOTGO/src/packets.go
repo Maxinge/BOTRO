@@ -30,168 +30,188 @@ func fctpackInit()  {
         curMap = strings.Split(string(bb), ".rsw")[0]
     }
 
-    fctpack["actor_moved"] = func (HexID []byte, bb []byte)  {
-        rr := splitBitsArray(bb,[]byte{135,0})
-        for _,vv := range rr {
-            mapID := int(vv[0])
-            fromto := bits48ToCoords(vv[4:4+6])
-            if mm, exist := mobList[mapID]; exist {
-                mm.Coords.X = fromto[2]
-                mm.Coords.Y = fromto[3]
-                mu.Lock()
-                mobList[mapID] = mm
-                mu.Unlock()
-            }
-        }
-    }
+    // fctpack["actor_moved"] = func (HexID []byte, bb []byte)  {
+    //     rr := splitBitsArray(bb,[]byte{135,0})
+    //     for _,vv := range rr {
+    //         mapID := int(vv[0])
+    //         MUmobList.Lock()
+    //         fromto := bits48ToCoords(vv[4:4+6])
+    //         if mm, exist := mobList[mapID]; exist {
+    //             mm.Coords.X = fromto[2]
+    //             mm.Coords.Y = fromto[3]
+    //             mobList[mapID] = mm
+    //         }
+    //         MUmobList.Unlock()
+    //     }
+    // }
 
-    fctpack["actor_appear"] = func (HexID []byte, bb []byte)  {
-        // fmt.Printf("actor_appear [%v] \t",fmt.Sprintf("%#x", HexID))
-        // fmt.Printf("bb -> \t[%v] \n",bb)
-        rr := getActorsFromArray(bb)
-        for _,vv := range rr {
-            // fmt.Printf("vv -> \t[%v]\n",vv)
-            if isMob(vv[0:3]) {
-                mapID := int(vv[3])
-                mobID := int(byteArrayToUInt16(vv[21:21+2]))
-                sss := splitBitsArray(vv,[]byte{255,255,255,255,255,255,255,255})
-                mobName := strings.Replace(string(sss[1]),"\u0000", "", -1)
-                cc := Coord{X:0,Y:0} ; index := 0
-                if sliceEqual(vv[0:3], []byte{108,0,5}) { index = 61 }
-                if sliceEqual(vv[0:3], []byte{114,0,5}) { index = 65 }
-                bb := bits24ToCoords(vv[index:index+3])
-                cc.X = bb[0]; cc.Y = bb[1];
-                mu.Lock()
-                mobList[mapID] = Mob{ MobID:mobID, Name:mobName, Coords:cc }
-                mu.Unlock()
-            }
-        }
-    }
+    // fctpack["actor_appear"] = func (HexID []byte, bb []byte)  {
+    //     parseMob(bb)
+    // }
+    //
+    // fctpack["load_map_data"] = func (HexID []byte, bb []byte)  {
+    //     rr := getActorsFromArray(bb)
+    //     for _,vv := range rr {
+    //         fmt.Printf("vv -> \t[%v]\n",vv)
+    //         parseMob(bb[2:])
+    //     }
+    // }
 
-    fctpack["load_map_data"] = fctpack["actor_appear"]
 
-    fctpack["actor_something_happen"] = func (HexID []byte, bb []byte)  {
-        // fmt.Printf("actor_something_happen [%v] \t",fmt.Sprintf("%#x", HexID))
-        // fmt.Printf("bb -> \t[%v] \n",bb)
-        mapID := int(bb[0])
-        mu.Lock()
-        if bb[4] == 1{ // isDead
-        if _, exist := mobList[mapID]; exist {
-            delete(mobList, mapID)
-            // fmt.Printf("mapID is ded-> \t[%v]\n",mapID)
-        }}
-        mu.Unlock()
-    }
 
-    fctpack["item_appear"] = func (HexID []byte, bb []byte)  {
-        // fmt.Printf("item_appear [%v] \n",fmt.Sprintf("%#x", HexID))
-        rrr := splitBitsArray(bb,[]byte{221,10})
-        for _, vv := range rrr {
-            parseItem(vv)
-        }
-    }
-
-    fctpack["mob_info"] = func (HexID []byte, bb []byte)  {
-        // fmt.Printf("mob_info [%v] \n",fmt.Sprintf("%#x", HexID))
-        rr := splitBitsArray(bb,[]byte{255,255})
-        if len(rr) > 1{
-            //mob dropped items
-            rrr := splitBitsArray(rr[1],[]byte{221,10})
-            for ii := 1; ii < len(rrr) ; ii++ {
-                parseItem(rrr[ii])
-            }
-        }
-    }
-
-    fctpack["use_skill"] = func (HexID []byte, bb []byte)  {
-        fmt.Printf("use_skill [%v] \t",fmt.Sprintf("%#x", HexID))
-        fmt.Printf("bb -> \t[%v]\n",bb)
-    }
-
-    fctpack["item_disappear"] = func (HexID []byte, bb []byte)  {
-        fmt.Printf("item_disappear [%v] \t",fmt.Sprintf("%#x", HexID))
-        fmt.Printf("bb -> \t[%v]\n",bb)
-        for ii := 0; ii < len(bb); ii+=4 {
-            delete(groundItems, int(byteArrayToUInt32(bb[ii:ii+4])))
-        }
-    }
-    fctpack["try_loot_item"] = func (HexID []byte, bb []byte)  {
-        fmt.Printf("try_loot_item [%v] \t",fmt.Sprintf("%#x", HexID))
-        fmt.Printf("bb -> \t[%v]\n",bb)
-
-    }
-    fctpack["loot_item_confirm"] = func (HexID []byte, bb []byte)  {
-        rrr := splitBitsArray(bb,[]byte{74,188,30,0})
-        if len(rrr) > 1{
-            for ii := 1; ii < len(rrr) ; ii++ {
-                // fmt.Printf("loot -> \t[%v]\n",rrr[ii][0:4])
-                delete(groundItems, int(byteArrayToUInt32(rrr[ii][0:4])))
-            }
-        }
-    }
-
-    fctpack["uknw_greed"] = func (HexID []byte, bb []byte)  {
-        rr := splitBitsArray(bb,[]byte{74,188,30,0,74,188,30,0})
-        if len(rr) > 2{
-            rrr := splitBitsArray(rr[2],[]byte{74,188,30,0})
-            if len(rrr) > 1{
-                for ii := 1; ii < len(rrr) ; ii++ {
-                    // fmt.Printf("loot -> \t[%v]\n",rrr[ii][0:4])
-                    delete(groundItems, int(byteArrayToUInt32(rrr[ii][0:4])))
-                }
-            }
-        }
-    }
+    // fctpack["actor_something_happen"] = func (HexID []byte, bb []byte)  {
+    //     // fmt.Printf("actor_something_happen [%v] \t",fmt.Sprintf("%#x", HexID))
+    //     // fmt.Printf("bb -> \t[%v] \n",bb)
+    //     mapID := int(bb[0])
+    //     MUmobList.Lock()
+    //     if bb[4] == 1{ // isDead
+    //     if _, exist := mobList[mapID]; exist {
+    //         targetMobDead = mapID
+    //         delete(mobList, mapID)
+    //         // fmt.Printf("mapID is ded-> \t[%v]\n",mapID)
+    //     }}
+    //     MUmobList.Unlock()
+    // }
+    //
+    // fctpack["item_appear"] = func (HexID []byte, bb []byte)  {
+    //     // fmt.Printf("item_appear [%v] \n",fmt.Sprintf("%#x", HexID))
+    //     rrr := splitBitsArray(bb,[]byte{221,10})
+    //     for _, vv := range rrr {
+    //         parseItem(vv)
+    //     }
+    // }
+    //
+    // fctpack["mob_info"] = func (HexID []byte, bb []byte)  {
+    //     rr := splitBitsArray(bb,[]byte{255,255})
+    //     if len(rr) > 1{
+    //         //mob dropped items
+    //         rrr := splitBitsArray(rr[1],[]byte{221,10})
+    //         for ii := 1; ii < len(rrr) ; ii++ {
+    //             parseItem(rrr[ii])
+    //         }
+    //     }
+    // }
+    //
+    // fctpack["use_skill"] = func (HexID []byte, bb []byte)  {
+    //     fmt.Printf("use_skill [%v] \t",fmt.Sprintf("%#x", HexID))
+    //     fmt.Printf("bb -> \t[%v]\n",bb)
+    // }
+    //
+    // fctpack["item_disappear"] = func (HexID []byte, bb []byte)  {
+    //     // fmt.Printf("item_disappear [%v] \t",fmt.Sprintf("%#x", HexID))
+    //     // fmt.Printf("bb -> \t[%v]\n",bb)
+    //     // 253 9
+    //     // 255 9
+    //     MUgroundItems.Lock()
+    //     for ii := 0; ii < len(bb); ii+=4 {
+    //         delete(groundItems, int(byteArrayToUInt32(bb[ii:ii+4])))
+    //     }
+    //     MUgroundItems.Unlock()
+    // }
+    // // fctpack["try_loot_item"] = func (HexID []byte, bb []byte)  {
+    // //     fmt.Printf("try_loot_item [%v] \t",fmt.Sprintf("%#x", HexID))
+    // //     fmt.Printf("bb -> \t[%v]\n",bb)
+    // // }
+    // fctpack["loot_item_confirm"] = func (HexID []byte, bb []byte)  {
+    //
+    //     rrr := splitBitsArray(bb,[]byte{74,188,30,0})
+    //     if len(rrr) > 1{
+    //         MUgroundItems.Lock()
+    //         for ii := 1; ii < len(rrr) ; ii++ {
+    //             targetItemLooted = int(byteArrayToUInt32(rrr[ii][0:4]))
+    //             // fmt.Printf("loot -> \t[%v]\n",rrr[ii][0:4])
+    //             delete(groundItems, int(byteArrayToUInt32(rrr[ii][0:4])))
+    //         }
+    //         MUgroundItems.Unlock()
+    //     }
+    // }
+    //
+    // fctpack["uknw_greed"] = func (HexID []byte, bb []byte)  {
+    //     rr := splitBitsArray(bb,[]byte{74,188,30,0,74,188,30,0})
+    //     if len(rr) > 2{
+    //         rrr := splitBitsArray(rr[2],[]byte{74,188,30,0})
+    //         if len(rrr) > 1{
+    //             MUgroundItems.Lock()
+    //             for ii := 1; ii < len(rrr) ; ii++ {
+    //                 // fmt.Printf("loot -> \t[%v]\n",rrr[ii][0:4])
+    //                 delete(groundItems, int(byteArrayToUInt32(rrr[ii][0:4])))
+    //             }
+    //             MUgroundItems.Unlock()
+    //         }
+    //     }
+    // }
 
 }
 
 // #######################
-func parseItem(item []byte){
-    // fmt.Printf("mapID -> \t[%v]\n",item[0:4])
-    mapID := int(byteArrayToUInt32(item[0:4]))
-    itemID := int(byteArrayToUInt16(item[4:6]))
-    x := int(byteArrayToUInt16(item[11:13]))
-    y := int(byteArrayToUInt16(item[13:15]))
-    amount := int(byteArrayToUInt16(item[17:19]))
-    groundItems[mapID] = Item{ ItemID:itemID, Coords:Coord{X:x,Y:y}, Amount:amount}
-}
 
-func isMob(bb []byte) bool{
-    flags := [][]byte{
-        []byte{108,0,5},
-        []byte{114,0,5},
-    }
-    for _,vv := range flags {
-        if sliceEqual(vv, bb) { return true }
-    }
-    return false
-}
 
-func getActorsFromArray(bb []byte) [][]byte{
-    flags := [][]byte{
-        []byte{108,0,5}, // mobs
-        []byte{114,0,5}, // mobs
-        []byte{63,4,184}, // ???
-        []byte{0,49,1}, // player
-        []byte{164,1,3}, // ???
-        []byte{108,0,0}, // player vending ?
-    }
-    var res [][]byte
-    for i := 0; i <= len(bb)-3 ; i++ {
-        if inArrayByte(flags,bb[i:i+3]) {
-            j := 0
-            for {
-                if i+j >= len(bb){ break }
-                if sliceEqual(bb[i+j:i+j+8], []byte{255,255,255,255,255,255,255,255}) {
-                    res = append(res,bb[i:i+j+32])
-                    i = i+j+32 ; break
-                }
-                j++
-            }
-        }
-    }
-    return res
-}
+
+
+// func parseMob(mob []byte){
+//     if mob[0] == 108 || mob[0] == 114 {
+//         mapID := int(byteArrayToUInt32(mob[0:0+4]))
+//         mobID := int(byteArrayToUInt16(mob[21:21+2]))
+//         sss := splitBitsArray(mob,[]byte{255,255,255,255,255,255,255,255})
+//         mobName := strings.Replace(string(sss[1]),"\u0000", "", -1)
+//         cc := Coord{X:0,Y:0} ; index := 0
+//         if mob[0] == 108 { index = 61 }
+//         if mob[0] == 114 { index = 65 }
+//         bc := bits24ToCoords(mob[index:index+3])
+//         cc.X = bc[0]; cc.Y = bc[1];
+//         MUmobList.Lock()
+//         mobList[mapID] = Mob{ MobID:mobID, Name:mobName, Coords:cc }
+//         MUmobList.Unlock()
+//     }
+// }
+// func parseItem(item []byte){
+//     // fmt.Printf("mapID -> \t[%v]\n",item[0:4])
+//     mapID := int(byteArrayToUInt32(item[0:4]))
+//     itemID := int(byteArrayToUInt16(item[4:6]))
+//     x := int(byteArrayToUInt16(item[11:13]))
+//     y := int(byteArrayToUInt16(item[13:15]))
+//     amount := int(byteArrayToUInt16(item[17:19]))
+//     MUgroundItems.Lock()
+//     groundItems[mapID] = Item{ ItemID:itemID, Coords:Coord{X:x,Y:y}, Amount:amount}
+//     MUgroundItems.Unlock()
+// }
+
+// func isMob(bb []byte) bool{
+//     flags := [][]byte{
+//         []byte{0,108},
+//         []byte{0,114},
+//     }
+//     for _,vv := range flags {
+//         if sliceEqual(vv, bb) { return true }
+//     }
+//     return false
+// }
+
+// func getActorsFromArray(bb []byte) [][]byte{
+//     flags := [][]byte{
+//         []byte{255,9,108}, // mobs
+//         []byte{255,9,114}, // mobs
+//         []byte{255,9,63}, // ???
+//         []byte{255,9,49}, // player
+//         []byte{255,9,164}, // ???
+//         []byte{255,9,108}, // player vending ?
+//     }
+//     var res [][]byte
+//     for i := 0; i <= len(bb)-3 ; i++ {
+//         if inArrayByte(flags,bb[i:i+3]) {
+//             j := 0
+//             for {
+//                 if i+j >= len(bb){ break }
+//                 if sliceEqual(bb[i+j:i+j+8], []byte{255,255,255,255,255,255,255,255}) {
+//                     res = append(res,bb[i:i+j+32])
+//                     i = i+j+32 ; break
+//                 }
+//                 j++
+//             }
+//         }
+//     }
+//     return res
+// }
 
 
 func int16ToBitString(ii int) string {

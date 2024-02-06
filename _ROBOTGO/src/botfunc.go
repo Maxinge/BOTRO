@@ -1,7 +1,6 @@
 package main
 
 import(
-	// "fmt"
 	"math"
 	"math/rand"
 	"time"
@@ -20,7 +19,11 @@ func loadprofil(){
     // fmt.Printf("profil -- %v -- \n", profil)
 
     mappp := profil["map"].(map[string]interface{})
-    lockMap = mappp["lockmap"].(string)
+	lockMap = mappp["lockmap"].(string)
+
+	tele := mappp["teleport_search"].([]interface{})
+	tpSearch = int(tele[0].(float64)); tpTime = int(tele[1].(float64))
+
     rrr := mappp["route"].([]interface{})
     route = map[string][]int{}
     for _,vv := range rrr {
@@ -34,6 +37,10 @@ func loadprofil(){
         ss := strings.Split(vv.(string), "#")
         targetMobs = append(targetMobs, Stoi(ss[1]))
     }
+
+	combbb := profil["combat"].(map[string]interface{})
+	attackDist = int(combbb["min_dist"].(float64))
+	combatTime = int(combbb["max_combat_time"].(float64))
 
     fmt.Printf("route -- %v -- \n", route)
     fmt.Printf("targetMobs -- %v -- \n", targetMobs)
@@ -231,8 +238,11 @@ func pathfind(start Coord, finish Coord, lgatMap ROLGatMap) []Coord {
 				candidates = append(candidates, v)
 			}}
 		}
-		if len(candidates) == 0 && len(coordList) >= 2{
-			coordList = coordList[0:len(coordList)-2]; continue
+		if len(candidates) == 0{
+			if len(coordList) >= 3 {
+				coordList = coordList[0:len(coordList)-2]; continue
+			}
+			return coordList
 		}
 		rand.Seed(time.Now().UnixNano())
 		rn := candidates[rand.Intn(len(candidates))]
@@ -244,6 +254,7 @@ func pathfind(start Coord, finish Coord, lgatMap ROLGatMap) []Coord {
 	path = cleanPath(path, 4, lgatMap)
 	path = cleanPath(path, 1, lgatMap)
 
-	return path
+	path = append(path,finish)
 
+	return path
 }

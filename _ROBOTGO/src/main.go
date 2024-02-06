@@ -37,7 +37,6 @@ var (
     err error
     proxyCo net.Conn
     exit = make(chan bool)
-    mu sync.Mutex
 
     fctpack map[string]func([]byte, []byte)
     // gatMaps = map[string]ROGatMap{}
@@ -48,8 +47,12 @@ var (
     route map[string][]int
     targetMobs []int
 
+    MUmobList sync.Mutex
     mobList = map[int]Mob{}
+
+    MUgroundItems sync.Mutex
     groundItems = map[int]Item{}
+
     strMobs = ""
     strGroundItems = ""
 )
@@ -112,7 +115,7 @@ func main() {
 
     // imgui.CreateWindow("ROBOTGO", 500, 500)
 
-    targetFPS := 10
+    targetFPS := 15
 	frameTime := time.Second / time.Duration(targetFPS)
 
 	lastFrameTime := time.Now()
@@ -128,12 +131,17 @@ func main() {
         basePos := imgui.MainViewport().Pos()
         baseSize := imgui.MainViewport().Size()
 
-        imgui.SetNextWindowPosV(imgui.NewVec2(basePos.X, basePos.Y + 400), 0, imgui.NewVec2(0, 0))
-        imgui.SetNextWindowSize(imgui.Vec2{X: baseSize.X, Y: baseSize.Y - 400})
+        imgui.SetNextWindowPosV(imgui.NewVec2(basePos.X+1, basePos.Y + 400+1), 0, imgui.NewVec2(0, 0))
+        imgui.SetNextWindowSize(imgui.Vec2{X: baseSize.X-2, Y: baseSize.Y - 400-2})
         imgui.Begin("Info")
 
         imgui.Text(fmt.Sprintf("Coords = X : %v / Y : %v", curCoord.X, curCoord.Y ))
         imgui.Text(fmt.Sprintf("Map : %v - Next point : %v", curMap, nextPoint))
+
+        imgui.Text(fmt.Sprintf("\n timeInState --- %v", timeInState ))
+        imgui.Text(fmt.Sprintf("\n targetMob [%v] ---  targetItem[%v]\n", targetMob, targetItem ))
+
+
         imgui.Text(fmt.Sprintf("\n states --- \n%v", printStruct(botStates) ))
         imgui.Text(fmt.Sprintf("\n Mobs --- \n%v", strMobs ))
         imgui.Text(fmt.Sprintf("\n groundItems --- \n%v", strGroundItems ))
@@ -154,7 +162,7 @@ func main() {
             for y := 0; y < lgatMap.height; y++{
 
                 if getDist(curCoord,(Coord{X:x,Y:y})) > float64(sightDist) { continue }
-                size := float32(1)
+                size := float32(1) * scale
                 bbcolor := []byte{111,111,111,255}
                 xpos := float32(x) - float32(curCoord.X)
                 ypos := float32(lgatMap.height - 1 - y) - float32(curCoord.Y*-1)
@@ -175,30 +183,32 @@ func main() {
                     }
                 }
 
-                for _,vv := range targetMobPath {
-                    if vv.X == x && vv.Y == y{
-                        bbcolor[0] = 22; bbcolor[1] = 180; bbcolor[2] = 17;
-                    }
-                }
+                // for _,vv := range targetMobPath {
+                //     if vv.X == x && vv.Y == y{
+                //         bbcolor[0] = 22; bbcolor[1] = 180; bbcolor[2] = 55;
+                //     }
+                // }
+                //
+                // for _,vv := range targetItemPath {
+                //     if vv.X == x && vv.Y == y{
+                //         bbcolor[0] = 200; bbcolor[1] = 50; bbcolor[2] = 200;
+                //     }
+                // }
 
                 if curCoord.X == x && curCoord.Y == y{
                     bbcolor[0] = 150; bbcolor[1] = 100; bbcolor[2] = 50;
-                    xpos -= float32(2)
-                    ypos -= float32(2)
-                    size = float32(5)
+                    size = float32(3) * scale
                 }
 
-                mu.Lock()
+                MUmobList.Lock()
                 for _,vv := range mobList {
                     if vv.Coords.X == x && vv.Coords.Y == y{
                         bbcolor[0] = 33; bbcolor[1] = 200; bbcolor[2] = 220;
-                        xpos -= float32(2)
-                        ypos -= float32(2)
-                        size = float32(5)
+                        size = float32(3) * scale
                     }
                 }
-                mu.Unlock()
-                drawList.AddRectFilled(imgui.Vec2{X: xpos, Y:  ypos}, imgui.Vec2{X: xpos+(size*scale),Y: ypos+(size*scale)}, byteArrayToUInt32(bbcolor))
+                MUmobList.Unlock()
+                drawList.AddRectFilled(imgui.Vec2{X: xpos, Y:  ypos}, imgui.Vec2{X: xpos+size,Y: ypos+size}, byteArrayToUInt32(bbcolor))
             }}
         }
         imgui.Render()

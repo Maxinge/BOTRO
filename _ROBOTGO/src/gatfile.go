@@ -101,3 +101,37 @@ func loadGatTexture(mapName string)  {
 //     }}
 //     return ROGatMap{cells2: cells2, cells : cell_list, width : int(width), height : int(height)}
 // }
+
+// maps, _ := ioutil.ReadDir(CurDir()+"data/gats/")
+// for _, m := range maps {
+//     if !m.IsDir() {
+//         name := strings.Split(m.Name(), ".gat")[0]
+//         fmt.Printf("name -- %v -- \n", name)
+//         loadGatMap(name)
+//     }
+// }
+//
+//
+// for kk, ggg := range gatMaps {
+//
+//     fichier, _ := os.Create(CurDir()+"data/lgats/"+kk+".lgat")
+//     defer fichier.Close()
+//
+//     ccc := []byte{}
+//     ww := int16ToBitString(ggg.width)
+//     ww1,_ := strconv.ParseInt(ww[0:8], 2, 16)
+//     ww2,_ := strconv.ParseInt(ww[8:16], 2, 16)
+//     bb := []byte{byte(ww1),byte(ww2)}
+//     ccc = append(ccc,bb...)
+//
+//     hh := int16ToBitString(ggg.height)
+//     hh1,_ := strconv.ParseInt(hh[0:8], 2, 16)
+//     hh2,_ := strconv.ParseInt(hh[8:16], 2, 16)
+//     bbb := []byte{byte(hh1),byte(hh2)}
+//     ccc = append(ccc,bbb...)
+//
+//     ccc = append(ccc,ggg.cells2...)
+//
+//
+//     fichier.Write(ccc)
+// }

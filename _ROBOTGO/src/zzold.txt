@@ -3,9 +3,27 @@
 "(PICKY_)   Mob-ID#1050",
 "(MUKA)   Mob-ID#1055"
 
+ [[10 0  15 0    43 55 243       6]]
+ [[1 0   14 0    2 55 243        6]]
+ [[10 0  15 0    12 55 243       6]]
+ [[1 0   14 0    93 55 243       6]]
+ [[1 0   14 0    86 55 243       6]]
+ [[1 0   14 0    151 55 243      6]]
+ [[1 0   14 0    151 55 243      6]]
+ [[10 0  15 0    114 55 243      6]]
+ [[10 0  15 0    243 54 243      6]]
+ [[1 0   14 0    8 55 243        6]]
+ [[1 0   14 0    59 55 243       6]]
+ [[10 0  15 0    134 55 243      6]]
+
 [[115 165 2 0]]
 
 [[107 165 2 0
+
+[
+108 0 5 69 55 243 6 0 0 0 0 200 0 0 0 0 0 0 0 0 0 25 4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 18 201 176 0 0 0 3 0 0 0 255 255 255 255 255 255 255 255 0 0 0 80 105 99 107 121 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+253 9 114 0 5 116 55 243 6 0 0 0 0 150 0 0 0 0 0 0 0 0 0 241 3 0 0 0 0 0 0 0 0 0 0 0 0 125 56 213 154 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 24 137 177 140 155 136 0 0 5 0 0 0 255 255 255 255 255 255 255 255 0 0 0 67 111 110 100 111 114 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+255 9 108 0 5 54 55 243 6 0 0 0 0 200 0 0 0 0 0 0 0 0 0 26 4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 15 74 4 0 0 0 3 0 0 0 255 255 255 255 255 255 255 255 0 0 0 80 105 99 107 121 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 135 0 125 56 213 154 20 203 17 40 168 136]
 
 135 0 63 146 174 139 47 139 83 24 189 136]]
 item_disappear [0xa100]         bb ->   [[99 170 2 0   161 0 97 170   2 0 161 0   98 170 2 0]]
@@ -768,37 +786,3 @@ backend.Run(func () {
                     }}
                     maskTexture = imgui.NewTextureFromRgba(img)
                 }
-
-    maps, _ := ioutil.ReadDir(CurDir()+"data/gats/")
-    for _, m := range maps {
-        if !m.IsDir() {
-            name := strings.Split(m.Name(), ".gat")[0]
-            fmt.Printf("name -- %v -- \n", name)
-            loadGatMap(name)
-        }
-    }
-
-
-    for kk, ggg := range gatMaps {
-
-        fichier, _ := os.Create(CurDir()+"data/lgats/"+kk+".lgat")
-        defer fichier.Close()
-
-        ccc := []byte{}
-        ww := int16ToBitString(ggg.width)
-        ww1,_ := strconv.ParseInt(ww[0:8], 2, 16)
-        ww2,_ := strconv.ParseInt(ww[8:16], 2, 16)
-        bb := []byte{byte(ww1),byte(ww2)}
-        ccc = append(ccc,bb...)
-
-        hh := int16ToBitString(ggg.height)
-        hh1,_ := strconv.ParseInt(hh[0:8], 2, 16)
-        hh2,_ := strconv.ParseInt(hh[8:16], 2, 16)
-        bbb := []byte{byte(hh1),byte(hh2)}
-        ccc = append(ccc,bbb...)
-
-        ccc = append(ccc,ggg.cells2...)
-
-
-        fichier.Write(ccc)
-    }

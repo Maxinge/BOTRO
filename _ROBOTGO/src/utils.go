@@ -63,6 +63,27 @@ func sliceEqual(slice1 []byte, slice2 []byte) bool {
 	return true
 }
 
+func splitBitsArrayMulti(bb []byte ,search [][]byte) [][]byte {
+    slen := len(search[0])
+	for _,vv := range search {
+		if len(vv) != slen{
+			if err != nil { fmt.Printf("err splitBitsArray : all search need same len \n", err) }
+			return [][]byte{}
+		}
+	}
+    var res [][]byte
+    j := 0
+    for i := 0; i <= len(bb)-slen ; i++ {
+        if inArrayByte(search,bb[i:i+slen]) {
+            res = append(res,bb[j:i])
+            i += slen
+            j = i
+        }
+    }
+    res = append(res,bb[j:len(bb)])
+    return res
+}
+
 func splitBitsArray(bb []byte ,search []byte) [][]byte {
     slen := len(search)
     var res [][]byte

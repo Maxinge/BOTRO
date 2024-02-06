@@ -90,10 +90,11 @@ func main() {
         regionAddr = baseAddress + mbi.RegionSize
 	}
 
+
     buffer2 := make([]byte, 10000)
     go func() {
         for {
-            time.Sleep(300 * time.Millisecond)
+            time.Sleep(200 * time.Millisecond)
             if botConn == nil { continue }
             buffer2 = buffer2[0:4]
             bb := []byte{20,20}
