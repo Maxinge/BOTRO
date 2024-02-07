@@ -17,12 +17,13 @@
         "(PECOPECO_EGG)   Mob-ID#1047",
         "(PICKY)   Mob-ID#1049",
         "(DROPS)   Mob-ID#1113",
-        "(CONDOR)   Mob-ID#1009"
+        "(CONDOR)   Mob-ID#1009",
+        "(CHONCHON)   Mob-ID#1011"
     ],
     "combat":{
         "skills":[
             "14::1::10::800::Cold Bolt"
         ],
-        "min_dist":7
+        "min_dist":10
     }
 }

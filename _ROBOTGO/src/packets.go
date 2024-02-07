@@ -34,15 +34,33 @@ func fctpackInit()  {
         // cc := bits48ToCoords(bb[4:])
     }
 
+    fctpack["skill_use"] = func (HexID []byte, bb []byte)  {
+        // fmt.Printf(" ####### [%v][%v] -> [%v]\n","skill_use", len(bb)+2, bb)
+    }
+
     fctpack["chat_main"] = func (HexID []byte, bb []byte)  {}
 
+
+    fctpack["actor_lookat_send"] = func (HexID []byte, bb []byte)  {}
+    fctpack["item_drop_send"] = func (HexID []byte, bb []byte)  {}
+    fctpack["item_inventory_remove"] = func (HexID []byte, bb []byte)  {}
+    fctpack["try_item_loot"] = func (HexID []byte, bb []byte)  {}
     fctpack["send_self_move_to"] = func (HexID []byte, bb []byte)  {}
     fctpack["send_sync_serv"] = func (HexID []byte, bb []byte)  {}
     fctpack["recv_sync_serv"] = func (HexID []byte, bb []byte)  {}
     fctpack["actor_info"] = func (HexID []byte, bb []byte)  {}
     fctpack["stat_info"] = func (HexID []byte, bb []byte)  {}
     fctpack["actor_info_request"] = func (HexID []byte, bb []byte)  {}
+    fctpack["map_change"] = func (HexID []byte, bb []byte)  {}
+    fctpack["get_exp"] = func (HexID []byte, bb []byte)  {}
+    fctpack["item_inventory_add"] = func (HexID []byte, bb []byte)  {}
 
+    fctpack["item_use_send"] = func (HexID []byte, bb []byte)  {
+        fmt.Printf("[%v][%v] -> [%v]\n","item_use_send", len(bb)+2, bb)
+    }
+    fctpack["item_exist"] = func (HexID []byte, bb []byte)  {
+        // fmt.Printf("[%v][%v] -> [%v]\n","item_exist", len(bb)+2, bb)
+    }
     fctpack["item_appear"] = func (HexID []byte, bb []byte)  {
         // fmt.Printf("[%v][%v] -> [%v]\n","item_appear", len(bb)+2, bb)
         mapID := int(binary.LittleEndian.Uint32(bb[0:0+4]))
@@ -56,15 +74,14 @@ func fctpackInit()  {
     }
 
     fctpack["item_disappear"] = func (HexID []byte, bb []byte)  {
+        targetItemLooted = int(byteArrayToUInt32(bb[0:4]))
         MUgroundItems.Lock()
-        for ii := 0; ii < len(bb); ii+=4 {
-            delete(groundItems, int(binary.LittleEndian.Uint32(bb[ii:ii+4])))
-        }
+        delete(groundItems, targetItemLooted)
         MUgroundItems.Unlock()
     }
 
     fctpack["actor_action"] = func (HexID []byte, bb []byte)  {
-        // fmt.Printf("[%v][%v] -> [%v]\n","item_disappear", len(bb)+2, bb)
+        // fmt.Printf("[%v][%v] -> [%v]\n","actor_action", len(bb)+2, bb)
     }
 
 
@@ -78,7 +95,10 @@ func fctpackInit()  {
         curCoord = Coord{X:int(cx),Y:int(cy)}
     }
 
+    // [[215 91 249 6   34 9 194 44 152 136  154 135 24 160]]
+
     fctpack["actor_moved"] = func (HexID []byte, bb []byte)  {
+        // fmt.Printf("[%v][%v] -> [%v]\n","actor_moved", len(bb)+2, bb)
         mapID := int(binary.LittleEndian.Uint32(bb[0:4]))
         MUmobList.Lock()
         fromto := bits48ToCoords(bb[4:4+6])
@@ -90,10 +110,12 @@ func fctpackInit()  {
         MUmobList.Unlock()
     }
 
+    // ## type : 5 = mob / 6 = npc
     fctpack["actor_appear"] = func (HexID []byte, bb []byte)  {
         // fmt.Printf("[%v][%v] -> [%v]\n","actor_appear", len(bb)+2, bb)
         mapID := int(binary.LittleEndian.Uint32(bb[3:3+4]))
         mobID := int(binary.LittleEndian.Uint16(bb[21:21+4]))
+        actorType := byte(bb[2])
         sss := splitBitsArray(bb,[]byte{255,255,255,255,255,255,255,255})
         mobName := ""
         if len(sss) > 1 { mobName = strings.Replace(string(sss[1]),"\u0000", "", -1) }
@@ -103,37 +125,24 @@ func fctpackInit()  {
         if bb[0] == 114 { index = 65 }
         bc := bits24ToCoords(bb[index:index+3])
         cc.X = bc[0]; cc.Y = bc[1];
-        MUmobList.Lock()
-        mobList[mapID] = Mob{ MobID:mobID, Name:mobName, Coords:cc }
-        MUmobList.Unlock()
+        if actorType == 5  {
+            MUmobList.Lock()
+            mobList[mapID] = Mob{ MobID:mobID, Name:mobName, Coords:cc }
+            MUmobList.Unlock()
+        }
     }
 
     fctpack["actor_dead_disapear"] = func (HexID []byte, bb []byte)  {
         // fmt.Printf("[%v][%v] -> [%v]\n","actor_dead_disapear", len(bb)+2, bb)
         mapID := int(binary.LittleEndian.Uint32(bb[0:0+4]))
         MUmobList.Lock()
-        if bb[4] == 1{ // isDead
-        if _, exist := mobList[mapID]; exist {
+        if bb[4] == 1{
             targetMobDead = mapID
-            delete(mobList, mapID)
-            // fmt.Printf("mapID is ded-> \t[%v]\n",mapID)
-        }}
+            delete(mobList, targetMobDead)
+        }
         MUmobList.Unlock()
     }
 
-
-    fctpack["loot_item_confirm"] = func (HexID []byte, bb []byte)  {
-        rrr := splitBitsArray(bb,[]byte{74,188,30,0})
-        if len(rrr) > 1{
-            MUgroundItems.Lock()
-            for ii := 1; ii < len(rrr) ; ii++ {
-                targetItemLooted = int(byteArrayToUInt32(rrr[ii][0:4]))
-                // fmt.Printf("loot -> \t[%v]\n",rrr[ii][0:4])
-                delete(groundItems, int(byteArrayToUInt32(rrr[ii][0:4])))
-            }
-            MUgroundItems.Unlock()
-        }
-    }
 
 
 }

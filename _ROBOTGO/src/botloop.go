@@ -18,7 +18,7 @@ type States struct {
     HasTargetMob bool
     HasTargetItem bool
     InCombat bool
-    InLootItem bool
+    IsLooting bool
 }
 
 var(
@@ -81,7 +81,7 @@ func botLoop() {
 
         if checkState == botStates {
             timeInState = elapsed.Sub(startTime).Seconds()
-            if timeInState > float64(20) { resetStates() }
+            if timeInState > float64(15) { resetStates() }
             elapsed = time.Now()
         }else{
             startTime = time.Now()
@@ -91,80 +91,56 @@ func botLoop() {
         // #################################
         // #################################
 
-
         if curMap == lockMap { botStates.InLockMap = true }                 else{ botStates.InLockMap = false }
         if curMap == saveMap { botStates.InSaveMap = true }                 else{ botStates.InSaveMap = false }
         if _, exist := route[curMap]; exist { botStates.OnTheRoad = true }  else{ botStates.OnTheRoad = false }
         if curPath != nil { botStates.IsWalking = true }                    else{ botStates.IsWalking = false }
         if targetMob >= 0 {
-            botStates.HasTargetMob = true; botStates.HasTargetItem = false;
-        }else{ botStates.HasTargetMob = false }
+            botStates.HasTargetMob = true;
+        }else{ botStates.HasTargetMob = false ; botStates.GoToMob = false; botStates.InCombat = false}
         if targetItem >= 0 {
-            botStates.HasTargetItem = true; botStates.HasTargetMob = false;
-        }else{ botStates.HasTargetItem = false }
+            botStates.HasTargetItem = true; botStates.HasTargetMob = false; botStates.InCombat = false;
+        }else{ botStates.HasTargetItem = false ; botStates.GoToItem = false; botStates.IsLooting = false;}
 
+        // #################################
 
-
-        // if botStates == (States{InLockMap:true, HasTargetItem:true}) {
-        //
-        //     MUgroundItems.Lock()
-        //     item := groundItems[targetItem]
-        //     MUgroundItems.Unlock()
-        //
-        //     if targetItem == targetItemLooted { targetItem = -1; continue startBotLoop }
-        //     targetItemPath = pathfind(curCoord, item.Coords, lgatMaps[curMap])
-        //     if len(targetItemPath) <= 0 { continue startBotLoop }
-        //     sendToServer("0x5f03",coordsTo24Bits(targetItemPath[0].X,targetItemPath[0].Y))
-        //     time.Sleep(200 * time.Millisecond)
-        //     if getDist(curCoord, item.Coords) > 3 { continue startBotLoop }
-        //
-        //     lootBin := make([]byte, 4) ; lel := make([]byte, 4)
-        //     binary.BigEndian.PutUint32(lootBin, uint32(targetItem))
-        //     for ii := 0; ii < len(lootBin); ii++ {
-        //         lel[len(lootBin) -1 - ii ] = lootBin[ii]
-        //     }
-        //     fmt.Printf("lootBin -- %v -- \n", lel)
-        //     sendToServer("0x6203",lel)
-        //     sendToServer("0x6203",lel)
-        //     time.Sleep(100 * time.Millisecond)
-        //     resetStates()
-        //     continue startBotLoop
-        // }
-        //
-        // if botStates == (States{InLockMap:true, HasTargetMob:true, InCombat:true}) {
-
-        // }
-
-        if botStates == (States{InLockMap:true, HasTargetMob:true, InCombat:true}) {
-
-            if targetMob == targetMobDead { targetMob = -1; continue startBotLoop }
-
-            mobBin := make([]byte, 4) ;
-            binary.BigEndian.PutUint32(mobBin, uint32(targetMob))
-            // for ii := 0; ii < len(lootBin); ii++ {
-            //     lel[len(lootBin) -1 - ii ] = lootBin[ii]
-            // }
-            // fmt.Printf("lootBin -- %v -- \n", lel)
-
-            lel := []byte{}
-            lel = append(lel,[]byte{10,0,15}...)
-            lel = append(lel,mobBin...)
-            lel = append(lel,byte(6))
-
-
-            fmt.Printf("kill -- %v -- \n", mobBin)
-            sendToServer("0x3804",lel)
-            time.Sleep(1400 * time.Millisecond)
-            continue startBotLoop
-            // '0114' => ['skill_use', 'v a4 a4 V3 v3 C',
-            // [qw(skillID sourceID targetID tick src_speed dst_speed damage level option type)]]
+        if botStates == (States{InLockMap:true, HasTargetItem:true, IsLooting:true}) {
+            if targetItem == targetItemLooted { targetItem = -1; botStates.IsLooting = false; continue startBotLoop }
+            itemBin := make([]byte, 4) ;
+            binary.LittleEndian.PutUint32(itemBin, uint32(targetItem))
+            fmt.Printf("# loot loot # \n")
+            sendToServer("0362", itemBin)
+            time.Sleep(200 * time.Millisecond)
         }
 
-        if botStates == (States{InLockMap:true, IsWalking:true, HasTargetMob:true}) ||
-           botStates == (States{InLockMap:true, IsWalking:true, HasTargetMob:true, GoToMob:true}){
-            MUmobList.Lock()
-            mob := mobList[targetMob]
-            MUmobList.Unlock()
+        if botStates == (States{InLockMap:true, HasTargetItem:true}) ||
+           botStates == (States{InLockMap:true, IsWalking:true, HasTargetItem:true}) ||
+           botStates == (States{InLockMap:true, IsWalking:true, HasTargetItem:true, GoToItem:true}) {
+            MUgroundItems.Lock()
+            item := groundItems[targetItem]
+            MUgroundItems.Unlock()
+            nextPoint = item.Coords
+            curPath = pathfind(curCoord, nextPoint, lgatMaps[curMap])
+            pathIndex = 1 ; minDist = 2;
+            botStates.GoToItem = true
+        }
+
+        if botStates == (States{InLockMap:true, HasTargetMob:true, InCombat:true}) {
+            if targetMob == targetMobDead { targetMob = -1; botStates.InCombat = false; continue startBotLoop }
+            mobBin := make([]byte, 4) ;
+            binary.LittleEndian.PutUint32(mobBin, uint32(targetMob))
+            lel := []byte{}
+            lel = append(lel,[]byte{10,0,15,0}...)
+            lel = append(lel,mobBin...)
+            sendToServer("0438",lel)
+            time.Sleep(800 * time.Millisecond)
+        }
+
+        if botStates == (States{InLockMap:true, HasTargetMob:true}) ||
+           botStates == (States{InLockMap:true, IsWalking:true, HasTargetMob:true}) ||
+           botStates == (States{InLockMap:true, IsWalking:true, HasTargetMob:true, GoToMob:true}) {
+            botStates.InCombat = false
+            MUmobList.Lock() ;  mob := mobList[targetMob] ; MUmobList.Unlock()
             line := linearInterpolation(curCoord, mob.Coords)
         	for _,vv := range line {
         		gatcell := lgatMaps[curMap].cells[vv.X][vv.Y]
@@ -172,37 +148,38 @@ func botLoop() {
                     MUmobList.Lock()
                     delete(mobList, targetMob);
                     MUmobList.Unlock()
+                    targetMob = -1;
                     continue startBotLoop
                 }
         	}
-            curPath = pathfind(curCoord, mob.Coords, lgatMaps[curMap])
-            pathIndex = 0 ; minDist = attackDist;
+            nextPoint = mob.Coords
+            curPath = pathfind(curCoord, nextPoint, lgatMaps[curMap])
+            pathIndex = 1 ; minDist = attackDist;
             botStates.GoToMob = true
         }
-
 
         if botStates == (States{OnTheRoad:true}) {
             fmt.Printf("# newPath OnTheRoad # \n")
             nextPoint = (Coord{X:route[curMap][0], Y:route[curMap][1]})
-            pathIndex = 0 ; minDist = 0;
+            pathIndex = 0 ; minDist = 1;
             curPath = pathfind(curCoord, nextPoint, lgatMaps[curMap])
         }
 
         if botStates == (States{InLockMap:true}) {
             fmt.Printf("# newPath InLockMap # \n")
             nextPoint = randomPoint(lgatMaps[curMap],curCoord, 80)
-            pathIndex = 0 ; minDist = 0;
+            pathIndex = 0 ; minDist = 1;
             curPath = pathfind(curCoord, nextPoint, lgatMaps[curMap])
         }
 
         if botStates == (States{InLockMap:true, IsWalking:true}) ||
            botStates == (States{OnTheRoad:true, IsWalking:true}) ||
            botStates == (States{InLockMap:true, IsWalking:true, HasTargetMob:true, GoToMob:true}) ||
-           botStates == (States{OnTheRoad:true, IsWalking:true, HasTargetItem:true, GoToItem:true}) {
+           botStates == (States{InLockMap:true, IsWalking:true, HasTargetItem:true, GoToItem:true}) {
             if getDist(nextPoint, curCoord) <= float64(minDist) {
                 if botStates.GoToMob == true { botStates.InCombat = true; botStates.GoToMob = false }
-                if botStates.GoToItem == true { botStates.InLootItem = true; botStates.GoToItem = false }
-                curPath = nil; continue startBotLoop
+                if botStates.GoToItem == true { botStates.IsLooting = true; botStates.GoToItem = false }
+                curPath = nil; pathIndex = 0 ; continue startBotLoop
             }
             if pathIndex > len(curPath)-2 {
                 nextStep = nextPoint
@@ -210,8 +187,11 @@ func botLoop() {
                 nextStep = Coord{curPath[pathIndex].X,curPath[pathIndex].Y}
             }
             if getDist(curCoord, nextStep) < 6{ pathIndex += 8 }
-            sendToServer("0x5f03",coordsTo24Bits(nextStep.X,nextStep.Y))
+            sendToServer("035F",coordsTo24Bits(nextStep.X,nextStep.Y))
             time.Sleep(50 * time.Millisecond)
+
+            if botStates.GoToMob == true { continue startBotLoop }
+            if botStates.GoToItem == true { continue startBotLoop }
         }
 
         // botStates.ReadyToTp = false

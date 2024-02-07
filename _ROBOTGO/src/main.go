@@ -112,7 +112,7 @@ func main() {
         }
     }()
 
-    go botLoop()
+    // go botLoop()
     go infoUILoop()
 
     // ########################
@@ -210,9 +210,9 @@ func main() {
 
 
 func sendToServer(hexID string,data []byte){
-    var ii int16
-	fmt.Sscanf(hexID, "0x%x", &ii)
-    bb := []byte{ byte(ii >> 8), byte(ii) }
+    var ii uint16
+	fmt.Sscanf(hexID, "%x", &ii)
+    bb := []byte{byte(ii), byte(ii >> 8)}
     bb = append(bb,data...)
     proxyCo.Write(bb)
 }

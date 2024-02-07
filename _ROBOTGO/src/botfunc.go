@@ -40,7 +40,7 @@ func loadprofil(){
 
 	combbb := profil["combat"].(map[string]interface{})
 	attackDist = int(combbb["min_dist"].(float64))
-	
+
 
     fmt.Printf("route -- %v -- \n", route)
     fmt.Printf("targetMobs -- %v -- \n", targetMobs)

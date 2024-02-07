@@ -9,19 +9,24 @@
     "####": {  "Size":1,    "Ident":"############### UKNW ###############", "Desc":"" },
 
     "01D7": {  "Size":15,   "Ident":"uknw", "Desc":"" },
-    "0B08": {  "Size":-1,   "Ident":"uknw", "Desc":"inventory/storage when tp" },
-    "0B09": {  "Size":-1,   "Ident":"uknw", "Desc":"list  when tp" },
+    "0B08": {  "Size":-1,   "Ident":"uknw", "Desc":"triggered when tp" },
+    "0B09": {  "Size":-1,   "Ident":"uknw", "Desc":"triggered  when tp" },
+    "0B0A": {  "Size":-1,   "Ident":"uknw", "Desc":"triggered  when tp" },
+    "0B0B": {  "Size":4,   "Ident":"uknw", "Desc":"triggered  when tp" },
+    "0A3B": {  "Size":-1,   "Ident":"uknw", "Desc":"triggered  when tp" },
+    "099B": {  "Size":8,   "Ident":"uknw", "Desc":"triggered  when tp" },
+
 
     "0B1A": {  "Size":29,   "Ident":"uknw", "Desc":"" },
-    "0A37": {  "Size":69,   "Ident":"uknw", "Desc":"" },
     "0ACB": {  "Size":12,   "Ident":"uknw", "Desc":"" },
     "0983": {  "Size":29,   "Ident":"uknw", "Desc":"" },
     "01DE": {  "Size":33,   "Ident":"uknw", "Desc":"" },
     "0196": {  "Size":9,   "Ident":"uknw", "Desc":"" },
     "009C": {  "Size":9,   "Ident":"uknw", "Desc":"" },
-    "0438": {  "Size":10,   "Ident":"uknw", "Desc":"" },
+
     "0088": {  "Size":10,   "Ident":"uknw", "Desc":"" },
     "00C0": {  "Size":7,   "Ident":"uknw", "Desc":"" },
+    "08C8": {  "Size":34,   "Ident":"uknw", "Desc":"" },
 
 
     "####": {  "Size":1,    "Ident":"############### SERV & CHAT ###############", "Desc":"" },
@@ -33,21 +38,41 @@
 
     "####": {  "Size":1,    "Ident":"############### NPC INTERACT & INVENTORY & ITEMS ###############", "Desc":"" },
 
+    "0439": {  "Size":8,    "Ident":"item_use_send", "Desc":"" },
+
     "0ADD": {  "Size":24,    "Ident":"item_appear", "Desc":"" },
-    "00A1": {  "Size":8,     "Ident":"item_disappear", "Desc":"" },
-    "0362": {  "Size":8,     "Ident":"try_item_loot", "Desc":"" },
+    "00A1": {  "Size":6,     "Ident":"item_disappear", "Desc":"" },
+    "009D": {  "Size":19,     "Ident":"item_exist", "Desc":"" },
+    "0362": {  "Size":6,     "Ident":"try_item_loot", "Desc":"" },
+
+
+    "0A37": {  "Size":69,    "Ident":"item_inventory_add", "Desc":"" },
+    "00AF": {  "Size":6,    "Ident":"item_inventory_remove", "Desc":"" },
+    "0363": {  "Size":6,    "Ident":"item_drop_send", "Desc":"" },
+
 
     "####": {  "Size":1,    "Ident":"############### MAP & LOCATION & STATS ###############", "Desc":"" },
 
+    "0131": {  "Size":86,   "Ident":"vender_found", "Desc":"" },
+
     "035F": {  "Size":7,    "Ident":"send_self_move_to", "Desc":"" },
     "0087": {  "Size":14,   "Ident":"recv_self_move_to", "Desc":"" },
+    "0091": {  "Size":22,   "Ident":"map_change", "Desc":"triggered when tp too" },
+
+    "00B0": {  "Size":8,   "Ident":"stat_info", "Desc":"" },
+    "0141": {  "Size":14,   "Ident":"stat_info", "Desc":"" },
 
     "####": {  "Size":1,    "Ident":"############### ACTORS ###############", "Desc":"" },
+
+
+    "0361": {  "Size":5,   "Ident":"actor_lookat_send", "Desc":"" },
+
+    "0438": {  "Size":10,   "Ident":"skill_use", "Desc":"" },
 
     "0ACC": {  "Size":18,    "Ident":"get_exp", "Desc":"" },
     "0368": {  "Size":6,   "Ident":"actor_info_request", "Desc":"" },
     "008A": {  "Size":29,   "Ident":"actor_action", "Desc":"" },
-    "00B0": {  "Size":8,   "Ident":"stat_info", "Desc":"" },
+
     "0A30": {  "Size":106,   "Ident":"actor_info", "Desc":"" },
     "0086": {  "Size":16,   "Ident":"actor_moved", "Desc":"" },
     "0080": {  "Size":7,    "Ident":"actor_dead_disapear", "Desc":"" },
