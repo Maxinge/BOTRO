@@ -5,6 +5,7 @@ import(
     "time"
     "sort"
     "encoding/binary"
+    "sync"
 )
 
 type States struct {
@@ -37,15 +38,23 @@ var(
     nextStep = Coord{}
     minDist = 1
 
+    MUmobList sync.Mutex
+    mobList = map[int]Mob{}
+    MUgroundItems sync.Mutex
+    groundItems = map[int]Item{}
+
     targetMob = -1
     targetMobDead = -1
     targetItem = -1
     targetItemLooted = -1
+    ignoreItem = []int{}
 
     attackDist = 1
 
     tpSearch = -1
     tpTime = 5
+    useAttacks = [][]string{}
+    attackIndex = 0
 )
 
 // var states = []string{
@@ -108,7 +117,7 @@ func botLoop() {
             if targetItem == targetItemLooted { targetItem = -1; botStates.IsLooting = false; continue startBotLoop }
             itemBin := make([]byte, 4) ;
             binary.LittleEndian.PutUint32(itemBin, uint32(targetItem))
-            fmt.Printf("# loot loot # \n")
+            // fmt.Printf("# loot loot # \n")
             sendToServer("0362", itemBin)
             time.Sleep(200 * time.Millisecond)
         }
@@ -127,13 +136,31 @@ func botLoop() {
 
         if botStates == (States{InLockMap:true, HasTargetMob:true, InCombat:true}) {
             if targetMob == targetMobDead { targetMob = -1; botStates.InCombat = false; continue startBotLoop }
+            arrayBin := []byte{}
+            att := useAttacks[attackIndex]
+            skillIDBin := make([]byte, 2) ;
+            binary.LittleEndian.PutUint16(skillIDBin, uint16(Stoi(att[0])))
+            skillLVBin := make([]byte, 2) ;
+            binary.LittleEndian.PutUint16(skillLVBin, uint16(Stoi(att[1])))
             mobBin := make([]byte, 4) ;
             binary.LittleEndian.PutUint32(mobBin, uint32(targetMob))
-            lel := []byte{}
-            lel = append(lel,[]byte{10,0,15,0}...)
-            lel = append(lel,mobBin...)
-            sendToServer("0438",lel)
-            time.Sleep(800 * time.Millisecond)
+            delay := Stoi(att[2])
+
+            if Stoi(att[0]) != 0 {
+                arrayBin = append(arrayBin,skillLVBin...)
+                arrayBin = append(arrayBin,skillIDBin...)
+                arrayBin = append(arrayBin,mobBin...)
+                sendToServer("0438", arrayBin)
+            }else{
+                arrayBin = append(arrayBin,mobBin...)
+                // 0 = unique autoattack / 7 = start autoattack
+                arrayBin = append(arrayBin,byte(0))
+                sendToServer("0437", arrayBin)
+            }
+
+            if attackIndex < len(useAttacks)-1 { attackIndex++ }else{ attackIndex = 0 }
+            time.Sleep(time.Duration(delay) * time.Millisecond)
+            continue startBotLoop
         }
 
         if botStates == (States{InLockMap:true, HasTargetMob:true}) ||
@@ -159,14 +186,14 @@ func botLoop() {
         }
 
         if botStates == (States{OnTheRoad:true}) {
-            fmt.Printf("# newPath OnTheRoad # \n")
+            // fmt.Printf("# newPath OnTheRoad # \n")
             nextPoint = (Coord{X:route[curMap][0], Y:route[curMap][1]})
             pathIndex = 0 ; minDist = 1;
             curPath = pathfind(curCoord, nextPoint, lgatMaps[curMap])
         }
 
         if botStates == (States{InLockMap:true}) {
-            fmt.Printf("# newPath InLockMap # \n")
+            // fmt.Printf("# newPath InLockMap # \n")
             nextPoint = randomPoint(lgatMaps[curMap],curCoord, 80)
             pathIndex = 0 ; minDist = 1;
             curPath = pathfind(curCoord, nextPoint, lgatMaps[curMap])
@@ -222,7 +249,7 @@ func botLoop() {
         for kk,vv := range groundItems {
            if getDist(vv.Coords, curCoord) < 25 {
                MUgroundItems.Unlock()
-               targetItem = kk ; continue startBotLoop
+               targetItem = kk; continue startBotLoop
            }
         }
         MUgroundItems.Unlock()
@@ -230,12 +257,19 @@ func botLoop() {
         MUmobList.Lock()
         targetMob = -1
         for kk,vv := range mobList { if getDist(vv.Coords, curCoord) > 35 { delete(mobList, kk) } }
-        for kk,vv := range mobList {
-            if getDist(vv.Coords, curCoord) < 25 {
-            if intInArray(vv.MobID, targetMobs){
+
+        distMobList := map[float64]int{}
+        for kk,vv := range mobList { distMobList[getDist(vv.Coords, curCoord)] = kk }
+        keys := []float64{}
+        for kk,_ := range distMobList { keys = append(keys,kk) }
+        sort.Sort(sort.Float64Slice(keys))
+
+        for _,kkk := range keys {
+           mob := mobList[distMobList[kkk]]
+            if getDist(mob.Coords, curCoord) < 25 {
                 MUmobList.Unlock()
-                targetMob = kk ; continue startBotLoop
-            }}
+                targetMob = distMobList[kkk] ; continue startBotLoop
+            }
         }
         MUmobList.Unlock()
 
@@ -243,30 +277,30 @@ func botLoop() {
 
 }
 
-func infoUILoop() {
-    for { time.Sleep(200 * time.Millisecond)
-
-        keys := []int{}
-        strMobs = ""
-        MUmobList.Lock()
-        for kk,_ := range mobList { keys = append(keys,kk) }
-        sort.Ints(keys)
-        for _,kkk := range keys {
-            mm := mobList[kkk]
-            strMobs += "["+Itos(kkk)+"] ("+Itos(mm.Coords.X)+" / "+Itos(mm.Coords.Y)+") "+Itos(mm.MobID) +" "+mm.Name +"\n"
-        }
-        MUmobList.Unlock()
-
-        keys = []int{}
-        strGroundItems = ""
-        MUgroundItems.Lock()
-        for kk,_ := range groundItems { keys = append(keys,kk) }
-        sort.Ints(keys)
-        for _,kkk := range keys {
-            ii := groundItems[kkk]
-            strGroundItems += "["+Itos(kkk)+"] ("+Itos(ii.Coords.X)+" / "+Itos(ii.Coords.Y)+") "+Itos(ii.ItemID) +" "+Itos(ii.Amount) +"\n"
-        }
-        MUgroundItems.Unlock()
-
-    }
-}
+// func infoUILoop() {
+//     for { time.Sleep(200 * time.Millisecond)
+//
+//         keys := []int{}
+//         strMobs = ""
+//         MUmobList.Lock()
+//         for kk,_ := range mobList { keys = append(keys,kk) }
+//         sort.Ints(keys)
+//         for _,kkk := range keys {
+//             mm := mobList[kkk]
+//             strMobs += "["+Itos(kkk)+"] ("+Itos(mm.Coords.X)+" / "+Itos(mm.Coords.Y)+") "+Itos(mm.MobID) +" "+mm.Name +"\n"
+//         }
+//         MUmobList.Unlock()
+//
+//         keys = []int{}
+//         strGroundItems = ""
+//         MUgroundItems.Lock()
+//         for kk,_ := range groundItems { keys = append(keys,kk) }
+//         sort.Ints(keys)
+//         for _,kkk := range keys {
+//             ii := groundItems[kkk]
+//             strGroundItems += "["+Itos(kkk)+"] ("+Itos(ii.Coords.X)+" / "+Itos(ii.Coords.Y)+") "+Itos(ii.ItemID) +" "+Itos(ii.Amount) +"\n"
+//         }
+//         MUgroundItems.Unlock()
+//
+//     }
+// }

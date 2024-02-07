@@ -148,7 +148,7 @@ func routeFromClient(localConn net.Conn, port int){
         n, err := localConn.Read(sendbuffer)
         if err != nil { fmt.Printf("err localConn -- %v -- \n", err); return }
         HexID := binary.LittleEndian.Uint16(sendbuffer[0:2]);
-        fmt.Printf("recv : [%04X] len [%v] \n", HexID, len(sendbuffer[:n]))
+        fmt.Printf("send : [%04X] len [%v] \n", HexID, len(sendbuffer[:n]))
         if botConn != nil { botConn.Write(sendbuffer[:n]) }
         serverConn.Write(sendbuffer[:n])
 	}

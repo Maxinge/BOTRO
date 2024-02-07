@@ -4,7 +4,7 @@ import(
 	"math"
 	"math/rand"
 	"time"
-	"fmt"
+	// "fmt"
     "encoding/json"
     "strings"
 )
@@ -41,11 +41,24 @@ func loadprofil(){
 	combbb := profil["combat"].(map[string]interface{})
 	attackDist = int(combbb["min_dist"].(float64))
 
+	atttt := combbb["attack"].([]interface{})
 
-    fmt.Printf("route -- %v -- \n", route)
-    fmt.Printf("targetMobs -- %v -- \n", targetMobs)
+	for _,vv := range atttt {
+		att := strings.Split(vv.(string), "::")
+		useAttacks = append(useAttacks,[]string{att[0], att[1], att[2], att[3]})
+	}
+
+	itemsss := profil["items"].(map[string]interface{})
+	iii := itemsss["loot_ignore"].([]interface{})
+	for _,vv := range iii {
+		item := strings.Split(vv.(string), "(")
+		ignoreItem = append(ignoreItem,Stoi(item[0]))
+	}
+
+
+    // fmt.Printf("route -- %v -- \n", route)
+    // fmt.Printf("targetMobs -- %v -- \n", targetMobs)
     // fmt.Printf("lockMap -- %v -- \n", lockMap)
-
 }
 
 

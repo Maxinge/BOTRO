@@ -9,8 +9,8 @@
     },
     "items":{
         "loot_ignore":[
-            "713 (Empty_Bottle)",
-            "507 (Red_Herb)"
+            "1750(Arrow)",
+            "507(Red_Herb)"
         ]
     },
     "mobs":[
@@ -21,9 +21,9 @@
         "(CHONCHON)   Mob-ID#1011"
     ],
     "combat":{
-        "skills":[
-            "14::1::10::800::Cold Bolt"
+        "attack":[
+            "0::0::0::auto_attack"
         ],
-        "min_dist":10
+        "min_dist":3
     }
 }

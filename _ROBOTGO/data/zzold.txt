@@ -1,3 +1,20 @@
+"15::10::400::Frost Diver"
+
+distListItems := map[float64]int{}
+for kk,vv := range mobList { distListItems[getDist(vv.Coords, curCoord)] = kk }
+keys := []float64{}
+for kk,_ := range distListItems { keys = append(keys,kk) }
+sort.Sort(sort.Float64Slice(keys))
+
+for _,kkk := range keys {
+   mob := mobList[distListItems[kkk]]
+   if getDist(mob.Coords, curCoord) < 25 {
+       MUgroundItems.Unlock()
+       targetItem = distListItems[kkk]; continue startBotLoop
+   }
+}
+MUgroundItems.Unlock()
+
 "(PICKY)   Mob-ID#1049",
 "(DROPS)   Mob-ID#1113",
 "(PICKY_)   Mob-ID#1050",

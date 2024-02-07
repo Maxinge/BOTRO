@@ -19,8 +19,8 @@ func parsePacket(fname string, args []reflect.Value){
 func fctpackInit()  {
     fctpack = map[string]func([]byte, []byte){}
 
-    for k := range packetsmap {
-        fctpack[packetsmap[k].Ident] = func (HexID []byte, bb []byte)  {
+    for k := range packetsMap {
+        fctpack[packetsMap[k].Ident] = func (HexID []byte, bb []byte)  {
             HexID1 := fmt.Sprintf("%04X",binary.LittleEndian.Uint16(HexID))
             HexID2 := fmt.Sprintf("%04X",binary.LittleEndian.Uint16(bb[0:2]))
             fmt.Printf("[%v][%v]   [%v]\t ", HexID1, HexID2, len(bb)+2)
@@ -41,22 +41,27 @@ func fctpackInit()  {
     fctpack["chat_main"] = func (HexID []byte, bb []byte)  {}
 
 
-    fctpack["actor_lookat_send"] = func (HexID []byte, bb []byte)  {}
     fctpack["item_drop_send"] = func (HexID []byte, bb []byte)  {}
     fctpack["item_inventory_remove"] = func (HexID []byte, bb []byte)  {}
     fctpack["try_item_loot"] = func (HexID []byte, bb []byte)  {}
     fctpack["send_self_move_to"] = func (HexID []byte, bb []byte)  {}
     fctpack["send_sync_serv"] = func (HexID []byte, bb []byte)  {}
     fctpack["recv_sync_serv"] = func (HexID []byte, bb []byte)  {}
-    fctpack["actor_info"] = func (HexID []byte, bb []byte)  {}
-    fctpack["stat_info"] = func (HexID []byte, bb []byte)  {}
-    fctpack["actor_info_request"] = func (HexID []byte, bb []byte)  {}
     fctpack["map_change"] = func (HexID []byte, bb []byte)  {}
     fctpack["get_exp"] = func (HexID []byte, bb []byte)  {}
     fctpack["item_inventory_add"] = func (HexID []byte, bb []byte)  {}
+    fctpack["monster_ranged_attack"] = func (HexID []byte, bb []byte)  {}
+
+
+    fctpack["start_attack"] = func (HexID []byte, bb []byte)  {
+        // fmt.Printf("[%v][%v] -> [%v]\n","start_attack", len(bb)+2, bb)
+    }
+    fctpack["stop_attack"] = func (HexID []byte, bb []byte)  {
+        // fmt.Printf("[%v][%v] -> [%v]\n","stop_attack", len(bb)+2, bb)
+    }
 
     fctpack["item_use_send"] = func (HexID []byte, bb []byte)  {
-        fmt.Printf("[%v][%v] -> [%v]\n","item_use_send", len(bb)+2, bb)
+        // fmt.Printf("[%v][%v] -> [%v]\n","item_use_send", len(bb)+2, bb)
     }
     fctpack["item_exist"] = func (HexID []byte, bb []byte)  {
         // fmt.Printf("[%v][%v] -> [%v]\n","item_exist", len(bb)+2, bb)
@@ -65,6 +70,7 @@ func fctpackInit()  {
         // fmt.Printf("[%v][%v] -> [%v]\n","item_appear", len(bb)+2, bb)
         mapID := int(binary.LittleEndian.Uint32(bb[0:0+4]))
         itemID := int(binary.LittleEndian.Uint16(bb[4:4+2]))
+        if intInArray(itemID, ignoreItem) { return }
         x := int(binary.LittleEndian.Uint16(bb[11:13]))
         y := int(binary.LittleEndian.Uint16(bb[13:15]))
         amount := int(binary.LittleEndian.Uint16(bb[17:19]))
@@ -83,7 +89,6 @@ func fctpackInit()  {
     fctpack["actor_action"] = func (HexID []byte, bb []byte)  {
         // fmt.Printf("[%v][%v] -> [%v]\n","actor_action", len(bb)+2, bb)
     }
-
 
     fctpack["mem_map"] = func (HexID []byte, bb []byte)  {
         curMap = strings.Split(string(bb), ".rsw")[0]
@@ -126,6 +131,7 @@ func fctpackInit()  {
         bc := bits24ToCoords(bb[index:index+3])
         cc.X = bc[0]; cc.Y = bc[1];
         if actorType == 5  {
+            if !intInArray(mobID, targetMobs){ return }
             MUmobList.Lock()
             mobList[mapID] = Mob{ MobID:mobID, Name:mobName, Coords:cc }
             MUmobList.Unlock()

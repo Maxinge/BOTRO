@@ -8,7 +8,6 @@ import(
     "io/ioutil"
     "strings"
     "time"
-    "sync"
     "encoding/binary"
     "reflect"
 )
@@ -41,20 +40,16 @@ var (
     fctpack map[string]func([]byte, []byte)
     // gatMaps = map[string]ROGatMap{}
     lgatMaps = map[string]ROLGatMap{}
-    packetsmap map[string]Packet
+    packetsMap = map[string]Packet{}
 
     profil map[string]interface{}
     route map[string][]int
     targetMobs []int
 
-    MUmobList sync.Mutex
-    mobList = map[int]Mob{}
 
-    MUgroundItems sync.Mutex
-    groundItems = map[int]Item{}
 
-    strMobs = ""
-    strGroundItems = ""
+    // strMobs = ""
+    // strGroundItems = ""
 )
 
 
@@ -70,8 +65,25 @@ func main() {
     if err != nil { fmt.Printf("err -- %v -- \n", err); return }
     defer proxyCo.Close()
 
-    json.Unmarshal([]byte(readFileString(CurDir()+"data/packets.json")), &packetsmap)
-    // fmt.Printf("packetsmap -- %v -- \n", packetsmap)
+    fff := readFileString(CurDir()+"data/recvpackets.txt")
+    ss := strings.Split(fff, "\n")
+    for _,vv := range ss[:len(ss)-1] {
+        sss := strings.Split(vv, " ")
+        packetsMap[sss[0]] = Packet{Ident:"", Desc:"", Size:Stoi(sss[1][:len(sss[1])-1])}
+    }
+
+    var tempp map[string][]string
+    err := json.Unmarshal([]byte(readFileString(CurDir()+"data/packets.json")), &tempp)
+    if err != nil { fmt.Printf("err -- %v -- \n", err); return }
+
+    for kk,vv := range tempp {
+        tt := Packet{Ident:vv[0], Desc:vv[1], Size:0}
+        if _, exist := packetsMap[kk]; exist {
+            tt.Size = packetsMap[kk].Size
+        }
+        packetsMap[kk] = tt
+    }
+    
     loadprofil()
     fctpackInit()
 
@@ -79,7 +91,7 @@ func main() {
     for _, m := range maps {
         if !m.IsDir() {
             name := strings.Split(m.Name(), ".lgat")[0]
-            fmt.Printf("read -- %v -- \n", name)
+            // fmt.Printf("read -- %v -- \n", name)
             loadLGatMap(name)
         }
     }
@@ -90,18 +102,18 @@ func main() {
         for {
             n ,_ := proxyCo.Read(buffer)
             // if err != nil { fmt.Printf("err localConn -- %v -- \n", err); return }
-            if n < 3 { continue }
+            if n < 2 { continue }
             ii := -1
             for {
                 ii += 1; if ii >= n { break }
                 HexID := fmt.Sprintf("%04X",binary.LittleEndian.Uint16(buffer[ii:ii+2]));
                 plen := n - ii
-                if _, exist := packetsmap[HexID]; exist {
-                    plen = packetsmap[HexID].Size
+                if _, exist := packetsMap[HexID]; exist {
+                    plen = packetsMap[HexID].Size
                     if plen < 0 { plen = int(binary.LittleEndian.Uint16(buffer[ii+2:ii+4])) }
-                    if plen < 2 { plen = 2 }
+                    if plen <= 2 { plen = 2 }
                     args := []reflect.Value{ reflect.ValueOf(buffer[ii:ii+2]), reflect.ValueOf(buffer[ii+2:ii+2+plen-2]) }
-                    parsePacket(packetsmap[HexID].Ident, args)
+                    parsePacket(packetsMap[HexID].Ident, args)
                     ii += plen -1 ;
                     continue
                 }
@@ -112,8 +124,8 @@ func main() {
         }
     }()
 
-    // go botLoop()
-    go infoUILoop()
+    go botLoop()
+    // go infoUILoop()
 
     // ########################
     backend := imgui.CreateBackend(imgui.NewGLFWBackend())
@@ -150,8 +162,8 @@ func main() {
         imgui.Text(fmt.Sprintf("\n targetMob [%v] ---  targetItem[%v]\n", targetMob, targetItem ))
 
         imgui.Text(fmt.Sprintf("\n states --- \n%v", printStruct(botStates) ))
-        imgui.Text(fmt.Sprintf("\n Mobs --- \n%v", strMobs ))
-        imgui.Text(fmt.Sprintf("\n groundItems --- \n%v", strGroundItems ))
+        // imgui.Text(fmt.Sprintf("\n Mobs --- \n%v", strMobs ))
+        // imgui.Text(fmt.Sprintf("\n groundItems --- \n%v", strGroundItems ))
         imgui.End()
 
         drawList := imgui.BackgroundDrawListNil()
