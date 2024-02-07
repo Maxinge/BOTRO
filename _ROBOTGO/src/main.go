@@ -83,7 +83,7 @@ func main() {
         }
         packetsMap[kk] = tt
     }
-    
+
     loadprofil()
     fctpackInit()
 
@@ -191,9 +191,11 @@ func main() {
                     bbcolor[0] = 255; bbcolor[1] = 255; bbcolor[2] = 255;
                 }
 
-                for _,vv := range curPath {
-                    if vv.X == x && vv.Y == y{
-                        bbcolor[0] = 50; bbcolor[1] = 100; bbcolor[2] = 150;
+                if curPath != nil {
+                    for _,vv := range curPath {
+                        if vv.X == x && vv.Y == y{
+                            bbcolor[0] = 50; bbcolor[1] = 100; bbcolor[2] = 150;
+                        }
                     }
                 }
 

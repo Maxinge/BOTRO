@@ -19,14 +19,14 @@ func parsePacket(fname string, args []reflect.Value){
 func fctpackInit()  {
     fctpack = map[string]func([]byte, []byte){}
 
-    for k := range packetsMap {
-        fctpack[packetsMap[k].Ident] = func (HexID []byte, bb []byte)  {
-            HexID1 := fmt.Sprintf("%04X",binary.LittleEndian.Uint16(HexID))
-            HexID2 := fmt.Sprintf("%04X",binary.LittleEndian.Uint16(bb[0:2]))
-            fmt.Printf("[%v][%v]   [%v]\t ", HexID1, HexID2, len(bb)+2)
-            fmt.Printf("-> [%v]\n", bb)
-        }
-    }
+    // for k := range packetsMap {
+    //     fctpack[packetsMap[k].Ident] = func (HexID []byte, bb []byte)  {
+    //         HexID1 := fmt.Sprintf("%04X",binary.LittleEndian.Uint16(HexID))
+    //         HexID2 := fmt.Sprintf("%04X",binary.LittleEndian.Uint16(bb[0:2]))
+    //         fmt.Printf("[%v][%v]   [%v]\t ", HexID1, HexID2, len(bb)+2)
+    //         fmt.Printf("-> [%v]\n", bb)
+    //     }
+    // }
 
     fctpack["uknw"] = func (HexID []byte, bb []byte)  {}
 
@@ -35,7 +35,7 @@ func fctpackInit()  {
     }
 
     fctpack["skill_use"] = func (HexID []byte, bb []byte)  {
-        // fmt.Printf(" ####### [%v][%v] -> [%v]\n","skill_use", len(bb)+2, bb)
+        fmt.Printf(" ####### [%v][%v] -> [%v]\n","skill_use", len(bb)+2, bb)
     }
 
     fctpack["chat_main"] = func (HexID []byte, bb []byte)  {}
@@ -51,14 +51,8 @@ func fctpackInit()  {
     fctpack["get_exp"] = func (HexID []byte, bb []byte)  {}
     fctpack["item_inventory_add"] = func (HexID []byte, bb []byte)  {}
     fctpack["monster_ranged_attack"] = func (HexID []byte, bb []byte)  {}
-
-
-    fctpack["start_attack"] = func (HexID []byte, bb []byte)  {
-        // fmt.Printf("[%v][%v] -> [%v]\n","start_attack", len(bb)+2, bb)
-    }
-    fctpack["stop_attack"] = func (HexID []byte, bb []byte)  {
-        // fmt.Printf("[%v][%v] -> [%v]\n","stop_attack", len(bb)+2, bb)
-    }
+    fctpack["start_attack"] = func (HexID []byte, bb []byte)  {}
+    fctpack["stop_attack"] = func (HexID []byte, bb []byte)  {}
 
     fctpack["item_use_send"] = func (HexID []byte, bb []byte)  {
         // fmt.Printf("[%v][%v] -> [%v]\n","item_use_send", len(bb)+2, bb)
@@ -141,11 +135,9 @@ func fctpackInit()  {
     fctpack["actor_dead_disapear"] = func (HexID []byte, bb []byte)  {
         // fmt.Printf("[%v][%v] -> [%v]\n","actor_dead_disapear", len(bb)+2, bb)
         mapID := int(binary.LittleEndian.Uint32(bb[0:0+4]))
+        if bb[4] == 1 { targetMobDead = mapID }
         MUmobList.Lock()
-        if bb[4] == 1{
-            targetMobDead = mapID
-            delete(mobList, targetMobDead)
-        }
+        delete(mobList, targetMobDead)
         MUmobList.Unlock()
     }
 
@@ -154,22 +146,7 @@ func fctpackInit()  {
 }
 
 // #######################
-func int16ToBitString(ii int) string {
-    ss := ""
-	for i := 16 - 1; i >= 0; i-- {
-		bit := (ii >> uint(i)) & 1
-        ss += fmt.Sprintf("%d", bit)
-	}
-	return ss
-}
 
-func bitArrayToBitString(bb []byte) string{
-    ss := ""
-    for _, b := range bb {
-        ss += fmt.Sprintf("%08b", b)
-    }
-    return ss
-}
 
 func coordsTo24Bits(x int, y int /*, direction int*/) []byte {
     // coords to (x,y), so in 3 bytes

@@ -42,6 +42,22 @@ func Stoi(s string) int { ss,_:=strconv.Atoi(s); return ss }
 //     return append(slice[:s], slice[s+1:]...)
 // }
 
+func int16ToBitString(ii int) string {
+    ss := ""
+	for i := 16 - 1; i >= 0; i-- {
+		bit := (ii >> uint(i)) & 1
+        ss += fmt.Sprintf("%d", bit)
+	}
+	return ss
+}
+
+func bitArrayToBitString(bb []byte) string{
+    ss := ""
+    for _, b := range bb {
+        ss += fmt.Sprintf("%08b", b)
+    }
+    return ss
+}
 
 func byteArrayToUInt64(b []byte) uint64 {
 	if len(b) < 4 { return 0 }
@@ -69,6 +85,13 @@ func inArrayByte(bb [][]byte,search []byte) bool{
     return false
 }
 
+func sliceStrEqual(slice1 []string, slice2 []string) bool {
+	if len(slice1) != len(slice2) { return false }
+	for i := range slice1 {
+		if slice1[i] != slice2[i] { return false }
+	}
+	return true
+}
 func sliceEqual(slice1 []byte, slice2 []byte) bool {
 	if len(slice1) != len(slice2) { return false }
 	for i := range slice1 {
@@ -219,7 +242,7 @@ func prettyPrint(i interface{}) string {
 // 	cmd.Run()
 // }
 
-func StrInArray(str string,arr []string) bool{
+func strInArray(str string,arr []string) bool{
     for _, v := range arr { if str == v { return true } }
     return false
 }

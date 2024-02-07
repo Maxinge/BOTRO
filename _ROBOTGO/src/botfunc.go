@@ -219,6 +219,9 @@ func cleanPath(coordList []Coord, sighDist int, lgatMap ROLGatMap) []Coord{
 
 func pathfind(start Coord, finish Coord, lgatMap ROLGatMap) []Coord {
 
+	gatCell := lgatMap.cells[finish.X][finish.Y]
+	if !isValidCell(gatCell) { return []Coord{start} }
+
 	coordList := []Coord{}
 	visited := []Coord{}
 

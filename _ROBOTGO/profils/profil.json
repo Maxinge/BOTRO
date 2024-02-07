@@ -1,29 +1,35 @@
 {
     "map":{
-        "savemap":"morocc",
-        "lockmap":"moc_fild12",
+        "savemap":"prontera",
+        "lockmap":"moc_fild01",
         "teleport_search":[1, 5],
         "route":[
-            "morocc(160,18)"
+            "prontera(156,22)",
+            "prt_fild08(233,16)"
         ]
     },
     "items":{
         "loot_ignore":[
+            "517(Meat)",
+            "919(Animal's_Skin)",
             "1750(Arrow)",
-            "507(Red_Herb)"
+            "507(Red_Herb)",
+            "909(Jellopy)",
+            "917(Talon)",
+            "916(Feather_Of_Birds)",
+            "949(Feather)",
+            "935(Shell)"
         ]
     },
     "mobs":[
         "(PECOPECO_EGG)   Mob-ID#1047",
-        "(PICKY)   Mob-ID#1049",
         "(DROPS)   Mob-ID#1113",
-        "(CONDOR)   Mob-ID#1009",
-        "(CHONCHON)   Mob-ID#1011"
+        "(DESERT_WOLF_B)   Mob-ID#1107"
     ],
     "combat":{
         "attack":[
-            "0::0::0::auto_attack"
+            "15::10::200::Frost Diver"
         ],
-        "min_dist":3
+        "min_dist":10
     }
 }

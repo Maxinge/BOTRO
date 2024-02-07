@@ -1,4 +1,169 @@
 "15::10::400::Frost Diver"
+"0::0::0::auto_attack"
+
+"(PICKY)   Mob-ID#1049",
+"(CONDOR)   Mob-ID#1009",
+"(CHONCHON)   Mob-ID#1011",
+
+
+func remState(str string){
+    for kk, vv := range botStates {
+       if vv == str {
+           botStates = append(botStates[:kk], botStates[kk+1:]...) ; break
+       }
+   }
+}
+func addState(str string){
+    if !strInArray(str, botStates) {
+        botStates = append(botStates, str)
+    }
+}
+func chkState(ss []string) bool{
+    for _,vv := range ss {
+        if !strInArray(vv, botStates) { return false }
+    }
+    return true
+}
+
+// if botStates == (States{InLockMap:true, HasTargetItem:true, IsLooting:true}) {
+//
+//     itemBin := make([]byte, 4) ;
+//     binary.LittleEndian.PutUint32(itemBin, uint32(targetItem))
+//     // fmt.Printf("# loot loot # \n")
+//     sendToServer("0362", itemBin)
+//     time.Sleep(200 * time.Millisecond)
+// }
+//
+// if botStates == (States{InLockMap:true, HasTargetItem:true}) ||
+//    botStates == (States{InLockMap:true, HasTargetItem:true, GoToItem:true}) ||
+//    botStates == (States{InLockMap:true, IsWalking:true, HasTargetItem:true}) ||
+//    botStates == (States{InLockMap:true, IsWalking:true, HasTargetItem:true, GoToItem:true}) {
+//     MUgroundItems.Lock()
+//     item := groundItems[targetItem]
+//     MUgroundItems.Unlock()
+//     nextPoint = item.Coords
+//     curPath = pathfind(curCoord, nextPoint, lgatMaps[curMap])
+//     pathIndex = 1 ; minDist = 2;
+//     botStates.GoToItem = true
+// }
+//
+// if botStates == (States{InLockMap:true, HasTargetMob:true, InCombat:true}) {
+//
+//     arrayBin := []byte{}
+//     att := useAttacks[attackIndex]
+//     skillIDBin := make([]byte, 2) ;
+//     binary.LittleEndian.PutUint16(skillIDBin, uint16(Stoi(att[0])))
+//     skillLVBin := make([]byte, 2) ;
+//     binary.LittleEndian.PutUint16(skillLVBin, uint16(Stoi(att[1])))
+//     mobBin := make([]byte, 4) ;
+//     binary.LittleEndian.PutUint32(mobBin, uint32(targetMob))
+//     delay := Stoi(att[2])
+//
+//     if Stoi(att[0]) != 0 {
+//         arrayBin = append(arrayBin,skillLVBin...)
+//         arrayBin = append(arrayBin,skillIDBin...)
+//         arrayBin = append(arrayBin,mobBin...)
+//         sendToServer("0438", arrayBin)
+//     }else{
+//         arrayBin = append(arrayBin,mobBin...)
+//         // 0 = unique autoattack / 7 = start autoattack
+//         arrayBin = append(arrayBin,byte(0))
+//         sendToServer("0437", arrayBin)
+//     }
+//
+//     if attackIndex < len(useAttacks)-1 { attackIndex++ }else{ attackIndex = 0 }
+//     time.Sleep(time.Duration(delay) * time.Millisecond)
+//     continue startBotLoop
+// }
+//
+// if botStates == (States{InLockMap:true, HasTargetMob:true}) ||
+//    botStates == (States{InLockMap:true, HasTargetMob:true, GoToMob:true}) ||
+//    botStates == (States{InLockMap:true, IsWalking:true, HasTargetMob:true}) ||
+//    botStates == (States{InLockMap:true, IsWalking:true, HasTargetMob:true, GoToMob:true}) {
+//     botStates.InCombat = false
+//     MUmobList.Lock() ;  mob := mobList[targetMob] ; MUmobList.Unlock()
+//     line := linearInterpolation(curCoord, mob.Coords)
+// 	for _,vv := range line {
+// 		gatcell := lgatMaps[curMap].cells[vv.X][vv.Y]
+// 		if !isValidCell(gatcell) {
+//             MUmobList.Lock()
+//             delete(mobList, targetMob);
+//             MUmobList.Unlock()
+//             targetMob = -1;
+//             continue startBotLoop
+//         }
+// 	}
+//     nextPoint = mob.Coords
+//     curPath = pathfind(curCoord, nextPoint, lgatMaps[curMap])
+//     pathIndex = 1 ; minDist = attackDist;
+//     botStates.GoToMob = true
+// }
+//
+// if botStates == (States{OnTheRoad:true}) {
+//     // fmt.Printf("# newPath OnTheRoad # \n")
+//     nextPoint = (Coord{X:route[curMap][0], Y:route[curMap][1]})
+//     pathIndex = 0 ; minDist = 1;
+//     curPath = pathfind(curCoord, nextPoint, lgatMaps[curMap])
+// }
+//
+// if botStates == (States{InLockMap:true}) {
+//     // fmt.Printf("# newPath InLockMap # \n")
+//     nextPoint = randomPoint(lgatMaps[curMap],curCoord, 80)
+//     pathIndex = 0 ; minDist = 1;
+//     curPath = pathfind(curCoord, nextPoint, lgatMaps[curMap])
+// }
+//
+// if botStates == (States{InLockMap:true, IsWalking:true}) ||
+//    botStates == (States{OnTheRoad:true, IsWalking:true}) ||
+//    botStates == (States{InLockMap:true, IsWalking:true, HasTargetMob:true, GoToMob:true}) ||
+//    botStates == (States{InLockMap:true, IsWalking:true, HasTargetItem:true, GoToItem:true}) {
+//     if getDist(nextPoint, curCoord) <= float64(minDist) {
+//         if botStates.GoToMob == true { botStates.InCombat = true; botStates.GoToMob = false }
+//         if botStates.GoToItem == true { botStates.IsLooting = true; botStates.GoToItem = false }
+//         curPath = nil; pathIndex = 0 ; continue startBotLoop
+//     }
+//     if pathIndex > len(curPath)-2 {
+//         nextStep = nextPoint
+//     }else{
+//         nextStep = Coord{curPath[pathIndex].X,curPath[pathIndex].Y}
+//     }
+//     if getDist(curCoord, nextStep) < 6{ pathIndex += 8 }
+//     sendToServer("035F",coordsTo24Bits(nextStep.X,nextStep.Y))
+//     time.Sleep(50 * time.Millisecond)
+//
+//     if botStates.GoToMob == true { continue startBotLoop }
+//     if botStates.GoToItem == true { continue startBotLoop }
+// }
+
+// botStates.ReadyToTp = false
+// if TPelapsed.Sub(TPstartTime).Seconds() > float64(tpTime) {
+//     botStates.ReadyToTp = true
+//     TPstartTime = time.Now()
+//     continue startBotLoop
+// }
+// TPelapsed = time.Now()
+//
+// if botStates == (States{InLockMap:true, ReadyToTp:true}) ||
+//    botStates == (States{InLockMap:true, IsWalking:true, ReadyToTp:true}) {
+//     if tpSearch >= 0 {
+//         fmt.Printf("use tp -- \n")
+//         sendToServer("0x3804",[]byte{1,0,26,0,74,188,30,0})
+//         time.Sleep(1000 * time.Millisecond)
+//         resetStates()
+//         continue startBotLoop
+//     }
+// }
+
+// #################################
+// #################################
+
+
+
+
+
+
+
+
 
 distListItems := map[float64]int{}
 for kk,vv := range mobList { distListItems[getDist(vv.Coords, curCoord)] = kk }
