@@ -25,6 +25,8 @@ var(
     prevState = botStates
     timeInState = float64(0)
 
+    myActorID = 0
+
     curCoord = Coord{X:0, Y:0}
     nextPoint = Coord{X:0, Y:0}
 	curMap = ""
@@ -40,6 +42,8 @@ var(
     mobList = map[int]Mob{}
     MUgroundItems sync.Mutex
     groundItems = map[int]Item{}
+    MUinventoryItems sync.Mutex
+    inventoryItems = map[int]Item{}
 
     targetMob = -1
     targetMobDead = -2
@@ -60,6 +64,9 @@ var(
     weight = 0
     sp = 0
     spMAx = 0
+
+    useItemHP = map[int]int{}
+    useItemSP = map[int]int{}
 
 )
 
@@ -102,8 +109,27 @@ func botLoop() {
             startTime = time.Now()
         }
         prevState = botStates
-
-
+        // #################################
+        // #################################
+        for kk,vv := range useItemHP {
+            if vv > 0 {
+            if (float32(hp)/float32(maxHP)*100) < float32(vv) {
+                MUinventoryItems.Lock()
+                for kkkk,ii := range inventoryItems {
+                    if ii.ItemID == kk {
+                        arrayBin := []byte{}
+                        inventoryIDBin := make([]byte, 2);
+                        binary.LittleEndian.PutUint16(inventoryIDBin, uint16(kkkk))
+                        myActorIDBin := make([]byte, 4) ;
+                        binary.LittleEndian.PutUint32(myActorIDBin, uint32(myActorID))
+                        arrayBin = append(arrayBin,inventoryIDBin...)
+                        arrayBin = append(arrayBin,myActorIDBin...)
+                        sendToServer("0439", arrayBin)
+                    }
+                }
+                MUinventoryItems.Unlock()
+            }}
+        }
 
         // #################################
         // #################################
@@ -179,7 +205,12 @@ func botLoop() {
             if tpUse == 1 {
                 resetStates()
                 time.Sleep(800 * time.Millisecond)
-                sendToServer("0438",[]byte{1,0,26,0,74,188,30,0})
+                arrayBin := []byte{}
+                myActorIDBin := make([]byte, 4)
+                binary.LittleEndian.PutUint32(myActorIDBin, uint32(myActorID))
+                arrayBin = append(arrayBin, []byte{1,0,26,0}...)
+                arrayBin = append(arrayBin, myActorIDBin...)
+                sendToServer("0438", arrayBin)
                 time.Sleep(1300 * time.Millisecond)
                 TPstartTime = time.Now()
             }
@@ -213,11 +244,11 @@ func botLoop() {
         if botStates == (States{InLockMap:true, HasTargetMob: true, HasDest:true, AtRange:true})  {
             arrayBin := []byte{}
             att := useAttacks[attackIndex]
-            skillIDBin := make([]byte, 2) ;
+            skillIDBin := make([]byte, 2)
             binary.LittleEndian.PutUint16(skillIDBin, uint16(Stoi(att[0])))
-            skillLVBin := make([]byte, 2) ;
+            skillLVBin := make([]byte, 2)
             binary.LittleEndian.PutUint16(skillLVBin, uint16(Stoi(att[1])))
-            mobBin := make([]byte, 4) ;
+            mobBin := make([]byte, 4)
             binary.LittleEndian.PutUint32(mobBin, uint32(targetMob))
             delay := Stoi(att[2])
 
@@ -274,12 +305,13 @@ func botLoop() {
 
 var strInfo = ""
 var strMobs = ""
+var strInventoryItems = ""
 var strGroundItems = ""
 
 func infoUILoop() {
     for { time.Sleep(200 * time.Millisecond)
 
-        strInfo = Itos(hp)+" ## "+Itos(maxHP)+" ## "+Itos(maxWeight)+" ## "+Itos(weight)+" ## "+Itos(sp)+" ## "+Itos(spMAx)+" ## "
+        strInfo = "HP : "+Itos(hp)+"/"+Itos(maxHP)+" | SP : "+Itos(sp)+"/"+Itos(spMAx)+" | W: "+Itos(maxWeight)+"/"+Itos(weight)
 
         keys := []int{}
         strMobs = ""

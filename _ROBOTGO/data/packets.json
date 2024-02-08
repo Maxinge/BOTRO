@@ -1,8 +1,11 @@
 {
-    "####":  [ "############### GAME MEMORY ###############", "" ],
+
+    "1414":  [ "mem_data", "" ],
 
     "FFFF":  [ "uknw_pck", "..." ],
-    "1414":  [ "mem_data", "" ],
+
+    "0B1C":  [ "uknw", "..." ],
+
 
     "####":  [ "############### SERV & CHAT ###############", "" ],
 
@@ -11,34 +14,40 @@
     "02C1":  [ "chat_main", "" ],
 
     "009A":  [ "serv_announc", "" ],
+    "0A30":  [ "actor_info", "" ],
 
     "####":  [ "############### NPC INTERACT & INVENTORY & ITEMS ###############", "" ],
 
+
+    "0B09":  [ "inventory_info", "" ],
+    "0B0A":  [ "inventory_info", "" ],
+
+
+
     "0439":  [ "item_use_send", "" ],
+    "01C8":  [ "item_used", "" ],
     "0ADD":  [ "item_appear", "" ],
     "00A1":  [ "item_disappear", "" ],
     "009D":  [ "item_exist", "" ],
     "0362":  [ "try_item_loot", "" ],
+    "0A37":  [ "inventory_item_added", "" ],
+    "00AF":  [ "inventory_item_removed", "" ],
 
-    "0A37":  [ "item_inventory_add", "" ],
-    "00AF":  [ "item_inventory_remove", "" ],
-    "0363":  [ "item_drop_send", "" ],
+    "0A0A":  [ "storage_item_added", "" ],
 
 
     "####":  [ "############### MAP & LOCATION & STATS ###############", "" ],
 
+    "007D":  [ "map_loaded_ask", "" ],
     "035F":  [ "send_self_move_to", "" ],
     "0087":  [ "recv_self_move_to", "" ],
-    "0091":  [ "map_change", "triggered when tp too" ],
 
     "####":  [ "############### ACTORS ###############", "" ],
 
 
     "0118":  [ "stop_attack", "" ],
     "0437":  [ "start_attack", "" ],
-
     "0438":  [ "skill_use", "" ],
-
     "0ACC":  [ "get_exp", "" ],
     "0368":  [ "actor_info_request", "" ],
     "008A":  [ "actor_action", "" ],

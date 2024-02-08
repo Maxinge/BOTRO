@@ -2,7 +2,7 @@
     "map":{
         "savemap":"prontera",
         "lockmap":"moc_fild01",
-        "teleport_search":[1, 10],
+        "teleport_search":[0, 10],
         "route":[
             "prontera(156,22)",
             "izlude(33,76)",
@@ -25,6 +25,9 @@
             "949(Feather)",
             "935(Shell)",
             "2301(Cotton_Shirt)"
+        ],
+        "use":[
+            "569::40::-1"
         ]
     },
     "mobs":[
@@ -34,8 +37,8 @@
     ],
     "combat":{
         "attack":[
-            "0::0::0::auto_attack"
+            "0::0::100::auto_attack"
         ],
-        "min_dist":2
+        "min_dist":3
     }
 }

@@ -55,6 +55,12 @@ func loadprofil(){
 		ignoreItem = append(ignoreItem,Stoi(item[0]))
 	}
 
+	uuu := itemsss["use"].([]interface{})
+	for _,vv := range uuu {
+		uu := strings.Split(vv.(string), "::")
+		useItemHP[Stoi(uu[0])] = Stoi(uu[1])
+		useItemSP[Stoi(uu[0])] = Stoi(uu[2])
+	}
 
     // fmt.Printf("route -- %v -- \n", route)
     // fmt.Printf("targetMobs -- %v -- \n", targetMobs)

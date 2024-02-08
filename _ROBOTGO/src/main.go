@@ -107,14 +107,14 @@ func main() {
             for {
                 ii += 1; if ii >= n { break }
                 HexID := fmt.Sprintf("%04X",binary.LittleEndian.Uint16(buffer[ii:ii+2]));
-                plen := n - ii
+                plen := n-ii
                 if _, exist := packetsMap[HexID]; exist {
                     plen = packetsMap[HexID].Size
                     if plen < 0 { plen = int(binary.LittleEndian.Uint16(buffer[ii+2:ii+4])) }
                     if plen <= 2 { plen = 2 }
                     args := []reflect.Value{ reflect.ValueOf(buffer[ii:ii+2]), reflect.ValueOf(buffer[ii+2:ii+2+plen-2]) }
                     parsePacket(packetsMap[HexID].Ident, args)
-                    ii += plen -1 ;
+                    ii += plen-1;
                     continue
                 }
                 args := []reflect.Value{ reflect.ValueOf([]byte{255,255}), reflect.ValueOf(buffer[ii:ii+plen]) }
@@ -163,8 +163,10 @@ func main() {
         imgui.Text(fmt.Sprintf("\n strInfo --- \n%v", strInfo ))
 
         imgui.Text(fmt.Sprintf("\n states --- \n%v", printStruct(botStates) ))
-        imgui.Text(fmt.Sprintf("\n Mobs --- \n%v", strMobs ))
-        imgui.Text(fmt.Sprintf("\n groundItems --- \n%v", strGroundItems ))
+        imgui.Text(fmt.Sprintf("\n strMobs --- \n%v", strMobs ))
+        imgui.Text(fmt.Sprintf("\n strInventoryItems --- \n%v", prettyPrint(inventoryItems) ))
+        imgui.Text(fmt.Sprintf("\n strGroundItems --- \n%v", strGroundItems ))
+
         imgui.End()
 
         drawList := imgui.BackgroundDrawListNil()

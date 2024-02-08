@@ -22,37 +22,34 @@ func fctpackInit()  {
     // for k := range packetsMap {
     //     fctpack[packetsMap[k].Ident] = func (HexID []byte, bb []byte)  {
     //         HexID1 := fmt.Sprintf("%04X",binary.LittleEndian.Uint16(HexID))
-    //         HexID2 := fmt.Sprintf("%04X",binary.LittleEndian.Uint16(bb[0:2]))
-    //         fmt.Printf("[%v][%v]   [%v]\t ", HexID1, HexID2, len(bb)+2)
+    //         name := packetsMap[HexID1].Ident
+    //         fmt.Printf("[%v][%v][%v]\t ",name, HexID1, len(bb)+2)
     //         fmt.Printf("-> [%v]\n", bb)
     //     }
     // }
 
-    fctpack["uknw"] = func (HexID []byte, bb []byte)  {}
-
-    fctpack["recv_self_move_to"] = func (HexID []byte, bb []byte)  {
-        // cc := bits48ToCoords(bb[4:])
+    fctpack["uknw_pck"] = func (HexID []byte, bb []byte)  {
+        HexID1 := fmt.Sprintf("%04X",binary.LittleEndian.Uint16(HexID))
+        HexID2 := fmt.Sprintf("%04X",binary.LittleEndian.Uint16(bb[0:2]))
+        fmt.Printf("uknw_pck ####### [%v][%v] -> [%v] \t", HexID1, HexID2, len(bb)+2)
+        fmt.Printf("-> [%v]\n", bb)
     }
+
+    fctpack["chat_main"] = func (HexID []byte, bb []byte)  {}
+    fctpack["send_sync_serv"] = func (HexID []byte, bb []byte)  {}
+    fctpack["recv_sync_serv"] = func (HexID []byte, bb []byte)  {}
+    fctpack["recv_self_move_to"] = func (HexID []byte, bb []byte)  {}
+
 
     fctpack["skill_use"] = func (HexID []byte, bb []byte)  {
         fmt.Printf(" ####### [%v][%v] -> [%v]\n","skill_use", len(bb)+2, bb)
     }
 
-    fctpack["chat_main"] = func (HexID []byte, bb []byte)  {}
+    fctpack["actor_info"] = func (HexID []byte, bb []byte)  {
+        myActorID = int(binary.LittleEndian.Uint32(bb[0:0+4]))
+    }
 
 
-    fctpack["item_drop_send"] = func (HexID []byte, bb []byte)  {}
-    fctpack["item_inventory_remove"] = func (HexID []byte, bb []byte)  {}
-    fctpack["try_item_loot"] = func (HexID []byte, bb []byte)  {}
-    fctpack["send_self_move_to"] = func (HexID []byte, bb []byte)  {}
-    fctpack["send_sync_serv"] = func (HexID []byte, bb []byte)  {}
-    fctpack["recv_sync_serv"] = func (HexID []byte, bb []byte)  {}
-    fctpack["map_change"] = func (HexID []byte, bb []byte)  {}
-    fctpack["get_exp"] = func (HexID []byte, bb []byte)  {}
-    fctpack["item_inventory_add"] = func (HexID []byte, bb []byte)  {}
-    fctpack["monster_ranged_attack"] = func (HexID []byte, bb []byte)  {}
-    fctpack["start_attack"] = func (HexID []byte, bb []byte)  {}
-    fctpack["stop_attack"] = func (HexID []byte, bb []byte)  {}
 
     fctpack["mem_data"] = func (HexID []byte, bb []byte)  {
         ii := 0
@@ -65,7 +62,7 @@ func fctpackInit()  {
         WEIGHT := binary.LittleEndian.Uint32(bb[ii:ii+4]); ii += 4
         SP := binary.LittleEndian.Uint32(bb[ii:ii+4]); ii += 4
         MAXSP := binary.LittleEndian.Uint32(bb[ii:ii+4]); ii += 4
-        
+
         curMap = MAP
         curCoord = Coord{X:int(XPOS),Y:int(YPOS)}
         hp = int(HPLEFT)
@@ -76,14 +73,81 @@ func fctpackInit()  {
         spMAx = int(MAXSP)
     }
 
-    fctpack["item_use_send"] = func (HexID []byte, bb []byte)  {
-        // fmt.Printf("[%v][%v] -> [%v]\n","item_use_send", len(bb)+2, bb)
+    fctpack["inventory_info"] = func (HexID []byte, bb []byte)  {
+        // fmt.Printf(" ####### [%v][%v] -> [%v]\n","inventory_info", len(bb)+2, bb)
+        HexID1 := fmt.Sprintf("%04X",binary.LittleEndian.Uint16(HexID))
+        // inventoryType := bb[2]
+        if HexID1 == "0B09" {
+            fmt.Printf(" 0B09 \n",)
+            for ii := 3; ii < len(bb); ii+=34 {
+                inventoryID := int(binary.LittleEndian.Uint16(bb[ii:ii+2]))
+                itemID := int(binary.LittleEndian.Uint32(bb[ii+2:ii+2+4]))
+                amount := int(binary.LittleEndian.Uint16(bb[ii+7:ii+7+2]))
+                MUinventoryItems.Lock()
+                inventoryItems[inventoryID] = Item{ ItemID:itemID, Coords:Coord{X:0,Y:0}, Amount:amount}
+                MUinventoryItems.Unlock()
+            }
+        }
+        if HexID1 == "0B0A" {
+            fmt.Printf(" 0B0A \n",)
+            for ii := 3; ii < len(bb); ii+=67 {
+                inventoryID := int(binary.LittleEndian.Uint16(bb[ii:ii+2]))
+                itemID := int(binary.LittleEndian.Uint32(bb[ii+2:ii+2+4]))
+                MUinventoryItems.Lock()
+                inventoryItems[inventoryID] = Item{ ItemID:itemID, Coords:Coord{X:0,Y:0}, Amount:1}
+                MUinventoryItems.Unlock()
+            }
+        }
     }
-    fctpack["item_exist"] = func (HexID []byte, bb []byte)  {
-        // fmt.Printf("[%v][%v] -> [%v]\n","item_exist", len(bb)+2, bb)
+
+
+
+    fctpack["inventory_item_added"] = func (HexID []byte, bb []byte)  {
+        // fmt.Printf(" ####### [%v][%v] -> [%v]\n","inventory_item_added", len(bb)+2, bb)
+        inventoryID := int(binary.LittleEndian.Uint16(bb[0:0+2]))
+        amount := int(binary.LittleEndian.Uint16(bb[2:2+2]))
+        itemID := int(binary.LittleEndian.Uint32(bb[4:4+4]))
+        MUinventoryItems.Lock()
+        if ii, exist := inventoryItems[inventoryID]; exist {
+            ii.Amount += amount
+            inventoryItems[inventoryID] = ii
+        }else{
+            inventoryItems[inventoryID] = Item{ ItemID:itemID, Coords:Coord{X:0,Y:0}, Amount:amount}
+        }
+        MUinventoryItems.Unlock()
     }
+
+    fctpack["inventory_item_removed"] = func (HexID []byte, bb []byte)  {
+        // fmt.Printf(" ####### [%v][%v] -> [%v]\n","inventory_item_removed", len(bb)+2, bb)
+        inventoryID := int(binary.LittleEndian.Uint16(bb[0:0+2]))
+        amount := int(binary.LittleEndian.Uint16(bb[2:2+2]))
+        if ii, exist := inventoryItems[inventoryID]; exist {
+            ii.Amount -= amount
+            if ii.Amount <= 0 {
+                MUinventoryItems.Lock()
+                delete(inventoryItems, inventoryID)
+                MUinventoryItems.Unlock()
+            }else{
+                inventoryItems[inventoryID] = ii
+            }
+        }
+    }
+
+    fctpack["item_used"] = func (HexID []byte, bb []byte)  {
+        // fmt.Printf(" ####### [%v][%v] -> [%v]\n","item_used", len(bb)+2, bb)
+        inventoryID := int(binary.LittleEndian.Uint16(bb[0:0+2]))
+        // itemID := int(binary.LittleEndian.Uint32(bb[2:2+4]))
+        amountLeft := int(binary.LittleEndian.Uint16(bb[10:10+2]))
+        if ii, exist := inventoryItems[inventoryID]; exist {
+            ii.Amount = amountLeft
+            inventoryItems[inventoryID] = ii
+        }
+    }
+
+
+
     fctpack["item_appear"] = func (HexID []byte, bb []byte)  {
-        // fmt.Printf("[%v][%v] -> [%v]\n","item_appear", len(bb)+2, bb)
+        // fmt.Printf(" ####### [%v][%v][%v] -> [%v]\n","item_appear", HexID, len(bb)+2, bb)
         mapID := int(binary.LittleEndian.Uint32(bb[0:0+4]))
         itemID := int(binary.LittleEndian.Uint16(bb[4:4+2]))
         if intInArray(itemID, ignoreItem) { return }
@@ -101,16 +165,6 @@ func fctpackInit()  {
         delete(groundItems, targetItemLooted)
         MUgroundItems.Unlock()
     }
-
-    fctpack["actor_action"] = func (HexID []byte, bb []byte)  {
-        // fmt.Printf("[%v][%v] -> [%v]\n","actor_action", len(bb)+2, bb)
-    }
-
-
-
-
-
-    // [[215 91 249 6   34 9 194 44 152 136  154 135 24 160]]
 
     fctpack["actor_moved"] = func (HexID []byte, bb []byte)  {
         // fmt.Printf("[%v][%v] -> [%v]\n","actor_moved", len(bb)+2, bb)
