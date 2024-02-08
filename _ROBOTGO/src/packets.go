@@ -54,6 +54,28 @@ func fctpackInit()  {
     fctpack["start_attack"] = func (HexID []byte, bb []byte)  {}
     fctpack["stop_attack"] = func (HexID []byte, bb []byte)  {}
 
+    fctpack["mem_data"] = func (HexID []byte, bb []byte)  {
+        ii := 0
+        MAP := strings.Split(string(bb[ii:ii+40]), ".rsw")[0]; ii += 40
+        XPOS := binary.LittleEndian.Uint32(bb[ii:ii+4]); ii += 4
+        YPOS := binary.LittleEndian.Uint32(bb[ii:ii+4]); ii += 4
+        HPLEFT := binary.LittleEndian.Uint32(bb[ii:ii+4]); ii += 4
+        HPMAX := binary.LittleEndian.Uint32(bb[ii:ii+4]); ii += 4
+        WEIGHTMAX := binary.LittleEndian.Uint32(bb[ii:ii+4]); ii += 4
+        WEIGHT := binary.LittleEndian.Uint32(bb[ii:ii+4]); ii += 4
+        SP := binary.LittleEndian.Uint32(bb[ii:ii+4]); ii += 4
+        MAXSP := binary.LittleEndian.Uint32(bb[ii:ii+4]); ii += 4
+        
+        curMap = MAP
+        curCoord = Coord{X:int(XPOS),Y:int(YPOS)}
+        hp = int(HPLEFT)
+        maxHP = int(HPMAX)
+        maxWeight = int(WEIGHTMAX)
+        weight = int(WEIGHT)
+        sp = int(SP)
+        spMAx = int(MAXSP)
+    }
+
     fctpack["item_use_send"] = func (HexID []byte, bb []byte)  {
         // fmt.Printf("[%v][%v] -> [%v]\n","item_use_send", len(bb)+2, bb)
     }
@@ -84,15 +106,9 @@ func fctpackInit()  {
         // fmt.Printf("[%v][%v] -> [%v]\n","actor_action", len(bb)+2, bb)
     }
 
-    fctpack["mem_map"] = func (HexID []byte, bb []byte)  {
-        curMap = strings.Split(string(bb), ".rsw")[0]
-    }
 
-    fctpack["mem_coord"] = func (HexID []byte, bb []byte)  {
-        cx := binary.LittleEndian.Uint32(bb[0:4])
-        cy := binary.LittleEndian.Uint32(bb[4:8])
-        curCoord = Coord{X:int(cx),Y:int(cy)}
-    }
+
+
 
     // [[215 91 249 6   34 9 194 44 152 136  154 135 24 160]]
 
@@ -111,7 +127,7 @@ func fctpackInit()  {
 
     // ## type : 5 = mob / 6 = npc
     fctpack["actor_appear"] = func (HexID []byte, bb []byte)  {
-        // fmt.Printf("[%v][%v] -> [%v]\n","actor_appear", len(bb)+2, bb)
+        // fmt.Printf(" ####### [%v][%v][%v] -> [%v]\n","actor_appear", HexID, len(bb)+2, bb)
         mapID := int(binary.LittleEndian.Uint32(bb[3:3+4]))
         mobID := int(binary.LittleEndian.Uint16(bb[21:21+4]))
         actorType := byte(bb[2])

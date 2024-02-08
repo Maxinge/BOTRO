@@ -5,7 +5,15 @@
 "(CONDOR)   Mob-ID#1009",
 "(CHONCHON)   Mob-ID#1011",
 
-
+<ul class="nsw_warp"><li><a href="#" onmouseover="front(&quot;warp_2910&quot;)" onmouseout="back(&quot;warp_2910&quot;)" onclick="return tag_this(&quot;warp_2910&quot;);" id="t#warp_2910" class="nbu_ml">To moc_fild02 (77, 338)</a>
+</li><li><a href="#" onmouseover="front(&quot;warp_2911&quot;)" onmouseout="back(&quot;warp_2911&quot;)" onclick="return tag_this(&quot;warp_2911&quot;);" id="t#warp_2911" class="nbu_ml">To moc_fild02 (77, 338)</a>
+</li><li><a href="#" onmouseover="front(&quot;warp_2912&quot;)" onmouseout="back(&quot;warp_2912&quot;)" onclick="return tag_this(&quot;warp_2912&quot;);" id="t#warp_2912" class="nbu_ml">To </a>
+</li><li><a href="#" onmouseover="front(&quot;warp_2907&quot;)" onmouseout="back(&quot;warp_2907&quot;)" onclick="return tag_this(&quot;warp_2907&quot;);" id="t#warp_2907" class="nbu_ml">To </a>
+</li><li><a href="#" onmouseover="front(&quot;warp_2913&quot;)" onmouseout="back(&quot;warp_2913&quot;)" onclick="return tag_this(&quot;warp_2913&quot;);" id="t#warp_2913" class="nbu_ml">To </a>
+</li><li><a href="#" onmouseover="front(&quot;warp_2909&quot;)" onmouseout="back(&quot;warp_2909&quot;)" onclick="return tag_this(&quot;warp_2909&quot;);" id="t#warp_2909" class="nbu_ml">To </a>
+</li><li><a href="#" onmouseover="front(&quot;warp_2914&quot;)" onmouseout="back(&quot;warp_2914&quot;)" onclick="return tag_this(&quot;warp_2914&quot;);" id="t#warp_2914" class="nbu_ml">To prt_fild08 (54, 24)</a>
+</li><li><a href="#" onmouseover="front(&quot;warp_2908&quot;)" onmouseout="back(&quot;warp_2908&quot;)" onclick="return tag_this(&quot;warp_2908&quot;);" id="t#warp_2908" class="nbu_ml">To </a>
+</li></ul>
 func remState(str string){
     for kk, vv := range botStates {
        if vv == str {
@@ -135,24 +143,7 @@ func chkState(ss []string) bool{
 //     if botStates.GoToItem == true { continue startBotLoop }
 // }
 
-// botStates.ReadyToTp = false
-// if TPelapsed.Sub(TPstartTime).Seconds() > float64(tpTime) {
-//     botStates.ReadyToTp = true
-//     TPstartTime = time.Now()
-//     continue startBotLoop
-// }
-// TPelapsed = time.Now()
-//
-// if botStates == (States{InLockMap:true, ReadyToTp:true}) ||
-//    botStates == (States{InLockMap:true, IsWalking:true, ReadyToTp:true}) {
-//     if tpSearch >= 0 {
-//         fmt.Printf("use tp -- \n")
-//         sendToServer("0x3804",[]byte{1,0,26,0,74,188,30,0})
-//         time.Sleep(1000 * time.Millisecond)
-//         resetStates()
-//         continue startBotLoop
-//     }
-// }
+
 
 // #################################
 // #################################

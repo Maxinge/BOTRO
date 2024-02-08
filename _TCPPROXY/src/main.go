@@ -97,22 +97,47 @@ func main() {
         for {
             time.Sleep(200 * time.Millisecond)
             if botConn == nil { continue }
-            buffer2 = buffer2[0:4]
+
             bb := []byte{20,20}
-            // X position // 0x00F2EA98
-            err = windows.ReadProcessMemory(processHandle, 0x00F2EA98, &buffer2[0], uintptr(len(buffer2)), nil)
+
+            // MAP ## 0x00CBACF0
+            err = windows.ReadProcessMemory(processHandle, 0x00CBACF0, &buffer2[0], uintptr(40), nil)
+            bb = append(bb,buffer2[0:40]...)
+
+            // XPOS ## 0x00F2EA98
+            err = windows.ReadProcessMemory(processHandle, 0x00F2EA98, &buffer2[0], uintptr(4), nil)
             bb = append(bb,buffer2[0:4]...)
-            // Y position // 0x00F2EA9C
-            err = windows.ReadProcessMemory(processHandle, 0x00F2EA9C, &buffer2[0], uintptr(len(buffer2)), nil)
+
+            // YPOS ## 0x00F2EA9C
+            err = windows.ReadProcessMemory(processHandle, 0x00F2EA9C, &buffer2[0], uintptr(4), nil)
             bb = append(bb,buffer2[0:4]...)
+
+            // HPLEFT ## 0x00F45E54
+            err = windows.ReadProcessMemory(processHandle, 0x00F45E54, &buffer2[0], uintptr(4), nil)
+            bb = append(bb,buffer2[0:4]...)
+
+            // HPMAX ## 0x00F45E58
+            err = windows.ReadProcessMemory(processHandle, 0x00F45E58, &buffer2[0], uintptr(4), nil)
+            bb = append(bb,buffer2[0:4]...)
+
+            // WEIGHTMAX ## 0x00F42364
+            err = windows.ReadProcessMemory(processHandle, 0x00F42364, &buffer2[0], uintptr(4), nil)
+            bb = append(bb,buffer2[0:4]...)
+
+            // WEIGHT ## 0x00F42368
+            err = windows.ReadProcessMemory(processHandle, 0x00F42368, &buffer2[0], uintptr(4), nil)
+            bb = append(bb,buffer2[0:4]...)
+
+            // SP ## 0x00F45E5C
+            err = windows.ReadProcessMemory(processHandle, 0x00F45E5C, &buffer2[0], uintptr(4), nil)
+            bb = append(bb,buffer2[0:4]...)
+
+            // MAXSP ## 0x00F45E60
+            err = windows.ReadProcessMemory(processHandle, 0x00F45E60, &buffer2[0], uintptr(4), nil)
+            bb = append(bb,buffer2[0:4]...)
+
             if botConn != nil { botConn.Write(bb) }
 
-            // MAP // 0x00CBACF0
-            buffer2 = buffer2[0:40]
-            err = windows.ReadProcessMemory(processHandle, 0x00CBACF0, &buffer2[0], uintptr(len(buffer2)), nil)
-            bb = []byte{20,21}
-            bb = append(bb,buffer2[0:40]...)
-            if botConn != nil { botConn.Write(bb) }
         }
     }()
 

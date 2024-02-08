@@ -22,7 +22,7 @@ func loadprofil(){
 	lockMap = mappp["lockmap"].(string)
 
 	tele := mappp["teleport_search"].([]interface{})
-	tpSearch = int(tele[0].(float64)); tpTime = int(tele[1].(float64))
+	tpUse = int(tele[0].(float64)); tpTime = int(tele[1].(float64))
 
     rrr := mappp["route"].([]interface{})
     route = map[string][]int{}

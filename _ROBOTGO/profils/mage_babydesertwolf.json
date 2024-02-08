@@ -34,8 +34,8 @@
     ],
     "combat":{
         "attack":[
-            "0::0::0::auto_attack"
+            "15::10::200::Frost Diver"
         ],
-        "min_dist":2
+        "min_dist":8
     }
 }

@@ -2,10 +2,7 @@
     "####":  [ "############### GAME MEMORY ###############", "" ],
 
     "FFFF":  [ "uknw_pck", "..." ],
-
-    "1414":  [ "mem_coord", "int32(X)/int32(Y) readed from game memory" ],
-    "1514":  [ "mem_map", "map readed from game memory str 40" ],
-
+    "1414":  [ "mem_data", "" ],
 
     "####":  [ "############### SERV & CHAT ###############", "" ],
 
@@ -50,7 +47,6 @@
     "0080":  [ "actor_dead_disapear", "" ],
     "09FD":  [ "actor_appear", "same shit only padding change" ],
     "09FF":  [ "actor_appear", "same shit only padding change" ],
-
 
     "####": [ "", "" ]
 }
