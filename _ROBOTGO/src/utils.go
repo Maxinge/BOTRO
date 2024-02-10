@@ -11,7 +11,7 @@ import(
 	// "io"
 	"encoding/json"
 	"runtime"
-	// "sort"
+	"sort"
 	"reflect"
 	"strconv"
 	// "net"
@@ -45,6 +45,15 @@ func Stoi(s string) int { ss,_:=strconv.Atoi(s); return ss }
 func int16ToBitString(ii int) string {
     ss := ""
 	for i := 16 - 1; i >= 0; i-- {
+		bit := (ii >> uint(i)) & 1
+        ss += fmt.Sprintf("%d", bit)
+	}
+	return ss
+}
+
+func int32ToBitString(ii int) string {
+    ss := ""
+	for i := 32 - 1; i >= 0; i-- {
 		bit := (ii >> uint(i)) & 1
         ss += fmt.Sprintf("%d", bit)
 	}
@@ -171,16 +180,34 @@ func prettyPrint(i interface{}) string {
     return string(s)
 }
 
-// func SortedKeysStr(m map[string]string) ([]string) {
-//     keys := make([]string, len(m))
-//     i := 0
-//     for k := range m {
-//         keys[i] = k
-//         i++
-//     }
-//     sort.Strings(keys)
-//     return keys
-// }
+func keyMap(mm interface{}) []interface{} {
+	mapV := reflect.ValueOf(mm)
+	keys := []interface{}{}
+	for _, key := range mapV.MapKeys() {
+		keys = append(keys, key.Interface())
+	}
+	return keys
+}
+
+func sortStrKeys(ii []interface{}) []string {
+	keys := []string{}
+	for _, vv := range ii { keys = append(keys,vv.(string)) }
+	sort.Sort(sort.StringSlice(keys))
+	return keys
+}
+func sortIntKeys(ii []interface{}) []int {
+	keys := []int{}
+	for _, vv := range ii { keys = append(keys,vv.(int)) }
+	sort.Sort(sort.IntSlice(keys))
+	return keys
+}
+func sortFloatKeys(ii []interface{}) []float64 {
+	keys := []float64{}
+	for _, vv := range ii { keys = append(keys,vv.(float64)) }
+	sort.Sort(sort.Float64Slice(keys))
+	return keys
+}
+
 //
 // func ExecCMD(cmd string,args... string) {
 // 	err := exec.Command(cmd,args...).Run()

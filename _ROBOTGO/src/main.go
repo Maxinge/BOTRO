@@ -18,38 +18,17 @@ type Packet struct {
     Size  int
 }
 
-type Mob struct {
-    MobID int
-    Name string
-    Coords Coord
-    HP int
-    HPLeft int
-}
-
-type Item struct {
-    ItemID int
-    Coords Coord
-    Amount int
-}
 
 var (
     err error
     proxyCo net.Conn
     exit = make(chan bool)
-
     fctpack map[string]func([]byte, []byte)
     // gatMaps = map[string]ROGatMap{}
     lgatMaps = map[string]ROLGatMap{}
     packetsMap = map[string]Packet{}
-
-    profil map[string]interface{}
-    route map[string][]int
-    targetMobs []int
-
-
-
-    // strMobs = ""
-    // strGroundItems = ""
+    profil map[string][]interface{}
+    conf = map[string][]interface{}{}
 )
 
 
@@ -58,8 +37,8 @@ func main() {
     fmt.Println("#--- ROBOTGO START ---#")
     fmt.Printf("current dir -- %v -- \n", CurDir())
 
-    // iiiii := fmt.Sprintf("%04X",binary.LittleEndian.Uint16([]byte{150,1}))
-    // fmt.Printf("kek -- [%v] -- \n", iiiii); return
+    loadprofil()
+    // fmt.Printf("conf -- %v -- \n", prettyPrint(conf)); return
 
     proxyCo, err = net.Dial("tcp", "127.0.0.1:6666")
     if err != nil { fmt.Printf("err -- %v -- \n", err); return }
@@ -84,7 +63,6 @@ func main() {
         packetsMap[kk] = tt
     }
 
-    loadprofil()
     fctpackInit()
 
     maps, _ := ioutil.ReadDir(CurDir()+"data/lgats/")
@@ -155,8 +133,8 @@ func main() {
         imgui.SetNextWindowSize(imgui.Vec2{X: baseSize.X-2, Y: baseSize.Y - 400-2})
         imgui.Begin("Info")
 
-        imgui.Text(fmt.Sprintf("Coords = X : %v / Y : %v", curCoord.X, curCoord.Y ))
-        imgui.Text(fmt.Sprintf("Map : %v - Next point : %v", curMap, nextPoint))
+        imgui.Text(fmt.Sprintf("Coords = X : %v / Y : %v | ID: %v", curCoord.X, curCoord.Y, accountId ))
+        imgui.Text(fmt.Sprintf("Map : %v - Next point : %v (dist:%v)", curMap, nextPoint, getDist(curCoord, nextPoint)))
 
         imgui.Text(fmt.Sprintf("\n timeInState --- %v", timeInState ))
         imgui.Text(fmt.Sprintf("\n targetMob [%v] ---  targetItem[%v]\n", targetMob, targetItem ))
@@ -164,7 +142,7 @@ func main() {
 
         imgui.Text(fmt.Sprintf("\n states --- \n%v", printStruct(botStates) ))
         imgui.Text(fmt.Sprintf("\n strMobs --- \n%v", strMobs ))
-        imgui.Text(fmt.Sprintf("\n strInventoryItems --- \n%v", prettyPrint(inventoryItems) ))
+        imgui.Text(fmt.Sprintf("\n strInventoryItems --- \n%v", strInventoryItems ))
         imgui.Text(fmt.Sprintf("\n strGroundItems --- \n%v", strGroundItems ))
 
         imgui.End()
@@ -232,4 +210,118 @@ func sendToServer(hexID string,data []byte){
     bb := []byte{byte(ii), byte(ii >> 8)}
     bb = append(bb,data...)
     proxyCo.Write(bb)
+}
+
+
+type CRoute struct{ Map string; X int; Y int; }
+type CMob struct{ Priority int; Id int; Name string; }
+type CItemLoot struct{ Priority int; Id int; Name string; }
+type CItemUse struct{ Id int; Name string; MinHP int; MinSP int; BuffId int; }
+type CSKillSelf struct{ Id int; Lv int; Name string; MinHP int; MinSP int; BuffId int; }
+type CSkillTarget struct{ Id int; Lv int; Name string; MinDist int; MinHP int; }
+
+func loadprofil(){
+    err := json.Unmarshal([]byte(readFileString(CurDir()+"profils/profil.json")), &profil)
+    if err != nil { fmt.Printf("err json conf -- %v -- \n", err) }
+
+
+    for _,vv := range profil["General"] {
+        tt := vv.([]interface{})
+        if (reflect.TypeOf(tt[1]).Kind()) == reflect.Float64{
+            stru := struct{ Key string; Val int }{ Key: tt[0].(string), Val: int(tt[1].(float64)) }
+            conf["General"] = append(conf["General"], stru)
+        }
+        if (reflect.TypeOf(tt[1]).Kind()) == reflect.String{
+            stru := struct{ Key string; Val string }{ Key: tt[0].(string), Val: tt[1].(string) }
+            conf["General"] = append(conf["General"], stru)
+        }
+    }
+    for _,vv := range profil["Route"] {
+        stru := CRoute{}
+        for kkk,vvv := range vv.(map[string]interface{}) {
+            fld := reflect.ValueOf(&stru).Elem().FieldByName(kkk); convertField(vvv, fld)
+        }
+        conf["Route"] = append(conf["Route"], stru)
+    }
+    for _,vv := range profil["Mob"] {
+        stru := CMob{ Priority:1 }
+        for kkk,vvv := range vv.(map[string]interface{}) {
+            fld := reflect.ValueOf(&stru).Elem().FieldByName(kkk); convertField(vvv, fld)
+        }
+        conf["Mob"] = append(conf["Mob"], stru)
+    }
+    for _,vv := range profil["ItemLoot"] {
+        stru := CItemLoot{ Priority:1 }
+        for kkk,vvv := range vv.(map[string]interface{}) {
+            fld := reflect.ValueOf(&stru).Elem().FieldByName(kkk); convertField(vvv, fld)
+        }
+        conf["ItemLoot"] = append(conf["ItemLoot"], stru)
+    }
+    for _,vv := range profil["ItemUse"] {
+        stru := CItemUse{ MinHP:-1, MinSP:-1, BuffId:-1 }
+        for kkk,vvv := range vv.(map[string]interface{}) {
+            fld := reflect.ValueOf(&stru).Elem().FieldByName(kkk); convertField(vvv, fld)
+        }
+        conf["ItemUse"] = append(conf["ItemUse"], stru)
+    }
+    for _,vv := range profil["SKillSelf"] {
+        stru := CSKillSelf{ MinHP:-1, MinSP:-1, BuffId:-1 }
+        for kkk,vvv := range vv.(map[string]interface{}) {
+            fld := reflect.ValueOf(&stru).Elem().FieldByName(kkk); convertField(vvv, fld)
+        }
+        conf["SKillSelf"] = append(conf["SKillSelf"], stru)
+    }
+    for _,vv := range profil["SkillTarget"] {
+        stru := CSkillTarget{ Id:-1, MinDist:3, Lv:1 }
+        for kkk,vvv := range vv.(map[string]interface{}) {
+            fld := reflect.ValueOf(&stru).Elem().FieldByName(kkk); convertField(vvv, fld)
+        }
+        conf["SkillTarget"] = append(conf["SkillTarget"], stru)
+    }
+}
+
+// ### example ###
+// if exist := getConf(conf["Route"],"Map","prontera"); exist != nil {
+//     fmt.Printf("exist -- %v -- \n", exist.(CRoute).X)
+// }
+//
+// if exist := getConf(conf["General"],"Key","useTP"); exist != nil {
+//     TP := exist.(struct{Key string;Val int}).Val
+//     fmt.Printf("TP -- %v -- \n", TP)
+// }
+
+func getConf(iiconf []interface{}, key2 string, iii interface{}) interface{} {
+    for _,vv := range iiconf {
+
+    for i := 0; i < reflect.TypeOf(vv).NumField(); i++ {
+        kkk := reflect.TypeOf(vv).Field(i).Name
+        vvv := reflect.ValueOf(vv).Field(i).Interface()
+        if key2 == kkk{
+        if (reflect.TypeOf(vvv).Kind()) == reflect.Int{
+        if (reflect.TypeOf(iii).Kind()) == reflect.Int{
+        if vvv.(int) == iii.(int) {
+            return vv
+        }}}}
+        if key2 == kkk{
+        if (reflect.TypeOf(vvv).Kind()) == reflect.Float64{
+        if (reflect.TypeOf(iii).Kind()) == reflect.Float64{
+        if vvv.(float64) == iii.(float64) {
+            return vv
+        }}}}
+        if key2 == kkk{
+        if (reflect.TypeOf(vvv).Kind()) == reflect.String{
+        if (reflect.TypeOf(iii).Kind()) == reflect.String{
+        if vvv.(string) == iii.(string) {
+            return vv
+        }}}}
+    }}
+    return nil
+}
+
+func convertField(ii interface{}, ff reflect.Value) {
+	if ff.IsValid() {
+		if (reflect.TypeOf(ii).Kind()) == reflect.Float64{ ff.SetInt(int64(ii.(float64))) }
+		if (reflect.TypeOf(ii).Kind()) == reflect.Bool{ ff.SetBool(ii.(bool)) }
+		if (reflect.TypeOf(ii).Kind()) == reflect.String{ ff.SetString(ii.(string)) }
+	}
 }

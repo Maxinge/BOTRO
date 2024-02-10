@@ -4,69 +4,7 @@ import(
 	"math"
 	"math/rand"
 	"time"
-	// "fmt"
-    "encoding/json"
-    "strings"
 )
-
-type Coord struct {
-	X,Y int
-}
-
-
-func loadprofil(){
-    json.Unmarshal([]byte(readFileString(CurDir()+"profils/profil.json")), &profil)
-    // fmt.Printf("profil -- %v -- \n", profil)
-
-    mappp := profil["map"].(map[string]interface{})
-	lockMap = mappp["lockmap"].(string)
-
-	tele := mappp["teleport_search"].([]interface{})
-	tpUse = int(tele[0].(float64)); tpTime = int(tele[1].(float64))
-
-    rrr := mappp["route"].([]interface{})
-    route = map[string][]int{}
-    for _,vv := range rrr {
-        ss := strings.Split(vv.(string), "(")
-        sss := strings.Split(ss[1], ",")
-        route[ss[0]] = []int{ Stoi(sss[0]),Stoi(sss[1][:len(sss[1])-1]) }
-    }
-
-    mobbb := profil["mobs"].([]interface{})
-    for _,vv := range mobbb {
-        ss := strings.Split(vv.(string), "#")
-        targetMobs = append(targetMobs, Stoi(ss[1]))
-    }
-
-	combbb := profil["combat"].(map[string]interface{})
-	attackDist = int(combbb["min_dist"].(float64))
-
-	atttt := combbb["attack"].([]interface{})
-
-	for _,vv := range atttt {
-		att := strings.Split(vv.(string), "::")
-		useAttacks = append(useAttacks,[]string{att[0], att[1], att[2], att[3]})
-	}
-
-	itemsss := profil["items"].(map[string]interface{})
-	iii := itemsss["loot_ignore"].([]interface{})
-	for _,vv := range iii {
-		item := strings.Split(vv.(string), "(")
-		ignoreItem = append(ignoreItem,Stoi(item[0]))
-	}
-
-	uuu := itemsss["use"].([]interface{})
-	for _,vv := range uuu {
-		uu := strings.Split(vv.(string), "::")
-		useItemHP[Stoi(uu[0])] = Stoi(uu[1])
-		useItemSP[Stoi(uu[0])] = Stoi(uu[2])
-	}
-
-    // fmt.Printf("route -- %v -- \n", route)
-    // fmt.Printf("targetMobs -- %v -- \n", targetMobs)
-    // fmt.Printf("lockMap -- %v -- \n", lockMap)
-}
-
 
 
 func getDist(from Coord, to Coord) float64 {
@@ -237,7 +175,10 @@ func pathfind(start Coord, finish Coord, lgatMap ROLGatMap) []Coord {
 
 	brainSize := (lgatMap.height*lgatMap.width) / 2
 
+	PFstartTime := time.Now()
+    PFelapsed := time.Now()
 	for {
+		if PFelapsed.Sub(PFstartTime).Seconds() > float64(10) { return []Coord{start} }
 		_curCoord := coordList[len(coordList)-1]
 		if _curCoord == finish { break }
 		visited = append(visited, _curCoord)
@@ -269,6 +210,8 @@ func pathfind(start Coord, finish Coord, lgatMap ROLGatMap) []Coord {
 		rand.Seed(time.Now().UnixNano())
 		rn := candidates[rand.Intn(len(candidates))]
 		coordList = append(coordList, rn);
+
+		PFelapsed = time.Now()
 	}
 
 	path := cleanPath(coordList, 1, lgatMap)

@@ -9,6 +9,7 @@
 
     "####":  [ "############### SERV & CHAT ###############", "" ],
 
+    "0283":  [ "account_id", "" ],
     "0360":  [ "send_sync_serv", "" ],
     "007F":  [ "recv_sync_serv", "" ],
     "02C1":  [ "chat_main", "" ],
@@ -18,11 +19,8 @@
 
     "####":  [ "############### NPC INTERACT & INVENTORY & ITEMS ###############", "" ],
 
-
     "0B09":  [ "inventory_info", "" ],
     "0B0A":  [ "inventory_info", "" ],
-
-
 
     "0439":  [ "item_use_send", "" ],
     "01C8":  [ "item_used", "" ],
@@ -52,10 +50,15 @@
     "0368":  [ "actor_info_request", "" ],
     "008A":  [ "actor_action", "" ],
 
-    "0086":  [ "actor_moved", "" ],
+
+    "0086":  [ "actor_moving", "" ],
     "0080":  [ "actor_dead_disapear", "" ],
+
     "09FD":  [ "actor_appear", "same shit only padding change" ],
     "09FF":  [ "actor_appear", "same shit only padding change" ],
+
+
+
 
     "####": [ "", "" ]
 }

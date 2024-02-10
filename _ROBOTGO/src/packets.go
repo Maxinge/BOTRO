@@ -28,6 +28,11 @@ func fctpackInit()  {
     //     }
     // }
 
+    // fctpack["account_id"] = func (HexID []byte, bb []byte)  {
+    //     myActorID = int(binary.LittleEndian.Uint32(bb[0:0+4]))
+    //     fmt.Printf("#### myActorID-> [%v]\n", myActorID)
+    // }
+
     fctpack["uknw_pck"] = func (HexID []byte, bb []byte)  {
         HexID1 := fmt.Sprintf("%04X",binary.LittleEndian.Uint16(HexID))
         HexID2 := fmt.Sprintf("%04X",binary.LittleEndian.Uint16(bb[0:2]))
@@ -45,12 +50,6 @@ func fctpackInit()  {
         fmt.Printf(" ####### [%v][%v] -> [%v]\n","skill_use", len(bb)+2, bb)
     }
 
-    fctpack["actor_info"] = func (HexID []byte, bb []byte)  {
-        myActorID = int(binary.LittleEndian.Uint32(bb[0:0+4]))
-    }
-
-
-
     fctpack["mem_data"] = func (HexID []byte, bb []byte)  {
         ii := 0
         MAP := strings.Split(string(bb[ii:ii+40]), ".rsw")[0]; ii += 40
@@ -60,25 +59,23 @@ func fctpackInit()  {
         HPMAX := binary.LittleEndian.Uint32(bb[ii:ii+4]); ii += 4
         WEIGHTMAX := binary.LittleEndian.Uint32(bb[ii:ii+4]); ii += 4
         WEIGHT := binary.LittleEndian.Uint32(bb[ii:ii+4]); ii += 4
-        SP := binary.LittleEndian.Uint32(bb[ii:ii+4]); ii += 4
-        MAXSP := binary.LittleEndian.Uint32(bb[ii:ii+4]); ii += 4
+        SPLEFT := binary.LittleEndian.Uint32(bb[ii:ii+4]); ii += 4
+        SPMAX := binary.LittleEndian.Uint32(bb[ii:ii+4]); ii += 4
 
         curMap = MAP
         curCoord = Coord{X:int(XPOS),Y:int(YPOS)}
-        hp = int(HPLEFT)
-        maxHP = int(HPMAX)
+        HPLeft = int(HPLEFT)
+        HPMax = int(HPMAX)
         maxWeight = int(WEIGHTMAX)
         weight = int(WEIGHT)
-        sp = int(SP)
-        spMAx = int(MAXSP)
+        SPLeft = int(SPLEFT)
+        SPMax = int(SPMAX)
     }
 
     fctpack["inventory_info"] = func (HexID []byte, bb []byte)  {
-        // fmt.Printf(" ####### [%v][%v] -> [%v]\n","inventory_info", len(bb)+2, bb)
         HexID1 := fmt.Sprintf("%04X",binary.LittleEndian.Uint16(HexID))
         // inventoryType := bb[2]
         if HexID1 == "0B09" {
-            fmt.Printf(" 0B09 \n",)
             for ii := 3; ii < len(bb); ii+=34 {
                 inventoryID := int(binary.LittleEndian.Uint16(bb[ii:ii+2]))
                 itemID := int(binary.LittleEndian.Uint32(bb[ii+2:ii+2+4]))
@@ -89,7 +86,6 @@ func fctpackInit()  {
             }
         }
         if HexID1 == "0B0A" {
-            fmt.Printf(" 0B0A \n",)
             for ii := 3; ii < len(bb); ii+=67 {
                 inventoryID := int(binary.LittleEndian.Uint16(bb[ii:ii+2]))
                 itemID := int(binary.LittleEndian.Uint32(bb[ii+2:ii+2+4]))
@@ -103,7 +99,6 @@ func fctpackInit()  {
 
 
     fctpack["inventory_item_added"] = func (HexID []byte, bb []byte)  {
-        // fmt.Printf(" ####### [%v][%v] -> [%v]\n","inventory_item_added", len(bb)+2, bb)
         inventoryID := int(binary.LittleEndian.Uint16(bb[0:0+2]))
         amount := int(binary.LittleEndian.Uint16(bb[2:2+2]))
         itemID := int(binary.LittleEndian.Uint32(bb[4:4+4]))
@@ -118,7 +113,6 @@ func fctpackInit()  {
     }
 
     fctpack["inventory_item_removed"] = func (HexID []byte, bb []byte)  {
-        // fmt.Printf(" ####### [%v][%v] -> [%v]\n","inventory_item_removed", len(bb)+2, bb)
         inventoryID := int(binary.LittleEndian.Uint16(bb[0:0+2]))
         amount := int(binary.LittleEndian.Uint16(bb[2:2+2]))
         if ii, exist := inventoryItems[inventoryID]; exist {
@@ -134,7 +128,6 @@ func fctpackInit()  {
     }
 
     fctpack["item_used"] = func (HexID []byte, bb []byte)  {
-        // fmt.Printf(" ####### [%v][%v] -> [%v]\n","item_used", len(bb)+2, bb)
         inventoryID := int(binary.LittleEndian.Uint16(bb[0:0+2]))
         // itemID := int(binary.LittleEndian.Uint32(bb[2:2+4]))
         amountLeft := int(binary.LittleEndian.Uint16(bb[10:10+2]))
@@ -144,13 +137,9 @@ func fctpackInit()  {
         }
     }
 
-
-
     fctpack["item_appear"] = func (HexID []byte, bb []byte)  {
-        // fmt.Printf(" ####### [%v][%v][%v] -> [%v]\n","item_appear", HexID, len(bb)+2, bb)
         mapID := int(binary.LittleEndian.Uint32(bb[0:0+4]))
         itemID := int(binary.LittleEndian.Uint16(bb[4:4+2]))
-        if intInArray(itemID, ignoreItem) { return }
         x := int(binary.LittleEndian.Uint16(bb[11:13]))
         y := int(binary.LittleEndian.Uint16(bb[13:15]))
         amount := int(binary.LittleEndian.Uint16(bb[17:19]))
@@ -166,8 +155,8 @@ func fctpackInit()  {
         MUgroundItems.Unlock()
     }
 
-    fctpack["actor_moved"] = func (HexID []byte, bb []byte)  {
-        // fmt.Printf("[%v][%v] -> [%v]\n","actor_moved", len(bb)+2, bb)
+    fctpack["actor_moving"] = func (HexID []byte, bb []byte)  {
+        // fmt.Printf(" ####### [%v][%v] -> [%v]\n","actor_moved", len(bb)+2, bb)
         mapID := int(binary.LittleEndian.Uint32(bb[0:4]))
         MUmobList.Lock()
         fromto := bits48ToCoords(bb[4:4+6])
@@ -181,29 +170,23 @@ func fctpackInit()  {
 
     // ## type : 5 = mob / 6 = npc
     fctpack["actor_appear"] = func (HexID []byte, bb []byte)  {
-        // fmt.Printf(" ####### [%v][%v][%v] -> [%v]\n","actor_appear", HexID, len(bb)+2, bb)
         mapID := int(binary.LittleEndian.Uint32(bb[3:3+4]))
         mobID := int(binary.LittleEndian.Uint16(bb[21:21+4]))
         actorType := byte(bb[2])
-        sss := splitBitsArray(bb,[]byte{255,255,255,255,255,255,255,255})
-        mobName := ""
-        if len(sss) > 1 { mobName = strings.Replace(string(sss[1]),"\u0000", "", -1) }
-        cc := Coord{X:0,Y:0};
+        cc := Coord{X:0,Y:0}
         index := 0
-        if bb[0] == 108 { index = 61 }
-        if bb[0] == 114 { index = 65 }
+        if sliceEqual(bb[0:2],[]byte{114,0}){ index = 65 }
+        if sliceEqual(bb[0:2],[]byte{108,0}){ index = 61 }
         bc := bits24ToCoords(bb[index:index+3])
         cc.X = bc[0]; cc.Y = bc[1];
         if actorType == 5  {
-            if !intInArray(mobID, targetMobs){ return }
             MUmobList.Lock()
-            mobList[mapID] = Mob{ MobID:mobID, Name:mobName, Coords:cc }
+            mobList[mapID] = Mob{ MobID:mobID, Coords:cc }
             MUmobList.Unlock()
         }
     }
 
     fctpack["actor_dead_disapear"] = func (HexID []byte, bb []byte)  {
-        // fmt.Printf("[%v][%v] -> [%v]\n","actor_dead_disapear", len(bb)+2, bb)
         mapID := int(binary.LittleEndian.Uint32(bb[0:0+4]))
         if bb[4] == 1 { targetMobDead = mapID }
         MUmobList.Lock()
@@ -216,8 +199,6 @@ func fctpackInit()  {
 }
 
 // #######################
-
-
 func coordsTo24Bits(x int, y int /*, direction int*/) []byte {
     // coords to (x,y), so in 3 bytes
     // packed in 2 x 10 bits trunks  + 00

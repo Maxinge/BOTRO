@@ -1,13 +1,28 @@
 package main
 
 import(
-    // "fmt"
+    "fmt"
     "time"
-    "sort"
     "encoding/binary"
     "sync"
 )
 
+type Coord struct {
+	X,Y int
+}
+
+type Mob struct {
+    MobID int
+    Coords Coord
+    HPMax int
+    HPLeft int
+}
+
+type Item struct {
+    ItemID int
+    Coords Coord
+    Amount int
+}
 
 type States struct {
     InSaveMap bool
@@ -25,13 +40,17 @@ var(
     prevState = botStates
     timeInState = float64(0)
 
-    myActorID = 0
+    accountId = 0
 
     curCoord = Coord{X:0, Y:0}
     nextPoint = Coord{X:0, Y:0}
 	curMap = ""
-    lockMap = ""
-    saveMap = ""
+    HPLeft = 0
+    HPMax = 0
+    maxWeight = 0
+    weight = 0
+    SPLeft = 0
+    SPMax = 0
 
     pathIndex = 0
 	curPath = []Coord{}
@@ -44,36 +63,22 @@ var(
     groundItems = map[int]Item{}
     MUinventoryItems sync.Mutex
     inventoryItems = map[int]Item{}
+    MUbuffList sync.Mutex
+    buffList = map[int]int{}
 
     targetMob = -1
     targetMobDead = -2
     targetItem = -1
     targetItemLooted = -2
-    ignoreItem = []int{}
-
     attackDist = 1
-
-    tpUse = 0
-    tpTime = 0
-    useAttacks = [][]string{}
     attackIndex = 0
 
-    hp = 0
-    maxHP = 0
-    maxWeight = 0
-    weight = 0
-    sp = 0
-    spMAx = 0
-
-    useItemHP = map[int]int{}
-    useItemSP = map[int]int{}
-
+    lockMap = ""
+    saveMap = ""
+    useTPLockMap = 0
+    useTPDelay = 10
 )
 
-// var states = []string{
-//     "standing",
-//     "moving",
-// }
 func resetStates(){
     botStates = States{}
     pathIndex = 0 ; curPath = nil ;
@@ -88,6 +93,37 @@ func resetStates(){
     MUmobList.Unlock()
 }
 
+func itemInInventory(id int, amount int)  int{
+    for kk,ii := range inventoryItems {
+        if ii.ItemID == id && ii.Amount >= amount   { return kk }
+    }
+    return -1
+}
+
+func sendUseItem(id int){
+    arrayBin := []byte{}
+    inventoryIDBin := make([]byte, 2);
+    binary.LittleEndian.PutUint16(inventoryIDBin, uint16(id))
+    accountIdBin := make([]byte, 4) ;
+    binary.LittleEndian.PutUint32(accountIdBin, uint32(accountId))
+    arrayBin = append(arrayBin,inventoryIDBin...)
+    arrayBin = append(arrayBin,accountIdBin...)
+    sendToServer("0439", arrayBin)
+}
+func sendUseSkill(id int, lv int, target int){
+    arrayBin := []byte{}
+    skillIDBin := make([]byte, 2)
+    binary.LittleEndian.PutUint16(skillIDBin, uint16(id))
+    skillLVBin := make([]byte, 2)
+    binary.LittleEndian.PutUint16(skillLVBin, uint16(lv))
+    targetBin := make([]byte, 4)
+    binary.LittleEndian.PutUint32(targetBin, uint32(target))
+    arrayBin = append(arrayBin,skillLVBin...)
+    arrayBin = append(arrayBin,skillIDBin...)
+    arrayBin = append(arrayBin,targetBin...)
+    sendToServer("0438", arrayBin)
+}
+
 func botLoop() {
 
     curPath = nil
@@ -97,6 +133,22 @@ func botLoop() {
 
     TPstartTime := time.Now()
     TPelapsed := time.Now()
+
+    if exist := getConf(conf["General"],"Key","accountId"); exist != nil {
+        accountId = exist.(struct{Key string; Val int}).Val
+    }
+    if exist := getConf(conf["General"],"Key","lockMap"); exist != nil {
+        lockMap = exist.(struct{Key string; Val string}).Val
+    }
+    if exist := getConf(conf["General"],"Key","saveMap"); exist != nil {
+        saveMap = exist.(struct{Key string; Val string}).Val
+    }
+    if exist := getConf(conf["General"],"Key","useTPLockMap"); exist != nil {
+        useTPLockMap = exist.(struct{Key string; Val int}).Val
+    }
+    if exist := getConf(conf["General"],"Key","useTPDelay"); exist != nil {
+        useTPDelay = exist.(struct{Key string; Val int}).Val
+    }
 
     for { time.Sleep(100 * time.Millisecond)
         if curCoord == (Coord{X:0, Y:0}){ continue }
@@ -111,22 +163,31 @@ func botLoop() {
         prevState = botStates
         // #################################
         // #################################
-        for kk,vv := range useItemHP {
-            if vv > 0 {
-            if (float32(hp)/float32(maxHP)*100) < float32(vv) {
+
+        for _, vv := range conf["SKillSelf"] {
+            if vv.(CSKillSelf).MinHP > 0 && vv.(CSKillSelf).MinSP > 0{
+            if (float32(HPLeft)/float32(HPMax)*100) < float32(vv.(CSKillSelf).MinHP) {
+            if (float32(SPLeft)/float32(SPMax)*100) > float32(vv.(CSKillSelf).MinSP) {
+                sendUseSkill(vv.(CSKillSelf).Id, vv.(CSKillSelf).Lv, accountId)
+            }}}
+        }
+
+        // #################################
+        // #################################
+
+        for _, vv := range conf["ItemUse"] {
+            if vv.(CItemUse).MinHP > 0  {
+            if (float32(HPLeft)/float32(HPMax)*100) < float32(vv.(CItemUse).MinHP) {
                 MUinventoryItems.Lock()
-                for kkkk,ii := range inventoryItems {
-                    if ii.ItemID == kk {
-                        arrayBin := []byte{}
-                        inventoryIDBin := make([]byte, 2);
-                        binary.LittleEndian.PutUint16(inventoryIDBin, uint16(kkkk))
-                        myActorIDBin := make([]byte, 4) ;
-                        binary.LittleEndian.PutUint32(myActorIDBin, uint32(myActorID))
-                        arrayBin = append(arrayBin,inventoryIDBin...)
-                        arrayBin = append(arrayBin,myActorIDBin...)
-                        sendToServer("0439", arrayBin)
-                    }
-                }
+                inventID := itemInInventory(vv.(CItemUse).Id, 1)
+                if inventID > -1  { sendUseItem(inventID) }
+                MUinventoryItems.Unlock()
+            }}
+            if vv.(CItemUse).MinSP > 0  {
+            if (float32(SPLeft)/float32(SPMax)*100) < float32(vv.(CItemUse).MinSP) {
+                MUinventoryItems.Lock()
+                inventID := itemInInventory(vv.(CItemUse).Id, 1)
+                if inventID > -1  { sendUseItem(inventID) }
                 MUinventoryItems.Unlock()
             }}
         }
@@ -134,17 +195,21 @@ func botLoop() {
         // #################################
         // #################################
 
-        if targetMob == targetMobDead { targetMob = -1; targetMobDead = -2; nextPoint = Coord{X:0, Y:0} }
+        if targetMob == targetMobDead {
+            targetMob = -1; targetMobDead = -2; nextPoint = Coord{X:0, Y:0}
+             time.Sleep(200 * time.Millisecond)
+        }
         if targetItem == targetItemLooted { targetItem = -1; targetItemLooted = -2; nextPoint = Coord{X:0, Y:0} }
 
         MUgroundItems.Lock()
         targetItem = -1
         for kk,vv := range groundItems { if getDist(vv.Coords, curCoord) > 40 { delete(groundItems, kk) } }
         for kk,vv := range groundItems {
-            if curMap == lockMap {
-            if getDist(vv.Coords, curCoord) < 25 {
-                targetItem = kk
-            }}
+            if curMap != lockMap { continue }
+            if exist := getConf(conf["ItemLoot"],"Id",vv.ItemID); exist != nil {
+                if exist.(CItemLoot).Priority == -1 { continue }
+            }
+            targetItem = kk
         }
         MUgroundItems.Unlock()
 
@@ -153,12 +218,11 @@ func botLoop() {
         for kk,vv := range mobList { if getDist(vv.Coords, curCoord) > 40 { delete(mobList, kk) } }
         distMobList := map[float64]int{}
         for kk,vv := range mobList { distMobList[getDist(vv.Coords, curCoord)] = kk }
-        keys := []float64{}
-        for kk,_ := range distMobList { keys = append(keys,kk) }
-        sort.Sort(sort.Float64Slice(keys))
+        keys := sortFloatKeys(keyMap(distMobList))
         for i := len(keys)-1; i >= 0; i-- {
             if curMap != lockMap { continue }
             mob := mobList[distMobList[keys[i]]]
+            if exist := getConf(conf["Mob"],"Id",mob.MobID); exist == nil { continue }
             // if getDist(curCoord, mob.Coords) > 25 { continue }
             mobPath := pathfind(curCoord, mob.Coords, lgatMaps[curMap])
             if len(mobPath) < 50 { targetMob = distMobList[keys[i]] ; continue }
@@ -173,23 +237,25 @@ func botLoop() {
         }
         MUmobList.Unlock()
 
-        distFromDest := getDist(curCoord, nextPoint)
 
-        if tpUse > 0 {
+        if useTPLockMap > 0 {
             botStates.ReadyToTp = false
-            if TPelapsed.Sub(TPstartTime).Seconds() > float64(tpTime) {
+            if TPelapsed.Sub(TPstartTime).Seconds() > float64(useTPDelay) {
                 botStates.ReadyToTp = true
             }
             TPelapsed = time.Now()
         }
 
+        distFromDest := getDist(curCoord, nextPoint)
         // #################################
         // #################################
         if nextPoint != (Coord{X:0, Y:0}) { botStates.HasDest = true }          else{ botStates.HasDest = false }
         if curMap == lockMap { botStates.InLockMap = true }                     else{ botStates.InLockMap = false }
         if curMap == saveMap { botStates.InSaveMap = true }                     else{ botStates.InSaveMap = false }
         if distFromDest <= float64(minDist) { botStates.AtRange = true }        else{ botStates.AtRange = false }
-        if _, exist := route[curMap]; exist { botStates.OnTheRoad = true }      else{ botStates.OnTheRoad = false }
+        if exist := getConf(conf["Route"],"Map", curMap); exist != nil {
+            botStates.OnTheRoad = true
+        }else{ botStates.OnTheRoad = false }
         if targetMob >= 0 { botStates.HasTargetMob = true }                     else{ botStates.HasTargetMob = false }
         if targetItem >= 0 { botStates.HasTargetItem = true }                   else{ botStates.HasTargetItem = false }
         // #################################
@@ -202,16 +268,23 @@ func botLoop() {
 
         if botStates == (States{InLockMap:true, ReadyToTp:true}) ||
            botStates == (States{InLockMap:true, HasDest:true, ReadyToTp:true}) {
-            if tpUse == 1 {
+            if useTPLockMap == 1 {
                 resetStates()
                 time.Sleep(800 * time.Millisecond)
-                arrayBin := []byte{}
-                myActorIDBin := make([]byte, 4)
-                binary.LittleEndian.PutUint32(myActorIDBin, uint32(myActorID))
-                arrayBin = append(arrayBin, []byte{1,0,26,0}...)
-                arrayBin = append(arrayBin, myActorIDBin...)
-                sendToServer("0438", arrayBin)
+                tpId := int(binary.LittleEndian.Uint16([]byte{26,0}))
+                tpLv := int(binary.LittleEndian.Uint16([]byte{1,0}))
+                sendUseSkill(tpId, tpLv, accountId)
                 time.Sleep(1300 * time.Millisecond)
+                TPstartTime = time.Now()
+            }
+            if useTPLockMap == 2 {
+                inventID := itemInInventory(601,1) // fly wing
+                if inventID > -1  {
+                    resetStates()
+                    time.Sleep(800 * time.Millisecond)
+                    sendUseItem(inventID)
+                    time.Sleep(1300 * time.Millisecond)
+                }
                 TPstartTime = time.Now()
             }
         }
@@ -234,42 +307,35 @@ func botLoop() {
         }
 
         if botStates == (States{InLockMap:true, HasTargetItem: true, HasDest:true, AtRange:true})  {
-                itemBin := make([]byte, 4) ;
-                binary.LittleEndian.PutUint32(itemBin, uint32(targetItem))
-                // fmt.Printf("# loot loot # \n")
-                sendToServer("0362", itemBin)
-                time.Sleep(200 * time.Millisecond)
+            itemBin := make([]byte, 4) ;
+            binary.LittleEndian.PutUint32(itemBin, uint32(targetItem))
+            sendToServer("0362", itemBin)
+            time.Sleep(200 * time.Millisecond)
         }
 
         if botStates == (States{InLockMap:true, HasTargetMob: true, HasDest:true, AtRange:true})  {
-            arrayBin := []byte{}
-            att := useAttacks[attackIndex]
-            skillIDBin := make([]byte, 2)
-            binary.LittleEndian.PutUint16(skillIDBin, uint16(Stoi(att[0])))
-            skillLVBin := make([]byte, 2)
-            binary.LittleEndian.PutUint16(skillLVBin, uint16(Stoi(att[1])))
-            mobBin := make([]byte, 4)
-            binary.LittleEndian.PutUint32(mobBin, uint32(targetMob))
-            delay := Stoi(att[2])
-
-            if Stoi(att[0]) != 0 {
-                arrayBin = append(arrayBin,skillLVBin...)
-                arrayBin = append(arrayBin,skillIDBin...)
-                arrayBin = append(arrayBin,mobBin...)
-                sendToServer("0438", arrayBin)
+            skill := conf["SkillTarget"][attackIndex]
+            delay := 0
+            if skill.(CSkillTarget).Id != -1 {
+                sendUseSkill(skill.(CSkillTarget).Id, skill.(CSkillTarget).Lv, targetMob)
             }else{
+                arrayBin := []byte{}
+                mobBin := make([]byte, 4)
+                binary.LittleEndian.PutUint32(mobBin, uint32(targetMob))
                 arrayBin = append(arrayBin,mobBin...)
                 // 0 = unique autoattack / 7 = start autoattack
-                arrayBin = append(arrayBin,byte(0))
+                arrayBin = append(arrayBin,byte(7))
                 sendToServer("0437", arrayBin)
+                delay = 1000
             }
-            if attackIndex < len(useAttacks)-1 { attackIndex++ }else{ attackIndex = 0 }
+            if attackIndex < len(conf["SkillTarget"])-1 { attackIndex++ }else{ attackIndex = 0 }
             time.Sleep(time.Duration(delay) * time.Millisecond)
         }
 
 
         if botStates == (States{InLockMap:true, HasDest:true}) ||
            botStates == (States{OnTheRoad:true, HasDest:true}) ||
+           botStates == (States{OnTheRoad:true, HasDest:true, InSaveMap:true}) ||
            botStates == (States{InLockMap:true, HasDest:true, HasTargetMob:true}) ||
            botStates == (States{InLockMap:true, HasDest:true, HasTargetItem:true}) {
             if pathIndex > len(curPath)-2 {
@@ -277,6 +343,7 @@ func botLoop() {
             }else{
                 nextStep = Coord{curPath[pathIndex].X,curPath[pathIndex].Y}
             }
+
             if getDist(curCoord, nextStep) < 6{ pathIndex += 8 }
             sendToServer("035F",coordsTo24Bits(nextStep.X,nextStep.Y))
             time.Sleep(50 * time.Millisecond)
@@ -287,10 +354,13 @@ func botLoop() {
             curPath = nil ; pathIndex = 0 ; nextPoint = Coord{X:0, Y:0}
         }
 
-        if botStates == (States{OnTheRoad:true}) {
-            nextPoint = (Coord{X:route[curMap][0], Y:route[curMap][1]})
-            curPath = pathfind(curCoord, nextPoint, lgatMaps[curMap])
-            pathIndex = 0 ; minDist = 1;
+        if botStates == (States{OnTheRoad:true}) ||
+           botStates == (States{OnTheRoad:true, InSaveMap:true}) {
+            if exist := getConf(conf["Route"],"Map",curMap); exist != nil {
+                nextPoint = Coord{X:exist.(CRoute).X, Y:exist.(CRoute).Y}
+                curPath = pathfind(curCoord, nextPoint, lgatMaps[curMap])
+                pathIndex = 0 ; minDist = 1;
+            }
         }
 
         if botStates == (States{InLockMap:true}) {
@@ -301,37 +371,47 @@ func botLoop() {
 
     }
 
+    fmt.Printf("# lel # \n")
 }
 
-var strInfo = ""
-var strMobs = ""
-var strInventoryItems = ""
-var strGroundItems = ""
-
+var (
+    strInfo = ""
+    strMobs = ""
+    strInventoryItems = ""
+    strGroundItems = ""
+)
 func infoUILoop() {
     for { time.Sleep(200 * time.Millisecond)
 
-        strInfo = "HP : "+Itos(hp)+"/"+Itos(maxHP)+" | SP : "+Itos(sp)+"/"+Itos(spMAx)+" | W: "+Itos(maxWeight)+"/"+Itos(weight)
+        HPpc := int(float32(HPLeft)/float32(HPMax)*100)
+        SPpc := int(float32(SPLeft)/float32(SPMax)*100)
 
-        keys := []int{}
+        strInfo = "HP : "+Itos(HPLeft)+"/"+Itos(HPMax)+"("+Itos(HPpc)+"%) "
+        strInfo += "| SP : "+Itos(SPLeft)+"/"+Itos(SPMax)+" ("+Itos(SPpc)+"%)"
+        strInfo += "| W: "+Itos(maxWeight)+"/"+Itos(weight)
+
+        strInventoryItems = ""
+        MUinventoryItems.Lock()
+        for _, kkk := range sortIntKeys(keyMap(inventoryItems)) {
+            iii := inventoryItems[kkk]
+            strInventoryItems += "["+Itos(iii.ItemID)+"] "+Itos(iii.Amount)  +" ea \n"
+        }
+        MUinventoryItems.Unlock()
+
         strMobs = ""
         MUmobList.Lock()
-        for kk,_ := range mobList { keys = append(keys,kk) }
-        sort.Ints(keys)
-        for _,kkk := range keys {
+        for _, kkk := range sortIntKeys(keyMap(mobList)) {
             mm := mobList[kkk]
-            strMobs += "["+Itos(kkk)+"] ("+Itos(mm.Coords.X)+" / "+Itos(mm.Coords.Y)+") "+Itos(mm.MobID) +" "+mm.Name +"\n"
+            strMobs += "["+Itos(kkk)+"] ("+Itos(mm.Coords.X)+" / "+Itos(mm.Coords.Y)+") "+Itos(mm.MobID) +"\n"
         }
         MUmobList.Unlock()
 
-        keys = []int{}
         strGroundItems = ""
         MUgroundItems.Lock()
-        for kk,_ := range groundItems { keys = append(keys,kk) }
-        sort.Ints(keys)
-        for _,kkk := range keys {
+        for _, kkk := range sortIntKeys(keyMap(groundItems)) {
             ii := groundItems[kkk]
-            strGroundItems += "["+Itos(kkk)+"] ("+Itos(ii.Coords.X)+" / "+Itos(ii.Coords.Y)+") "+Itos(ii.ItemID) +" "+Itos(ii.Amount) +"\n"
+            strGroundItems += "["+Itos(kkk)+"] ("+Itos(ii.Coords.X)+" / "+Itos(ii.Coords.Y)+")"
+            strGroundItems += Itos(ii.ItemID) +" "+Itos(ii.Amount) +"\n"
         }
         MUgroundItems.Unlock()
 
