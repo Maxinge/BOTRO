@@ -43,6 +43,12 @@
     "####":  [ "############### ACTORS ###############", "" ],
 
 
+    "0AF4":  [ "warp_portal_send", "" ],
+    "011B":  [ "warp_portal_choice_send", "" ],
+    "0ABE":  [ "warp_portal_choice_recv", "" ],
+
+
+
     "0983":  [ "actor_status_active", "" ],
 
     "0118":  [ "stop_attack", "" ],
@@ -52,13 +58,12 @@
     "0368":  [ "actor_info_request", "" ],
     "008A":  [ "actor_action", "" ],
 
-
     "0086":  [ "actor_moving", "" ],
+    "08CD":  [ "actor_moving_interrupt", "" ],
     "0080":  [ "actor_dead_disapear", "" ],
 
     "09FD":  [ "actor_appear", "same shit only padding change" ],
     "09FF":  [ "actor_appear", "same shit only padding change" ],
-
 
 
 

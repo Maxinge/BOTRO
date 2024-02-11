@@ -16,12 +16,15 @@ la premiere compilation de cimguigo peu prendre du temps
 
 
 ## TODO ##
-- check si les items sont drop par le mob target
-- lock target
+- detect dead
 - town run
-- mob agressif
-- esquive aoe
-- mob priority
+- check si les items sont drop par le mob target
 - skill delay / cast confirm + warp portal
+- lock target
+- mob agressif / priority
+- esquive aoe
 - item delay
 - map change delay
+- /sit
+- mob move walk speed prévision coords
+- extract les GRF

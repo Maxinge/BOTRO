@@ -26,6 +26,8 @@
 		"NeedHit": 85,
 		"Element": "Neutral",
 		"ElementLevel": 3,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 9.01,
@@ -178,6 +180,8 @@
 		"NeedHit": 167,
 		"Element": "Shadow",
 		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -324,6 +328,8 @@
 		"NeedHit": 152,
 		"Element": "Water",
 		"ElementLevel": 1,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 35,
@@ -402,6 +408,8 @@
 		"NeedHit": 140,
 		"Element": "Neutral",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -554,6 +562,8 @@
 		"NeedHit": 146,
 		"Element": "Neutral",
 		"ElementLevel": 3,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 25.01,
@@ -704,6 +714,8 @@
 		"NeedHit": 153,
 		"Element": "Neutral",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 20.01,
@@ -833,6 +845,8 @@
 		"NeedHit": 107,
 		"Element": "Water",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 10.01,
@@ -965,6 +979,8 @@
 		"NeedHit": 146,
 		"Element": "Shadow",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 45.51,
@@ -1090,29 +1106,31 @@
 		"Id": 1094,
 		"SpriteName": "AMBERNITE",
 		"Name": "Ambernite",
-		"Level": 88,
-		"HP": 1214138,
-		"BaseExp": 130896,
-		"JobExp": 53836,
+		"Level": 13,
+		"HP": 422,
+		"BaseExp": 102,
+		"JobExp": 81,
 		"Scale": "Large",
-		"Race": "DemiHuman",
-		"IsMVP": true,
+		"Race": "Insect",
+		"IsMVP": false,
 		"Str": 1,
-		"Dex": 74,
-		"Agi": 1,
-		"Vit": 90,
-		"Int": 124,
-		"Luk": 45,
-		"Def": 26,
-		"MDef": 52,
-		"Atk": "1647~2576",
-		"Range": "3~21~21",
-		"Flee": 89,
-		"Hit": 162,
-		"NeedFlee": 237,
-		"NeedHit": 109,
-		"Element": "Earth",
-		"ElementLevel": 3,
+		"Dex": 18,
+		"Agi": 13,
+		"Vit": 13,
+		"Int": 5,
+		"Luk": 5,
+		"Def": 30,
+		"MDef": 0,
+		"Atk": "39~46",
+		"Range": "1~15~18",
+		"Flee": 26,
+		"Hit": 31,
+		"NeedFlee": 106,
+		"NeedHit": 46,
+		"Element": "Water",
+		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.51,
@@ -1225,7 +1243,57 @@
 					"Slots": 0,
 					"SellOvercharged": 12
 				}
+			}
+		],
+		"Maps": [
+			{
+				"MapName": "gef_fild09",
+				"Amount": 60
 			},
+			{
+				"MapName": "gef_fild13",
+				"Amount": 20
+			},
+			{
+				"MapName": "mjolnir_07",
+				"Amount": 25
+			},
+			{
+				"MapName": "prt_fild04",
+				"Amount": 10
+			}
+		]
+	},
+	{
+		"Id": 1511,
+		"SpriteName": "AMON_RA",
+		"Name": "Amon Ra",
+		"Level": 88,
+		"HP": 1214138,
+		"BaseExp": 130896,
+		"JobExp": 53836,
+		"Scale": "Large",
+		"Race": "DemiHuman",
+		"IsMVP": true,
+		"Str": 1,
+		"Dex": 74,
+		"Agi": 1,
+		"Vit": 90,
+		"Int": 124,
+		"Luk": 45,
+		"Def": 26,
+		"MDef": 52,
+		"Atk": "1647~2576",
+		"Range": "3~21~21",
+		"Flee": 89,
+		"Hit": 162,
+		"NeedFlee": 237,
+		"NeedHit": 109,
+		"Element": "Earth",
+		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
+		"Drops": [
 			{
 				"Chance": 1.51,
 				"Item": {
@@ -1341,20 +1409,8 @@
 		],
 		"Maps": [
 			{
-				"MapName": "gef_fild09",
-				"Amount": 60
-			},
-			{
-				"MapName": "gef_fild13",
-				"Amount": 20
-			},
-			{
-				"MapName": "mjolnir_07",
-				"Amount": 25
-			},
-			{
-				"MapName": "prt_fild04",
-				"Amount": 10
+				"MapName": "moc_pryd06",
+				"Amount": 1
 			}
 		]
 	},
@@ -1385,6 +1441,8 @@
 		"NeedHit": 66,
 		"Element": "Poison",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.51,
@@ -1557,6 +1615,8 @@
 		"NeedHit": 86,
 		"Element": "Ghost",
 		"ElementLevel": 1,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 60.01,
@@ -1705,6 +1765,8 @@
 		"NeedHit": 103,
 		"Element": "Undead",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 44.14,
@@ -1871,6 +1933,8 @@
 		"NeedHit": 122,
 		"Element": "Poison",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 44.14,
@@ -2009,6 +2073,8 @@
 		"NeedHit": 54,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -2181,6 +2247,8 @@
 		"NeedHit": 54,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 60.01,
@@ -2324,6 +2392,8 @@
 		"NeedHit": 90,
 		"Element": "Holy",
 		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 1.01,
@@ -2484,6 +2554,8 @@
 		"NeedHit": 145,
 		"Element": "Holy",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.06,
@@ -2636,6 +2708,8 @@
 		"NeedHit": 124,
 		"Element": "Water",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 48.51,
@@ -2788,6 +2862,8 @@
 		"NeedHit": 124,
 		"Element": "Water",
 		"ElementLevel": 2,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 48.51,
@@ -2940,6 +3016,8 @@
 		"NeedHit": 25,
 		"Element": "Neutral",
 		"ElementLevel": 3,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 3.21,
@@ -3106,6 +3184,8 @@
 		"NeedHit": 160,
 		"Element": "Undead",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 43.65,
@@ -3254,6 +3334,8 @@
 		"NeedHit": 59,
 		"Element": "Undead",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 45.01,
@@ -3418,6 +3500,8 @@
 		"NeedHit": 149,
 		"Element": "Earth",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 35.01,
@@ -3578,6 +3662,8 @@
 		"NeedHit": 105,
 		"Element": "Earth",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 25.01,
@@ -3693,6 +3779,8 @@
 		"NeedHit": 102,
 		"Element": "Poison",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -3835,6 +3923,8 @@
 		"NeedHit": 70,
 		"Element": "Poison",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -3999,6 +4089,8 @@
 		"NeedHit": 210,
 		"Element": "Wind",
 		"ElementLevel": 3,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 25,
@@ -4147,6 +4239,8 @@
 		"NeedHit": 165,
 		"Element": "Wind",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 44.14,
@@ -4317,6 +4411,8 @@
 		"NeedHit": 24,
 		"Element": "Water",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 2.01,
@@ -4493,6 +4589,8 @@
 		"NeedHit": 57,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 5.01,
@@ -4643,6 +4741,8 @@
 		"NeedHit": 102,
 		"Element": "Undead",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 44.14,
@@ -4777,6 +4877,53 @@
 		"SpriteName": "G_HARWORD",
 		"Name": "MasterSmith Howard",
 		"Level": 99,
+		"HP": 310000,
+		"BaseExp": 27000,
+		"JobExp": 15000,
+		"Scale": "Medium",
+		"Race": "DemiHuman",
+		"IsMVP": false,
+		"Str": 100,
+		"Dex": 136,
+		"Agi": 73,
+		"Vit": 112,
+		"Int": 35,
+		"Luk": 60,
+		"Def": 66,
+		"MDef": 36,
+		"Atk": "4822~5033",
+		"Range": "1~15~18",
+		"Flee": 172,
+		"Hit": 235,
+		"NeedFlee": 310,
+		"NeedHit": 192,
+		"Element": "Water",
+		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": true,
+		"Drops": [
+			{
+				"Chance": 0.11,
+				"Item": {
+					"Id": 617,
+					"AegisName": "Old_Violet_Box",
+					"Name": "Old Purple Box",
+					"Type": "Usable",
+					"Buy": 10000,
+					"Sell": 5000,
+					"Weight": 20,
+					"Slots": 0,
+					"SellOvercharged": 6200
+				}
+			}
+		],
+		"Maps": []
+	},
+	{
+		"Id": 1648,
+		"SpriteName": "B_HARWORD",
+		"Name": "MasterSmith Howard",
+		"Level": 99,
 		"HP": 1460000,
 		"BaseExp": 6003510,
 		"JobExp": 2131500,
@@ -4799,21 +4946,9 @@
 		"NeedHit": 192,
 		"Element": "Earth",
 		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
-			{
-				"Chance": 0.11,
-				"Item": {
-					"Id": 617,
-					"AegisName": "Old_Violet_Box",
-					"Name": "Old Purple Box",
-					"Type": "Usable",
-					"Buy": 10000,
-					"Sell": 5000,
-					"Weight": 20,
-					"Slots": 0,
-					"SellOvercharged": 6200
-				}
-			},
 			{
 				"Chance": 35.01,
 				"Item": {
@@ -4956,6 +5091,8 @@
 		"NeedHit": 38,
 		"Element": "Fire",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.86,
@@ -5098,6 +5235,8 @@
 		"NeedHit": 96,
 		"Element": "Ghost",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 52.01,
@@ -5213,29 +5352,31 @@
 		"Id": 1101,
 		"SpriteName": "BAPHOMET_",
 		"Name": "Baphomet Jr.",
-		"Level": 81,
-		"HP": 668000,
-		"BaseExp": 427500,
-		"JobExp": 342000,
-		"Scale": "Large",
+		"Level": 50,
+		"HP": 6666,
+		"BaseExp": 4059,
+		"JobExp": 2353,
+		"Scale": "Small",
 		"Race": "Demon",
-		"IsMVP": true,
+		"IsMVP": false,
 		"Str": 1,
-		"Dex": 120,
-		"Agi": 152,
-		"Vit": 30,
-		"Int": 85,
-		"Luk": 95,
-		"Def": 35,
-		"MDef": 45,
-		"Atk": "3220~4040",
-		"Range": "2~15~18",
-		"Flee": 233,
-		"Hit": 201,
-		"NeedFlee": 276,
-		"NeedHit": 253,
+		"Dex": 93,
+		"Agi": 75,
+		"Vit": 55,
+		"Int": 1,
+		"Luk": 45,
+		"Def": 15,
+		"MDef": 25,
+		"Atk": "399~512",
+		"Range": "1~15~18",
+		"Flee": 125,
+		"Hit": 143,
+		"NeedFlee": 218,
+		"NeedHit": 145,
 		"Element": "Shadow",
-		"ElementLevel": 3,
+		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 5.01,
@@ -5348,7 +5489,45 @@
 					"Slots": 0,
 					"SellOvercharged": 12
 				}
-			},
+			}
+		],
+		"Maps": [
+			{
+				"MapName": "prt_maze03",
+				"Amount": 25
+			}
+		]
+	},
+	{
+		"Id": 1039,
+		"SpriteName": "BAPHOMET",
+		"Name": "Baphomet",
+		"Level": 81,
+		"HP": 668000,
+		"BaseExp": 427500,
+		"JobExp": 342000,
+		"Scale": "Large",
+		"Race": "Demon",
+		"IsMVP": true,
+		"Str": 1,
+		"Dex": 120,
+		"Agi": 152,
+		"Vit": 30,
+		"Int": 85,
+		"Luk": 95,
+		"Def": 35,
+		"MDef": 45,
+		"Atk": "3220~4040",
+		"Range": "2~15~18",
+		"Flee": 233,
+		"Hit": 201,
+		"NeedFlee": 276,
+		"NeedHit": 253,
+		"Element": "Shadow",
+		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
+		"Drops": [
 			{
 				"Chance": 4.01,
 				"Item": {
@@ -5465,9 +5644,154 @@
 		"Maps": [
 			{
 				"MapName": "prt_maze03",
-				"Amount": 25
+				"Amount": 1
 			}
 		]
+	},
+	{
+		"Id": 1399,
+		"SpriteName": "EVENT_BAPHO",
+		"Name": "Baphomet",
+		"Level": 68,
+		"HP": 1264000,
+		"BaseExp": 427500,
+		"JobExp": 125527,
+		"Scale": "Large",
+		"Race": "Demon",
+		"IsMVP": true,
+		"Str": 1,
+		"Dex": 120,
+		"Agi": 152,
+		"Vit": 96,
+		"Int": 85,
+		"Luk": 95,
+		"Def": 35,
+		"MDef": 45,
+		"Atk": "1847~2267",
+		"Range": "3~15~18",
+		"Flee": 220,
+		"Hit": 188,
+		"NeedFlee": 263,
+		"NeedHit": 240,
+		"Element": "Shadow",
+		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
+		"Drops": [
+			{
+				"Chance": 5.51,
+				"Item": {
+					"Id": 1417,
+					"AegisName": "Pole_Axe",
+					"Name": "Pole Axe",
+					"Type": "Weapon",
+					"Buy": 20,
+					"Sell": 10,
+					"Weight": 380,
+					"Slots": 1,
+					"SellOvercharged": 12
+				}
+			},
+			{
+				"Chance": 6.81,
+				"Item": {
+					"Id": 1306,
+					"AegisName": "War_Axe",
+					"Name": "War Axe",
+					"Type": "Weapon",
+					"Buy": 20,
+					"Sell": 10,
+					"Weight": 420,
+					"Slots": 1,
+					"SellOvercharged": 12
+				}
+			},
+			{
+				"Chance": 4.81,
+				"Item": {
+					"Id": 1145,
+					"AegisName": "Holy_Avenger",
+					"Name": "Holy Avenger",
+					"Type": "Weapon",
+					"Buy": 450000,
+					"Sell": 225000,
+					"Weight": 135,
+					"Slots": 0,
+					"SellOvercharged": 279000
+				}
+			},
+			{
+				"Chance": 6.41,
+				"Item": {
+					"Id": 2110,
+					"AegisName": "Holy_Guard",
+					"Name": "Holy Guard",
+					"Type": "Armor",
+					"Buy": 85000,
+					"Sell": 42500,
+					"Weight": 140,
+					"Slots": 0,
+					"SellOvercharged": 52700
+				}
+			},
+			{
+				"Chance": 15.01,
+				"Item": {
+					"Id": 2327,
+					"AegisName": "Holy_Robe",
+					"Name": "Holy Robe",
+					"Type": "Armor",
+					"Buy": 20,
+					"Sell": 10,
+					"Weight": 170,
+					"Slots": 0,
+					"SellOvercharged": 12
+				}
+			},
+			{
+				"Chance": 5.01,
+				"Item": {
+					"Id": 2111,
+					"AegisName": "Herald_Of_GOD",
+					"Name": "Sacred Mission",
+					"Type": "Armor",
+					"Buy": 128000,
+					"Sell": 64000,
+					"Weight": 160,
+					"Slots": 0,
+					"SellOvercharged": 79360
+				}
+			},
+			{
+				"Chance": 17.21,
+				"Item": {
+					"Id": 2621,
+					"AegisName": "Ring_",
+					"Name": "Ring",
+					"Type": "Armor",
+					"Buy": 30000,
+					"Sell": 15000,
+					"Weight": 20,
+					"Slots": 1,
+					"SellOvercharged": 18600
+				}
+			},
+			{
+				"Chance": 15.51,
+				"Item": {
+					"Id": 2256,
+					"AegisName": "Magestic_Goat",
+					"Name": "Majestic Goat",
+					"Type": "Armor",
+					"Buy": 20,
+					"Sell": 10,
+					"Weight": 80,
+					"Slots": 0,
+					"SellOvercharged": 12
+				}
+			}
+		],
+		"Maps": []
 	},
 	{
 		"Id": 1848,
@@ -5496,6 +5820,8 @@
 		"NeedHit": 130,
 		"Element": "Shadow",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [],
 		"Maps": []
 	},
@@ -5526,6 +5852,8 @@
 		"NeedHit": 270,
 		"Element": "Shadow",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 5.01,
@@ -5669,6 +5997,8 @@
 		"NeedHit": 140,
 		"Element": "Shadow",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 2.01,
@@ -5829,6 +6159,8 @@
 		"NeedHit": 88,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 65.01,
@@ -5961,6 +6293,8 @@
 		"NeedHit": 70,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -6133,6 +6467,8 @@
 		"NeedHit": 22,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.51,
@@ -6381,6 +6717,8 @@
 		"NeedHit": 115,
 		"Element": "Fire",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 48.51,
@@ -6477,6 +6815,8 @@
 		"NeedHit": 134,
 		"Element": "Wind",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 46.09,
@@ -6615,6 +6955,8 @@
 		"NeedHit": 177,
 		"Element": "Shadow",
 		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 48.51,
@@ -6763,6 +7105,8 @@
 		"NeedHit": 122,
 		"Element": "Shadow",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 41.72,
@@ -6925,6 +7269,8 @@
 		"NeedHit": 22,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 55.01,
@@ -7178,29 +7524,31 @@
 		"Id": 1025,
 		"SpriteName": "SNAKE",
 		"Name": "Boa",
-		"Level": 73,
-		"HP": 255000,
-		"BaseExp": 274500,
-		"JobExp": 187500,
-		"Scale": "Large",
+		"Level": 15,
+		"HP": 471,
+		"BaseExp": 135,
+		"JobExp": 117,
+		"Scale": "Medium",
 		"Race": "Brute",
-		"IsMVP": true,
-		"Str": 70,
-		"Dex": 164,
-		"Agi": 83,
-		"Vit": 30,
-		"Int": 80,
-		"Luk": 88,
-		"Def": 25,
-		"MDef": 55,
-		"Atk": "2433~4210",
-		"Range": "3~15~18",
-		"Flee": 156,
-		"Hit": 237,
-		"NeedFlee": 312,
-		"NeedHit": 176,
-		"Element": "Ghost",
-		"ElementLevel": 3,
+		"IsMVP": false,
+		"Str": 1,
+		"Dex": 35,
+		"Agi": 15,
+		"Vit": 15,
+		"Int": 10,
+		"Luk": 5,
+		"Def": 0,
+		"MDef": 0,
+		"Atk": "46~55",
+		"Range": "1~15~18",
+		"Flee": 30,
+		"Hit": 50,
+		"NeedFlee": 125,
+		"NeedHit": 50,
+		"Element": "Earth",
+		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -7313,7 +7661,69 @@
 					"Slots": 0,
 					"SellOvercharged": 12
 				}
+			}
+		],
+		"Maps": [
+			{
+				"MapName": "mjolnir_07",
+				"Amount": 25
 			},
+			{
+				"MapName": "moc_fild13",
+				"Amount": 20
+			},
+			{
+				"MapName": "pay_fild02",
+				"Amount": 20
+			},
+			{
+				"MapName": "pay_fild05",
+				"Amount": 25
+			},
+			{
+				"MapName": "pay_fild09",
+				"Amount": 20
+			},
+			{
+				"MapName": "prt_maze01",
+				"Amount": 5
+			},
+			{
+				"MapName": "lasa_dun01",
+				"Amount": 10
+			}
+		]
+	},
+	{
+		"Id": 1418,
+		"SpriteName": "DARK_SNAKE_LORD",
+		"Name": "Evil Snake Lord",
+		"Level": 73,
+		"HP": 255000,
+		"BaseExp": 274500,
+		"JobExp": 187500,
+		"Scale": "Large",
+		"Race": "Brute",
+		"IsMVP": true,
+		"Str": 70,
+		"Dex": 164,
+		"Agi": 83,
+		"Vit": 30,
+		"Int": 80,
+		"Luk": 88,
+		"Def": 25,
+		"MDef": 55,
+		"Atk": "2433~4210",
+		"Range": "3~15~18",
+		"Flee": 156,
+		"Hit": 237,
+		"NeedFlee": 312,
+		"NeedHit": 176,
+		"Element": "Ghost",
+		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
+		"Drops": [
 			{
 				"Chance": 58.21,
 				"Item": {
@@ -7429,32 +7839,8 @@
 		],
 		"Maps": [
 			{
-				"MapName": "mjolnir_07",
-				"Amount": 25
-			},
-			{
-				"MapName": "moc_fild13",
-				"Amount": 20
-			},
-			{
-				"MapName": "pay_fild02",
-				"Amount": 20
-			},
-			{
-				"MapName": "pay_fild05",
-				"Amount": 25
-			},
-			{
-				"MapName": "pay_fild09",
-				"Amount": 20
-			},
-			{
-				"MapName": "prt_maze01",
-				"Amount": 5
-			},
-			{
-				"MapName": "lasa_dun01",
-				"Amount": 10
+				"MapName": "gon_dun03",
+				"Amount": 1
 			}
 		]
 	},
@@ -7485,6 +7871,8 @@
 		"NeedHit": 102,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 25.01,
@@ -7575,8 +7963,8 @@
 	},
 	{
 		"Id": 1841,
-		"SpriteName": "s Minion",
-		"Name": "/",
+		"SpriteName": "G_SNAKE_",
+		"Name": "Snake Lord's Minion",
 		"Level": 15,
 		"HP": 10,
 		"BaseExp": 1,
@@ -7600,6 +7988,8 @@
 		"NeedHit": 50,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 20.01,
@@ -7648,8 +8038,8 @@
 	},
 	{
 		"Id": 1842,
-		"SpriteName": "s Minion",
-		"Name": "/",
+		"SpriteName": "G_ANACONDAQ_",
+		"Name": "Snake Lord's Minion",
 		"Level": 23,
 		"HP": 15,
 		"BaseExp": 1,
@@ -7673,6 +8063,8 @@
 		"NeedHit": 66,
 		"Element": "Poison",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 35.01,
@@ -7746,6 +8138,8 @@
 		"NeedHit": 123,
 		"Element": "Fire",
 		"ElementLevel": 2,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 30.01,
@@ -7870,6 +8264,8 @@
 		"NeedHit": 95,
 		"Element": "Earth",
 		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [],
 		"Maps": [
 			{
@@ -7913,6 +8309,8 @@
 		"NeedHit": 111,
 		"Element": "Undead",
 		"ElementLevel": 2,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 40.01,
@@ -8047,6 +8445,8 @@
 		"NeedHit": 67,
 		"Element": "Undead",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 55.01,
@@ -8199,6 +8599,8 @@
 		"NeedHit": 111,
 		"Element": "Fire",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -8351,6 +8753,8 @@
 		"NeedHit": 66,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -8497,6 +8901,8 @@
 		"NeedHit": 112,
 		"Element": "Wind",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 32.01,
@@ -8606,8 +9012,8 @@
 	},
 	{
 		"Id": 1307,
-		"SpriteName": "Nine Tails",
-		"Name": "/",
+		"SpriteName": "CAT_O_NINE_TAIL",
+		"Name": "Cat o' Nine Tails",
 		"Level": 76,
 		"HP": 64512,
 		"BaseExp": 16303,
@@ -8631,6 +9037,8 @@
 		"NeedHit": 171,
 		"Element": "Fire",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.02,
@@ -8745,7 +9153,12 @@
 				}
 			}
 		],
-		"Maps": []
+		"Maps": [
+			{
+				"MapName": "gld_dun01",
+				"Amount": 4
+			}
+		]
 	},
 	{
 		"Id": 1300,
@@ -8774,6 +9187,8 @@
 		"NeedHit": 109,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 30.01,
@@ -8908,6 +9323,8 @@
 		"NeedHit": 168,
 		"Element": "Poison",
 		"ElementLevel": 2,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 55,
@@ -9056,6 +9473,8 @@
 		"NeedHit": 134,
 		"Element": "Fire",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 25.01,
@@ -9204,6 +9623,8 @@
 		"NeedHit": 162,
 		"Element": "Fire",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -9352,6 +9773,8 @@
 		"NeedHit": 131,
 		"Element": "Fire",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -9516,6 +9939,8 @@
 		"NeedHit": 131,
 		"Element": "Fire",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -9659,6 +10084,8 @@
 		"NeedHit": 34,
 		"Element": "Wind",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.51,
@@ -9831,6 +10258,8 @@
 		"NeedHit": 75,
 		"Element": "Wind",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.91,
@@ -10007,6 +10436,8 @@
 		"NeedHit": 34,
 		"Element": "Wind",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.51,
@@ -10145,6 +10576,8 @@
 		"NeedHit": 72,
 		"Element": "Holy",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 15.01,
@@ -10297,6 +10730,8 @@
 		"NeedHit": 150,
 		"Element": "Earth",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -10463,6 +10898,8 @@
 		"NeedHit": 158,
 		"Element": "Neutral",
 		"ElementLevel": 4,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -10623,6 +11060,8 @@
 		"NeedHit": 54,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -10795,6 +11234,8 @@
 		"NeedHit": 54,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -10938,6 +11379,8 @@
 		"NeedHit": 38,
 		"Element": "Wind",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -11106,6 +11549,8 @@
 		"NeedHit": 38,
 		"Element": "Holy",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 50.01,
@@ -11151,6 +11596,8 @@
 		"NeedHit": 119,
 		"Element": "Wind",
 		"ElementLevel": 1,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 12,
@@ -11299,6 +11746,8 @@
 		"NeedHit": 80,
 		"Element": "Neutral",
 		"ElementLevel": 3,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 10.01,
@@ -11437,6 +11886,8 @@
 		"NeedHit": 166,
 		"Element": "Fire",
 		"ElementLevel": 2,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 30,
@@ -11575,6 +12026,8 @@
 		"NeedHit": 66,
 		"Element": "Water",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.46,
@@ -11735,6 +12188,8 @@
 		"NeedHit": 175,
 		"Element": "Shadow",
 		"ElementLevel": 2,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 65,
@@ -11883,6 +12338,8 @@
 		"NeedHit": 60,
 		"Element": "Water",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 55.01,
@@ -12015,6 +12472,8 @@
 		"NeedHit": 161,
 		"Element": "Poison",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 46.57,
@@ -12171,6 +12630,8 @@
 		"NeedHit": 122,
 		"Element": "Wind",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 45.51,
@@ -12309,6 +12770,8 @@
 		"NeedHit": 76,
 		"Element": "Wind",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -12491,6 +12954,8 @@
 		"NeedHit": 76,
 		"Element": "Wind",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 60.01,
@@ -12620,6 +13085,8 @@
 		"NeedHit": 95,
 		"Element": "Neutral",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 9.01,
@@ -12754,6 +13221,8 @@
 		"NeedHit": 141,
 		"Element": "Shadow",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 46.57,
@@ -12855,29 +13324,31 @@
 		"Id": 1302,
 		"SpriteName": "DARK_ILLUSION",
 		"Name": "Dark Illusion",
-		"Level": 80,
-		"HP": 720000,
-		"BaseExp": 277500,
-		"JobExp": 249750,
+		"Level": 77,
+		"HP": 103631,
+		"BaseExp": 67500,
+		"JobExp": 47250,
 		"Scale": "Large",
 		"Race": "Demon",
-		"IsMVP": true,
-		"Str": 1,
-		"Dex": 99,
-		"Agi": 120,
-		"Vit": 30,
-		"Int": 118,
-		"Luk": 60,
-		"Def": 30,
+		"IsMVP": false,
+		"Str": 5,
+		"Dex": 97,
+		"Agi": 100,
+		"Vit": 40,
+		"Int": 100,
+		"Luk": 40,
+		"Def": 64,
 		"MDef": 70,
-		"Atk": "2800~3320",
+		"Atk": "1300~1950",
 		"Range": "2~15~18",
-		"Flee": 200,
-		"Hit": 179,
-		"NeedFlee": 254,
-		"NeedHit": 220,
+		"Flee": 177,
+		"Hit": 174,
+		"NeedFlee": 249,
+		"NeedHit": 197,
 		"Element": "Undead",
 		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.04,
@@ -12990,7 +13461,49 @@
 					"Slots": 0,
 					"SellOvercharged": 12
 				}
+			}
+		],
+		"Maps": [
+			{
+				"MapName": "gl_church",
+				"Amount": 1
 			},
+			{
+				"MapName": "gld_dun04",
+				"Amount": 1
+			}
+		]
+	},
+	{
+		"Id": 1272,
+		"SpriteName": "DARK_LORD",
+		"Name": "Dark Lord",
+		"Level": 80,
+		"HP": 720000,
+		"BaseExp": 277500,
+		"JobExp": 249750,
+		"Scale": "Large",
+		"Race": "Demon",
+		"IsMVP": true,
+		"Str": 1,
+		"Dex": 99,
+		"Agi": 120,
+		"Vit": 30,
+		"Int": 118,
+		"Luk": 60,
+		"Def": 30,
+		"MDef": 70,
+		"Atk": "2800~3320",
+		"Range": "2~15~18",
+		"Flee": 200,
+		"Hit": 179,
+		"NeedFlee": 254,
+		"NeedHit": 220,
+		"Element": "Undead",
+		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": true,
+		"Drops": [
 			{
 				"Chance": 8.01,
 				"Item": {
@@ -13092,7 +13605,7 @@
 		],
 		"Maps": [
 			{
-				"MapName": "gl_church",
+				"MapName": "gl_chyard",
 				"Amount": 1
 			},
 			{
@@ -13128,6 +13641,8 @@
 		"NeedHit": 190,
 		"Element": "Fire",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 40.75,
@@ -13234,6 +13749,8 @@
 		"NeedHit": 151,
 		"Element": "Fire",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 40.75,
@@ -13340,6 +13857,8 @@
 		"NeedHit": 159,
 		"Element": "Poison",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 40.75,
@@ -13454,6 +13973,8 @@
 		"NeedHit": 169,
 		"Element": "Shadow",
 		"ElementLevel": 2,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [],
 		"Maps": [
 			{
@@ -13489,6 +14010,8 @@
 		"NeedHit": 58,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -13653,6 +14176,8 @@
 		"NeedHit": 58,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 60.01,
@@ -13796,6 +14321,8 @@
 		"NeedHit": 74,
 		"Element": "Fire",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.06,
@@ -13948,6 +14475,8 @@
 		"NeedHit": 114,
 		"Element": "Water",
 		"ElementLevel": 4,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.26,
@@ -14110,6 +14639,8 @@
 		"NeedHit": 101,
 		"Element": "Shadow",
 		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 30.01,
@@ -14266,6 +14797,8 @@
 		"NeedHit": 135,
 		"Element": "Shadow",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -14418,6 +14951,8 @@
 		"NeedHit": 171,
 		"Element": "Shadow",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 58.21,
@@ -14538,6 +15073,8 @@
 		"NeedHit": 147,
 		"Element": "Earth",
 		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 48.51,
@@ -14649,29 +15186,31 @@
 		"Id": 1110,
 		"SpriteName": "DOKEBI",
 		"Name": "Dokebi",
-		"Level": 72,
-		"HP": 249000,
-		"BaseExp": 208500,
-		"JobExp": 187650,
-		"Scale": "Medium",
+		"Level": 33,
+		"HP": 2697,
+		"BaseExp": 1279,
+		"JobExp": 805,
+		"Scale": "Small",
 		"Race": "Demon",
-		"IsMVP": true,
-		"Str": 88,
-		"Dex": 125,
-		"Agi": 90,
-		"Vit": 30,
+		"IsMVP": false,
+		"Str": 50,
+		"Dex": 69,
+		"Agi": 50,
+		"Vit": 40,
 		"Int": 35,
-		"Luk": 65,
-		"Def": 60,
-		"MDef": 35,
-		"Atk": "1340~1590",
+		"Luk": 40,
+		"Def": 0,
+		"MDef": 10,
+		"Atk": "197~249",
 		"Range": "1~15~18",
-		"Flee": 162,
-		"Hit": 197,
-		"NeedFlee": 272,
-		"NeedHit": 182,
+		"Flee": 83,
+		"Hit": 102,
+		"NeedFlee": 177,
+		"NeedHit": 103,
 		"Element": "Shadow",
-		"ElementLevel": 3,
+		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -14784,7 +15323,49 @@
 					"Slots": 0,
 					"SellOvercharged": 12
 				}
+			}
+		],
+		"Maps": [
+			{
+				"MapName": "pay_dun04",
+				"Amount": 50
 			},
+			{
+				"MapName": "pay_fild10",
+				"Amount": 25
+			}
+		]
+	},
+	{
+		"Id": 1046,
+		"SpriteName": "DOPPELGANGER",
+		"Name": "Doppelganger",
+		"Level": 72,
+		"HP": 249000,
+		"BaseExp": 208500,
+		"JobExp": 187650,
+		"Scale": "Medium",
+		"Race": "Demon",
+		"IsMVP": true,
+		"Str": 88,
+		"Dex": 125,
+		"Agi": 90,
+		"Vit": 30,
+		"Int": 35,
+		"Luk": 65,
+		"Def": 60,
+		"MDef": 35,
+		"Atk": "1340~1590",
+		"Range": "1~15~18",
+		"Flee": 162,
+		"Hit": 197,
+		"NeedFlee": 272,
+		"NeedHit": 182,
+		"Element": "Shadow",
+		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
+		"Drops": [
 			{
 				"Chance": 2.51,
 				"Item": {
@@ -14900,12 +15481,12 @@
 		],
 		"Maps": [
 			{
-				"MapName": "pay_dun04",
-				"Amount": 50
+				"MapName": "gef_dun02",
+				"Amount": 1
 			},
 			{
-				"MapName": "pay_fild10",
-				"Amount": 25
+				"MapName": "gld_dun02",
+				"Amount": 1
 			}
 		]
 	},
@@ -14936,6 +15517,8 @@
 		"NeedHit": 272,
 		"Element": "Ghost",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 100,
@@ -14981,6 +15564,8 @@
 		"NeedHit": 150,
 		"Element": "Undead",
 		"ElementLevel": 3,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 61.01,
@@ -15120,29 +15705,31 @@
 		"Id": 3987,
 		"SpriteName": "DOUGHRING",
 		"Name": "Doughring",
-		"Level": 85,
-		"HP": 320096,
-		"BaseExp": 232500,
-		"JobExp": 181500,
-		"Scale": "Large",
-		"Race": "Demon",
-		"IsMVP": true,
+		"Level": 25,
+		"HP": 1204,
+		"BaseExp": 397,
+		"JobExp": 333,
+		"Scale": "Medium",
+		"Race": "Formless",
+		"IsMVP": false,
 		"Str": 1,
-		"Dex": 85,
-		"Agi": 95,
-		"Vit": 90,
-		"Int": 87,
-		"Luk": 100,
-		"Def": 45,
-		"MDef": 76,
-		"Atk": "1625~1890",
-		"Range": "3~15~18",
-		"Flee": 180,
-		"Hit": 170,
-		"NeedFlee": 245,
-		"NeedHit": 200,
-		"Element": "Shadow",
-		"ElementLevel": 4,
+		"Dex": 30,
+		"Agi": 18,
+		"Vit": 28,
+		"Int": 15,
+		"Luk": 20,
+		"Def": 10,
+		"MDef": 15,
+		"Atk": "75~100",
+		"Range": "1~15~18",
+		"Flee": 43,
+		"Hit": 55,
+		"NeedFlee": 130,
+		"NeedHit": 63,
+		"Element": "Neutral",
+		"ElementLevel": 1,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 55,
@@ -15241,7 +15828,45 @@
 					"Slots": 0,
 					"SellOvercharged": 12
 				}
-			},
+			}
+		],
+		"Maps": [
+			{
+				"MapName": "lasa_dun01",
+				"Amount": 30
+			}
+		]
+	},
+	{
+		"Id": 1389,
+		"SpriteName": "DRACULA",
+		"Name": "Dracula",
+		"Level": 85,
+		"HP": 320096,
+		"BaseExp": 232500,
+		"JobExp": 181500,
+		"Scale": "Large",
+		"Race": "Demon",
+		"IsMVP": true,
+		"Str": 1,
+		"Dex": 85,
+		"Agi": 95,
+		"Vit": 90,
+		"Int": 87,
+		"Luk": 100,
+		"Def": 45,
+		"MDef": 76,
+		"Atk": "1625~1890",
+		"Range": "3~15~18",
+		"Flee": 180,
+		"Hit": 170,
+		"NeedFlee": 245,
+		"NeedHit": 200,
+		"Element": "Shadow",
+		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": true,
+		"Drops": [
 			{
 				"Chance": 67.01,
 				"Item": {
@@ -15357,8 +15982,8 @@
 		],
 		"Maps": [
 			{
-				"MapName": "lasa_dun01",
-				"Amount": 30
+				"MapName": "gef_dun03",
+				"Amount": 1
 			}
 		]
 	},
@@ -15389,6 +16014,8 @@
 		"NeedHit": 48,
 		"Element": "Wind",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 2.01,
@@ -15541,6 +16168,8 @@
 		"NeedHit": 149,
 		"Element": "Wind",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 44.14,
@@ -15674,29 +16303,31 @@
 		"Id": 1111,
 		"SpriteName": "DRAINLIAR",
 		"Name": "Drainliar",
-		"Level": 70,
-		"HP": 327000,
-		"BaseExp": 213000,
-		"JobExp": 149100,
-		"Scale": "Medium",
-		"Race": "Undead",
-		"IsMVP": true,
-		"Str": 85,
-		"Dex": 79,
-		"Agi": 80,
-		"Vit": 49,
-		"Int": 75,
-		"Luk": 50,
-		"Def": 20,
-		"MDef": 35,
-		"Atk": "1800~2100",
+		"Level": 24,
+		"HP": 1255,
+		"BaseExp": 543,
+		"JobExp": 331,
+		"Scale": "Small",
+		"Race": "Brute",
+		"IsMVP": false,
+		"Str": 1,
+		"Dex": 58,
+		"Agi": 36,
+		"Vit": 12,
+		"Int": 1,
+		"Luk": 1,
+		"Def": 0,
+		"MDef": 0,
+		"Atk": "94~133",
 		"Range": "1~15~18",
-		"Flee": 150,
-		"Hit": 149,
-		"NeedFlee": 224,
-		"NeedHit": 170,
-		"Element": "Undead",
-		"ElementLevel": 1,
+		"Flee": 60,
+		"Hit": 82,
+		"NeedFlee": 157,
+		"NeedHit": 80,
+		"Element": "Shadow",
+		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.61,
@@ -15809,7 +16440,97 @@
 					"Slots": 0,
 					"SellOvercharged": 12
 				}
+			}
+		],
+		"Maps": [
+			{
+				"MapName": "alde_dun01",
+				"Amount": 40
 			},
+			{
+				"MapName": "alde_dun03",
+				"Amount": 55
+			},
+			{
+				"MapName": "gef_dun01",
+				"Amount": 10
+			},
+			{
+				"MapName": "gef_dun03",
+				"Amount": 40
+			},
+			{
+				"MapName": "gl_sew04",
+				"Amount": 5
+			},
+			{
+				"MapName": "in_sphinx1",
+				"Amount": 20
+			},
+			{
+				"MapName": "in_sphinx2",
+				"Amount": 15
+			},
+			{
+				"MapName": "mjo_dun02",
+				"Amount": 20
+			},
+			{
+				"MapName": "moc_pryd02",
+				"Amount": 20
+			},
+			{
+				"MapName": "moc_pryd03",
+				"Amount": 8
+			},
+			{
+				"MapName": "orcsdun01",
+				"Amount": 5
+			},
+			{
+				"MapName": "orcsdun02",
+				"Amount": 20
+			},
+			{
+				"MapName": "pay_dun01",
+				"Amount": 5
+			},
+			{
+				"MapName": "prt_sewb4",
+				"Amount": 20
+			}
+		]
+	},
+	{
+		"Id": 1112,
+		"SpriteName": "DRAKE",
+		"Name": "Drake",
+		"Level": 70,
+		"HP": 327000,
+		"BaseExp": 213000,
+		"JobExp": 149100,
+		"Scale": "Medium",
+		"Race": "Undead",
+		"IsMVP": true,
+		"Str": 85,
+		"Dex": 79,
+		"Agi": 80,
+		"Vit": 49,
+		"Int": 75,
+		"Luk": 50,
+		"Def": 20,
+		"MDef": 35,
+		"Atk": "1800~2100",
+		"Range": "1~15~18",
+		"Flee": 150,
+		"Hit": 149,
+		"NeedFlee": 224,
+		"NeedHit": 170,
+		"Element": "Undead",
+		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
+		"Drops": [
 			{
 				"Chance": 6.01,
 				"Item": {
@@ -15911,60 +16632,8 @@
 		],
 		"Maps": [
 			{
-				"MapName": "alde_dun01",
-				"Amount": 40
-			},
-			{
-				"MapName": "alde_dun03",
-				"Amount": 55
-			},
-			{
-				"MapName": "gef_dun01",
-				"Amount": 10
-			},
-			{
-				"MapName": "gef_dun03",
-				"Amount": 40
-			},
-			{
-				"MapName": "gl_sew04",
-				"Amount": 5
-			},
-			{
-				"MapName": "in_sphinx1",
-				"Amount": 20
-			},
-			{
-				"MapName": "in_sphinx2",
-				"Amount": 15
-			},
-			{
-				"MapName": "mjo_dun02",
-				"Amount": 20
-			},
-			{
-				"MapName": "moc_pryd02",
-				"Amount": 20
-			},
-			{
-				"MapName": "moc_pryd03",
-				"Amount": 8
-			},
-			{
-				"MapName": "orcsdun01",
-				"Amount": 5
-			},
-			{
-				"MapName": "orcsdun02",
-				"Amount": 20
-			},
-			{
-				"MapName": "pay_dun01",
-				"Amount": 5
-			},
-			{
-				"MapName": "prt_sewb4",
-				"Amount": 20
+				"MapName": "treasure02",
+				"Amount": 1
 			}
 		]
 	},
@@ -15995,6 +16664,8 @@
 		"NeedHit": 166,
 		"Element": "Fire",
 		"ElementLevel": 3,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 40,
@@ -16143,6 +16814,8 @@
 		"NeedHit": 138,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 75.01,
@@ -16243,6 +16916,8 @@
 		"NeedHit": 26,
 		"Element": "Fire",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 75.01,
@@ -16451,6 +17126,8 @@
 		"NeedHit": 145,
 		"Element": "Earth",
 		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -16603,6 +17280,8 @@
 		"NeedHit": 112,
 		"Element": "Undead",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 32.01,
@@ -16745,6 +17424,8 @@
 		"NeedHit": 69,
 		"Element": "Neutral",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 32.01,
@@ -16879,6 +17560,8 @@
 		"NeedHit": 81,
 		"Element": "Wind",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -17014,29 +17697,31 @@
 		"Id": 1093,
 		"SpriteName": "ECLIPSE",
 		"Name": "Eclipse",
-		"Level": 65,
-		"HP": 152000,
-		"BaseExp": 108000,
-		"JobExp": 97200,
-		"Scale": "Large",
+		"Level": 6,
+		"HP": 1800,
+		"BaseExp": 1035,
+		"JobExp": 720,
+		"Scale": "Medium",
 		"Race": "Brute",
-		"IsMVP": true,
-		"Str": 78,
-		"Dex": 90,
-		"Agi": 70,
-		"Vit": 85,
-		"Int": 66,
-		"Luk": 85,
-		"Def": 15,
-		"MDef": 15,
-		"Atk": "1215~1565",
+		"IsMVP": false,
+		"Str": 1,
+		"Dex": 11,
+		"Agi": 36,
+		"Vit": 6,
+		"Int": 1,
+		"Luk": 80,
+		"Def": 0,
+		"MDef": 40,
+		"Atk": "20~26",
 		"Range": "1~15~18",
-		"Flee": 135,
-		"Hit": 155,
-		"NeedFlee": 230,
-		"NeedHit": 155,
-		"Element": "Fire",
-		"ElementLevel": 1,
+		"Flee": 42,
+		"Hit": 17,
+		"NeedFlee": 92,
+		"NeedHit": 62,
+		"Element": "Neutral",
+		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 2.01,
@@ -17149,7 +17834,53 @@
 					"Slots": 0,
 					"SellOvercharged": 12
 				}
+			}
+		],
+		"Maps": [
+			{
+				"MapName": "prt_fild02",
+				"Amount": 1
 			},
+			{
+				"MapName": "prt_maze03",
+				"Amount": 1
+			},
+			{
+				"MapName": "lasa_dun01",
+				"Amount": 1
+			}
+		]
+	},
+	{
+		"Id": 1115,
+		"SpriteName": "EDDGA",
+		"Name": "Eddga",
+		"Level": 65,
+		"HP": 152000,
+		"BaseExp": 108000,
+		"JobExp": 97200,
+		"Scale": "Large",
+		"Race": "Brute",
+		"IsMVP": true,
+		"Str": 78,
+		"Dex": 90,
+		"Agi": 70,
+		"Vit": 85,
+		"Int": 66,
+		"Luk": 85,
+		"Def": 15,
+		"MDef": 15,
+		"Atk": "1215~1565",
+		"Range": "1~15~18",
+		"Flee": 135,
+		"Hit": 155,
+		"NeedFlee": 230,
+		"NeedHit": 155,
+		"Element": "Fire",
+		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
+		"Drops": [
 			{
 				"Chance": 1.51,
 				"Item": {
@@ -17251,15 +17982,11 @@
 		],
 		"Maps": [
 			{
-				"MapName": "prt_fild02",
+				"MapName": "pay_fild11",
 				"Amount": 1
 			},
 			{
-				"MapName": "prt_maze03",
-				"Amount": 1
-			},
-			{
-				"MapName": "lasa_dun01",
+				"MapName": "gld_dun01",
 				"Amount": 1
 			}
 		]
@@ -17291,6 +18018,8 @@
 		"NeedHit": 80,
 		"Element": "Ghost",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 10.01,
@@ -17451,6 +18180,8 @@
 		"NeedHit": 60,
 		"Element": "Fire",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.51,
@@ -17607,6 +18338,8 @@
 		"NeedHit": 160,
 		"Element": "Neutral",
 		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 40.01,
@@ -17745,6 +18478,8 @@
 		"NeedHit": 180,
 		"Element": "Wind",
 		"ElementLevel": 3,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [],
 		"Maps": []
 	},
@@ -17775,6 +18510,8 @@
 		"NeedHit": 165,
 		"Element": "Wind",
 		"ElementLevel": 2,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 40,
@@ -17941,6 +18678,8 @@
 		"NeedHit": 173,
 		"Element": "Wind",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 80.36,
@@ -18089,6 +18828,8 @@
 		"NeedHit": 127,
 		"Element": "Holy",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [],
 		"Maps": [
 			{
@@ -18124,6 +18865,8 @@
 		"NeedHit": 118,
 		"Element": "Earth",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 43.66,
@@ -18248,6 +18991,8 @@
 		"NeedHit": 107,
 		"Element": "Undead",
 		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.11,
@@ -18385,29 +19130,31 @@
 		"Id": 1416,
 		"SpriteName": "WICKED_NYMPH",
 		"Name": "Evil Nymph",
-		"Level": 73,
-		"HP": 255000,
-		"BaseExp": 274500,
-		"JobExp": 187500,
-		"Scale": "Large",
-		"Race": "Brute",
-		"IsMVP": true,
-		"Str": 70,
-		"Dex": 164,
-		"Agi": 83,
-		"Vit": 30,
-		"Int": 80,
-		"Luk": 88,
-		"Def": 25,
-		"MDef": 55,
-		"Atk": "2433~4210",
-		"Range": "3~15~18",
-		"Flee": 156,
-		"Hit": 237,
-		"NeedFlee": 312,
-		"NeedHit": 176,
-		"Element": "Ghost",
+		"Level": 63,
+		"HP": 16029,
+		"BaseExp": 11835,
+		"JobExp": 7797,
+		"Scale": "Medium",
+		"Race": "Demon",
+		"IsMVP": false,
+		"Str": 1,
+		"Dex": 100,
+		"Agi": 64,
+		"Vit": 12,
+		"Int": 69,
+		"Luk": 80,
+		"Def": 12,
+		"MDef": 75,
+		"Atk": "399~1090",
+		"Range": "2~15~18",
+		"Flee": 127,
+		"Hit": 163,
+		"NeedFlee": 238,
+		"NeedHit": 147,
+		"Element": "Shadow",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 39.78,
@@ -18520,118 +19267,6 @@
 					"Slots": 0,
 					"SellOvercharged": 12
 				}
-			},
-			{
-				"Chance": 58.21,
-				"Item": {
-					"Id": 7169,
-					"AegisName": "Taegeuk_Plate",
-					"Name": "Ba Gua",
-					"Type": "Misc",
-					"Buy": 2800,
-					"Sell": 1400,
-					"Weight": 1,
-					"Slots": 0,
-					"SellOvercharged": 1736
-				}
-			},
-			{
-				"Chance": 51.01,
-				"Item": {
-					"Id": 10020,
-					"AegisName": "Sword_Of_Grave_Keeper",
-					"Name": "Grave Keeper's Sword",
-					"Type": "PetAccessory",
-					"Buy": 20,
-					"Sell": 10,
-					"Weight": 0,
-					"Slots": 0,
-					"SellOvercharged": 12
-				}
-			},
-			{
-				"Chance": 0.81,
-				"Item": {
-					"Id": 1471,
-					"AegisName": "Hell_Fire",
-					"Name": "Hellfire",
-					"Type": "Weapon",
-					"Buy": 20,
-					"Sell": 10,
-					"Weight": 350,
-					"Slots": 0,
-					"SellOvercharged": 12
-				}
-			},
-			{
-				"Chance": 0.81,
-				"Item": {
-					"Id": 5012,
-					"AegisName": "Ph_D_Hat",
-					"Name": "Ph.D Hat",
-					"Type": "Armor",
-					"Buy": 20,
-					"Sell": 10,
-					"Weight": 20,
-					"Slots": 0,
-					"SellOvercharged": 12
-				}
-			},
-			{
-				"Chance": 5.01,
-				"Item": {
-					"Id": 1474,
-					"AegisName": "Gae_Bolg",
-					"Name": "Gae Bolg",
-					"Type": "Weapon",
-					"Buy": 20,
-					"Sell": 10,
-					"Weight": 200,
-					"Slots": 0,
-					"SellOvercharged": 12
-				}
-			},
-			{
-				"Chance": 9.01,
-				"Item": {
-					"Id": 7226,
-					"AegisName": "Pill",
-					"Name": "Pellet",
-					"Type": "Misc",
-					"Buy": 2,
-					"Sell": 1,
-					"Weight": 1,
-					"Slots": 0,
-					"SellOvercharged": 1
-				}
-			},
-			{
-				"Chance": 20.01,
-				"Item": {
-					"Id": 661,
-					"AegisName": "Sway_Apron",
-					"Name": "Soft Apron",
-					"Type": "Usable",
-					"Buy": 20000,
-					"Sell": 10000,
-					"Weight": 5,
-					"Slots": 0,
-					"SellOvercharged": 12400
-				}
-			},
-			{
-				"Chance": 0.02,
-				"Item": {
-					"Id": 4330,
-					"AegisName": "Dark_Snake_Lord_Card",
-					"Name": "Evil Snake Lord Card",
-					"Type": "Card",
-					"Buy": 20,
-					"Sell": 10,
-					"Weight": 1,
-					"Slots": 0,
-					"SellOvercharged": 12
-				}
 			}
 		],
 		"Maps": [
@@ -18668,6 +19303,8 @@
 		"NeedHit": 170,
 		"Element": "Shadow",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.06,
@@ -18820,6 +19457,8 @@
 		"NeedHit": 127,
 		"Element": "Fire",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 55.01,
@@ -18940,6 +19579,8 @@
 		"NeedHit": 24,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 65.01,
@@ -19116,6 +19757,8 @@
 		"NeedHit": 23,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 20.01,
@@ -19274,6 +19917,8 @@
 		"NeedHit": 24,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 65.01,
@@ -19417,6 +20062,8 @@
 		"NeedHit": 40,
 		"Element": "Shadow",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 55.01,
@@ -19597,6 +20244,8 @@
 		"NeedHit": 42,
 		"Element": "Shadow",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 35.01,
@@ -19769,6 +20418,8 @@
 		"NeedHit": 102,
 		"Element": "Undead",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 55.01,
@@ -19911,6 +20562,8 @@
 		"NeedHit": 100,
 		"Element": "Fire",
 		"ElementLevel": 1,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 40.01,
@@ -20059,6 +20712,8 @@
 		"NeedHit": 72,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -20219,6 +20874,8 @@
 		"NeedHit": 133,
 		"Element": "Water",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 44.14,
@@ -20407,6 +21064,8 @@
 		"NeedHit": 146,
 		"Element": "Water",
 		"ElementLevel": 2,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 90,
@@ -20555,6 +21214,8 @@
 		"NeedHit": 80,
 		"Element": "Fire",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 55.01,
@@ -20711,6 +21372,8 @@
 		"NeedHit": 142,
 		"Element": "Fire",
 		"ElementLevel": 3,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 22,
@@ -20859,6 +21522,8 @@
 		"NeedHit": 117,
 		"Element": "Fire",
 		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 65.01,
@@ -20993,6 +21658,8 @@
 		"NeedHit": 137,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -21141,6 +21808,8 @@
 		"NeedHit": 129,
 		"Element": "Wind",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 38.81,
@@ -21327,6 +21996,8 @@
 		"NeedHit": 142,
 		"Element": "Earth",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 62.01,
@@ -21473,6 +22144,8 @@
 		"NeedHit": 132,
 		"Element": "Ghost",
 		"ElementLevel": 1,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 90,
@@ -21621,6 +22294,8 @@
 		"NeedHit": 65,
 		"Element": "Ghost",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -21785,6 +22460,8 @@
 		"NeedHit": 80,
 		"Element": "Undead",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 60.01,
@@ -21949,6 +22626,8 @@
 		"NeedHit": 114,
 		"Element": "Wind",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 5.51,
@@ -22083,6 +22762,8 @@
 		"NeedHit": 111,
 		"Element": "Poison",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 45.51,
@@ -22235,6 +22916,8 @@
 		"NeedHit": 105,
 		"Element": "Ghost",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 1.51,
@@ -22349,6 +23032,8 @@
 		"NeedHit": 120,
 		"Element": "Shadow",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 18.01,
@@ -22491,6 +23176,8 @@
 		"NeedHit": 78,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.31,
@@ -22641,6 +23328,8 @@
 		"NeedHit": 141,
 		"Element": "Fire",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 43.66,
@@ -22761,6 +23450,8 @@
 		"NeedHit": 147,
 		"Element": "Fire",
 		"ElementLevel": 3,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 45.6,
@@ -22913,6 +23604,8 @@
 		"NeedHit": 63,
 		"Element": "Poison",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.04,
@@ -23069,6 +23762,8 @@
 		"NeedHit": 139,
 		"Element": "Wind",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 15.01,
@@ -23217,6 +23912,8 @@
 		"NeedHit": 112,
 		"Element": "Wind",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 25.01,
@@ -23351,6 +24048,8 @@
 		"NeedHit": 83,
 		"Element": "Wind",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 2.71,
@@ -23503,6 +24202,8 @@
 		"NeedHit": 68,
 		"Element": "Fire",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 2.51,
@@ -23655,6 +24356,8 @@
 		"NeedHit": 68,
 		"Element": "Poison",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 2.31,
@@ -23807,6 +24510,8 @@
 		"NeedHit": 66,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 1.01,
@@ -23936,29 +24641,31 @@
 		"Id": 1126,
 		"SpriteName": "GOBLIN_5",
 		"Name": "Goblin",
-		"Level": 64,
-		"HP": 126000,
-		"BaseExp": 121500,
-		"JobExp": 85050,
-		"Scale": "Large",
-		"Race": "Insect",
-		"IsMVP": true,
-		"Str": 65,
-		"Dex": 85,
-		"Agi": 75,
-		"Vit": 35,
-		"Int": 45,
-		"Luk": 150,
-		"Def": 60,
-		"MDef": 45,
-		"Atk": "870~1145",
+		"Level": 22,
+		"HP": 1288,
+		"BaseExp": 414,
+		"JobExp": 313,
+		"Scale": "Medium",
+		"Race": "DemiHuman",
+		"IsMVP": false,
+		"Str": 1,
+		"Dex": 32,
+		"Agi": 22,
+		"Vit": 22,
+		"Int": 15,
+		"Luk": 10,
+		"Def": 10,
+		"MDef": 5,
+		"Atk": "105~127",
 		"Range": "1~15~18",
-		"Flee": 139,
-		"Hit": 149,
-		"NeedFlee": 224,
-		"NeedHit": 159,
-		"Element": "Fire",
-		"ElementLevel": 2,
+		"Flee": 44,
+		"Hit": 54,
+		"NeedFlee": 129,
+		"NeedHit": 64,
+		"Element": "Water",
+		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 1.51,
@@ -24071,7 +24778,49 @@
 					"Slots": 0,
 					"SellOvercharged": 12
 				}
+			}
+		],
+		"Maps": [
+			{
+				"MapName": "gef_fild11",
+				"Amount": 5
 			},
+			{
+				"MapName": "prt_fild11",
+				"Amount": 25
+			}
+		]
+	},
+	{
+		"Id": 1086,
+		"SpriteName": "GOLDEN_BUG",
+		"Name": "Golden Thief Bug",
+		"Level": 64,
+		"HP": 126000,
+		"BaseExp": 121500,
+		"JobExp": 85050,
+		"Scale": "Large",
+		"Race": "Insect",
+		"IsMVP": true,
+		"Str": 65,
+		"Dex": 85,
+		"Agi": 75,
+		"Vit": 35,
+		"Int": 45,
+		"Luk": 150,
+		"Def": 60,
+		"MDef": 45,
+		"Atk": "870~1145",
+		"Range": "1~15~18",
+		"Flee": 139,
+		"Hit": 149,
+		"NeedFlee": 224,
+		"NeedHit": 159,
+		"Element": "Fire",
+		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": false,
+		"Drops": [
 			{
 				"Chance": 10.01,
 				"Item": {
@@ -24187,12 +24936,8 @@
 		],
 		"Maps": [
 			{
-				"MapName": "gef_fild11",
-				"Amount": 5
-			},
-			{
-				"MapName": "prt_fild11",
-				"Amount": 25
+				"MapName": "prt_sewb4",
+				"Amount": 1
 			}
 		]
 	},
@@ -24223,6 +24968,8 @@
 		"NeedHit": 60,
 		"Element": "Neutral",
 		"ElementLevel": 3,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 1.51,
@@ -24379,6 +25126,8 @@
 		"NeedHit": 125,
 		"Element": "Neutral",
 		"ElementLevel": 4,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 20.01,
@@ -24513,6 +25262,8 @@
 		"NeedHit": 154,
 		"Element": "Fire",
 		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 45.6,
@@ -24633,6 +25384,8 @@
 		"NeedHit": 112,
 		"Element": "Earth",
 		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 40.01,
@@ -24781,6 +25534,8 @@
 		"NeedHit": 131,
 		"Element": "Earth",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 30.01,
@@ -24868,6 +25623,8 @@
 		"NeedHit": 144,
 		"Element": "Fire",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 48.51,
@@ -25006,6 +25763,8 @@
 		"NeedHit": 102,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 25.01,
@@ -25126,6 +25885,8 @@
 		"NeedHit": 80,
 		"Element": "Fire",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 20.01,
@@ -25282,6 +26043,8 @@
 		"NeedHit": 144,
 		"Element": "Wind",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 42.01,
@@ -25430,6 +26193,8 @@
 		"NeedHit": 22,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 70.01,
@@ -25782,6 +26547,8 @@
 		"NeedHit": 143,
 		"Element": "Fire",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 50.01,
@@ -25878,6 +26645,8 @@
 		"NeedHit": 187,
 		"Element": "Wind",
 		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 25.01,
@@ -26030,6 +26799,8 @@
 		"NeedHit": 86,
 		"Element": "Ghost",
 		"ElementLevel": 1,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 60.01,
@@ -26178,6 +26949,8 @@
 		"NeedHit": 107,
 		"Element": "Earth",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 35.01,
@@ -26326,6 +27099,8 @@
 		"NeedHit": 175,
 		"Element": "Holy",
 		"ElementLevel": 1,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 81.01,
@@ -26492,6 +27267,8 @@
 		"NeedHit": 202,
 		"Element": "Wind",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 48.51,
@@ -26597,29 +27374,31 @@
 		"Id": 1515,
 		"SpriteName": "GARM_BABY",
 		"Name": "Hatii Baby",
-		"Level": 73,
-		"HP": 197000,
-		"BaseExp": 203700,
-		"JobExp": 162900,
-		"Scale": "Large",
+		"Level": 61,
+		"HP": 20199,
+		"BaseExp": 1533,
+		"JobExp": 4470,
+		"Scale": "Medium",
 		"Race": "Brute",
-		"IsMVP": true,
-		"Str": 85,
-		"Dex": 95,
-		"Agi": 126,
-		"Vit": 82,
-		"Int": 65,
-		"Luk": 60,
-		"Def": 40,
-		"MDef": 45,
-		"Atk": "1700~1900",
-		"Range": "3~15~18",
-		"Flee": 199,
-		"Hit": 168,
-		"NeedFlee": 243,
-		"NeedHit": 219,
+		"IsMVP": false,
+		"Str": 45,
+		"Dex": 85,
+		"Agi": 30,
+		"Vit": 56,
+		"Int": 55,
+		"Luk": 30,
+		"Def": 34,
+		"MDef": 13,
+		"Atk": "680~1179",
+		"Range": "1~15~18",
+		"Flee": 91,
+		"Hit": 146,
+		"NeedFlee": 221,
+		"NeedHit": 111,
 		"Element": "Water",
-		"ElementLevel": 4,
+		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 15.01,
@@ -26704,7 +27483,45 @@
 					"Slots": 0,
 					"SellOvercharged": 12
 				}
-			},
+			}
+		],
+		"Maps": [
+			{
+				"MapName": "xmas_fild01",
+				"Amount": 1
+			}
+		]
+	},
+	{
+		"Id": 1252,
+		"SpriteName": "GARM",
+		"Name": "Hatii",
+		"Level": 73,
+		"HP": 197000,
+		"BaseExp": 203700,
+		"JobExp": 162900,
+		"Scale": "Large",
+		"Race": "Brute",
+		"IsMVP": true,
+		"Str": 85,
+		"Dex": 95,
+		"Agi": 126,
+		"Vit": 82,
+		"Int": 65,
+		"Luk": 60,
+		"Def": 40,
+		"MDef": 45,
+		"Atk": "1700~1900",
+		"Range": "3~15~18",
+		"Flee": 199,
+		"Hit": 168,
+		"NeedFlee": 243,
+		"NeedHit": 219,
+		"Element": "Water",
+		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": true,
+		"Drops": [
 			{
 				"Chance": 55.01,
 				"Item": {
@@ -26838,6 +27655,8 @@
 		"NeedHit": 111,
 		"Element": "Water",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 20.01,
@@ -26883,6 +27702,8 @@
 		"NeedHit": 135,
 		"Element": "Fire",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 44.14,
@@ -27035,6 +27856,8 @@
 		"NeedHit": 99,
 		"Element": "Shadow",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 43.66,
@@ -27191,6 +28014,8 @@
 		"NeedHit": 108,
 		"Element": "Fire",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 35.02,
@@ -27343,6 +28168,8 @@
 		"NeedHit": 118,
 		"Element": "Fire",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 25.01,
@@ -27495,6 +28322,8 @@
 		"NeedHit": 72,
 		"Element": "Earth",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 1.21,
@@ -27659,6 +28488,8 @@
 		"NeedHit": 38,
 		"Element": "Wind",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.81,
@@ -27805,6 +28636,8 @@
 		"NeedHit": 56,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.81,
@@ -27955,6 +28788,8 @@
 		"NeedHit": 88,
 		"Element": "Fire",
 		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 65.01,
@@ -28119,6 +28954,8 @@
 		"NeedHit": 127,
 		"Element": "Wind",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.31,
@@ -28283,6 +29120,8 @@
 		"NeedHit": 48,
 		"Element": "Water",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.26,
@@ -28461,6 +29300,8 @@
 		"NeedHit": 176,
 		"Element": "Fire",
 		"ElementLevel": 3,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 90,
@@ -28595,6 +29436,8 @@
 		"NeedHit": 180,
 		"Element": "Ghost",
 		"ElementLevel": 3,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 75,
@@ -28729,6 +29572,8 @@
 		"NeedHit": 113,
 		"Element": "Shadow",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 3.01,
@@ -28877,6 +29722,8 @@
 		"NeedHit": 92,
 		"Element": "Neutral",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -29011,6 +29858,8 @@
 		"NeedHit": 127,
 		"Element": "Shadow",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -29159,6 +30008,8 @@
 		"NeedHit": 166,
 		"Element": "Shadow",
 		"ElementLevel": 2,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -29307,6 +30158,8 @@
 		"NeedHit": 96,
 		"Element": "Fire",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -29441,6 +30294,8 @@
 		"NeedHit": 96,
 		"Element": "Fire",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -29584,6 +30439,8 @@
 		"NeedHit": 147,
 		"Element": "Fire",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 10.01,
@@ -29671,6 +30528,8 @@
 		"NeedHit": 59,
 		"Element": "Water",
 		"ElementLevel": 1,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 50.01,
@@ -29813,6 +30672,8 @@
 		"NeedHit": 119,
 		"Element": "Earth",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 45.01,
@@ -29919,6 +30780,8 @@
 		"NeedHit": 160,
 		"Element": "Wind",
 		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 20.01,
@@ -30071,6 +30934,8 @@
 		"NeedHit": 135,
 		"Element": "Fire",
 		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.31,
@@ -30219,6 +31084,8 @@
 		"NeedHit": 88,
 		"Element": "Water",
 		"ElementLevel": 2,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 80.01,
@@ -30339,6 +31206,8 @@
 		"NeedHit": 112,
 		"Element": "Water",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 65.01,
@@ -30473,6 +31342,8 @@
 		"NeedHit": 95,
 		"Element": "Neutral",
 		"ElementLevel": 3,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 50.01,
@@ -30621,6 +31492,8 @@
 		"NeedHit": 148,
 		"Element": "Undead",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 80.01,
@@ -30754,29 +31627,31 @@
 		"Id": 1294,
 		"SpriteName": "KILLER_MANTIS",
 		"Name": "Killer Mantis",
-		"Level": 83,
-		"HP": 504000,
-		"BaseExp": 337500,
-		"JobExp": 222000,
-		"Scale": "Large",
-		"Race": "Plant",
-		"IsMVP": true,
-		"Str": 120,
-		"Dex": 120,
-		"Agi": 125,
-		"Vit": 85,
-		"Int": 130,
-		"Luk": 15,
-		"Def": 60,
-		"MDef": 65,
-		"Atk": "2800~3525",
-		"Range": "2~15~18",
-		"Flee": 208,
-		"Hit": 203,
-		"NeedFlee": 278,
-		"NeedHit": 228,
-		"Element": "Ghost",
+		"Level": 56,
+		"HP": 13183,
+		"BaseExp": 9763,
+		"JobExp": 3549,
+		"Scale": "Medium",
+		"Race": "Insect",
+		"IsMVP": false,
+		"Str": 5,
+		"Dex": 75,
+		"Agi": 26,
+		"Vit": 24,
+		"Int": 5,
+		"Luk": 40,
+		"Def": 35,
+		"MDef": 20,
+		"Atk": "764~927",
+		"Range": "1~15~18",
+		"Flee": 82,
+		"Hit": 131,
+		"NeedFlee": 206,
+		"NeedHit": 102,
+		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 45.51,
@@ -30875,7 +31750,45 @@
 					"Slots": 0,
 					"SellOvercharged": 12
 				}
-			},
+			}
+		],
+		"Maps": [
+			{
+				"MapName": "gld_dun02",
+				"Amount": 12
+			}
+		]
+	},
+	{
+		"Id": 3994,
+		"SpriteName": "KING_PORING",
+		"Name": "King Poring",
+		"Level": 83,
+		"HP": 504000,
+		"BaseExp": 337500,
+		"JobExp": 222000,
+		"Scale": "Large",
+		"Race": "Plant",
+		"IsMVP": true,
+		"Str": 120,
+		"Dex": 120,
+		"Agi": 125,
+		"Vit": 85,
+		"Int": 130,
+		"Luk": 15,
+		"Def": 60,
+		"MDef": 65,
+		"Atk": "2800~3525",
+		"Range": "2~15~18",
+		"Flee": 208,
+		"Hit": 203,
+		"NeedFlee": 278,
+		"NeedHit": 228,
+		"Element": "Ghost",
+		"ElementLevel": 1,
+		"IsAggressive": null,
+		"CanDetectCast": null,
+		"Drops": [
 			{
 				"Chance": 35,
 				"Item": {
@@ -31005,8 +31918,8 @@
 		],
 		"Maps": [
 			{
-				"MapName": "gld_dun02",
-				"Amount": 12
+				"MapName": "lasa_dun03",
+				"Amount": 1
 			}
 		]
 	},
@@ -31037,6 +31950,8 @@
 		"NeedHit": 73,
 		"Element": "Fire",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 2.51,
@@ -31193,6 +32108,8 @@
 		"NeedHit": 126,
 		"Element": "Wind",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 1.01,
@@ -31335,6 +32252,8 @@
 		"NeedHit": 82,
 		"Element": "Poison",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 1.01,
@@ -31477,6 +32396,8 @@
 		"NeedHit": 82,
 		"Element": "Fire",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.36,
@@ -31629,6 +32550,8 @@
 		"NeedHit": 145,
 		"Element": "Neutral",
 		"ElementLevel": 3,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 71.01,
@@ -31781,6 +32704,8 @@
 		"NeedHit": 195,
 		"Element": "Ghost",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 35.01,
@@ -31910,29 +32835,31 @@
 		"Id": 1070,
 		"SpriteName": "KUKRE",
 		"Name": "Kukre",
-		"Level": 89,
-		"HP": 493000,
-		"BaseExp": 277500,
-		"JobExp": 211500,
-		"Scale": "Large",
-		"Race": "Plant",
-		"IsMVP": true,
+		"Level": 11,
+		"HP": 307,
+		"BaseExp": 63,
+		"JobExp": 43,
+		"Scale": "Small",
+		"Race": "Fish",
+		"IsMVP": false,
 		"Str": 1,
-		"Dex": 210,
-		"Agi": 125,
-		"Vit": 48,
-		"Int": 78,
-		"Luk": 38,
-		"Def": 20,
-		"MDef": 44,
-		"Atk": "450~2170",
-		"Range": "14~15~18",
-		"Flee": 214,
-		"Hit": 299,
-		"NeedFlee": 374,
-		"NeedHit": 234,
-		"Element": "Wind",
-		"ElementLevel": 3,
+		"Dex": 16,
+		"Agi": 11,
+		"Vit": 11,
+		"Int": 5,
+		"Luk": 2,
+		"Def": 15,
+		"MDef": 0,
+		"Atk": "28~37",
+		"Range": "1~15~18",
+		"Flee": 22,
+		"Hit": 27,
+		"NeedFlee": 102,
+		"NeedHit": 42,
+		"Element": "Water",
+		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.31,
@@ -32045,7 +32972,57 @@
 					"Slots": 0,
 					"SellOvercharged": 12
 				}
+			}
+		],
+		"Maps": [
+			{
+				"MapName": "iz_dun00",
+				"Amount": 15
 			},
+			{
+				"MapName": "iz_dun01",
+				"Amount": 50
+			},
+			{
+				"MapName": "treasure01",
+				"Amount": 20
+			},
+			{
+				"MapName": "treasure02",
+				"Amount": 20
+			}
+		]
+	},
+	{
+		"Id": 3049,
+		"SpriteName": "LADY_HUO",
+		"Name": "Lady Huo",
+		"Level": 87,
+		"HP": 482500,
+		"BaseExp": 235500,
+		"JobExp": 181200,
+		"Scale": "Large",
+		"Race": "Formless",
+		"IsMVP": true,
+		"Str": 120,
+		"Dex": 130,
+		"Agi": 102,
+		"Vit": 85,
+		"Int": 165,
+		"Luk": 80,
+		"Def": 32,
+		"MDef": 35,
+		"Atk": "2750~3590",
+		"Range": "3~15~18",
+		"Flee": 189,
+		"Hit": 217,
+		"NeedFlee": 292,
+		"NeedHit": 209,
+		"Element": "Holy",
+		"ElementLevel": 1,
+		"IsAggressive": null,
+		"CanDetectCast": null,
+		"Drops": [
 			{
 				"Chance": 90,
 				"Item": {
@@ -32143,7 +33120,45 @@
 					"Slots": 0,
 					"SellOvercharged": 12
 				}
-			},
+			}
+		],
+		"Maps": [
+			{
+				"MapName": "untomb_05s",
+				"Amount": 1
+			}
+		]
+	},
+	{
+		"Id": 1688,
+		"SpriteName": "LADY_TANEE",
+		"Name": "Lady Tanee",
+		"Level": 89,
+		"HP": 493000,
+		"BaseExp": 277500,
+		"JobExp": 211500,
+		"Scale": "Large",
+		"Race": "Plant",
+		"IsMVP": true,
+		"Str": 1,
+		"Dex": 210,
+		"Agi": 125,
+		"Vit": 48,
+		"Int": 78,
+		"Luk": 38,
+		"Def": 20,
+		"MDef": 44,
+		"Atk": "450~2170",
+		"Range": "14~15~18",
+		"Flee": 214,
+		"Hit": 299,
+		"NeedFlee": 374,
+		"NeedHit": 234,
+		"Element": "Wind",
+		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
+		"Drops": [
 			{
 				"Chance": 40.01,
 				"Item": {
@@ -32259,20 +33274,8 @@
 		],
 		"Maps": [
 			{
-				"MapName": "iz_dun00",
-				"Amount": 15
-			},
-			{
-				"MapName": "iz_dun01",
-				"Amount": 50
-			},
-			{
-				"MapName": "treasure01",
-				"Amount": 20
-			},
-			{
-				"MapName": "treasure02",
-				"Amount": 20
+				"MapName": "ayo_dun02",
+				"Amount": 1
 			}
 		]
 	},
@@ -32303,6 +33306,8 @@
 		"NeedHit": 125,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 43.66,
@@ -32459,6 +33464,8 @@
 		"NeedHit": 113,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 45.51,
@@ -32588,29 +33595,31 @@
 		"Id": 25009,
 		"SpriteName": "LAVA_GOLEM_MJ",
 		"Name": "Living Magma",
-		"Level": 92,
-		"HP": 585000,
-		"BaseExp": 690300,
-		"JobExp": 552240,
+		"Level": 72,
+		"HP": 18300,
+		"BaseExp": 8190,
+		"JobExp": 4905,
 		"Scale": "Large",
-		"Race": "Demon",
-		"IsMVP": true,
-		"Str": 110,
-		"Dex": 115,
-		"Agi": 135,
-		"Vit": 115,
-		"Int": 125,
-		"Luk": 110,
-		"Def": 55,
-		"MDef": 68,
-		"Atk": "3400~3800",
-		"Range": "3~15~18",
-		"Flee": 227,
-		"Hit": 207,
-		"NeedFlee": 282,
-		"NeedHit": 247,
-		"Element": "Shadow",
-		"ElementLevel": 1,
+		"Race": "Formless",
+		"IsMVP": false,
+		"Str": 80,
+		"Dex": 71,
+		"Agi": 1,
+		"Vit": 40,
+		"Int": 70,
+		"Luk": 35,
+		"Def": 20,
+		"MDef": 25,
+		"Atk": "600~800",
+		"Range": "1~15~18",
+		"Flee": 73,
+		"Hit": 143,
+		"NeedFlee": 218,
+		"NeedHit": 93,
+		"Element": "Fire",
+		"ElementLevel": 3,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 10,
@@ -32709,7 +33718,45 @@
 					"Slots": 0,
 					"SellOvercharged": 12
 				}
-			},
+			}
+		],
+		"Maps": [
+			{
+				"MapName": "ash_dun01",
+				"Amount": 20
+			}
+		]
+	},
+	{
+		"Id": 3983,
+		"SpriteName": "LOGI",
+		"Name": "Logi",
+		"Level": 92,
+		"HP": 585000,
+		"BaseExp": 690300,
+		"JobExp": 552240,
+		"Scale": "Large",
+		"Race": "Demon",
+		"IsMVP": true,
+		"Str": 110,
+		"Dex": 115,
+		"Agi": 135,
+		"Vit": 115,
+		"Int": 125,
+		"Luk": 110,
+		"Def": 55,
+		"MDef": 68,
+		"Atk": "3400~3800",
+		"Range": "3~15~18",
+		"Flee": 227,
+		"Hit": 207,
+		"NeedFlee": 282,
+		"NeedHit": 247,
+		"Element": "Shadow",
+		"ElementLevel": 1,
+		"IsAggressive": null,
+		"CanDetectCast": null,
+		"Drops": [
 			{
 				"Chance": 90,
 				"Item": {
@@ -32825,8 +33872,8 @@
 		],
 		"Maps": [
 			{
-				"MapName": "ash_dun01",
-				"Amount": 20
+				"MapName": "muspmi2",
+				"Amount": 1
 			}
 		]
 	},
@@ -32857,6 +33904,8 @@
 		"NeedHit": 157,
 		"Element": "Shadow",
 		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 8.01,
@@ -33005,6 +34054,8 @@
 		"NeedHit": 115,
 		"Element": "Undead",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 32.01,
@@ -33143,6 +34194,8 @@
 		"NeedHit": 76,
 		"Element": "Undead",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 45,
@@ -33258,6 +34311,8 @@
 		"NeedHit": 26,
 		"Element": "Neutral",
 		"ElementLevel": 3,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 65.01,
@@ -33442,6 +34497,8 @@
 		"NeedHit": 129,
 		"Element": "Fire",
 		"ElementLevel": 2,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 10,
@@ -33590,6 +34647,8 @@
 		"NeedHit": 143,
 		"Element": "Fire",
 		"ElementLevel": 2,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 35,
@@ -33738,6 +34797,8 @@
 		"NeedHit": 72,
 		"Element": "Water",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -33896,6 +34957,8 @@
 		"NeedHit": 72,
 		"Element": "Water",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -34039,6 +35102,8 @@
 		"NeedHit": 181,
 		"Element": "Ghost",
 		"ElementLevel": 3,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 90,
@@ -34187,6 +35252,8 @@
 		"NeedHit": 136,
 		"Element": "Fire",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 44.14,
@@ -34335,6 +35402,8 @@
 		"NeedHit": 68,
 		"Element": "Shadow",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.41,
@@ -34491,6 +35560,8 @@
 		"NeedHit": 35,
 		"Element": "Earth",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.51,
@@ -34583,6 +35654,8 @@
 		"NeedHit": 44,
 		"Element": "Earth",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.51,
@@ -34743,6 +35816,8 @@
 		"NeedHit": 62,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 1.11,
@@ -34911,6 +35986,8 @@
 		"NeedHit": 97,
 		"Element": "Wind",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 41.72,
@@ -35031,6 +36108,8 @@
 		"NeedHit": 92,
 		"Element": "Water",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.19,
@@ -35179,6 +36258,8 @@
 		"NeedHit": 92,
 		"Element": "Water",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.37,
@@ -35322,6 +36403,8 @@
 		"NeedHit": 100,
 		"Element": "Fire",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.36,
@@ -35470,6 +36553,8 @@
 		"NeedHit": 62,
 		"Element": "Water",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 50.01,
@@ -35608,6 +36693,8 @@
 		"NeedHit": 76,
 		"Element": "Water",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 50.01,
@@ -35746,6 +36833,8 @@
 		"NeedHit": 45,
 		"Element": "Water",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 32.01,
@@ -35900,6 +36989,8 @@
 		"NeedHit": 120,
 		"Element": "Fire",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 30.01,
@@ -35973,6 +37064,8 @@
 		"NeedHit": 45,
 		"Element": "Water",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 32.01,
@@ -36116,6 +37209,8 @@
 		"NeedHit": 62,
 		"Element": "Water",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 50.01,
@@ -36245,6 +37340,8 @@
 		"NeedHit": 123,
 		"Element": "Ghost",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -36401,6 +37498,8 @@
 		"NeedHit": 82,
 		"Element": "Water",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -36549,6 +37648,8 @@
 		"NeedHit": 56,
 		"Element": "Earth",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -36717,6 +37818,8 @@
 		"NeedHit": 56,
 		"Element": "Earth",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -36860,6 +37963,8 @@
 		"NeedHit": 153,
 		"Element": "Poison",
 		"ElementLevel": 1,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 100,
@@ -36924,6 +38029,8 @@
 		"NeedHit": 88,
 		"Element": "Shadow",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.11,
@@ -37052,28 +38159,30 @@
 		"SpriteName": "MAYA_PUPLE",
 		"Name": "Maya Purple",
 		"Level": 81,
-		"HP": 169000,
-		"BaseExp": 173100,
-		"JobExp": 155850,
+		"HP": 55479,
+		"BaseExp": 67500,
+		"JobExp": 57600,
 		"Scale": "Large",
 		"Race": "Insect",
-		"IsMVP": true,
+		"IsMVP": false,
 		"Str": 95,
-		"Dex": 82,
-		"Agi": 97,
-		"Vit": 76,
+		"Dex": 90,
+		"Agi": 90,
+		"Vit": 80,
 		"Int": 95,
-		"Luk": 105,
-		"Def": 60,
-		"MDef": 25,
-		"Atk": "1800~2070",
-		"Range": "1~15~18",
-		"Flee": 178,
-		"Hit": 163,
-		"NeedFlee": 238,
-		"NeedHit": 198,
+		"Luk": 119,
+		"Def": 68,
+		"MDef": 48,
+		"Atk": "1400~2000",
+		"Range": "2~15~18",
+		"Flee": 171,
+		"Hit": 171,
+		"NeedFlee": 246,
+		"NeedHit": 191,
 		"Element": "Earth",
 		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 80.01,
@@ -37172,7 +38281,49 @@
 					"Slots": 0,
 					"SellOvercharged": 12
 				}
+			}
+		],
+		"Maps": [
+			{
+				"MapName": "moc_fild14",
+				"Amount": 1
 			},
+			{
+				"MapName": "gld_dun03",
+				"Amount": 3
+			}
+		]
+	},
+	{
+		"Id": 1147,
+		"SpriteName": "MAYA",
+		"Name": "Maya",
+		"Level": 81,
+		"HP": 169000,
+		"BaseExp": 173100,
+		"JobExp": 155850,
+		"Scale": "Large",
+		"Race": "Insect",
+		"IsMVP": true,
+		"Str": 95,
+		"Dex": 82,
+		"Agi": 97,
+		"Vit": 76,
+		"Int": 95,
+		"Luk": 105,
+		"Def": 60,
+		"MDef": 25,
+		"Atk": "1800~2070",
+		"Range": "1~15~18",
+		"Flee": 178,
+		"Hit": 163,
+		"NeedFlee": 238,
+		"NeedHit": 198,
+		"Element": "Earth",
+		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": true,
+		"Drops": [
 			{
 				"Chance": 5.01,
 				"Item": {
@@ -37288,12 +38439,12 @@
 		],
 		"Maps": [
 			{
-				"MapName": "moc_fild14",
+				"MapName": "anthell02",
 				"Amount": 1
 			},
 			{
 				"MapName": "gld_dun03",
-				"Amount": 3
+				"Amount": 1
 			}
 		]
 	},
@@ -37324,6 +38475,8 @@
 		"NeedHit": 173,
 		"Element": "Neutral",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -37458,6 +38611,8 @@
 		"NeedHit": 173,
 		"Element": "Neutral",
 		"ElementLevel": 2,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -37592,6 +38747,8 @@
 		"NeedHit": 110,
 		"Element": "Neutral",
 		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 1.01,
@@ -37712,6 +38869,8 @@
 		"NeedHit": 56,
 		"Element": "Undead",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 55.01,
@@ -37860,6 +39019,8 @@
 		"NeedHit": 118,
 		"Element": "Water",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 13.01,
@@ -38034,6 +39195,8 @@
 		"NeedHit": 64,
 		"Element": "Fire",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.61,
@@ -38202,6 +39365,8 @@
 		"NeedHit": 116,
 		"Element": "Earth",
 		"ElementLevel": 3,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 43.66,
@@ -38316,6 +39481,8 @@
 		"NeedHit": 164,
 		"Element": "Poison",
 		"ElementLevel": 3,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 90,
@@ -38464,6 +39631,8 @@
 		"NeedHit": 171,
 		"Element": "Neutral",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.06,
@@ -38668,6 +39837,8 @@
 		"NeedHit": 180,
 		"Element": "Neutral",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.31,
@@ -38811,6 +39982,8 @@
 		"NeedHit": 163,
 		"Element": "Shadow",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 44.14,
@@ -38945,6 +40118,8 @@
 		"NeedHit": 114,
 		"Element": "Fire",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -39097,6 +40272,8 @@
 		"NeedHit": 114,
 		"Element": "Fire",
 		"ElementLevel": 2,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -39219,6 +40396,142 @@
 		]
 	},
 	{
+		"Id": 1059,
+		"SpriteName": "MISTRESS",
+		"Name": "Mistress",
+		"Level": 74,
+		"HP": 212000,
+		"BaseExp": 108000,
+		"JobExp": 75600,
+		"Scale": "Small",
+		"Race": "Insect",
+		"IsMVP": true,
+		"Str": 50,
+		"Dex": 70,
+		"Agi": 165,
+		"Vit": 60,
+		"Int": 115,
+		"Luk": 130,
+		"Def": 40,
+		"MDef": 60,
+		"Atk": "880~1210",
+		"Range": "1~15~18",
+		"Flee": 239,
+		"Hit": 144,
+		"NeedFlee": 219,
+		"NeedHit": 259,
+		"Element": "Wind",
+		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": true,
+		"Drops": [
+			{
+				"Chance": 1.51,
+				"Item": {
+					"Id": 1413,
+					"AegisName": "Gungnir",
+					"Name": "Gungnir",
+					"Type": "Weapon",
+					"Buy": 20,
+					"Sell": 10,
+					"Weight": 50,
+					"Slots": 0,
+					"SellOvercharged": 12
+				}
+			},
+			{
+				"Chance": 100,
+				"Item": {
+					"Id": 518,
+					"AegisName": "Honey",
+					"Name": "Honey",
+					"Type": "Healing",
+					"Buy": 500,
+					"Sell": 250,
+					"Weight": 10,
+					"Slots": 0,
+					"SellOvercharged": 310
+				}
+			},
+			{
+				"Chance": 2.51,
+				"Item": {
+					"Id": 2249,
+					"AegisName": "Coronet",
+					"Name": "Coronet",
+					"Type": "Armor",
+					"Buy": 20,
+					"Sell": 10,
+					"Weight": 30,
+					"Slots": 0,
+					"SellOvercharged": 12
+				}
+			},
+			{
+				"Chance": 10.01,
+				"Item": {
+					"Id": 616,
+					"AegisName": "Old_Card_Album",
+					"Name": "Old Card Album",
+					"Type": "Usable",
+					"Buy": 10000,
+					"Sell": 5000,
+					"Weight": 5,
+					"Slots": 0,
+					"SellOvercharged": 6200
+				}
+			},
+			{
+				"Chance": 0.11,
+				"Item": {
+					"Id": 7018,
+					"AegisName": "Young_Twig",
+					"Name": "Young Twig",
+					"Type": "Misc",
+					"Buy": 50,
+					"Sell": 25,
+					"Weight": 1,
+					"Slots": 0,
+					"SellOvercharged": 31
+				}
+			},
+			{
+				"Chance": 42.69,
+				"Item": {
+					"Id": 985,
+					"AegisName": "Elunium",
+					"Name": "Elunium",
+					"Type": "Misc",
+					"Buy": 1100,
+					"Sell": 550,
+					"Weight": 20,
+					"Slots": 0,
+					"SellOvercharged": 682
+				}
+			},
+			{
+				"Chance": 0.02,
+				"Item": {
+					"Id": 4132,
+					"AegisName": "Mistress_Card",
+					"Name": "Mistress Card",
+					"Type": "Card",
+					"Buy": 20,
+					"Sell": 10,
+					"Weight": 1,
+					"Slots": 0,
+					"SellOvercharged": 12
+				}
+			}
+		],
+		"Maps": [
+			{
+				"MapName": "mjolnir_08",
+				"Amount": 1
+			}
+		]
+	},
+	{
 		"Id": 1701,
 		"SpriteName": "SHELTER",
 		"Name": "Mistress of Shelter",
@@ -39245,6 +40558,8 @@
 		"NeedHit": 167,
 		"Element": "Holy",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 2.01,
@@ -39374,6 +40689,8 @@
 		"NeedHit": 105,
 		"Element": "Shadow",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -39520,6 +40837,8 @@
 		"NeedHit": 127,
 		"Element": "Neutral",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.04,
@@ -39668,6 +40987,8 @@
 		"NeedHit": 127,
 		"Element": "Neutral",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [],
 		"Maps": []
 	},
@@ -39675,29 +40996,31 @@
 		"Id": 3045,
 		"SpriteName": "MOONRABBIT",
 		"Name": "Moon Rabbit",
-		"Level": 67,
-		"HP": 120000,
-		"BaseExp": 117000,
-		"JobExp": 93600,
+		"Level": 74,
+		"HP": 11585,
+		"BaseExp": 13020,
+		"JobExp": 11052,
 		"Scale": "Medium",
-		"Race": "Demon",
-		"IsMVP": true,
+		"Race": "Brute",
+		"IsMVP": false,
 		"Str": 55,
-		"Dex": 95,
-		"Agi": 99,
-		"Vit": 55,
-		"Int": 82,
-		"Luk": 120,
-		"Def": 10,
-		"MDef": 55,
-		"Atk": "1200~1700",
+		"Dex": 90,
+		"Agi": 69,
+		"Vit": 51,
+		"Int": 70,
+		"Luk": 65,
+		"Def": 20,
+		"MDef": 24,
+		"Atk": "720~915",
 		"Range": "1~15~18",
-		"Flee": 166,
-		"Hit": 162,
-		"NeedFlee": 237,
-		"NeedHit": 186,
-		"Element": "Fire",
-		"ElementLevel": 3,
+		"Flee": 143,
+		"Hit": 164,
+		"NeedFlee": 239,
+		"NeedHit": 163,
+		"Element": "Holy",
+		"ElementLevel": 1,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 71.01,
@@ -39810,7 +41133,49 @@
 					"Slots": 0,
 					"SellOvercharged": 12
 				}
+			}
+		],
+		"Maps": [
+			{
+				"MapName": "untomb_05",
+				"Amount": 20
 			},
+			{
+				"MapName": "untomb_05s",
+				"Amount": 12
+			}
+		]
+	},
+	{
+		"Id": 1150,
+		"SpriteName": "MOONLIGHT",
+		"Name": "Moonlight Flower",
+		"Level": 67,
+		"HP": 120000,
+		"BaseExp": 117000,
+		"JobExp": 93600,
+		"Scale": "Medium",
+		"Race": "Demon",
+		"IsMVP": true,
+		"Str": 55,
+		"Dex": 95,
+		"Agi": 99,
+		"Vit": 55,
+		"Int": 82,
+		"Luk": 120,
+		"Def": 10,
+		"MDef": 55,
+		"Atk": "1200~1700",
+		"Range": "1~15~18",
+		"Flee": 166,
+		"Hit": 162,
+		"NeedFlee": 237,
+		"NeedHit": 186,
+		"Element": "Fire",
+		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
+		"Drops": [
 			{
 				"Chance": 2.01,
 				"Item": {
@@ -39898,12 +41263,8 @@
 		],
 		"Maps": [
 			{
-				"MapName": "untomb_05",
-				"Amount": 20
-			},
-			{
-				"MapName": "untomb_05s",
-				"Amount": 12
+				"MapName": "pay_dun04",
+				"Amount": 1
 			}
 		]
 	},
@@ -39934,6 +41295,8 @@
 		"NeedHit": 135,
 		"Element": "Fire",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [],
 		"Maps": []
 	},
@@ -39964,6 +41327,8 @@
 		"NeedHit": 59,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.71,
@@ -40124,6 +41489,8 @@
 		"NeedHit": 59,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.71,
@@ -40267,6 +41634,8 @@
 		"NeedHit": 76,
 		"Element": "Undead",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -40427,6 +41796,8 @@
 		"NeedHit": 65,
 		"Element": "Undead",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -40569,6 +41940,8 @@
 		"NeedHit": 132,
 		"Element": "Fire",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 48.51,
@@ -40703,6 +42076,8 @@
 		"NeedHit": 100,
 		"Element": "Neutral",
 		"ElementLevel": 3,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.91,
@@ -40855,6 +42230,8 @@
 		"NeedHit": 96,
 		"Element": "Poison",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.03,
@@ -41003,6 +42380,8 @@
 		"NeedHit": 235,
 		"Element": "Shadow",
 		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.02,
@@ -41159,6 +42538,8 @@
 		"NeedHit": 143,
 		"Element": "Water",
 		"ElementLevel": 4,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 5.01,
@@ -41279,6 +42660,8 @@
 		"NeedHit": 130,
 		"Element": "Fire",
 		"ElementLevel": 1,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 68.01,
@@ -41389,6 +42772,8 @@
 		"NeedHit": 105,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 51.01,
@@ -41541,6 +42926,8 @@
 		"NeedHit": 174,
 		"Element": "Shadow",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 49.48,
@@ -41689,6 +43076,8 @@
 		"NeedHit": 143,
 		"Element": "Ghost",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 60.01,
@@ -41841,6 +43230,8 @@
 		"NeedHit": 150,
 		"Element": "Ghost",
 		"ElementLevel": 3,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 20.01,
@@ -41914,6 +43305,8 @@
 		"NeedHit": 151,
 		"Element": "Fire",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 46.57,
@@ -42070,6 +43463,8 @@
 		"NeedHit": 43,
 		"Element": "Fire",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [],
 		"Maps": [
 			{
@@ -42105,6 +43500,8 @@
 		"NeedHit": 82,
 		"Element": "Water",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.14,
@@ -42253,6 +43650,8 @@
 		"NeedHit": 82,
 		"Element": "Water",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.27,
@@ -42396,6 +43795,8 @@
 		"NeedHit": 194,
 		"Element": "Shadow",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 90,
@@ -42530,6 +43931,8 @@
 		"NeedHit": 178,
 		"Element": "Shadow",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.02,
@@ -42690,6 +44093,8 @@
 		"NeedHit": 153,
 		"Element": "Poison",
 		"ElementLevel": 2,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 41.01,
@@ -42838,6 +44243,8 @@
 		"NeedHit": 22,
 		"Element": "Holy",
 		"ElementLevel": 1,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [],
 		"Maps": [
 			{
@@ -42850,29 +44257,31 @@
 		"Id": 1189,
 		"SpriteName": "ORC_ARCHER",
 		"Name": "Orc Archer",
-		"Level": 77,
-		"HP": 585700,
-		"BaseExp": 143700,
-		"JobExp": 100650,
-		"Scale": "Large",
+		"Level": 49,
+		"HP": 7440,
+		"BaseExp": 3820,
+		"JobExp": 2680,
+		"Scale": "Medium",
 		"Race": "DemiHuman",
-		"IsMVP": true,
+		"IsMVP": false,
 		"Str": 1,
-		"Dex": 105,
-		"Agi": 91,
-		"Vit": 30,
-		"Int": 70,
-		"Luk": 90,
-		"Def": 40,
-		"MDef": 45,
-		"Atk": "2257~2542",
-		"Range": "1~15~18",
-		"Flee": 168,
-		"Hit": 182,
-		"NeedFlee": 257,
-		"NeedHit": 188,
+		"Dex": 125,
+		"Agi": 44,
+		"Vit": 25,
+		"Int": 20,
+		"Luk": 20,
+		"Def": 10,
+		"MDef": 5,
+		"Atk": "310~390",
+		"Range": "9~15~18",
+		"Flee": 93,
+		"Hit": 174,
+		"NeedFlee": 249,
+		"NeedHit": 113,
 		"Element": "Earth",
-		"ElementLevel": 2,
+		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 46.57,
@@ -42985,7 +44394,49 @@
 					"Slots": 0,
 					"SellOvercharged": 12
 				}
+			}
+		],
+		"Maps": [
+			{
+				"MapName": "alde_dun02",
+				"Amount": 20
 			},
+			{
+				"MapName": "gef_fild14",
+				"Amount": 20
+			}
+		]
+	},
+	{
+		"Id": 1087,
+		"SpriteName": "ORK_HERO",
+		"Name": "Orc Hero",
+		"Level": 77,
+		"HP": 585700,
+		"BaseExp": 143700,
+		"JobExp": 100650,
+		"Scale": "Large",
+		"Race": "DemiHuman",
+		"IsMVP": true,
+		"Str": 1,
+		"Dex": 105,
+		"Agi": 91,
+		"Vit": 30,
+		"Int": 70,
+		"Luk": 90,
+		"Def": 40,
+		"MDef": 45,
+		"Atk": "2257~2542",
+		"Range": "1~15~18",
+		"Flee": 168,
+		"Hit": 182,
+		"NeedFlee": 257,
+		"NeedHit": 188,
+		"Element": "Earth",
+		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
+		"Drops": [
 			{
 				"Chance": 97.01,
 				"Item": {
@@ -43087,12 +44538,8 @@
 		],
 		"Maps": [
 			{
-				"MapName": "alde_dun02",
-				"Amount": 20
-			},
-			{
 				"MapName": "gef_fild14",
-				"Amount": 20
+				"Amount": 1
 			}
 		]
 	},
@@ -43100,29 +44547,31 @@
 		"Id": 1273,
 		"SpriteName": "ORC_LADY",
 		"Name": "Orc Lady",
-		"Level": 74,
-		"HP": 783000,
-		"BaseExp": 223500,
-		"JobExp": 178800,
-		"Scale": "Large",
+		"Level": 31,
+		"HP": 2701,
+		"BaseExp": 1048,
+		"JobExp": 775,
+		"Scale": "Medium",
 		"Race": "DemiHuman",
-		"IsMVP": true,
-		"Str": 85,
-		"Dex": 110,
-		"Agi": 82,
-		"Vit": 30,
-		"Int": 70,
-		"Luk": 85,
-		"Def": 40,
-		"MDef": 5,
-		"Atk": "3700~4150",
+		"IsMVP": false,
+		"Str": 35,
+		"Dex": 69,
+		"Agi": 42,
+		"Vit": 25,
+		"Int": 15,
+		"Luk": 55,
+		"Def": 10,
+		"MDef": 10,
+		"Atk": "135~170",
 		"Range": "1~15~18",
-		"Flee": 156,
-		"Hit": 184,
-		"NeedFlee": 259,
-		"NeedHit": 176,
+		"Flee": 73,
+		"Hit": 100,
+		"NeedFlee": 175,
+		"NeedHit": 93,
 		"Element": "Earth",
-		"ElementLevel": 4,
+		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 46.57,
@@ -43207,7 +44656,49 @@
 					"Slots": 0,
 					"SellOvercharged": 12
 				}
+			}
+		],
+		"Maps": [
+			{
+				"MapName": "gef_fild10",
+				"Amount": 55
 			},
+			{
+				"MapName": "gef_fild14",
+				"Amount": 35
+			}
+		]
+	},
+	{
+		"Id": 1190,
+		"SpriteName": "ORC_LORD",
+		"Name": "Orc Lord",
+		"Level": 74,
+		"HP": 783000,
+		"BaseExp": 223500,
+		"JobExp": 178800,
+		"Scale": "Large",
+		"Race": "DemiHuman",
+		"IsMVP": true,
+		"Str": 85,
+		"Dex": 110,
+		"Agi": 82,
+		"Vit": 30,
+		"Int": 70,
+		"Luk": 85,
+		"Def": 40,
+		"MDef": 5,
+		"Atk": "3700~4150",
+		"Range": "1~15~18",
+		"Flee": 156,
+		"Hit": 184,
+		"NeedFlee": 259,
+		"NeedHit": 176,
+		"Element": "Earth",
+		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": true,
+		"Drops": [
 			{
 				"Chance": 4.01,
 				"Item": {
@@ -43324,11 +44815,7 @@
 		"Maps": [
 			{
 				"MapName": "gef_fild10",
-				"Amount": 55
-			},
-			{
-				"MapName": "gef_fild14",
-				"Amount": 35
+				"Amount": 1
 			}
 		]
 	},
@@ -43359,6 +44846,8 @@
 		"NeedHit": 62,
 		"Element": "Undead",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 55.01,
@@ -43497,6 +44986,8 @@
 		"NeedHit": 68,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 2.11,
@@ -43626,29 +45117,31 @@
 		"Id": 1153,
 		"SpriteName": "ORC_ZOMBIE",
 		"Name": "Orc Zombie",
-		"Level": 78,
-		"HP": 415400,
-		"BaseExp": 147750,
-		"JobExp": 118200,
+		"Level": 24,
+		"HP": 1388,
+		"BaseExp": 402,
+		"JobExp": 246,
 		"Scale": "Medium",
 		"Race": "Undead",
-		"IsMVP": true,
+		"IsMVP": false,
 		"Str": 1,
-		"Dex": 86,
-		"Agi": 75,
-		"Vit": 30,
-		"Int": 37,
-		"Luk": 40,
-		"Def": 10,
-		"MDef": 25,
-		"Atk": "780~2880",
+		"Dex": 24,
+		"Agi": 12,
+		"Vit": 24,
+		"Int": 1,
+		"Luk": 5,
+		"Def": 5,
+		"MDef": 10,
+		"Atk": "122~172",
 		"Range": "1~15~18",
-		"Flee": 153,
-		"Hit": 164,
-		"NeedFlee": 239,
-		"NeedHit": 173,
+		"Flee": 36,
+		"Hit": 48,
+		"NeedFlee": 123,
+		"NeedHit": 56,
 		"Element": "Undead",
-		"ElementLevel": 4,
+		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 55.01,
@@ -43705,7 +45198,45 @@
 					"Slots": 0,
 					"SellOvercharged": 12
 				}
-			},
+			}
+		],
+		"Maps": [
+			{
+				"MapName": "orcsdun01",
+				"Amount": 80
+			}
+		]
+	},
+	{
+		"Id": 1038,
+		"SpriteName": "OSIRIS",
+		"Name": "Osiris",
+		"Level": 78,
+		"HP": 415400,
+		"BaseExp": 147750,
+		"JobExp": 118200,
+		"Scale": "Medium",
+		"Race": "Undead",
+		"IsMVP": true,
+		"Str": 1,
+		"Dex": 86,
+		"Agi": 75,
+		"Vit": 30,
+		"Int": 37,
+		"Luk": 40,
+		"Def": 10,
+		"MDef": 25,
+		"Atk": "780~2880",
+		"Range": "1~15~18",
+		"Flee": 153,
+		"Hit": 164,
+		"NeedFlee": 239,
+		"NeedHit": 173,
+		"Element": "Undead",
+		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": true,
+		"Drops": [
 			{
 				"Chance": 20.01,
 				"Item": {
@@ -43821,8 +45352,8 @@
 		],
 		"Maps": [
 			{
-				"MapName": "orcsdun01",
-				"Amount": 80
+				"MapName": "moc_pryd04",
+				"Amount": 1
 			}
 		]
 	},
@@ -43853,6 +45384,8 @@
 		"NeedHit": 140,
 		"Element": "Undead",
 		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [],
 		"Maps": []
 	},
@@ -43883,6 +45416,8 @@
 		"NeedHit": 120,
 		"Element": "Neutral",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 35.01,
@@ -44035,6 +45570,8 @@
 		"NeedHit": 140,
 		"Element": "Neutral",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 44.14,
@@ -44187,6 +45724,8 @@
 		"NeedHit": 139,
 		"Element": "Wind",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 44.14,
@@ -44321,6 +45860,8 @@
 		"NeedHit": 109,
 		"Element": "Wind",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 55.02,
@@ -44455,6 +45996,8 @@
 		"NeedHit": 154,
 		"Element": "Fire",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 43.66,
@@ -44597,6 +46140,8 @@
 		"NeedHit": 24,
 		"Element": "Neutral",
 		"ElementLevel": 3,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 2.51,
@@ -44765,6 +46310,8 @@
 		"NeedHit": 52,
 		"Element": "Fire",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -44903,6 +46450,8 @@
 		"NeedHit": 82,
 		"Element": "Poison",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 48.51,
@@ -45055,6 +46604,8 @@
 		"NeedHit": 142,
 		"Element": "Neutral",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 44.14,
@@ -45219,6 +46770,8 @@
 		"NeedHit": 120,
 		"Element": "Shadow",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 55.01,
@@ -45373,6 +46926,8 @@
 		"NeedHit": 112,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -45525,6 +47080,8 @@
 		"NeedHit": 110,
 		"Element": "Wind",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -45637,6 +47194,156 @@
 		]
 	},
 	{
+		"Id": 1157,
+		"SpriteName": "PHARAOH",
+		"Name": "Pharaoh",
+		"Level": 93,
+		"HP": 446000,
+		"BaseExp": 286500,
+		"JobExp": 200550,
+		"Scale": "Large",
+		"Race": "DemiHuman",
+		"IsMVP": true,
+		"Str": 1,
+		"Dex": 89,
+		"Agi": 93,
+		"Vit": 100,
+		"Int": 104,
+		"Luk": 112,
+		"Def": 67,
+		"MDef": 70,
+		"Atk": "2267~3015",
+		"Range": "1~15~18",
+		"Flee": 186,
+		"Hit": 182,
+		"NeedFlee": 257,
+		"NeedHit": 206,
+		"Element": "Shadow",
+		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
+		"Drops": [
+			{
+				"Chance": 58.21,
+				"Item": {
+					"Id": 7113,
+					"AegisName": "Broken_Pharaoh_Symbol",
+					"Name": "Broken Pharaoh Emblem",
+					"Type": "Misc",
+					"Buy": 2016,
+					"Sell": 1008,
+					"Weight": 1,
+					"Slots": 0,
+					"SellOvercharged": 1249
+				}
+			},
+			{
+				"Chance": 25.01,
+				"Item": {
+					"Id": 7114,
+					"AegisName": "Tutankhamens_Mask",
+					"Name": "Masque of Tutankhamen",
+					"Type": "Misc",
+					"Buy": 10,
+					"Sell": 5,
+					"Weight": 1,
+					"Slots": 0,
+					"SellOvercharged": 6
+				}
+			},
+			{
+				"Chance": 1.01,
+				"Item": {
+					"Id": 1136,
+					"AegisName": "Solar_Sword",
+					"Name": "Solar Sword",
+					"Type": "Weapon",
+					"Buy": 20,
+					"Sell": 10,
+					"Weight": 120,
+					"Slots": 0,
+					"SellOvercharged": 12
+				}
+			},
+			{
+				"Chance": 1.51,
+				"Item": {
+					"Id": 2327,
+					"AegisName": "Holy_Robe",
+					"Name": "Holy Robe",
+					"Type": "Armor",
+					"Buy": 20,
+					"Sell": 10,
+					"Weight": 170,
+					"Slots": 0,
+					"SellOvercharged": 12
+				}
+			},
+			{
+				"Chance": 5.01,
+				"Item": {
+					"Id": 5002,
+					"AegisName": "Gemmed_Crown",
+					"Name": "Jewel Crown",
+					"Type": "Armor",
+					"Buy": 20,
+					"Sell": 10,
+					"Weight": 60,
+					"Slots": 0,
+					"SellOvercharged": 12
+				}
+			},
+			{
+				"Chance": 3.01,
+				"Item": {
+					"Id": 1552,
+					"AegisName": "Tablet",
+					"Name": "Tablet",
+					"Type": "Weapon",
+					"Buy": 51000,
+					"Sell": 25500,
+					"Weight": 80,
+					"Slots": 1,
+					"SellOvercharged": 31620
+				}
+			},
+			{
+				"Chance": 0.81,
+				"Item": {
+					"Id": 1231,
+					"AegisName": "Bazerald",
+					"Name": "Bazerald",
+					"Type": "Weapon",
+					"Buy": 20,
+					"Sell": 10,
+					"Weight": 50,
+					"Slots": 0,
+					"SellOvercharged": 12
+				}
+			},
+			{
+				"Chance": 0.02,
+				"Item": {
+					"Id": 4148,
+					"AegisName": "Pharaoh_Card",
+					"Name": "Pharaoh Card",
+					"Type": "Card",
+					"Buy": 20,
+					"Sell": 10,
+					"Weight": 1,
+					"Slots": 0,
+					"SellOvercharged": 12
+				}
+			}
+		],
+		"Maps": [
+			{
+				"MapName": "in_sphinx5",
+				"Amount": 1
+			}
+		]
+	},
+	{
 		"Id": 1158,
 		"SpriteName": "PHEN",
 		"Name": "Phen",
@@ -45663,6 +47370,8 @@
 		"NeedHit": 72,
 		"Element": "Water",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 55.01,
@@ -45805,6 +47514,8 @@
 		"NeedHit": 155,
 		"Element": "Neutral",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 38.81,
@@ -45927,6 +47638,142 @@
 		]
 	},
 	{
+		"Id": 1159,
+		"SpriteName": "PHREEONI",
+		"Name": "Phreeoni",
+		"Level": 69,
+		"HP": 188000,
+		"BaseExp": 120000,
+		"JobExp": 84000,
+		"Scale": "Large",
+		"Race": "Brute",
+		"IsMVP": true,
+		"Str": 1,
+		"Dex": 130,
+		"Agi": 85,
+		"Vit": 78,
+		"Int": 35,
+		"Luk": 60,
+		"Def": 10,
+		"MDef": 20,
+		"Atk": "880~1530",
+		"Range": "1~15~18",
+		"Flee": 154,
+		"Hit": 199,
+		"NeedFlee": 274,
+		"NeedHit": 174,
+		"Element": "Neutral",
+		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
+		"Drops": [
+			{
+				"Chance": 97.01,
+				"Item": {
+					"Id": 1015,
+					"AegisName": "Thin_N_Long_Tongue",
+					"Name": "Tongue",
+					"Type": "Misc",
+					"Buy": 528,
+					"Sell": 264,
+					"Weight": 1,
+					"Slots": 0,
+					"SellOvercharged": 327
+				}
+			},
+			{
+				"Chance": 5.01,
+				"Item": {
+					"Id": 1223,
+					"AegisName": "Forturn_Sword",
+					"Name": "Fortune Sword",
+					"Type": "Weapon",
+					"Buy": 20,
+					"Sell": 10,
+					"Weight": 50,
+					"Slots": 0,
+					"SellOvercharged": 12
+				}
+			},
+			{
+				"Chance": 1.51,
+				"Item": {
+					"Id": 1236,
+					"AegisName": "Sucsamad",
+					"Name": "Sucsamad",
+					"Type": "Weapon",
+					"Buy": 20,
+					"Sell": 10,
+					"Weight": 80,
+					"Slots": 0,
+					"SellOvercharged": 12
+				}
+			},
+			{
+				"Chance": 50.01,
+				"Item": {
+					"Id": 1014,
+					"AegisName": "Jaws_Of_Ant",
+					"Name": "Ant Jaw",
+					"Type": "Misc",
+					"Buy": 232,
+					"Sell": 116,
+					"Weight": 1,
+					"Slots": 0,
+					"SellOvercharged": 143
+				}
+			},
+			{
+				"Chance": 3.01,
+				"Item": {
+					"Id": 2288,
+					"AegisName": "Mr_Scream",
+					"Name": "Mr. Scream",
+					"Type": "Armor",
+					"Buy": 20,
+					"Sell": 10,
+					"Weight": 10,
+					"Slots": 0,
+					"SellOvercharged": 12
+				}
+			},
+			{
+				"Chance": 29.01,
+				"Item": {
+					"Id": 985,
+					"AegisName": "Elunium",
+					"Name": "Elunium",
+					"Type": "Misc",
+					"Buy": 1100,
+					"Sell": 550,
+					"Weight": 20,
+					"Slots": 0,
+					"SellOvercharged": 682
+				}
+			},
+			{
+				"Chance": 0.02,
+				"Item": {
+					"Id": 4121,
+					"AegisName": "Phreeoni_Card",
+					"Name": "Phreeoni Card",
+					"Type": "Card",
+					"Buy": 20,
+					"Sell": 10,
+					"Weight": 1,
+					"Slots": 0,
+					"SellOvercharged": 12
+				}
+			}
+		],
+		"Maps": [
+			{
+				"MapName": "moc_fild15",
+				"Amount": 1
+			}
+		]
+	},
+	{
 		"Id": 1049,
 		"SpriteName": "PICKY",
 		"Name": "Picky",
@@ -45953,6 +47800,8 @@
 		"NeedHit": 26,
 		"Element": "Fire",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -46111,6 +47960,8 @@
 		"NeedHit": 27,
 		"Element": "Fire",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -46275,6 +48126,8 @@
 		"NeedHit": 26,
 		"Element": "Fire",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 65.01,
@@ -46404,6 +48257,8 @@
 		"NeedHit": 27,
 		"Element": "Fire",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 65.01,
@@ -46533,6 +48388,8 @@
 		"NeedHit": 56,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -46701,6 +48558,8 @@
 		"NeedHit": 56,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 57.01,
@@ -46844,6 +48703,8 @@
 		"NeedHit": 105,
 		"Element": "Earth",
 		"ElementLevel": 2,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 25.01,
@@ -46968,6 +48829,8 @@
 		"NeedHit": 58,
 		"Element": "Undead",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 30.01,
@@ -47106,6 +48969,8 @@
 		"NeedHit": 40,
 		"Element": "Water",
 		"ElementLevel": 3,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -47266,6 +49131,8 @@
 		"NeedHit": 58,
 		"Element": "Poison",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -47434,6 +49301,8 @@
 		"NeedHit": 100,
 		"Element": "Poison",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 55.01,
@@ -47586,6 +49455,8 @@
 		"NeedHit": 48,
 		"Element": "Poison",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 55.01,
@@ -47878,6 +49749,8 @@
 		"NeedHit": 22,
 		"Element": "Water",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 70.01,
@@ -48118,6 +49991,8 @@
 		"NeedHit": 37,
 		"Element": "Holy",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 70,
@@ -48233,6 +50108,8 @@
 		"NeedHit": 178,
 		"Element": "Ghost",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [],
 		"Maps": []
 	},
@@ -48263,6 +50140,8 @@
 		"NeedHit": 109,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 30.01,
@@ -48401,6 +50280,8 @@
 		"NeedHit": 110,
 		"Element": "Neutral",
 		"ElementLevel": 1,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 85.01,
@@ -48549,6 +50430,8 @@
 		"NeedHit": 138,
 		"Element": "Wind",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -48705,6 +50588,8 @@
 		"NeedHit": 23,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.81,
@@ -48897,6 +50782,8 @@
 		"NeedHit": 23,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 3.01,
@@ -49040,6 +50927,8 @@
 		"NeedHit": 121,
 		"Element": "Undead",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 32.01,
@@ -49164,6 +51053,8 @@
 		"NeedHit": 51,
 		"Element": "Wind",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 30.01,
@@ -49316,6 +51207,8 @@
 		"NeedHit": 97,
 		"Element": "Shadow",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 46.57,
@@ -49462,6 +51355,8 @@
 		"NeedHit": 119,
 		"Element": "Shadow",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 1.07,
@@ -49618,6 +51513,8 @@
 		"NeedHit": 22,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.51,
@@ -49838,6 +51735,8 @@
 		"NeedHit": 22,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 55.01,
@@ -50066,6 +51965,8 @@
 		"NeedHit": 125,
 		"Element": "Neutral",
 		"ElementLevel": 1,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 10,
@@ -50214,6 +52115,8 @@
 		"NeedHit": 115,
 		"Element": "Neutral",
 		"ElementLevel": 1,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 30,
@@ -50348,6 +52251,8 @@
 		"NeedHit": 99,
 		"Element": "Neutral",
 		"ElementLevel": 1,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 30,
@@ -50468,6 +52373,8 @@
 		"NeedHit": 121,
 		"Element": "Neutral",
 		"ElementLevel": 1,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 25,
@@ -50602,6 +52509,8 @@
 		"NeedHit": 108,
 		"Element": "Shadow",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.36,
@@ -50740,6 +52649,8 @@
 		"NeedHit": 154,
 		"Element": "Neutral",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 70.01,
@@ -50922,6 +52833,8 @@
 		"NeedHit": 176,
 		"Element": "Neutral",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 80.01,
@@ -51065,6 +52978,8 @@
 		"NeedHit": 38,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -51229,6 +53144,8 @@
 		"NeedHit": 30,
 		"Element": "Water",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -51373,6 +53290,8 @@
 		"NeedHit": 152,
 		"Element": "Earth",
 		"ElementLevel": 2,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 90,
@@ -51521,6 +53440,8 @@
 		"NeedHit": 107,
 		"Element": "Wind",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 5.01,
@@ -51669,6 +53590,8 @@
 		"NeedHit": 188,
 		"Element": "Neutral",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 38.81,
@@ -51798,29 +53721,31 @@
 		"Id": 1281,
 		"SpriteName": "SAGEWORM",
 		"Name": "Sage Worm",
-		"Level": 71,
-		"HP": 218652,
-		"BaseExp": 243750,
-		"JobExp": 210750,
-		"Scale": "Large",
-		"Race": "DemiHuman",
-		"IsMVP": true,
-		"Str": 91,
-		"Dex": 150,
-		"Agi": 85,
-		"Vit": 30,
-		"Int": 85,
-		"Luk": 60,
-		"Def": 10,
-		"MDef": 51,
-		"Atk": "2219~3169",
-		"Range": "3~15~18",
-		"Flee": 156,
-		"Hit": 221,
-		"NeedFlee": 296,
-		"NeedHit": 176,
-		"Element": "Shadow",
+		"Level": 43,
+		"HP": 3988,
+		"BaseExp": 2382,
+		"JobExp": 1980,
+		"Scale": "Small",
+		"Race": "Brute",
+		"IsMVP": false,
+		"Str": 1,
+		"Dex": 79,
+		"Agi": 52,
+		"Vit": 24,
+		"Int": 88,
+		"Luk": 55,
+		"Def": 0,
+		"MDef": 50,
+		"Atk": "200~280",
+		"Range": "1~15~18",
+		"Flee": 95,
+		"Hit": 122,
+		"NeedFlee": 197,
+		"NeedHit": 115,
+		"Element": "Neutral",
 		"ElementLevel": 3,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 10.01,
@@ -51933,7 +53858,49 @@
 					"Slots": 0,
 					"SellOvercharged": 12
 				}
+			}
+		],
+		"Maps": [
+			{
+				"MapName": "gl_cas01",
+				"Amount": 10
 			},
+			{
+				"MapName": "gl_in01",
+				"Amount": 14
+			}
+		]
+	},
+	{
+		"Id": 1492,
+		"SpriteName": "INCANTATION_SAMURAI",
+		"Name": "Samurai Specter",
+		"Level": 71,
+		"HP": 218652,
+		"BaseExp": 243750,
+		"JobExp": 210750,
+		"Scale": "Large",
+		"Race": "DemiHuman",
+		"IsMVP": true,
+		"Str": 91,
+		"Dex": 150,
+		"Agi": 85,
+		"Vit": 30,
+		"Int": 85,
+		"Luk": 60,
+		"Def": 10,
+		"MDef": 51,
+		"Atk": "2219~3169",
+		"Range": "3~15~18",
+		"Flee": 156,
+		"Hit": 221,
+		"NeedFlee": 296,
+		"NeedHit": 176,
+		"Element": "Shadow",
+		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
+		"Drops": [
 			{
 				"Chance": 25,
 				"Item": {
@@ -52049,12 +54016,8 @@
 		],
 		"Maps": [
 			{
-				"MapName": "gl_cas01",
-				"Amount": 10
-			},
-			{
-				"MapName": "gl_in01",
-				"Amount": 14
+				"MapName": "ama_dun03",
+				"Amount": 1
 			}
 		]
 	},
@@ -52085,6 +54048,8 @@
 		"NeedHit": 88,
 		"Element": "Earth",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.36,
@@ -52237,6 +54202,8 @@
 		"NeedHit": 75,
 		"Element": "Neutral",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 7.51,
@@ -52389,6 +54356,8 @@
 		"NeedHit": 34,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -52545,6 +54514,8 @@
 		"NeedHit": 72,
 		"Element": "Earth",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 60.01,
@@ -52679,6 +54650,8 @@
 		"NeedHit": 72,
 		"Element": "Earth",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -52843,6 +54816,8 @@
 		"NeedHit": 120,
 		"Element": "Earth",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 30.01,
@@ -52986,6 +54961,8 @@
 		"NeedHit": 68,
 		"Element": "Fire",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.71,
@@ -53138,6 +55115,8 @@
 		"NeedHit": 161,
 		"Element": "Fire",
 		"ElementLevel": 2,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 20,
@@ -53286,6 +55265,8 @@
 		"NeedHit": 35,
 		"Element": "Water",
 		"ElementLevel": 3,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 30.01,
@@ -53378,6 +55359,8 @@
 		"NeedHit": 115,
 		"Element": "Water",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 1.51,
@@ -53526,6 +55509,8 @@
 		"NeedHit": 111,
 		"Element": "Water",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 43.66,
@@ -53674,6 +55659,8 @@
 		"NeedHit": 133,
 		"Element": "Water",
 		"ElementLevel": 2,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -53794,6 +55781,8 @@
 		"NeedHit": 154,
 		"Element": "Ghost",
 		"ElementLevel": 3,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 85.01,
@@ -53942,6 +55931,8 @@
 		"NeedHit": 47,
 		"Element": "Water",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 55.01,
@@ -54096,6 +56087,8 @@
 		"NeedHit": 22,
 		"Element": "Holy",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 55.01,
@@ -54374,6 +56367,8 @@
 		"NeedHit": 174,
 		"Element": "Shadow",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -54516,6 +56511,8 @@
 		"NeedHit": 106,
 		"Element": "Poison",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -54688,6 +56685,8 @@
 		"NeedHit": 118,
 		"Element": "Undead",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 25.51,
@@ -54826,6 +56825,8 @@
 		"NeedHit": 92,
 		"Element": "Undead",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 35.01,
@@ -54974,6 +56975,8 @@
 		"NeedHit": 65,
 		"Element": "Undead",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 4.01,
@@ -55126,6 +57129,8 @@
 		"NeedHit": 64,
 		"Element": "Undead",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 55.01,
@@ -55286,6 +57291,8 @@
 		"NeedHit": 35,
 		"Element": "Undead",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.91,
@@ -55420,6 +57427,8 @@
 		"NeedHit": 135,
 		"Element": "Earth",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 49.48,
@@ -55576,6 +57585,8 @@
 		"NeedHit": 56,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 55.01,
@@ -55744,6 +57755,8 @@
 		"NeedHit": 86,
 		"Element": "Water",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -55892,6 +57905,8 @@
 		"NeedHit": 125,
 		"Element": "Earth",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 44.14,
@@ -56040,6 +58055,8 @@
 		"NeedHit": 147,
 		"Element": "Ghost",
 		"ElementLevel": 1,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 54,
@@ -56160,6 +58177,8 @@
 		"NeedHit": 48,
 		"Element": "Water",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -56344,6 +58363,8 @@
 		"NeedHit": 58,
 		"Element": "Poison",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -56487,6 +58508,8 @@
 		"NeedHit": 139,
 		"Element": "Earth",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 35.01,
@@ -56639,6 +58662,8 @@
 		"NeedHit": 76,
 		"Element": "Wind",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.71,
@@ -56795,6 +58820,8 @@
 		"NeedHit": 90,
 		"Element": "Wind",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -56967,6 +58994,8 @@
 		"NeedHit": 126,
 		"Element": "Earth",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 48.51,
@@ -57096,29 +59125,31 @@
 		"Id": 1495,
 		"SpriteName": "STONE_SHOOTER",
 		"Name": "Stone Shooter",
-		"Level": 77,
-		"HP": 240000,
-		"BaseExp": 237750,
-		"JobExp": 190200,
-		"Scale": "Large",
-		"Race": "Formless",
-		"IsMVP": true,
-		"Str": 75,
-		"Dex": 130,
-		"Agi": 185,
-		"Vit": 83,
-		"Int": 55,
-		"Luk": 79,
-		"Def": 35,
-		"MDef": 60,
-		"Atk": "1425~1585",
-		"Range": "2~15~18",
-		"Flee": 262,
-		"Hit": 207,
-		"NeedFlee": 282,
-		"NeedHit": 282,
-		"Element": "Wind",
-		"ElementLevel": 4,
+		"Level": 42,
+		"HP": 4104,
+		"BaseExp": 1857,
+		"JobExp": 1128,
+		"Scale": "Medium",
+		"Race": "Plant",
+		"IsMVP": false,
+		"Str": 1,
+		"Dex": 92,
+		"Agi": 40,
+		"Vit": 20,
+		"Int": 79,
+		"Luk": 20,
+		"Def": 12,
+		"MDef": 45,
+		"Atk": "309~350",
+		"Range": "10~15~18",
+		"Flee": 82,
+		"Hit": 134,
+		"NeedFlee": 209,
+		"NeedHit": 102,
+		"Element": "Fire",
+		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 50.01,
@@ -57217,7 +59248,49 @@
 					"Slots": 0,
 					"SellOvercharged": 12
 				}
+			}
+		],
+		"Maps": [
+			{
+				"MapName": "um_dun01",
+				"Amount": 70
 			},
+			{
+				"MapName": "um_fild02",
+				"Amount": 25
+			}
+		]
+	},
+	{
+		"Id": 1251,
+		"SpriteName": "KNIGHT_OF_WINDSTORM",
+		"Name": "Stormy Knight",
+		"Level": 77,
+		"HP": 240000,
+		"BaseExp": 237750,
+		"JobExp": 190200,
+		"Scale": "Large",
+		"Race": "Formless",
+		"IsMVP": true,
+		"Str": 75,
+		"Dex": 130,
+		"Agi": 185,
+		"Vit": 83,
+		"Int": 55,
+		"Luk": 79,
+		"Def": 35,
+		"MDef": 60,
+		"Atk": "1425~1585",
+		"Range": "2~15~18",
+		"Flee": 262,
+		"Hit": 207,
+		"NeedFlee": 282,
+		"NeedHit": 282,
+		"Element": "Wind",
+		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": true,
+		"Drops": [
 			{
 				"Chance": 1.51,
 				"Item": {
@@ -57333,12 +59406,8 @@
 		],
 		"Maps": [
 			{
-				"MapName": "um_dun01",
-				"Amount": 70
-			},
-			{
-				"MapName": "um_fild02",
-				"Amount": 25
+				"MapName": "xmas_dun02",
+				"Amount": 1
 			}
 		]
 	},
@@ -57369,6 +59438,8 @@
 		"NeedHit": 108,
 		"Element": "Water",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -57517,6 +59588,8 @@
 		"NeedHit": 108,
 		"Element": "Water",
 		"ElementLevel": 3,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -57660,6 +59733,8 @@
 		"NeedHit": 80,
 		"Element": "Water",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.11,
@@ -57789,29 +59864,31 @@
 		"Id": 1584,
 		"SpriteName": "TAMRUAN",
 		"Name": "Tamruan",
-		"Level": 70,
-		"HP": 193000,
-		"BaseExp": 88762,
-		"JobExp": 15667,
+		"Level": 52,
+		"HP": 10234,
+		"BaseExp": 5718,
+		"JobExp": 4882,
 		"Scale": "Large",
 		"Race": "Demon",
-		"IsMVP": true,
-		"Str": 1,
-		"Dex": 140,
-		"Agi": 85,
-		"Vit": 78,
-		"Int": 35,
-		"Luk": 60,
-		"Def": 20,
-		"MDef": 20,
-		"Atk": "1450~1770",
-		"Range": "2~15~18",
-		"Flee": 155,
-		"Hit": 210,
-		"NeedFlee": 285,
-		"NeedHit": 175,
-		"Element": "Neutral",
+		"IsMVP": false,
+		"Str": 80,
+		"Dex": 72,
+		"Agi": 62,
+		"Vit": 38,
+		"Int": 75,
+		"Luk": 15,
+		"Def": 15,
+		"MDef": 35,
+		"Atk": "489~534",
+		"Range": "1~15~18",
+		"Flee": 114,
+		"Hit": 124,
+		"NeedFlee": 199,
+		"NeedHit": 134,
+		"Element": "Shadow",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 48.51,
@@ -57896,7 +59973,45 @@
 					"Slots": 0,
 					"SellOvercharged": 12
 				}
-			},
+			}
+		],
+		"Maps": [
+			{
+				"MapName": "ayo_dun02",
+				"Amount": 100
+			}
+		]
+	},
+	{
+		"Id": 1583,
+		"SpriteName": "TAO_GUNKA",
+		"Name": "Tao Gunka",
+		"Level": 70,
+		"HP": 193000,
+		"BaseExp": 88762,
+		"JobExp": 15667,
+		"Scale": "Large",
+		"Race": "Demon",
+		"IsMVP": true,
+		"Str": 1,
+		"Dex": 140,
+		"Agi": 85,
+		"Vit": 78,
+		"Int": 35,
+		"Luk": 60,
+		"Def": 20,
+		"MDef": 20,
+		"Atk": "1450~1770",
+		"Range": "2~15~18",
+		"Flee": 155,
+		"Hit": 210,
+		"NeedFlee": 285,
+		"NeedHit": 175,
+		"Element": "Neutral",
+		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
+		"Drops": [
 			{
 				"Chance": 48.51,
 				"Item": {
@@ -58012,8 +60127,8 @@
 		],
 		"Maps": [
 			{
-				"MapName": "ayo_dun02",
-				"Amount": 100
+				"MapName": "beach_dun",
+				"Amount": 1
 			}
 		]
 	},
@@ -58044,6 +60159,8 @@
 		"NeedHit": 96,
 		"Element": "Neutral",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 46.57,
@@ -58196,6 +60313,8 @@
 		"NeedHit": 51,
 		"Element": "Shadow",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -58336,6 +60455,8 @@
 		"NeedHit": 127,
 		"Element": "Earth",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 35.01,
@@ -58470,6 +60591,8 @@
 		"NeedHit": 64,
 		"Element": "Water",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.46,
@@ -58616,6 +60739,8 @@
 		"NeedHit": 118,
 		"Element": "Earth",
 		"ElementLevel": 2,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [],
 		"Maps": [
 			{
@@ -58651,6 +60776,8 @@
 		"NeedHit": 142,
 		"Element": "Neutral",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 49.48,
@@ -58773,6 +60900,8 @@
 		"NeedHit": 30,
 		"Element": "Shadow",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 3.01,
@@ -58941,6 +61070,8 @@
 		"NeedHit": 32,
 		"Element": "Neutral",
 		"ElementLevel": 3,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 25.01,
@@ -59115,6 +61246,8 @@
 		"NeedHit": 22,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 25.01,
@@ -59183,6 +61316,8 @@
 		"NeedHit": 35,
 		"Element": "Water",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.51,
@@ -59339,6 +61474,8 @@
 		"NeedHit": 88,
 		"Element": "Fire",
 		"ElementLevel": 2,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 65.01,
@@ -59436,29 +61573,31 @@
 		"Id": 1279,
 		"SpriteName": "TRI_JOINT",
 		"Name": "Tri Joint",
-		"Level": 97,
-		"HP": 320700,
-		"BaseExp": 388500,
-		"JobExp": 271950,
-		"Scale": "Large",
-		"Race": "Brute",
-		"IsMVP": true,
-		"Str": 100,
-		"Dex": 105,
-		"Agi": 45,
-		"Vit": 55,
-		"Int": 65,
-		"Luk": 164,
-		"Def": 50,
-		"MDef": 54,
-		"Atk": "2438~3478",
-		"Range": "2~15~18",
-		"Flee": 142,
-		"Hit": 202,
-		"NeedFlee": 277,
-		"NeedHit": 162,
+		"Level": 32,
+		"HP": 2394,
+		"BaseExp": 1161,
+		"JobExp": 873,
+		"Scale": "Small",
+		"Race": "Insect",
+		"IsMVP": false,
+		"Str": 1,
+		"Dex": 67,
+		"Agi": 48,
+		"Vit": 24,
+		"Int": 10,
+		"Luk": 20,
+		"Def": 20,
+		"MDef": 5,
+		"Atk": "178~206",
+		"Range": "1~15~18",
+		"Flee": 80,
+		"Hit": 99,
+		"NeedFlee": 174,
+		"NeedHit": 100,
 		"Element": "Earth",
-		"ElementLevel": 2,
+		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 1.01,
@@ -59557,7 +61696,45 @@
 					"Slots": 0,
 					"SellOvercharged": 12
 				}
-			},
+			}
+		],
+		"Maps": [
+			{
+				"MapName": "beach_dun2",
+				"Amount": 20
+			}
+		]
+	},
+	{
+		"Id": 1312,
+		"SpriteName": "TURTLE_GENERAL",
+		"Name": "Turtle General",
+		"Level": 97,
+		"HP": 320700,
+		"BaseExp": 388500,
+		"JobExp": 271950,
+		"Scale": "Large",
+		"Race": "Brute",
+		"IsMVP": true,
+		"Str": 100,
+		"Dex": 105,
+		"Agi": 45,
+		"Vit": 55,
+		"Int": 65,
+		"Luk": 164,
+		"Def": 50,
+		"MDef": 54,
+		"Atk": "2438~3478",
+		"Range": "2~15~18",
+		"Flee": 142,
+		"Hit": 202,
+		"NeedFlee": 277,
+		"NeedHit": 162,
+		"Element": "Earth",
+		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
+		"Drops": [
 			{
 				"Chance": 0.09,
 				"Item": {
@@ -59673,8 +61850,8 @@
 		],
 		"Maps": [
 			{
-				"MapName": "beach_dun2",
-				"Amount": 20
+				"MapName": "tur_dun04",
+				"Amount": 1
 			}
 		]
 	},
@@ -59705,6 +61882,8 @@
 		"NeedHit": 150,
 		"Element": "Shadow",
 		"ElementLevel": 2,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 70,
@@ -59839,6 +62018,8 @@
 		"NeedHit": 58,
 		"Element": "Water",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.41,
@@ -59995,6 +62176,8 @@
 		"NeedHit": 58,
 		"Element": "Water",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.41,
@@ -60138,6 +62321,8 @@
 		"NeedHit": 89,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 2.01,
@@ -60302,6 +62487,8 @@
 		"NeedHit": 140,
 		"Element": "Shadow",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 40.01,
@@ -60436,6 +62623,8 @@
 		"NeedHit": 176,
 		"Element": "Shadow",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 50.01,
@@ -60579,6 +62768,8 @@
 		"NeedHit": 77,
 		"Element": "Undead",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -60735,6 +62926,8 @@
 		"NeedHit": 60,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 1.51,
@@ -60887,6 +63080,8 @@
 		"NeedHit": 66,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.51,
@@ -61043,6 +63238,8 @@
 		"NeedHit": 196,
 		"Element": "Wind",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 48.51,
@@ -61203,6 +63400,8 @@
 		"NeedHit": 105,
 		"Element": "Ghost",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 1.51,
@@ -61337,6 +63536,8 @@
 		"NeedHit": 105,
 		"Element": "Ghost",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.11,
@@ -61393,6 +63594,142 @@
 		]
 	},
 	{
+		"Id": 1630,
+		"SpriteName": "BACSOJIN_",
+		"Name": "White Lady",
+		"Level": 85,
+		"HP": 253221,
+		"BaseExp": 309000,
+		"JobExp": 307500,
+		"Scale": "Large",
+		"Race": "DemiHuman",
+		"IsMVP": true,
+		"Str": 52,
+		"Dex": 152,
+		"Agi": 65,
+		"Vit": 44,
+		"Int": 112,
+		"Luk": 35,
+		"Def": 20,
+		"MDef": 55,
+		"Atk": "1868~6124",
+		"Range": "3~15~18",
+		"Flee": 150,
+		"Hit": 237,
+		"NeedFlee": 312,
+		"NeedHit": 170,
+		"Element": "Wind",
+		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
+		"Drops": [
+			{
+				"Chance": 55.01,
+				"Item": {
+					"Id": 1020,
+					"AegisName": "Long_Hair",
+					"Name": "Black Hair",
+					"Type": "Misc",
+					"Buy": 292,
+					"Sell": 146,
+					"Weight": 1,
+					"Slots": 0,
+					"SellOvercharged": 181
+				}
+			},
+			{
+				"Chance": 50.01,
+				"Item": {
+					"Id": 603,
+					"AegisName": "Old_Blue_Box",
+					"Name": "Old Blue Box",
+					"Type": "Usable",
+					"Buy": 10000,
+					"Sell": 5000,
+					"Weight": 20,
+					"Slots": 0,
+					"SellOvercharged": 6200
+				}
+			},
+			{
+				"Chance": 0.51,
+				"Item": {
+					"Id": 12395,
+					"AegisName": "Tantanmen",
+					"Name": "Tantan Noodle",
+					"Type": "Usable",
+					"Buy": 20,
+					"Sell": 10,
+					"Weight": 5,
+					"Slots": 0,
+					"SellOvercharged": 12
+				}
+			},
+			{
+				"Chance": 30.01,
+				"Item": {
+					"Id": 7165,
+					"AegisName": "Limpid_Celestial_Robe",
+					"Name": "Transparent Celestial Robe",
+					"Type": "Misc",
+					"Buy": 650,
+					"Sell": 325,
+					"Weight": 1,
+					"Slots": 0,
+					"SellOvercharged": 403
+				}
+			},
+			{
+				"Chance": 10.01,
+				"Item": {
+					"Id": 7166,
+					"AegisName": "Soft_Silk_Cloth",
+					"Name": "Soft Silk",
+					"Type": "Misc",
+					"Buy": 1200,
+					"Sell": 600,
+					"Weight": 1,
+					"Slots": 0,
+					"SellOvercharged": 744
+				}
+			},
+			{
+				"Chance": 0.11,
+				"Item": {
+					"Id": 2234,
+					"AegisName": "Tiara",
+					"Name": "Tiara",
+					"Type": "Armor",
+					"Buy": 20,
+					"Sell": 10,
+					"Weight": 40,
+					"Slots": 0,
+					"SellOvercharged": 12
+				}
+			},
+			{
+				"Chance": 0.02,
+				"Item": {
+					"Id": 4372,
+					"AegisName": "Bacsojin_Card",
+					"Name": "White Lady Card",
+					"Type": "Card",
+					"Buy": 20,
+					"Sell": 10,
+					"Weight": 1,
+					"Slots": 0,
+					"SellOvercharged": 12
+				}
+			}
+		],
+		"Maps": [
+			{
+				"MapName": "lou_dun03",
+				"Amount": 1
+			}
+		]
+	},
+	{
 		"Id": 1082,
 		"SpriteName": "WHITE_PLANT",
 		"Name": "White Plant",
@@ -61419,6 +63756,8 @@
 		"NeedHit": 22,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 55.01,
@@ -61631,6 +63970,8 @@
 		"NeedHit": 143,
 		"Element": "Wind",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 53.36,
@@ -61779,6 +64120,8 @@
 		"NeedHit": 28,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -61951,6 +64294,8 @@
 		"NeedHit": 160,
 		"Element": "Wind",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 45.6,
@@ -62113,6 +64458,8 @@
 		"NeedHit": 65,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.21,
@@ -62277,6 +64624,8 @@
 		"NeedHit": 74,
 		"Element": "Fire",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.06,
@@ -62406,6 +64755,8 @@
 		"NeedHit": 151,
 		"Element": "Neutral",
 		"ElementLevel": 3,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 68.01,
@@ -62558,6 +64909,8 @@
 		"NeedHit": 102,
 		"Element": "Fire",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 45.01,
@@ -62718,6 +65071,8 @@
 		"NeedHit": 94,
 		"Element": "Earth",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 45.01,
@@ -62874,6 +65229,8 @@
 		"NeedHit": 48,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 0.61,
@@ -63034,6 +65391,8 @@
 		"NeedHit": 193,
 		"Element": "Undead",
 		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 44.14,
@@ -63182,6 +65541,8 @@
 		"NeedHit": 153,
 		"Element": "Undead",
 		"ElementLevel": 4,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 58.21,
@@ -63334,6 +65695,8 @@
 		"NeedHit": 116,
 		"Element": "Undead",
 		"ElementLevel": 2,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 38.81,
@@ -63472,6 +65835,8 @@
 		"NeedHit": 22,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 55.01,
@@ -63776,6 +66141,8 @@
 		"NeedHit": 65,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -63940,6 +66307,8 @@
 		"NeedHit": 63,
 		"Element": "Earth",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 60.01,
@@ -64083,6 +66452,8 @@
 		"NeedHit": 111,
 		"Element": "Wind",
 		"ElementLevel": 2,
+		"IsAggressive": null,
+		"CanDetectCast": null,
 		"Drops": [
 			{
 				"Chance": 80.01,
@@ -64203,6 +66574,8 @@
 		"NeedHit": 168,
 		"Element": "Neutral",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.06,
@@ -64351,6 +66724,8 @@
 		"NeedHit": 110,
 		"Element": "Shadow",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 55.01,
@@ -64485,6 +66860,8 @@
 		"NeedHit": 66,
 		"Element": "Fire",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 0.56,
@@ -64637,6 +67014,8 @@
 		"NeedHit": 136,
 		"Element": "Wind",
 		"ElementLevel": 2,
+		"IsAggressive": false,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 43.66,
@@ -64775,6 +67154,8 @@
 		"NeedHit": 80,
 		"Element": "Shadow",
 		"ElementLevel": 1,
+		"IsAggressive": false,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 44.63,
@@ -64899,6 +67280,8 @@
 		"NeedHit": 97,
 		"Element": "Undead",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 35.01,
@@ -65047,6 +67430,8 @@
 		"NeedHit": 43,
 		"Element": "Undead",
 		"ElementLevel": 1,
+		"IsAggressive": true,
+		"CanDetectCast": false,
 		"Drops": [
 			{
 				"Chance": 90.01,
@@ -65171,6 +67556,8 @@
 		"NeedHit": 127,
 		"Element": "Undead",
 		"ElementLevel": 3,
+		"IsAggressive": true,
+		"CanDetectCast": true,
 		"Drops": [
 			{
 				"Chance": 30.01,

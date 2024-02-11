@@ -1,0 +1,20 @@
+
+        "lockmap":"moc_fild01",
+
+            "prontera(156,22)",
+            "izlude(33,78)",
+            "prt_fild08(233,16)",
+            "pay_fild04(18,165)",
+            "moc_fild02(70,340)",
+            "prt_fild09(383,237)",
+            "moc_fild04(317,380)"
+
+        "(DESERT_WOLF_B)   Mob-ID#1107"
+
+
+        {"Name":"Converter Fire", "Id":12114, "MinHP":-1, "MinSP":-1,"BuffId": 1505 },
+
+
+        {"Name":"Blessing","Lv":10, "Id":34, "MinHP": -1, "MinSP": -1, "BuffId": 10},
+        {"Name":"Increase Agility","Lv":10, "Id":29, "MinHP": -1, "MinSP": -1, "BuffId": 12},
+        {"Name":"Heal", "Lv":3, "Id":28, "MinHP": 60, "MinSP": 60, "BuffId": -1}

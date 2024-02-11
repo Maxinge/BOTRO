@@ -51,6 +51,12 @@ func fctpackInit()  {
         fmt.Printf(" ####### [%v][%v] -> [%v]\n","skill_use", len(bb)+2, bb)
     }
 
+    fctpack["warp_portal_choice_recv"] = func (HexID []byte, bb []byte)  {
+        // fmt.Printf(" ####### [%v][%v] -> [%v]\n","warp_portal_choice_recv", len(bb)+2, bb)
+        fmt.Printf("####### warp_portal_choice_recv -> [%s]\n", bb[4:])
+    }
+
+
     fctpack["mem_data"] = func (HexID []byte, bb []byte)  {
         ii := 0
         MAP := strings.Split(string(bb[ii:ii+40]), ".rsw")[0]; ii += 40
@@ -72,6 +78,15 @@ func fctpackInit()  {
         SPLeft = int(SPLEFT)
         SPMax = int(SPMAX)
     }
+
+    // fctpack["warp_portal_send"] = func (HexID []byte, bb []byte)  {
+    //     fmt.Printf(" ####### [%v][%v] -> [%v]\n","warp_portal_send", len(bb)+2, bb)
+    // }
+    // fctpack["warp_portal_choice_send"] = func (HexID []byte, bb []byte)  {
+    //     fmt.Printf(" ####### [%v][%v] -> [%v]\n","warp_portal_choice_send", len(bb)+2, bb)
+    //     fmt.Printf("-> [%s]\n", bb[2:])
+    // }
+
 
 
     fctpack["actor_status_active"] = func (HexID []byte, bb []byte)  {
@@ -172,14 +187,26 @@ func fctpackInit()  {
         MUgroundItems.Unlock()
     }
 
+    fctpack["actor_moving_interrupt"] = func (HexID []byte, bb []byte)  {
+        // fmt.Printf(" ####### [%v][%v] -> [%v]\n","actor_moved", len(bb)+2, bb)
+        mapID := int(binary.LittleEndian.Uint32(bb[0:4]))
+        x := int(binary.LittleEndian.Uint16(bb[4:4+2]))
+        y := int(binary.LittleEndian.Uint16(bb[6:6+2]))
+        MUmobList.Lock()
+        if mm, exist := mobList[mapID]; exist {
+            mm.Coords.X = x; mm.Coords.Y = y
+            mobList[mapID] = mm
+        }
+        MUmobList.Unlock()
+    }
+
     fctpack["actor_moving"] = func (HexID []byte, bb []byte)  {
         // fmt.Printf(" ####### [%v][%v] -> [%v]\n","actor_moved", len(bb)+2, bb)
         mapID := int(binary.LittleEndian.Uint32(bb[0:4]))
         MUmobList.Lock()
         fromto := bits48ToCoords(bb[4:4+6])
         if mm, exist := mobList[mapID]; exist {
-            mm.Coords.X = fromto[2]
-            mm.Coords.Y = fromto[3]
+            mm.Coords.X = fromto[2]; mm.Coords.Y = fromto[3]
             mobList[mapID] = mm
         }
         MUmobList.Unlock()

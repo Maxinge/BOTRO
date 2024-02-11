@@ -134,7 +134,7 @@ func main() {
         imgui.Begin("Info")
 
         imgui.Text(fmt.Sprintf("Coords = X : %v / Y : %v | ID: %v", curCoord.X, curCoord.Y, accountId ))
-        imgui.Text(fmt.Sprintf("Map : %v - Next point : %v (dist:%v)", curMap, nextPoint, getDist(curCoord, nextPoint)))
+        imgui.Text(fmt.Sprintf("Map : %v - Next point : %v (dist:%v) mindist: %v", curMap, nextPoint, int(getDist(curCoord, nextPoint)),minDist))
 
         imgui.Text(fmt.Sprintf("\n timeInState --- %v", timeInState ))
         imgui.Text(fmt.Sprintf("\n targetMob [%v] ---  targetItem[%v]\n", targetMob, targetItem ))
@@ -214,7 +214,7 @@ func sendToServer(hexID string,data []byte){
 }
 
 
-type CRoute struct{ Map string; X int; Y int; }
+type CRoute struct{ Map string; X int; Y int; WarpPortal string; }
 type CMob struct{ Priority int; Id int; Name string; }
 type CItemLoot struct{ Priority int; Id int; Name string; }
 type CItemUse struct{ Id int; Name string; MinHP int; MinSP int; BuffId int; }

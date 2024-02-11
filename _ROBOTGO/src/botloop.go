@@ -14,6 +14,7 @@ type Coord struct {
 type Mob struct {
     MobID int
     Coords Coord
+    CoordsTo Coord
     HPMax int
     HPLeft int
 }
@@ -70,7 +71,7 @@ var(
     targetMobDead = -2
     targetItem = -1
     targetItemLooted = -2
-    attackDist = 1
+    attackDist = 2
     attackIndex = 0
 
     lockMap = ""
@@ -122,6 +123,32 @@ func sendUseSkill(id int, lv int, target int){
     arrayBin = append(arrayBin,skillIDBin...)
     arrayBin = append(arrayBin,targetBin...)
     sendToServer("0438", arrayBin)
+}
+
+func sendWarpPortal(lv int, x int, y int){
+    arrayBin := []byte{}
+    skillLVBin := make([]byte, 2)
+    binary.LittleEndian.PutUint16(skillLVBin, uint16(lv))
+    skillId := []byte{27, 0}
+    XBin := make([]byte, 2)
+    binary.LittleEndian.PutUint16(XBin, uint16(x))
+    YBin := make([]byte, 2)
+    binary.LittleEndian.PutUint16(YBin, uint16(y))
+    arrayBin = append(arrayBin,skillLVBin...)
+    arrayBin = append(arrayBin,skillId...)
+    arrayBin = append(arrayBin,XBin...)
+    arrayBin = append(arrayBin,YBin...)
+    arrayBin = append(arrayBin,byte(0))
+    sendToServer("0AF4", arrayBin)
+}
+
+func sendWarpPortalConfirm(choice string){
+    arrayBin := []byte{}
+    Id := []byte{27, 0}
+    byteStr := []byte(choice)
+    arrayBin = append(arrayBin, Id...)
+    arrayBin = append(arrayBin, byteStr[0:16]...)
+    sendToServer("011B", arrayBin)
 }
 
 func botLoop() {
@@ -221,14 +248,17 @@ func botLoop() {
         // #################################
         // #################################
 
+
         if targetMob == targetMobDead {
             targetMob = -1; targetMobDead = -2; nextPoint = Coord{X:0, Y:0}
-             time.Sleep(200 * time.Millisecond)
+            time.Sleep(200 * time.Millisecond)
         }
+        if !isInArray(targetMob, keyMap(mobList)){ targetMob = -1; }
+
         if targetItem == targetItemLooted { targetItem = -1; targetItemLooted = -2; nextPoint = Coord{X:0, Y:0} }
+        if !isInArray(targetItem, keyMap(groundItems)){ targetItem = -1; }
 
         MUgroundItems.Lock()
-        targetItem = -1
         for kk,vv := range groundItems { if getDist(vv.Coords, curCoord) > 40 { delete(groundItems, kk) } }
         for kk,vv := range groundItems {
             if curMap != lockMap { continue }
@@ -240,7 +270,6 @@ func botLoop() {
         MUgroundItems.Unlock()
 
         MUmobList.Lock()
-        targetMob = -1
         for kk,vv := range mobList { if getDist(vv.Coords, curCoord) > 40 { delete(mobList, kk) } }
         distMobList := map[float64]int{}
         for kk,vv := range mobList { distMobList[getDist(vv.Coords, curCoord)] = kk }
@@ -317,11 +346,12 @@ func botLoop() {
 
         if botStates == (States{InLockMap:true, HasTargetMob: true}) ||
            botStates == (States{InLockMap:true, HasTargetMob: true, HasDest:true}) ||
+           // botStates == (States{InLockMap:true, HasTargetMob: true, AtRange:true}) ||
            botStates == (States{InLockMap:true, HasTargetMob: true, HasDest:true, AtRange:true}) {
             MUmobList.Lock() ;  mob := mobList[targetMob] ; MUmobList.Unlock()
             nextPoint = mob.Coords
             curPath = pathfind(curCoord, nextPoint, lgatMaps[curMap])
-            pathIndex = 1 ; minDist = attackDist
+            pathIndex = 1 ; minDist = (conf["SkillTarget"][attackIndex].(CSkillTarget)).MinDist
         }
 
         if botStates == (States{InLockMap:true, HasTargetItem: true}) ||
@@ -340,10 +370,10 @@ func botLoop() {
         }
 
         if botStates == (States{InLockMap:true, HasTargetMob: true, HasDest:true, AtRange:true})  {
-            skill := conf["SkillTarget"][attackIndex]
+            skill := conf["SkillTarget"][attackIndex].(CSkillTarget)
             delay := 0
-            if skill.(CSkillTarget).Id != -1 {
-                sendUseSkill(skill.(CSkillTarget).Id, skill.(CSkillTarget).Lv, targetMob)
+            if skill.Id != -1 {
+                sendUseSkill(skill.Id, skill.Lv, targetMob)
             }else{
                 arrayBin := []byte{}
                 mobBin := make([]byte, 4)
@@ -383,6 +413,19 @@ func botLoop() {
         if botStates == (States{OnTheRoad:true}) ||
            botStates == (States{OnTheRoad:true, InSaveMap:true}) {
             if exist := getConf(conf["Route"],"Map",curMap); exist != nil {
+                time.Sleep(1000 * time.Millisecond)
+                if exist.(CRoute).WarpPortal != "" {
+                if itemInInventory(717,1) > 0 { // bluegem
+                    time.Sleep(2000 * time.Millisecond)
+                    warpPoint := randomPoint(lgatMaps[curMap],curCoord, 3)
+                    sendWarpPortal(4,warpPoint.X,warpPoint.Y)
+                    time.Sleep(2000 * time.Millisecond)
+                    sendWarpPortalConfirm(exist.(CRoute).WarpPortal)
+                    time.Sleep(2000 * time.Millisecond)
+                    sendToServer("035F",coordsTo24Bits(warpPoint.X,warpPoint.Y))
+                    time.Sleep(2000 * time.Millisecond)
+                    continue
+                }}
                 nextPoint = Coord{X:exist.(CRoute).X, Y:exist.(CRoute).Y}
                 curPath = pathfind(curCoord, nextPoint, lgatMaps[curMap])
                 pathIndex = 0 ; minDist = 1;

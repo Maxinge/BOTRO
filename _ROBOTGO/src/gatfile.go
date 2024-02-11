@@ -102,6 +102,27 @@ func loadGatTexture(mapName string)  {
 //     return ROGatMap{cells2: cells2, cells : cell_list, width : int(width), height : int(height)}
 // }
 
+// func prepareGat(gatMap *ROGatMap){
+// 	for x := 1; x < gatMap.width -1; x++{
+// 	for y := 1; y < gatMap.height -1; y++{
+// 		curCell := Coord{X: x, Y: y}
+// 		if isValidCell(gatMap.cells[x][y]) {
+// 		closeCells := firstCircleVectors()
+// 			for _,v := range closeCells {
+// 				vCell := Coord{X:curCell.X + v.X, Y:curCell.Y + v.Y }
+// 				oppositeCell := Coord{X:curCell.X + (v.X*-1), Y:curCell.Y +  (v.Y*-1)}
+// 				if vCell.X > gatMap.width -1 || vCell.Y > gatMap.height -1 { continue }
+// 				if vCell.X < 0 || vCell.Y < 0 { continue }
+// 				if !isValidCell(gatMap.cells[vCell.X][vCell.Y]){
+// 				if isValidCell(gatMap.cells[oppositeCell.X][oppositeCell.Y]){
+// 					gatMap.cells[x][y].cell_type = 2
+// 					break;
+// 				}}
+// 			}
+// 		}
+// 	}}
+// }
+
 // maps, _ := ioutil.ReadDir(CurDir()+"data/gats/")
 // for _, m := range maps {
 //     if !m.IsDir() {
