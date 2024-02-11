@@ -269,6 +269,29 @@ func sortFloatKeys(ii []interface{}) []float64 {
 // 	cmd.Run()
 // }
 
+func isInArray(ii interface{}, iii []interface{}) bool{
+    for _, vvv := range iii {
+		if (reflect.TypeOf(vvv).Kind()) == reflect.Int{
+        if (reflect.TypeOf(ii).Kind()) == reflect.Int{
+        if vvv.(int) == ii.(int) {
+            return true
+        }}}
+
+        if (reflect.TypeOf(vvv).Kind()) == reflect.Float64{
+        if (reflect.TypeOf(ii).Kind()) == reflect.Float64{
+        if vvv.(float64) == ii.(float64) {
+            return true
+        }}}
+
+        if (reflect.TypeOf(vvv).Kind()) == reflect.String{
+        if (reflect.TypeOf(ii).Kind()) == reflect.String{
+        if vvv.(string) == ii.(string) {
+            return true
+        }}}
+    }
+    return false
+}
+
 func strInArray(str string,arr []string) bool{
     for _, v := range arr { if str == v { return true } }
     return false

@@ -141,6 +141,7 @@ func main() {
         imgui.Text(fmt.Sprintf("\n strInfo --- \n%v", strInfo ))
 
         imgui.Text(fmt.Sprintf("\n states --- \n%v", printStruct(botStates) ))
+        imgui.Text(fmt.Sprintf("\n strBuffs --- \n%v", strBuffs ))
         imgui.Text(fmt.Sprintf("\n strMobs --- \n%v", strMobs ))
         imgui.Text(fmt.Sprintf("\n strInventoryItems --- \n%v", strInventoryItems ))
         imgui.Text(fmt.Sprintf("\n strGroundItems --- \n%v", strGroundItems ))
@@ -221,7 +222,7 @@ type CSKillSelf struct{ Id int; Lv int; Name string; MinHP int; MinSP int; BuffI
 type CSkillTarget struct{ Id int; Lv int; Name string; MinDist int; MinHP int; }
 
 func loadprofil(){
-    err := json.Unmarshal([]byte(readFileString(CurDir()+"profils/profil.json")), &profil)
+    err := json.Unmarshal([]byte(readFileString(CurDir()+"profils/_profil.json")), &profil)
     if err != nil { fmt.Printf("err json conf -- %v -- \n", err) }
 
 
@@ -251,7 +252,7 @@ func loadprofil(){
         conf["Mob"] = append(conf["Mob"], stru)
     }
     for _,vv := range profil["ItemLoot"] {
-        stru := CItemLoot{ Priority:1 }
+        stru := CItemLoot{ Priority:-1 }
         for kkk,vvv := range vv.(map[string]interface{}) {
             fld := reflect.ValueOf(&stru).Elem().FieldByName(kkk); convertField(vvv, fld)
         }

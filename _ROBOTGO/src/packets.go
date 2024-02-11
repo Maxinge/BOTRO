@@ -6,6 +6,7 @@ import(
     "reflect"
     "encoding/binary"
     "strings"
+    "time"
 )
 
 func parsePacket(fname string, args []reflect.Value){
@@ -70,6 +71,22 @@ func fctpackInit()  {
         weight = int(WEIGHT)
         SPLeft = int(SPLEFT)
         SPMax = int(SPMAX)
+    }
+
+
+    fctpack["actor_status_active"] = func (HexID []byte, bb []byte)  {
+        // HexID1 := fmt.Sprintf("%04X",binary.LittleEndian.Uint16(HexID))
+        // fmt.Printf("HexID1 [%v] \t", HexID1)
+        // fmt.Printf(" ####### [%v][%v] -> [%v]\n","actor_status_active", len(bb)+2, bb)
+        buffID := int(binary.LittleEndian.Uint16(bb[0:0+2]))
+        target := int(binary.LittleEndian.Uint32(bb[2:2+4]))
+        // timeLeft := int(binary.LittleEndian.Uint32(bb[7:7+4]))
+        timeLeft := int(binary.LittleEndian.Uint32(bb[11:11+4]))
+        if target == accountId {
+            MUbuffList.Lock()
+            buffList[buffID] = []int64{int64(timeLeft), time.Now().Unix()}
+            MUbuffList.Unlock()
+        }
     }
 
     fctpack["inventory_info"] = func (HexID []byte, bb []byte)  {

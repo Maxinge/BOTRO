@@ -22,3 +22,6 @@ la premiere compilation de cimguigo peu prendre du temps
 - mob agressif
 - esquive aoe
 - mob priority
+- skill delay / cast confirm + warp portal
+- item delay
+- map change delay

@@ -64,7 +64,7 @@ var(
     MUinventoryItems sync.Mutex
     inventoryItems = map[int]Item{}
     MUbuffList sync.Mutex
-    buffList = map[int]int{}
+    buffList = map[int][]int64{}
 
     targetMob = -1
     targetMobDead = -2
@@ -164,32 +164,58 @@ func botLoop() {
         // #################################
         // #################################
 
+        MUbuffList.Lock()
+        for kk,vv  := range buffList {
+            tBuffTot := vv[0]
+            tBuffAt := time.Unix(vv[1], 0)
+            timeLeft := time.Now().Sub(tBuffAt)
+            if (tBuffTot - timeLeft.Milliseconds()) < 0 { delete(buffList, kk); }
+        }
+        MUbuffList.Unlock()
+
         for _, vv := range conf["SKillSelf"] {
-            if vv.(CSKillSelf).MinHP > 0 && vv.(CSKillSelf).MinSP > 0{
-            if (float32(HPLeft)/float32(HPMax)*100) < float32(vv.(CSKillSelf).MinHP) {
-            if (float32(SPLeft)/float32(SPMax)*100) > float32(vv.(CSKillSelf).MinSP) {
-                sendUseSkill(vv.(CSKillSelf).Id, vv.(CSKillSelf).Lv, accountId)
+            sk := vv.(CSKillSelf)
+            if sk.MinHP > 0 && sk.MinSP > 0{
+            if (float32(HPLeft)/float32(HPMax)*100) < float32(sk.MinHP) {
+            if (float32(SPLeft)/float32(SPMax)*100) > float32(sk.MinSP) {
+                sendUseSkill(sk.Id, sk.Lv, accountId)
             }}}
+            if sk.BuffId > 0 {
+                MUbuffList.Lock()
+                if !isInArray(sk.BuffId, keyMap(buffList)){
+                    sendUseSkill(sk.Id, sk.Lv, accountId)
+                }
+                MUbuffList.Unlock()
+            }
         }
 
         // #################################
         // #################################
 
         for _, vv := range conf["ItemUse"] {
-            if vv.(CItemUse).MinHP > 0  {
-            if (float32(HPLeft)/float32(HPMax)*100) < float32(vv.(CItemUse).MinHP) {
+            it := vv.(CItemUse)
+            if it.MinHP > 0  {
+            if (float32(HPLeft)/float32(HPMax)*100) < float32(it.MinHP) {
                 MUinventoryItems.Lock()
-                inventID := itemInInventory(vv.(CItemUse).Id, 1)
+                inventID := itemInInventory(it.Id, 1)
                 if inventID > -1  { sendUseItem(inventID) }
                 MUinventoryItems.Unlock()
             }}
-            if vv.(CItemUse).MinSP > 0  {
-            if (float32(SPLeft)/float32(SPMax)*100) < float32(vv.(CItemUse).MinSP) {
+            if it.MinSP > 0  {
+            if (float32(SPLeft)/float32(SPMax)*100) < float32(it.MinSP) {
                 MUinventoryItems.Lock()
-                inventID := itemInInventory(vv.(CItemUse).Id, 1)
+                inventID := itemInInventory(it.Id, 1)
                 if inventID > -1  { sendUseItem(inventID) }
                 MUinventoryItems.Unlock()
             }}
+            if it.BuffId > 0 {
+                MUbuffList.Lock()
+                if !isInArray(it.BuffId, keyMap(buffList)){
+                    inventID := itemInInventory(it.Id, 1)
+                    if inventID > -1  { sendUseItem(inventID) }
+                }
+                MUbuffList.Unlock()
+            }
         }
 
         // #################################
@@ -377,6 +403,7 @@ func botLoop() {
 var (
     strInfo = ""
     strMobs = ""
+    strBuffs = ""
     strInventoryItems = ""
     strGroundItems = ""
 )
@@ -389,6 +416,18 @@ func infoUILoop() {
         strInfo = "HP : "+Itos(HPLeft)+"/"+Itos(HPMax)+"("+Itos(HPpc)+"%) "
         strInfo += "| SP : "+Itos(SPLeft)+"/"+Itos(SPMax)+" ("+Itos(SPpc)+"%)"
         strInfo += "| W: "+Itos(maxWeight)+"/"+Itos(weight)
+
+
+
+
+        strBuffs = ""
+        MUbuffList.Lock()
+        for _, kkk := range sortIntKeys(keyMap(buffList)) {
+            iii := buffList[kkk]
+            timeLeft := iii[0]-( (time.Now().Sub(time.Unix(iii[1], 0))).Milliseconds() )
+            strBuffs += "["+Itos(kkk)+"] " + fmt.Sprintf("%v",timeLeft)+"\n"
+        }
+        MUbuffList.Unlock()
 
         strInventoryItems = ""
         MUinventoryItems.Lock()
