@@ -1,0 +1,33 @@
+{
+    "General":[
+        ["Title",    "elderwillow/eggyra warp Acolyte"],
+        ["accountID",    2014282],
+
+        ["lockMap",      "job_monk"],
+        ["saveMap",      "morocc"],
+        ["useTPLockMap",  0],
+        ["useTPOnRoad",   1],
+        ["useTPDelay",   20],
+        ["useSitHP",     10],
+        ["useSitSP",     10]
+    ],
+    "Route":[
+    ],
+    "Mob":[
+        {"Priority":2, "Id":1182,   "Name":"mushroom1"},
+        {"Priority":1, "Id":1051,   "Name":"mushroom2"}
+    ],
+    "ItemLoot":[
+    ],
+    "ItemUse":[
+        {"Name":"Concentration Potion", "Id":645, "MinHP":-1, "MinSP":-1,"BuffId": 37 }
+    ],
+    "SKillSelf":[
+        {"Name":"Blessing","Lv":10, "Id":34, "MinHP": -1, "MinSP": -1, "BuffId": 10},
+        {"Name":"Increase Agility","Lv":10, "Id":29, "MinHP": -1, "MinSP": -1, "BuffId": 12},
+        {"Name":"Heal", "Lv":3, "Id":28, "MinHP": 60, "MinSP": 30, "BuffId": -1}
+    ],
+    "SkillTarget":[
+        {"Name":"auto_attack", "MinDist": 5, "MinHP": 0}
+    ]
+}

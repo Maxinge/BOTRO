@@ -3,111 +3,50 @@ package main
 import(
     "fmt"
     "strconv"
-    "reflect"
+    // "reflect"
     "encoding/binary"
     "strings"
     "time"
 )
 
-func parsePacket(fname string, args []reflect.Value){
-    function := reflect.ValueOf(fctpack[fname])
-    if function.Kind() == reflect.Func && fctpack[fname] != nil{
-        function.Call(args)
-    }
-}
+func parsePacket(bb []byte){
+    hexID := fmt.Sprintf("%04X",binary.LittleEndian.Uint16(bb[0:2]))
+    bb = bb[2:]
 
+    switch hexID {
+    default:
+        // fmt.Printf("### no_fct ### [%v][%v] -> [%v] \n", hexID, len(bb),bb)
 
-func fctpackInit()  {
-    fctpack = map[string]func([]byte, []byte){}
-
-    // for k := range packetsMap {
-    //     fctpack[packetsMap[k].Ident] = func (HexID []byte, bb []byte)  {
-    //         HexID1 := fmt.Sprintf("%04X",binary.LittleEndian.Uint16(HexID))
-    //         name := packetsMap[HexID1].Ident
-    //         fmt.Printf("[%v][%v][%v]\t ",name, HexID1, len(bb)+2)
-    //         fmt.Printf("-> [%v]\n", bb)
-    //     }
-    // }
-
-    // fctpack["account_id"] = func (HexID []byte, bb []byte)  {
-    //     myActorID = int(binary.LittleEndian.Uint32(bb[0:0+4]))
-    //     fmt.Printf("#### myActorID-> [%v]\n", myActorID)
-    // }
-
-    fctpack["uknw_pck"] = func (HexID []byte, bb []byte)  {
-        HexID1 := fmt.Sprintf("%04X",binary.LittleEndian.Uint16(HexID))
-        HexID2 := fmt.Sprintf("%04X",binary.LittleEndian.Uint16(bb[0:2]))
-        fmt.Printf("uknw_pck ####### [%v][%v] -> [%v] \t", HexID1, HexID2, len(bb)+2)
-        fmt.Printf("-> [%v]\n", bb)
-    }
-
-    fctpack["chat_main"] = func (HexID []byte, bb []byte)  {}
-    fctpack["send_sync_serv"] = func (HexID []byte, bb []byte)  {}
-    fctpack["recv_sync_serv"] = func (HexID []byte, bb []byte)  {}
-    fctpack["recv_self_move_to"] = func (HexID []byte, bb []byte)  {}
-
-
-    fctpack["skill_use"] = func (HexID []byte, bb []byte)  {
-        fmt.Printf(" ####### [%v][%v] -> [%v]\n","skill_use", len(bb)+2, bb)
-    }
-
-    fctpack["warp_portal_choice_recv"] = func (HexID []byte, bb []byte)  {
-        // fmt.Printf(" ####### [%v][%v] -> [%v]\n","warp_portal_choice_recv", len(bb)+2, bb)
-        fmt.Printf("####### warp_portal_choice_recv -> [%s]\n", bb[4:])
-    }
-
-
-    fctpack["mem_data"] = func (HexID []byte, bb []byte)  {
+    case "1414":  //mem_data
         ii := 0
-        MAP := strings.Split(string(bb[ii:ii+40]), ".rsw")[0]; ii += 40
-        XPOS := binary.LittleEndian.Uint32(bb[ii:ii+4]); ii += 4
-        YPOS := binary.LittleEndian.Uint32(bb[ii:ii+4]); ii += 4
-        HPLEFT := binary.LittleEndian.Uint32(bb[ii:ii+4]); ii += 4
-        HPMAX := binary.LittleEndian.Uint32(bb[ii:ii+4]); ii += 4
-        WEIGHTMAX := binary.LittleEndian.Uint32(bb[ii:ii+4]); ii += 4
-        WEIGHT := binary.LittleEndian.Uint32(bb[ii:ii+4]); ii += 4
-        SPLEFT := binary.LittleEndian.Uint32(bb[ii:ii+4]); ii += 4
-        SPMAX := binary.LittleEndian.Uint32(bb[ii:ii+4]); ii += 4
+        XPOS = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));           ii += 4
+        YPOS = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));           ii += 4
+        BASEXPMAX = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));      ii += 4
+        BASEEXP = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));        ii += 4
+        JOBXPMAX = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));       ii += 4
+        JOBEXP = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));         ii += 4
+        CHARNAME = strings.Split(string(bb[ii:ii+24]), "\x00")[0];     ii += 24
+        BASELV = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));         ii += 4
+        JOBLV = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));          ii += 4
+        ZENY = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));           ii += 4
+        MAP = strings.Split(string(bb[ii:ii+24]), ".rsw")[0];          ii += 24
+        HPLEFT = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));         ii += 4
+        HPMAX = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));          ii += 4
+        WEIGHTMAX = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));      ii += 4
+        WEIGHT = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));         ii += 4
+        SPLEFT = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));         ii += 4
+        SPMAX = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));          ii += 4
 
-        curMap = MAP
-        curCoord = Coord{X:int(XPOS),Y:int(YPOS)}
-        HPLeft = int(HPLEFT)
-        HPMax = int(HPMAX)
-        maxWeight = int(WEIGHTMAX)
-        weight = int(WEIGHT)
-        SPLeft = int(SPLEFT)
-        SPMax = int(SPMAX)
-    }
+    case "007D":  //map_loaded_ask
+        needWait = 500
+        SSphere = 0
 
-    // fctpack["warp_portal_send"] = func (HexID []byte, bb []byte)  {
-    //     fmt.Printf(" ####### [%v][%v] -> [%v]\n","warp_portal_send", len(bb)+2, bb)
-    // }
-    // fctpack["warp_portal_choice_send"] = func (HexID []byte, bb []byte)  {
-    //     fmt.Printf(" ####### [%v][%v] -> [%v]\n","warp_portal_choice_send", len(bb)+2, bb)
-    //     fmt.Printf("-> [%s]\n", bb[2:])
-    // }
-
-
-
-    fctpack["actor_status_active"] = func (HexID []byte, bb []byte)  {
-        // HexID1 := fmt.Sprintf("%04X",binary.LittleEndian.Uint16(HexID))
-        // fmt.Printf("HexID1 [%v] \t", HexID1)
-        // fmt.Printf(" ####### [%v][%v] -> [%v]\n","actor_status_active", len(bb)+2, bb)
-        buffID := int(binary.LittleEndian.Uint16(bb[0:0+2]))
-        target := int(binary.LittleEndian.Uint32(bb[2:2+4]))
-        // timeLeft := int(binary.LittleEndian.Uint32(bb[7:7+4]))
-        timeLeft := int(binary.LittleEndian.Uint32(bb[11:11+4]))
-        if target == accountId {
-            MUbuffList.Lock()
-            buffList[buffID] = []int64{int64(timeLeft), time.Now().Unix()}
-            MUbuffList.Unlock()
-        }
-    }
-
-    fctpack["inventory_info"] = func (HexID []byte, bb []byte)  {
-        HexID1 := fmt.Sprintf("%04X",binary.LittleEndian.Uint16(HexID))
+    case "0091":
+        fmt.Printf("### 0091 ### [%v][%v] -> [%v] \n", hexID, len(bb),bb)
+        
+    case "0B09", "0B0A":  //inventory_info
         // inventoryType := bb[2]
-        if HexID1 == "0B09" {
+        if hexID == "0B09" {
             for ii := 3; ii < len(bb); ii+=34 {
                 inventoryID := int(binary.LittleEndian.Uint16(bb[ii:ii+2]))
                 itemID := int(binary.LittleEndian.Uint32(bb[ii+2:ii+2+4]))
@@ -117,7 +56,7 @@ func fctpackInit()  {
                 MUinventoryItems.Unlock()
             }
         }
-        if HexID1 == "0B0A" {
+        if hexID == "0B0A" {
             for ii := 3; ii < len(bb); ii+=67 {
                 inventoryID := int(binary.LittleEndian.Uint16(bb[ii:ii+2]))
                 itemID := int(binary.LittleEndian.Uint32(bb[ii+2:ii+2+4]))
@@ -126,25 +65,44 @@ func fctpackInit()  {
                 MUinventoryItems.Unlock()
             }
         }
-    }
 
+    case "01C8":  //item_use
+        inventoryID := int(binary.LittleEndian.Uint16(bb[0:0+2]))
+        // itemID := int(binary.LittleEndian.Uint32(bb[2:2+4]))
+        amountLeft := int(binary.LittleEndian.Uint16(bb[10:10+2]))
+        if ii, exist := inventoryItems[inventoryID]; exist {
+            ii.Amount = amountLeft
+            inventoryItems[inventoryID] = ii
+        }
 
+    case "0ADD":  //item_appear
+        mapID := int(binary.LittleEndian.Uint32(bb[0:0+4]))
+        itemID := int(binary.LittleEndian.Uint16(bb[4:4+2]))
+        x := int(binary.LittleEndian.Uint16(bb[11:13]))
+        y := int(binary.LittleEndian.Uint16(bb[13:15]))
+        amount := int(binary.LittleEndian.Uint16(bb[17:19]))
+        MUgroundItems.Lock()
+        groundItems[mapID] = Item{ ItemID:itemID, Coords:Coord{X:x,Y:y}, Amount:amount}
+        MUgroundItems.Unlock()
 
-    fctpack["inventory_item_added"] = func (HexID []byte, bb []byte)  {
+    case "00A1":  //item_disappear
+        MUgroundItems.Lock()
+        delete(groundItems, int(byteArrayToUInt32(bb[0:4])))
+        MUgroundItems.Unlock()
+
+    case "0A37":  //inventory_item_added
         inventoryID := int(binary.LittleEndian.Uint16(bb[0:0+2]))
         amount := int(binary.LittleEndian.Uint16(bb[2:2+2]))
         itemID := int(binary.LittleEndian.Uint32(bb[4:4+4]))
         MUinventoryItems.Lock()
         if ii, exist := inventoryItems[inventoryID]; exist {
-            ii.Amount += amount
-            inventoryItems[inventoryID] = ii
+            ii.Amount += amount; inventoryItems[inventoryID] = ii
         }else{
             inventoryItems[inventoryID] = Item{ ItemID:itemID, Coords:Coord{X:0,Y:0}, Amount:amount}
         }
         MUinventoryItems.Unlock()
-    }
 
-    fctpack["inventory_item_removed"] = func (HexID []byte, bb []byte)  {
+    case "00AF":  //inventory_item_removed
         inventoryID := int(binary.LittleEndian.Uint16(bb[0:0+2]))
         amount := int(binary.LittleEndian.Uint16(bb[2:2+2]))
         if ii, exist := inventoryItems[inventoryID]; exist {
@@ -157,65 +115,68 @@ func fctpackInit()  {
                 inventoryItems[inventoryID] = ii
             }
         }
-    }
 
-    fctpack["item_used"] = func (HexID []byte, bb []byte)  {
-        inventoryID := int(binary.LittleEndian.Uint16(bb[0:0+2]))
-        // itemID := int(binary.LittleEndian.Uint32(bb[2:2+4]))
-        amountLeft := int(binary.LittleEndian.Uint16(bb[10:10+2]))
-        if ii, exist := inventoryItems[inventoryID]; exist {
-            ii.Amount = amountLeft
-            inventoryItems[inventoryID] = ii
+    case "0B1A":  //skill_use_confirm
+        sourceID := int(binary.LittleEndian.Uint32(bb[0:0+4]))
+        // targetID := int(binary.LittleEndian.Uint32(bb[4:4+4]))
+        // skillId := int(binary.LittleEndian.Uint16(bb[12:12+2]))
+        castTime := int(binary.LittleEndian.Uint32(bb[18:18+4]))
+        if sourceID == accountID {
+            needWait = castTime + 200
         }
-    }
 
-    fctpack["item_appear"] = func (HexID []byte, bb []byte)  {
-        mapID := int(binary.LittleEndian.Uint32(bb[0:0+4]))
-        itemID := int(binary.LittleEndian.Uint16(bb[4:4+2]))
-        x := int(binary.LittleEndian.Uint16(bb[11:13]))
-        y := int(binary.LittleEndian.Uint16(bb[13:15]))
-        amount := int(binary.LittleEndian.Uint16(bb[17:19]))
-        MUgroundItems.Lock()
-        groundItems[mapID] = Item{ ItemID:itemID, Coords:Coord{X:x,Y:y}, Amount:amount}
-        MUgroundItems.Unlock()
-    }
+    case "01D0":  //spirit_sphere
+        targetID := int(binary.LittleEndian.Uint32(bb[0:0+4]))
+        number := int(binary.LittleEndian.Uint16(bb[4:4+2]))
+        if targetID == accountID { SSphere = number }
 
-    fctpack["item_disappear"] = func (HexID []byte, bb []byte)  {
-        targetItemLooted = int(byteArrayToUInt32(bb[0:4]))
-        MUgroundItems.Lock()
-        delete(groundItems, targetItemLooted)
-        MUgroundItems.Unlock()
-    }
+    case "0983":  //actor_buffs_active
+        buffID := int(binary.LittleEndian.Uint16(bb[0:0+2]))
+        target := int(binary.LittleEndian.Uint32(bb[2:2+4]))
+        timeLeft := int(binary.LittleEndian.Uint32(bb[11:11+4]))
+        if target == accountID {
+            now := time.Now()
+            MUbuffList.Lock()
+            buffList[buffID] = []int64{int64(timeLeft), now.Unix()}
+            MUbuffList.Unlock()
+        }
 
-    fctpack["actor_moving_interrupt"] = func (HexID []byte, bb []byte)  {
-        // fmt.Printf(" ####### [%v][%v] -> [%v]\n","actor_moved", len(bb)+2, bb)
+    case "0086":  //actor_moving
+        mapID := int(binary.LittleEndian.Uint32(bb[0:4]))
+        now := time.Now()
+        MUmobList.Lock()
+        fromto := bits48ToCoords(bb[4:4+6])
+        if mm, exist := mobList[mapID]; exist {
+            mm.CoordsTo.X = fromto[2]; mm.CoordsTo.Y = fromto[3]
+            mm.LastMoveTime = now.Unix()
+            mm.PathTo = pathfind(mm.Coords, mm.CoordsTo, lgatMaps[MAP])
+            mobList[mapID] = mm
+        }
+        MUmobList.Unlock()
+
+    case "08CD":  //actor_moving_interrupt
         mapID := int(binary.LittleEndian.Uint32(bb[0:4]))
         x := int(binary.LittleEndian.Uint16(bb[4:4+2]))
         y := int(binary.LittleEndian.Uint16(bb[6:6+2]))
         MUmobList.Lock()
         if mm, exist := mobList[mapID]; exist {
             mm.Coords.X = x; mm.Coords.Y = y
+            mm.LastMoveTime = 0
             mobList[mapID] = mm
         }
         MUmobList.Unlock()
-    }
 
-    fctpack["actor_moving"] = func (HexID []byte, bb []byte)  {
-        // fmt.Printf(" ####### [%v][%v] -> [%v]\n","actor_moved", len(bb)+2, bb)
-        mapID := int(binary.LittleEndian.Uint32(bb[0:4]))
+    case "0080":  //actor_dead_disapear
+        mapID := int(binary.LittleEndian.Uint32(bb[0:0+4]))
+        // if bb[4] == 1 { targetMobDead = mapID }
         MUmobList.Lock()
-        fromto := bits48ToCoords(bb[4:4+6])
-        if mm, exist := mobList[mapID]; exist {
-            mm.Coords.X = fromto[2]; mm.Coords.Y = fromto[3]
-            mobList[mapID] = mm
-        }
+        delete(mobList, mapID)
         MUmobList.Unlock()
-    }
 
-    // ## type : 5 = mob / 6 = npc
-    fctpack["actor_appear"] = func (HexID []byte, bb []byte)  {
+    case "09FD", "09FF":  //actor_appear
         mapID := int(binary.LittleEndian.Uint32(bb[3:3+4]))
         mobID := int(binary.LittleEndian.Uint16(bb[21:21+4]))
+        moveSpeed := int(binary.LittleEndian.Uint16(bb[11:11+2]))
         actorType := byte(bb[2])
         cc := Coord{X:0,Y:0}
         index := 0
@@ -225,22 +186,65 @@ func fctpackInit()  {
         cc.X = bc[0]; cc.Y = bc[1];
         if actorType == 5  {
             MUmobList.Lock()
-            mobList[mapID] = Mob{ MobID:mobID, Coords:cc }
+            mobList[mapID] = Mob{ MobID:mobID, Coords:cc, MoveSpeed:moveSpeed }
             MUmobList.Unlock()
         }
-    }
 
-    fctpack["actor_dead_disapear"] = func (HexID []byte, bb []byte)  {
-        mapID := int(binary.LittleEndian.Uint32(bb[0:0+4]))
-        if bb[4] == 1 { targetMobDead = mapID }
+    case "01DE", "09CB", "08C8":  //skill_used_on_target //skill_no_dmg //actor_action
+        sourceii := 0 ; targetii := 0
+        if hexID == "01DE" { sourceii = 2 ; targetii = 6 }
+        if hexID == "09CB" { sourceii = 10 ; targetii = 6 }
+        if hexID == "08C8" { sourceii = 0 ; targetii = 4 }
+        sourceID := int(binary.LittleEndian.Uint32(bb[sourceii:sourceii+4]))
+        targetID := int(binary.LittleEndian.Uint32(bb[targetii:targetii+4]))
+        // dmg := int(binary.LittleEndian.Uint32(bb[20:20+4]))
+        if hexID == "08C8" && bb[27] != 1 { return } //autoattack
+
+        if sourceID != accountID {
+            MUmobList.Lock()
+            if mm, exist := mobList[targetID]; exist {
+                mm.IsNotValid = true;
+                mobList[targetID] = mm
+            }
+            MUmobList.Unlock()
+        }
         MUmobList.Lock()
-        delete(mobList, targetMobDead)
+        if mm, exist := mobList[sourceID]; exist {
+        if targetID == accountID {
+            mm.IsNotValid = false;
+            mobList[sourceID] = mm
+        }}
         MUmobList.Unlock()
+
+
+    // #######################
+    case "0A30":  //actor_info
+    case "00C0":  //emote
+    case "0438":  //skill_use_send
+
+    case "0360":  //send_sync_serv
+    case "007F":  //recv_sync_serv
+    case "02C1":  //chat_main
+    case "009A":  //serv_announc
+    case "0439":  //item_use_send
+    case "009D":  //item_exist
+    case "0362":  //try_item_loot
+    case "0A0A":  //storage_item_added
+    case "035F":  //send_self_move_to
+    case "0087":  //recv_self_move_to
+    case "011B":  //warp_portal_choice_send
+    case "0ABE":  //warp_portal_choice_recv
+    case "0AF4":  //skill_use_aoe_recv
+    case "0110":  //skill_use_failed
+    case "0118":  //stop_attack
+    case "0437":  //start_attack
+    case "0ACC":  //get_exp
+    case "0368":  //actor_info_request
+    case "008A":  //actor_action
     }
-
-
 
 }
+
 
 // #######################
 func coordsTo24Bits(x int, y int /*, direction int*/) []byte {

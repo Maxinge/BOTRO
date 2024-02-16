@@ -27,4 +27,3 @@ la premiere compilation de cimguigo peu prendre du temps
 - map change delay
 - /sit
 - mob move walk speed prévision coords
-- extract les GRF

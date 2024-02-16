@@ -1,26 +1,26 @@
 {
     "General":[
-        ["Title",    "elderwillow/eggyra warp Acolyte"],
-        ["accountId",    2014282],
+        ["Title",    "Muka peco egg Acolyte"],
+        ["accountID",    2014282],
 
-        ["lockMap",      "pay_fild07"],
+        ["lockMap",      "moc_fild10"],
         ["saveMap",      "morocc"],
         ["useTPLockMap",  1],
         ["useTPOnRoad",   1],
-        ["useTPDelay",   20],
+        ["useTPDelay",   10],
         ["useSitHP",     10],
         ["useSitSP",     10]
     ],
     "Route":[
-        {"Map":"morocc",        "X":0,    "Y":0,  "WarpPortal": "pay_fild07.gat"},
-        {"Map":"pay_fild08",    "X":160,     "Y":16},
-        {"Map":"pay_fild03",    "X":172,     "Y":281},
-        {"Map":"pay_fild01",    "X":379,    "Y":201},
-        {"Map":"pay_fild10",    "X":16,     "Y":290}
+        {"Map":"morocc",        "X":297,    "Y":207},
+        {"Map":"moc_fild06",    "X":207,     "Y":19},
+        {"Map":"moc_fild11",    "X":189,    "Y":362},
+        {"Map":"moc_fild09",    "X":31,     "Y":162}
     ],
     "Mob":[
-        {"Priority":2, "Id":1033,   "Name":"elder willow"},
-        {"Priority":1, "Id":1116,   "Name":"eggyra"}
+        {"Priority":-2, "Id":1091,   "Name":"DRAGON_FLY"},
+        {"Priority":2, "Id":1047,   "Name":"PECOPECO_EGG"},
+        {"Priority":1, "Id":1055,   "Name":"MUKA"}
     ],
     "ItemLoot":[
         {"Id":517,   "Name":"Meat"},
@@ -37,14 +37,15 @@
     "ItemUse":[
         {"Name":"Fresh Bread", "Id":8076, "MinHP":30, "MinSP":-1 },
         {"Name":"Concentration Potion", "Id":645, "MinHP":-1, "MinSP":-1,"BuffId": 37 },
-        {"Name":"Converter Water", "Id":12115, "MinHP":-1, "MinSP":-1,"BuffId": 1505 }
+        {"Name":"Converter Fire", "Id":12114, "MinHP":-1, "MinSP":-1,"BuffId": 1505 }
+
     ],
     "SKillSelf":[
         {"Name":"Blessing","Lv":10, "Id":34, "MinHP": -1, "MinSP": -1, "BuffId": 10},
         {"Name":"Increase Agility","Lv":10, "Id":29, "MinHP": -1, "MinSP": -1, "BuffId": 12},
-        {"Name":"Heal", "Lv":3, "Id":28, "MinHP": 60, "MinSP": 30, "BuffId": -1}
+        {"Name":"Heal", "Lv":3, "Id":28, "MinHP": 60, "MinSP": 60, "BuffId": -1}
     ],
     "SkillTarget":[
-        {"Name":"auto_attack", "MinDist": 5, "MinHP": 0}
+        {"Name":"auto_attack", "MinDist": 7, "MinHP": 0}
     ]
 }

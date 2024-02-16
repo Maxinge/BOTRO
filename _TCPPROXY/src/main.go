@@ -11,14 +11,15 @@ import(
     "encoding/binary"
 )
 
+var(
+    servAddr = "51.81.56.97"
+    exit = make(chan bool)
+    ports = []int{6900, 5121, 6121, 6666, 6667}
 
-var servAddr = "51.81.56.97"
-var exit = make(chan bool)
-var ports = []int{6900, 5121, 6121, 6666}
-
-var sendConn net.Conn
-var botConn net.Conn
-
+    sendConn net.Conn
+    botConn net.Conn
+    clientConn net.Conn
+)
 
 func main() {
 
@@ -100,44 +101,75 @@ func main() {
 
             bb := []byte{20,20}
 
-            // MAP ## 0x00CBACF0
-            err = windows.ReadProcessMemory(processHandle, 0x00CBACF0, &buffer2[0], uintptr(40), nil)
-            bb = append(bb,buffer2[0:40]...)
-
             // XPOS ## 0x00F2EA98
-            err = windows.ReadProcessMemory(processHandle, 0x00F2EA98, &buffer2[0], uintptr(4), nil)
+            windows.ReadProcessMemory(processHandle, 0x00F2EA98, &buffer2[0], uintptr(4), nil)
             bb = append(bb,buffer2[0:4]...)
 
             // YPOS ## 0x00F2EA9C
-            err = windows.ReadProcessMemory(processHandle, 0x00F2EA9C, &buffer2[0], uintptr(4), nil)
+            windows.ReadProcessMemory(processHandle, 0x00F2EA9C, &buffer2[0], uintptr(4), nil)
             bb = append(bb,buffer2[0:4]...)
 
+            // BASEXPMAX ## 0x00F422A0
+            windows.ReadProcessMemory(processHandle, 0x00F422A0, &buffer2[0], uintptr(4), nil)
+            bb = append(bb,buffer2[0:4]...)
+
+            // BASEEXP ## 0x00F42298
+            windows.ReadProcessMemory(processHandle, 0x00F42298, &buffer2[0], uintptr(4), nil)
+            bb = append(bb,buffer2[0:4]...)
+
+            // JOBXPMAX ## 0x00F422A8
+            windows.ReadProcessMemory(processHandle, 0x00F422A8, &buffer2[0], uintptr(4), nil)
+            bb = append(bb,buffer2[0:4]...)
+
+            // JOBEXP ## 0x00F422B0
+            windows.ReadProcessMemory(processHandle, 0x00F422B0, &buffer2[0], uintptr(4), nil)
+            bb = append(bb,buffer2[0:4]...)
+
+            // CHARNAME ## 0x00F48798
+            windows.ReadProcessMemory(processHandle, 0x00F48798, &buffer2[0], uintptr(24), nil)
+            bb = append(bb,buffer2[0:24]...)
+
+            // BASELV ## 0x00F422B8
+            windows.ReadProcessMemory(processHandle, 0x00F422B8, &buffer2[0], uintptr(4), nil)
+            bb = append(bb,buffer2[0:4]...)
+
+            // JOBLV ## 0x00F422C0
+            windows.ReadProcessMemory(processHandle, 0x00F422C0, &buffer2[0], uintptr(4), nil)
+            bb = append(bb,buffer2[0:4]...)
+
+            // ZENY ## 0x00F42358
+            windows.ReadProcessMemory(processHandle, 0x00F42358, &buffer2[0], uintptr(4), nil)
+            bb = append(bb,buffer2[0:4]...)
+
+            // MAP ## 0x00CBACF0
+            windows.ReadProcessMemory(processHandle, 0x00CBACF0, &buffer2[0], uintptr(24), nil)
+            bb = append(bb,buffer2[0:24]...)
+
             // HPLEFT ## 0x00F45E54
-            err = windows.ReadProcessMemory(processHandle, 0x00F45E54, &buffer2[0], uintptr(4), nil)
+            windows.ReadProcessMemory(processHandle, 0x00F45E54, &buffer2[0], uintptr(4), nil)
             bb = append(bb,buffer2[0:4]...)
 
             // HPMAX ## 0x00F45E58
-            err = windows.ReadProcessMemory(processHandle, 0x00F45E58, &buffer2[0], uintptr(4), nil)
+            windows.ReadProcessMemory(processHandle, 0x00F45E58, &buffer2[0], uintptr(4), nil)
             bb = append(bb,buffer2[0:4]...)
 
             // WEIGHTMAX ## 0x00F42364
-            err = windows.ReadProcessMemory(processHandle, 0x00F42364, &buffer2[0], uintptr(4), nil)
+            windows.ReadProcessMemory(processHandle, 0x00F42364, &buffer2[0], uintptr(4), nil)
             bb = append(bb,buffer2[0:4]...)
 
             // WEIGHT ## 0x00F42368
-            err = windows.ReadProcessMemory(processHandle, 0x00F42368, &buffer2[0], uintptr(4), nil)
+            windows.ReadProcessMemory(processHandle, 0x00F42368, &buffer2[0], uintptr(4), nil)
             bb = append(bb,buffer2[0:4]...)
 
             // SP ## 0x00F45E5C
-            err = windows.ReadProcessMemory(processHandle, 0x00F45E5C, &buffer2[0], uintptr(4), nil)
+            windows.ReadProcessMemory(processHandle, 0x00F45E5C, &buffer2[0], uintptr(4), nil)
             bb = append(bb,buffer2[0:4]...)
 
             // MAXSP ## 0x00F45E60
-            err = windows.ReadProcessMemory(processHandle, 0x00F45E60, &buffer2[0], uintptr(4), nil)
+            windows.ReadProcessMemory(processHandle, 0x00F45E60, &buffer2[0], uintptr(4), nil)
             bb = append(bb,buffer2[0:4]...)
 
             if botConn != nil { botConn.Write(bb) }
-
         }
     }()
 
@@ -149,11 +181,11 @@ func main() {
 }
 
 
-func routeFromClient(localConn net.Conn, port int){
+func routeFromClient(tcpConn net.Conn, port int){
     serverConn, _ := net.Dial("tcp", servAddr+":"+Itos(port))
     defer serverConn.Close()
 
-    if port == 5121 { sendConn = serverConn }
+    if port == 5121 { sendConn = serverConn; clientConn = tcpConn}
 
     go func() {
         recvbuffer := make([]byte, 20000)
@@ -162,7 +194,7 @@ func routeFromClient(localConn net.Conn, port int){
             if err != nil { fmt.Printf("err serverConn -- %v -- \n", err); return }
             HexID := binary.LittleEndian.Uint16(recvbuffer[0:2]);
             fmt.Printf("recv : [%04X] len [%v] \n", HexID, len(recvbuffer[:n]))
-            localConn.Write(recvbuffer[:n])
+            tcpConn.Write(recvbuffer[:n])
             if botConn != nil { botConn.Write(recvbuffer[:n]) }
     	}
     }()
@@ -170,8 +202,8 @@ func routeFromClient(localConn net.Conn, port int){
 
     sendbuffer := make([]byte, 20000)
 	for {
-        n, err := localConn.Read(sendbuffer)
-        if err != nil { fmt.Printf("err localConn -- %v -- \n", err); return }
+        n, err := tcpConn.Read(sendbuffer)
+        if err != nil { fmt.Printf("err tcpConn -- %v -- \n", err); return }
         HexID := binary.LittleEndian.Uint16(sendbuffer[0:2]);
         fmt.Printf("send : [%04X] len [%v] \n", HexID, len(sendbuffer[:n]))
         if botConn != nil { botConn.Write(sendbuffer[:n]) }
@@ -179,13 +211,22 @@ func routeFromClient(localConn net.Conn, port int){
 	}
 }
 
-func routeFromBot(localConn net.Conn){
-    botConn = localConn
+func routeToServ(tcpConn net.Conn){
+    botConn = tcpConn
     buffer := make([]byte, 100000)
     for {
         n, err := botConn.Read(buffer)
-        if err != nil { fmt.Printf("err localConn -- %v -- \n", err); return }
+        if err != nil { fmt.Printf("err tcpConn -- %v -- \n", err); return }
         sendConn.Write(buffer[:n])
+	}
+}
+
+func routeToClient(tcpConn net.Conn){
+    buffer := make([]byte, 100000)
+    for {
+        n, err := tcpConn.Read(buffer)
+        if err != nil { fmt.Printf("err tcpConn -- %v -- \n", err); return }
+        clientConn.Write(buffer[:n])
 	}
 }
 
@@ -194,13 +235,16 @@ func handleFromClient(port int){
     if err != nil { fmt.Printf("err : %v\n", err); return}
     defer listener.Close()
     for {
-		localConn, err := listener.Accept()
+		tcpConn, err := listener.Accept()
         if err != nil { fmt.Printf("err : %v\n", err) }
-		fmt.Printf("new co port %d de %s\n", port, localConn.RemoteAddr())
+		fmt.Printf("new co port %d de %s\n", port, tcpConn.RemoteAddr())
         if port == 6666 {
-            go routeFromBot(localConn); continue
+            go routeToServ(tcpConn); continue
         }
-        go routeFromClient(localConn,port)
+        if port == 6667 {
+            go routeToClient(tcpConn); continue
+        }
+        go routeFromClient(tcpConn,port)
 
 	}
     exit<-true

@@ -1,7 +1,7 @@
 {
     "General":[
         ["Title",    "Muka peco egg Acolyte"],
-        ["accountId",    2014282],
+        ["accountID",    2014282],
 
         ["lockMap",      "moc_fild10"],
         ["saveMap",      "morocc"],

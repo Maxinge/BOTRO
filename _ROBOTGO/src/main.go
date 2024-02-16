@@ -12,23 +12,18 @@ import(
     "reflect"
 )
 
-type Packet struct {
-    Ident  string
-    Desc  string
-    Size  int
-}
-
 
 var (
     err error
     proxyCo net.Conn
+    proxyCoClient net.Conn
     exit = make(chan bool)
-    fctpack map[string]func([]byte, []byte)
     // gatMaps = map[string]ROGatMap{}
     lgatMaps = map[string]ROLGatMap{}
-    packetsMap = map[string]Packet{}
+    packetsMap = map[string]int{}
     profil map[string][]interface{}
     conf = map[string][]interface{}{}
+    mobDB []map[string]interface{}
 )
 
 
@@ -40,41 +35,37 @@ func main() {
     loadprofil()
     // fmt.Printf("conf -- %v -- \n", prettyPrint(conf)); return
 
-    proxyCo, err = net.Dial("tcp", "127.0.0.1:6666")
-    if err != nil { fmt.Printf("err -- %v -- \n", err); return }
-    defer proxyCo.Close()
-
     fff := readFileString(CurDir()+"data/recvpackets.txt")
     ss := strings.Split(fff, "\n")
     for _,vv := range ss[:len(ss)-1] {
         sss := strings.Split(vv, " ")
-        packetsMap[sss[0]] = Packet{Ident:"", Desc:"", Size:Stoi(sss[1][:len(sss[1])-1])}
+        packetsMap[sss[0]] = Stoi(sss[1][:len(sss[1])-1])
     }
 
-    var tempp map[string][]string
-    err := json.Unmarshal([]byte(readFileString(CurDir()+"data/packets.json")), &tempp)
-    if err != nil { fmt.Printf("err -- %v -- \n", err); return }
-
-    for kk,vv := range tempp {
-        tt := Packet{Ident:vv[0], Desc:vv[1], Size:0}
-        if _, exist := packetsMap[kk]; exist {
-            tt.Size = packetsMap[kk].Size
-        }
-        packetsMap[kk] = tt
-    }
-
-    fctpackInit()
-
-    maps, _ := ioutil.ReadDir(CurDir()+"data/lgats/")
+    maps, _ := ioutil.ReadDir(CurDir()+"data/flds/")
     for _, m := range maps {
         if !m.IsDir() {
-            name := strings.Split(m.Name(), ".lgat")[0]
+            name := strings.Split(m.Name(), ".fld")[0]
             // fmt.Printf("read -- %v -- \n", name)
-            loadLGatMap(name)
+            loadFLD(name)
         }
     }
 
+    err = json.Unmarshal([]byte(readFileString(CurDir()+"data/mobs_db.json")), &mobDB)
+    if err != nil { fmt.Printf("err -- %v -- \n", err); return }
+
     // ########################
+    // ########################
+
+    proxyCo, err = net.Dial("tcp", "127.0.0.1:6666")
+    if err != nil { fmt.Printf("err -- %v -- \n", err); return }
+    defer proxyCo.Close()
+
+    proxyCoClient, err = net.Dial("tcp", "127.0.0.1:6667")
+    if err != nil { fmt.Printf("err -- %v -- \n", err); return }
+    defer proxyCoClient.Close()
+
+
     go func() {
         buffer := make([]byte, 100000)
         for {
@@ -87,23 +78,21 @@ func main() {
                 HexID := fmt.Sprintf("%04X",binary.LittleEndian.Uint16(buffer[ii:ii+2]));
                 plen := n-ii
                 if _, exist := packetsMap[HexID]; exist {
-                    plen = packetsMap[HexID].Size
+                    plen = packetsMap[HexID]
                     if plen < 0 { plen = int(binary.LittleEndian.Uint16(buffer[ii+2:ii+4])) }
                     if plen <= 2 { plen = 2 }
-                    args := []reflect.Value{ reflect.ValueOf(buffer[ii:ii+2]), reflect.ValueOf(buffer[ii+2:ii+2+plen-2]) }
-                    parsePacket(packetsMap[HexID].Ident, args)
+                    parsePacket(buffer[ii:ii+plen])
                     ii += plen-1;
                     continue
                 }
-                args := []reflect.Value{ reflect.ValueOf([]byte{255,255}), reflect.ValueOf(buffer[ii:ii+plen]) }
-                parsePacket("uknw_pck", args)
+                fmt.Printf("####### uknw_pck [%v][%v] -> [%v] \n", HexID, plen, buffer[ii:ii+plen])
                 break;
             }
         }
     }()
 
     go botLoop()
-    go infoUILoop()
+
 
     // ########################
     backend := imgui.CreateBackend(imgui.NewGLFWBackend())
@@ -111,7 +100,7 @@ func main() {
 
     backend.SetBeforeDestroyContextHook(func () {  })
     backend.SetBgColor(imgui.NewVec4(0.45, 0.55, 0.6, 1.0))
-    backend.CreateWindow("ROBOTGO", 500, 800)
+    backend.CreateWindow("ROBOTGO", 500, 1000)
 
     targetFPS := 15
 	frameTime := time.Second / time.Duration(targetFPS)
@@ -133,18 +122,12 @@ func main() {
         imgui.SetNextWindowSize(imgui.Vec2{X: baseSize.X-2, Y: baseSize.Y - 400-2})
         imgui.Begin("Info")
 
-        imgui.Text(fmt.Sprintf("Coords = X : %v / Y : %v | ID: %v", curCoord.X, curCoord.Y, accountId ))
-        imgui.Text(fmt.Sprintf("Map : %v - Next point : %v (dist:%v) mindist: %v", curMap, nextPoint, int(getDist(curCoord, nextPoint)),minDist))
+        imgui.Text(fmt.Sprintf("[%v:%v] %v", charCoord.X, charCoord.Y, MAP))
+        imgui.Text(fmt.Sprintf("ID: %v | %v [%v/%v] zeny : %v", accountID, CHARNAME, BASELV, JOBLV, ZENY))
 
-        imgui.Text(fmt.Sprintf("\n timeInState --- %v", timeInState ))
-        imgui.Text(fmt.Sprintf("\n targetMob [%v] ---  targetItem[%v]\n", targetMob, targetItem ))
-        imgui.Text(fmt.Sprintf("\n strInfo --- \n%v", strInfo ))
-
-        imgui.Text(fmt.Sprintf("\n states --- \n%v", printStruct(botStates) ))
-        imgui.Text(fmt.Sprintf("\n strBuffs --- \n%v", strBuffs ))
-        imgui.Text(fmt.Sprintf("\n strMobs --- \n%v", strMobs ))
-        imgui.Text(fmt.Sprintf("\n strInventoryItems --- \n%v", strInventoryItems ))
-        imgui.Text(fmt.Sprintf("\n strGroundItems --- \n%v", strGroundItems ))
+        // MUmobList.Lock()
+        // imgui.Text(fmt.Sprintf(" ### mobList \n %v ", prettyPrint(mobList)))
+        // MUmobList.Unlock()
 
         imgui.End()
 
@@ -152,16 +135,16 @@ func main() {
 
         scale := float32(3)
         sightDist := float32(66)
-        if _, exist := lgatMaps[curMap]; exist {
-            lgatMap := lgatMaps[curMap]
+        if _, exist := lgatMaps[MAP]; exist {
+            lgatMap := lgatMaps[MAP]
             for x := 0; x < lgatMap.width; x++{
             for y := 0; y < lgatMap.height; y++{
 
-                if getDist(curCoord,(Coord{X:x,Y:y})) > float64(sightDist) { continue }
+                if getDist(charCoord,(Coord{X:x,Y:y})) > float64(sightDist) { continue }
                 size := float32(1) * scale
                 bbcolor := []byte{111,111,111,255}
-                xpos := float32(x) - float32(curCoord.X)
-                ypos := float32(lgatMap.height - 1 - y) - float32(curCoord.Y*-1)
+                xpos := float32(x) - float32(charCoord.X)
+                ypos := float32(lgatMap.height - 1 - y) - float32(charCoord.Y*-1)
 
                 xpos = (xpos*scale) + basePos.X
                 ypos = ((ypos - float32(lgatMap.height))*scale) + basePos.Y
@@ -173,15 +156,15 @@ func main() {
                     bbcolor[0] = 255; bbcolor[1] = 255; bbcolor[2] = 255;
                 }
 
-                if curPath != nil {
-                    for _,vv := range curPath {
+                if movePath != nil {
+                    for _,vv := range movePath {
                         if vv.X == x && vv.Y == y{
                             bbcolor[0] = 50; bbcolor[1] = 100; bbcolor[2] = 150;
                         }
                     }
                 }
 
-                if curCoord.X == x && curCoord.Y == y{
+                if charCoord.X == x && charCoord.Y == y{
                     bbcolor[0] = 150; bbcolor[1] = 100; bbcolor[2] = 50;
                     size = float32(3) * scale
                 }
@@ -203,16 +186,6 @@ func main() {
 
     <-exit
 }
-
-
-func sendToServer(hexID string,data []byte){
-    var ii uint16
-	fmt.Sscanf(hexID, "%x", &ii)
-    bb := []byte{byte(ii), byte(ii >> 8)}
-    bb = append(bb,data...)
-    proxyCo.Write(bb)
-}
-
 
 type CRoute struct{ Map string; X int; Y int; WarpPortal string; }
 type CMob struct{ Priority int; Id int; Name string; }
