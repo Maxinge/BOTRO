@@ -7,6 +7,12 @@ import(
 )
 
 
+
+func coordInCoords(c Coord, cc []Coord) bool{
+    for _,vv := range cc { if vv == c { return true } }
+    return false
+}
+
 func getDist(from Coord, to Coord) float64 {
 	return math.Sqrt(math.Pow(float64(to.X-from.X), 2) + math.Pow(float64(to.Y-from.Y), 2))
 }
@@ -178,7 +184,7 @@ func pathfind(start Coord, finish Coord, lgatMap ROLGatMap) []Coord {
 	PFstartTime := time.Now()
     PFelapsed := time.Now()
 	for {
-		if PFelapsed.Sub(PFstartTime).Seconds() > float64(10) { return []Coord{start} }
+		if PFelapsed.Sub(PFstartTime).Seconds() > float64(5) { return []Coord{start} }
 		_curCoord := coordList[len(coordList)-1]
 		if _curCoord == finish { break }
 		visited = append(visited, _curCoord)

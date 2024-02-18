@@ -3,49 +3,41 @@
         ["Title",    "Muka peco egg Acolyte"],
         ["accountID",    2014282],
 
-        ["lockMap",      "moc_fild10"],
         ["saveMap",      "morocc"],
-        ["useTPLockMap",  1],
-        ["useTPOnRoad",   1],
-        ["useTPDelay",   10],
-        ["useSitHP",     10],
-        ["useSitSP",     10]
+        ["lockMap",      "moc_fild18"],
+        ["WarpPortal",   "moc_fild18.gat"],
+        ["useTPLockMap",    1],
+        ["useTPOnRoad",     1],
+        ["useTPDelay",      10],
+        ["useSitHP",        1],
+        ["useSitUnderSP",   30],
+        ["useSitAboveSP",   95]
     ],
     "Route":[
-        {"Map":"morocc",        "X":297,    "Y":207},
-        {"Map":"moc_fild06",    "X":207,     "Y":19},
-        {"Map":"moc_fild11",    "X":189,    "Y":362},
-        {"Map":"moc_fild09",    "X":31,     "Y":162}
+        {"Map":"cmd_fild09",    "X":369,     "Y":164},
+        {"Map":"moc_fild12",    "X":118,    "Y":30},
+        {"Map":"moc_fild17",    "X":30,     "Y":300}
     ],
     "Mob":[
-        {"Priority":-2, "Id":1091,   "Name":"DRAGON_FLY"},
-        {"Priority":2, "Id":1047,   "Name":"PECOPECO_EGG"},
-        {"Priority":1, "Id":1055,   "Name":"MUKA"}
+        {"Priority":1, "Id":1091, "Name":"DRAGON_FLY"},
+        {"Priority":1, "Id":1047, "Name":"PECOPECO_EGG"},
+        {"Priority":1, "Id":1138, "Name":"MAGNOLIA",
+            "AtkName":"Throw Spirit Sphere", "AtkId":267,"AtkLv":3, "MinDist": 7, "MinHP": 0},
+        {"Priority":1, "Id":1127, "Name":"HODE",
+            "AtkName":"Throw Spirit Sphere", "AtkId":267,"AtkLv":3, "MinDist": 7, "MinHP": 0}
     ],
     "ItemLoot":[
         {"Id":517,   "Name":"Meat"},
-        {"Id":919,   "Name":"Animals_Skin"},
-        {"Id":1750,  "Name":"Arrow"},
-        {"Id":507,   "Name":"Red_Herb"},
-        {"Id":909,   "Name":"Jellopy"},
-        {"Id":917,   "Name":"Talon" },
-        {"Id":916,   "Name":"Feather_Of_Birds"},
-        {"Id":949,   "Name":"Feather"},
-        {"Id":935,   "Name":"Shell"},
         {"Priority":-1, "Id":2301,  "Name":"Cotton_Shirt"}
     ],
     "ItemUse":[
         {"Name":"Fresh Bread", "Id":8076, "MinHP":30, "MinSP":-1 },
-        {"Name":"Concentration Potion", "Id":645, "MinHP":-1, "MinSP":-1,"BuffId": 37 },
         {"Name":"Converter Fire", "Id":12114, "MinHP":-1, "MinSP":-1,"BuffId": 1505 }
-
     ],
     "SKillSelf":[
-        {"Name":"Blessing","Lv":10, "Id":34, "MinHP": -1, "MinSP": -1, "BuffId": 10},
-        {"Name":"Increase Agility","Lv":10, "Id":29, "MinHP": -1, "MinSP": -1, "BuffId": 12},
-        {"Name":"Heal", "Lv":3, "Id":28, "MinHP": 60, "MinSP": 60, "BuffId": -1}
-    ],
-    "SkillTarget":[
-        {"Name":"auto_attack", "MinDist": 7, "MinHP": 0}
+        {"Name":"SSS","Lv":3, "Id":666666,              "MinHP": -1, "MinSP": -1, "BuffId": -1},
+        {"Name":"Blessing","Lv":10, "Id":34,            "MinHP": 30, "MinSP": 30, "BuffId": 10},
+        {"Name":"Increase Agility","Lv":10, "Id":29,    "MinHP": 30, "MinSP": 30, "BuffId": 12},
+        {"Name":"Heal", "Lv":3, "Id":28,                "MinHP": 20, "MinSP": 20, "BuffId": -1}
     ]
 }

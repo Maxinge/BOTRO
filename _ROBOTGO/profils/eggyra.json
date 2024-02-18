@@ -12,7 +12,6 @@
         ["useSitSP",     10]
     ],
     "Route":[
-        {"Map":"morocc",        "X":0,    "Y":0,  "WarpPortal": "pay_fild07.gat"},
         {"Map":"pay_fild08",    "X":160,     "Y":16},
         {"Map":"pay_fild03",    "X":172,     "Y":281},
         {"Map":"pay_fild01",    "X":379,    "Y":201},

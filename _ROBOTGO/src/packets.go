@@ -37,13 +37,13 @@ func parsePacket(bb []byte){
         SPLEFT = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));         ii += 4
         SPMAX = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));          ii += 4
 
-    case "007D":  //map_loaded_ask
-        needWait = 500
+    case "007D":  //map_loaded
+        resetMobItemList()
+        resetPath()
+        needWait2 = 700
+        addWait(700)
         SSphere = 0
 
-    case "0091":
-        fmt.Printf("### 0091 ### [%v][%v] -> [%v] \n", hexID, len(bb),bb)
-        
     case "0B09", "0B0A":  //inventory_info
         // inventoryType := bb[2]
         if hexID == "0B09" {
@@ -76,13 +76,14 @@ func parsePacket(bb []byte){
         }
 
     case "0ADD":  //item_appear
+        now := time.Now()
         mapID := int(binary.LittleEndian.Uint32(bb[0:0+4]))
         itemID := int(binary.LittleEndian.Uint16(bb[4:4+2]))
         x := int(binary.LittleEndian.Uint16(bb[11:13]))
         y := int(binary.LittleEndian.Uint16(bb[13:15]))
         amount := int(binary.LittleEndian.Uint16(bb[17:19]))
         MUgroundItems.Lock()
-        groundItems[mapID] = Item{ ItemID:itemID, Coords:Coord{X:x,Y:y}, Amount:amount}
+        groundItems[mapID] = Item{ ItemID:itemID, Coords:Coord{X:x,Y:y}, Amount:amount, DropTime:now.Unix()}
         MUgroundItems.Unlock()
 
     case "00A1":  //item_disappear
@@ -119,10 +120,12 @@ func parsePacket(bb []byte){
     case "0B1A":  //skill_use_confirm
         sourceID := int(binary.LittleEndian.Uint32(bb[0:0+4]))
         // targetID := int(binary.LittleEndian.Uint32(bb[4:4+4]))
-        // skillId := int(binary.LittleEndian.Uint16(bb[12:12+2]))
+        skillId := int(binary.LittleEndian.Uint16(bb[12:12+2]))
         castTime := int(binary.LittleEndian.Uint32(bb[18:18+4]))
         if sourceID == accountID {
-            needWait = castTime + 200
+            nw := castTime + 200
+            if skillId == 267{ nw += 300 } // TSS
+            addWait(nw)
         }
 
     case "01D0":  //spirit_sphere
@@ -130,54 +133,77 @@ func parsePacket(bb []byte){
         number := int(binary.LittleEndian.Uint16(bb[4:4+2]))
         if targetID == accountID { SSphere = number }
 
-    case "0983":  //actor_buffs_active
+    case "0983","0196","043F":  //buff_active_time //buff_active_off // buff_active_on
         buffID := int(binary.LittleEndian.Uint16(bb[0:0+2]))
         target := int(binary.LittleEndian.Uint32(bb[2:2+4]))
+        flag := bb[6]
         timeLeft := int(binary.LittleEndian.Uint32(bb[11:11+4]))
+
         if target == accountID {
+        if buffID == 622{
+            if flag == 1 { SIT = true } else { SIT = false }
+            return
+        }}
+
+        if target == accountID {
+        if timeLeft > 0 && flag == 1{
             now := time.Now()
             MUbuffList.Lock()
             buffList[buffID] = []int64{int64(timeLeft), now.Unix()}
             MUbuffList.Unlock()
-        }
+            return
+        }}
 
     case "0086":  //actor_moving
+        // fmt.Printf("### actor_moving ### [%v][%v] -> [%v] \n", hexID, len(bb),bb)
         mapID := int(binary.LittleEndian.Uint32(bb[0:4]))
+        fromto := bits48ToCoords(bb[4:4+6])
+        // tick := int(binary.LittleEndian.Uint32(bb[10:10+4]))
         now := time.Now()
         MUmobList.Lock()
-        fromto := bits48ToCoords(bb[4:4+6])
         if mm, exist := mobList[mapID]; exist {
             mm.CoordsTo.X = fromto[2]; mm.CoordsTo.Y = fromto[3]
+            mm.Coords.X = fromto[0]; mm.Coords.Y = fromto[1]
+            // mm.Coords.X = fromto[2]; mm.Coords.Y = fromto[3]
             mm.LastMoveTime = now.Unix()
-            mm.PathTo = pathfind(mm.Coords, mm.CoordsTo, lgatMaps[MAP])
+            mm.PathMoveTo = pathfind(mm.Coords, mm.CoordsTo, lgatMaps[MAP])
             mobList[mapID] = mm
         }
         MUmobList.Unlock()
 
-    case "08CD":  //actor_moving_interrupt
+    case "0088":  //actor_moving_interrupt
         mapID := int(binary.LittleEndian.Uint32(bb[0:4]))
         x := int(binary.LittleEndian.Uint16(bb[4:4+2]))
         y := int(binary.LittleEndian.Uint16(bb[6:6+2]))
+
         MUmobList.Lock()
         if mm, exist := mobList[mapID]; exist {
             mm.Coords.X = x; mm.Coords.Y = y
             mm.LastMoveTime = 0
+            mm.PathMoveTo = []Coord{}
             mobList[mapID] = mm
         }
         MUmobList.Unlock()
 
     case "0080":  //actor_dead_disapear
+        now := time.Now()
         mapID := int(binary.LittleEndian.Uint32(bb[0:0+4]))
         // if bb[4] == 1 { targetMobDead = mapID }
         MUmobList.Lock()
-        delete(mobList, mapID)
+        if mm, exist := mobList[mapID]; exist {
+            mm.DeathTime = now.Unix()
+            mobList[mapID] = mm
+        }
         MUmobList.Unlock()
 
     case "09FD", "09FF":  //actor_appear
+        // fmt.Printf("### actor_appear ### [%v][%v] -> [%v] \n", hexID, len(bb),bb)
+
         mapID := int(binary.LittleEndian.Uint32(bb[3:3+4]))
         mobID := int(binary.LittleEndian.Uint16(bb[21:21+4]))
         moveSpeed := int(binary.LittleEndian.Uint16(bb[11:11+2]))
         actorType := byte(bb[2])
+        if bb[17] == 4 || bb[17] == 2 { return } // hided
         cc := Coord{X:0,Y:0}
         index := 0
         if sliceEqual(bb[0:2],[]byte{114,0}){ index = 65 }
@@ -186,7 +212,11 @@ func parsePacket(bb []byte){
         cc.X = bc[0]; cc.Y = bc[1];
         if actorType == 5  {
             MUmobList.Lock()
-            mobList[mapID] = Mob{ MobID:mobID, Coords:cc, MoveSpeed:moveSpeed }
+            prio := 0
+            if exist := getConf(conf["Mob"],"Id",mobID); exist != nil {
+                prio = exist.(CMob).Priority
+            }
+            mobList[mapID] = Mob{ MobID:mobID, Coords:cc, MoveSpeed:moveSpeed, Priority: prio }
             MUmobList.Unlock()
         }
 
@@ -237,7 +267,7 @@ func parsePacket(bb []byte){
     case "0AF4":  //skill_use_aoe_recv
     case "0110":  //skill_use_failed
     case "0118":  //stop_attack
-    case "0437":  //start_attack
+    case "0437":  //player_action_send
     case "0ACC":  //get_exp
     case "0368":  //actor_info_request
     case "008A":  //actor_action

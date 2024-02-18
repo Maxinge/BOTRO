@@ -122,8 +122,19 @@ func main() {
         imgui.SetNextWindowSize(imgui.Vec2{X: baseSize.X-2, Y: baseSize.Y - 400-2})
         imgui.Begin("Info")
 
-        imgui.Text(fmt.Sprintf("[%v:%v] %v", charCoord.X, charCoord.Y, MAP))
-        imgui.Text(fmt.Sprintf("ID: %v | %v [%v/%v] zeny : %v", accountID, CHARNAME, BASELV, JOBLV, ZENY))
+        imgui.Text(fmt.Sprintf("[%v:%v] => %v %v (distFromDest : %.2f - %v)", charCoord.X, charCoord.Y, nextPoint, MAP, distFromDest, minDist))
+        imgui.Text(fmt.Sprintf("ID: %v | %v [%v/%v] zeny : %v | Sit : %v", accountID, CHARNAME, BASELV, JOBLV, ZENY, SIT))
+
+        imgui.Text(fmt.Sprintf("targetItemID [%v] -- targetMobID [%v]", targetItemID, targetMobID))
+
+
+        MUbuffList.Lock()
+        imgui.Text(fmt.Sprintf("### buffList ###\n %v ", prettyPrint(buffList)))
+        MUbuffList.Unlock()
+
+        // MUgroundItems.Lock()
+        // imgui.Text(fmt.Sprintf("### groundItems ###\n %v ", prettyPrint(groundItems)))
+        // MUgroundItems.Unlock()
 
         // MUmobList.Lock()
         // imgui.Text(fmt.Sprintf(" ### mobList \n %v ", prettyPrint(mobList)))
@@ -188,11 +199,11 @@ func main() {
 }
 
 type CRoute struct{ Map string; X int; Y int; WarpPortal string; }
-type CMob struct{ Priority int; Id int; Name string; }
+type CMob struct{ Priority int; Id int; Name string;
+                  AtkName string; AtkId int; AtkLv int; MinDist int; MinHP int;}
 type CItemLoot struct{ Priority int; Id int; Name string; }
 type CItemUse struct{ Id int; Name string; MinHP int; MinSP int; BuffId int; }
 type CSKillSelf struct{ Id int; Lv int; Name string; MinHP int; MinSP int; BuffId int; }
-type CSkillTarget struct{ Id int; Lv int; Name string; MinDist int; MinHP int; }
 
 func loadprofil(){
     err := json.Unmarshal([]byte(readFileString(CurDir()+"profils/_profil.json")), &profil)
@@ -218,7 +229,7 @@ func loadprofil(){
         conf["Route"] = append(conf["Route"], stru)
     }
     for _,vv := range profil["Mob"] {
-        stru := CMob{ Priority:1 }
+        stru := CMob{ Priority:1, AtkLv:1, MinDist:4 }
         for kkk,vvv := range vv.(map[string]interface{}) {
             fld := reflect.ValueOf(&stru).Elem().FieldByName(kkk); convertField(vvv, fld)
         }
@@ -244,13 +255,6 @@ func loadprofil(){
             fld := reflect.ValueOf(&stru).Elem().FieldByName(kkk); convertField(vvv, fld)
         }
         conf["SKillSelf"] = append(conf["SKillSelf"], stru)
-    }
-    for _,vv := range profil["SkillTarget"] {
-        stru := CSkillTarget{ Id:-1, MinDist:3, Lv:1 }
-        for kkk,vvv := range vv.(map[string]interface{}) {
-            fld := reflect.ValueOf(&stru).Elem().FieldByName(kkk); convertField(vvv, fld)
-        }
-        conf["SkillTarget"] = append(conf["SkillTarget"], stru)
     }
 }
 

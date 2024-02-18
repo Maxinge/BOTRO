@@ -13,13 +13,14 @@ type Mob struct {
     MobID int
     Coords Coord
     CoordsTo Coord
-    PathTo []Coord
+    PathMoveTo []Coord
     HPMax int
     HPLeft int
     LastMoveTime int64
     MoveSpeed int
     DeathTime int64
     IsNotValid bool
+    Priority int
 }
 
 type Item struct {
@@ -50,9 +51,11 @@ var(
     SPLEFT = 0
     SPMAX = 0
 
+    SIT = false
+
     needWait = 0
+    needWait2 = 0
     now = time.Now()
-    stateTime = time.Now()
 
     MUmobList sync.Mutex
     mobList = map[int]Mob{}
@@ -65,15 +68,13 @@ var(
 
     SSphere = 0
 
-    // lastMobDead = Mob{}
-    // lastItemLooted = -1
-
-
     accountID = 0
     lockMap = ""
     saveMap = ""
     useTPLockMap = 0
     useTPDelay = 10
+    useSitUnderSP = 0
+    useSitAboveSP = 99
 
     // ##### BOT
     charCoord = Coord{}
@@ -82,11 +83,9 @@ var(
     movePath = []Coord{}
     pathIndex = 0
     minDist = 1
+    distFromDest = float64(0)
 
-    // targetMob = -1
-    // targetItem = -1
-    //
-    // attackDist = 2
-    // attackIndex = 0
+    targetItemID = -1
+    targetMobID = -1
 
 )
