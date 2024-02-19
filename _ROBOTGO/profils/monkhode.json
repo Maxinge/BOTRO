@@ -4,30 +4,27 @@
         ["accountID",    2014282],
 
         ["saveMap",      "oldnewpayon"],
-        ["lockMap",      "orcsdun02"],
-        ["WarpPortal",   "gef_fild11.gat"],
-        ["useTPNbAggro",    4],
+        ["lockMap",      "moc_fild17"],
+        ["WarpPortal",   "moc_fild18.gat"],
         ["useTPLockMap",    1],
         ["useTPOnRoad",     1],
         ["useTPDelay",      5000],
         ["useSitHP",        1],
-        ["useSitUnderSP",   40],
+        ["useSitUnderSP",   25],
         ["useSitAboveSP",   95]
     ],
     "Route":[
-        {"Map":"orcsdun01",    "X":183,    "Y":8},
-        {"Map":"gef_fild11",    "X":111,    "Y":364},
-        {"Map":"gef_fild10",    "X":223,    "Y":205},
-
-        {"Map":"in_orcs01",    "X":108,     "Y":114}
+        {"Map":"moc_fild18",    "X":382,     "Y":305},
+        {"Map":"moc_fild11",    "X":212,    "Y":29},
+        {"Map":"moc_fild16",    "X":16,     "Y":179}
     ],
     "Mob":[
         {"Priority":1, "Id":1091, "Name":"DRAGON_FLY"},
-        {"Priority":1, "Id":1177, "Name":"ZENORC",
+        {"Priority":1, "Id":1119, "Name":"FRILLDORA",
             "AtkName":"Throw Spirit Sphere", "AtkId":267,"AtkLv":3, "MinDist": 7, "MinHP": 0},
-        {"Priority":1, "Id":1111, "Name":"drainliar",
+        {"Priority":1, "Id":1138, "Name":"MAGNOLIA",
             "AtkName":"Throw Spirit Sphere", "AtkId":267,"AtkLv":3, "MinDist": 7, "MinHP": 0},
-        {"Priority":1, "Id":1152, "Name":"orc skel",
+        {"Priority":1, "Id":1127, "Name":"HODE",
             "AtkName":"Throw Spirit Sphere", "AtkId":267,"AtkLv":3, "MinDist": 7, "MinHP": 0}
     ],
     "ItemLoot":[

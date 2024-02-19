@@ -40,8 +40,8 @@ func parsePacket(bb []byte){
     case "007D":  //map_loaded
         resetMobItemList()
         resetPath()
-        needWait2 = 700
-        addWait(700)
+        needWait2 = 800
+        addWait(1000)
         SSphere = 0
 
     case "0B09", "0B0A":  //inventory_info
@@ -123,7 +123,7 @@ func parsePacket(bb []byte){
         skillId := int(binary.LittleEndian.Uint16(bb[12:12+2]))
         castTime := int(binary.LittleEndian.Uint32(bb[18:18+4]))
         if sourceID == accountID {
-            nw := castTime + 200
+            nw := castTime + 0
             if skillId == 267{ nw += 300 } // TSS
             addWait(nw)
         }
@@ -145,14 +145,19 @@ func parsePacket(bb []byte){
             return
         }}
 
-        if target == accountID {
-        if timeLeft > 0 && flag == 1{
-            now := time.Now()
-            MUbuffList.Lock()
-            buffList[buffID] = []int64{int64(timeLeft), now.Unix()}
-            MUbuffList.Unlock()
-            return
-        }}
+        if target == accountID && hexID == "0983"{
+            if buffID == 46 {
+                if timeLeft == 0 { timeLeft = 200 };
+                addWait(timeLeft); return
+            }
+            if timeLeft > 0 {
+                now := time.Now()
+                MUbuffList.Lock()
+                buffList[buffID] = []int64{int64(timeLeft), now.Unix()}
+                MUbuffList.Unlock()
+                return
+            }
+        }
 
     case "0086":  //actor_moving
         // fmt.Printf("### actor_moving ### [%v][%v] -> [%v] \n", hexID, len(bb),bb)
@@ -196,7 +201,8 @@ func parsePacket(bb []byte){
         }
         MUmobList.Unlock()
 
-    case "09FD", "09FF":  //actor_appear
+    case "09FD", "09FF", "07F7", "0857", "0915", "09DD","007C":  //actor_appear_exist // actor spawned
+
         // fmt.Printf("### actor_appear ### [%v][%v] -> [%v] \n", hexID, len(bb),bb)
 
         mapID := int(binary.LittleEndian.Uint32(bb[3:3+4]))
@@ -213,14 +219,18 @@ func parsePacket(bb []byte){
         if actorType == 5  {
             MUmobList.Lock()
             prio := 0
+            aggro := false
+            mobdata := findMobInDb(mobID)
+            if mobdata != nil { aggro = mobdata["IsAggressive"].(bool) }
             if exist := getConf(conf["Mob"],"Id",mobID); exist != nil {
                 prio = exist.(CMob).Priority
             }
-            mobList[mapID] = Mob{ MobID:mobID, Coords:cc, MoveSpeed:moveSpeed, Priority: prio }
+            mobList[mapID] = Mob{ MobID:mobID, Coords:cc, MoveSpeed:moveSpeed, Priority: prio, Aggro:aggro }
             MUmobList.Unlock()
         }
 
     case "01DE", "09CB", "08C8":  //skill_used_on_target //skill_no_dmg //actor_action
+
         sourceii := 0 ; targetii := 0
         if hexID == "01DE" { sourceii = 2 ; targetii = 6 }
         if hexID == "09CB" { sourceii = 10 ; targetii = 6 }
@@ -242,6 +252,7 @@ func parsePacket(bb []byte){
         if mm, exist := mobList[sourceID]; exist {
         if targetID == accountID {
             mm.IsNotValid = false;
+            mm.Aggro = true;
             mobList[sourceID] = mm
         }}
         MUmobList.Unlock()
@@ -251,7 +262,6 @@ func parsePacket(bb []byte){
     case "0A30":  //actor_info
     case "00C0":  //emote
     case "0438":  //skill_use_send
-
     case "0360":  //send_sync_serv
     case "007F":  //recv_sync_serv
     case "02C1":  //chat_main
@@ -270,7 +280,6 @@ func parsePacket(bb []byte){
     case "0437":  //player_action_send
     case "0ACC":  //get_exp
     case "0368":  //actor_info_request
-    case "008A":  //actor_action
     }
 
 }

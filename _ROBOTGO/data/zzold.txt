@@ -1,3 +1,4 @@
+{"Name":"Blessing","Lv":10, "Id":34,            "MinHP": 20, "MinSP": 20, "BuffId": 10},
 
 // TPstartTime := time.Now()
 // TPelapsed := time.Now()

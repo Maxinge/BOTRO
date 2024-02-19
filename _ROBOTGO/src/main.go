@@ -54,6 +54,7 @@ func main() {
     err = json.Unmarshal([]byte(readFileString(CurDir()+"data/mobs_db.json")), &mobDB)
     if err != nil { fmt.Printf("err -- %v -- \n", err); return }
 
+
     // ########################
     // ########################
 
@@ -125,7 +126,7 @@ func main() {
         imgui.Text(fmt.Sprintf("[%v:%v] => %v %v (distFromDest : %.2f - %v)", charCoord.X, charCoord.Y, nextPoint, MAP, distFromDest, minDist))
         imgui.Text(fmt.Sprintf("ID: %v | %v [%v/%v] zeny : %v | Sit : %v", accountID, CHARNAME, BASELV, JOBLV, ZENY, SIT))
 
-        imgui.Text(fmt.Sprintf("targetItemID [%v] -- targetMobID [%v]", targetItemID, targetMobID))
+        imgui.Text(fmt.Sprintf("targetItemID [%v] -- targetMobID [%v] -- timerNoMob [%v]", targetItemID, targetMobID, timerNoMob))
 
 
         MUbuffList.Lock()

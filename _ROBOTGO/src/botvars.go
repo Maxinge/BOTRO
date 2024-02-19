@@ -21,6 +21,7 @@ type Mob struct {
     DeathTime int64
     IsNotValid bool
     Priority int
+    Aggro bool
 }
 
 type Item struct {
@@ -71,10 +72,12 @@ var(
     accountID = 0
     lockMap = ""
     saveMap = ""
+    useTPNbAggro = 10
     useTPLockMap = 0
     useTPDelay = 10
     useSitUnderSP = 0
     useSitAboveSP = 99
+    timerNoMob = 0
 
     // ##### BOT
     charCoord = Coord{}

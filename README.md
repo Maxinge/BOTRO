@@ -18,8 +18,7 @@ la premiere compilation de cimguigo peu prendre du temps
 ## TODO ##
 - detect dead
 - town run
-- lock target
 - mob agressif / priority
 - esquive aoe
-- /sit
 - bot detect miss
+- si mob non agressif, hit le mettre en aggro = true

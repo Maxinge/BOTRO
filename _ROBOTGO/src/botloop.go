@@ -5,6 +5,7 @@ import(
     "time"
     "encoding/binary"
     // "math"
+    "math/rand"
 )
 
 
@@ -20,17 +21,18 @@ func botLoop() {
     if exist := getConf(conf["General"],"Key","saveMap"); exist != nil {
         saveMap = exist.(struct{Key string; Val string}).Val
     }
+    if exist := getConf(conf["General"],"Key","useTPNbAggro"); exist != nil {
+        useTPNbAggro = exist.(struct{Key string; Val int}).Val
+    }
     if exist := getConf(conf["General"],"Key","useTPLockMap"); exist != nil {
         useTPLockMap = exist.(struct{Key string; Val int}).Val
     }
     if exist := getConf(conf["General"],"Key","useTPDelay"); exist != nil {
         useTPDelay = exist.(struct{Key string; Val int}).Val
     }
-
     if exist := getConf(conf["General"],"Key","useSitUnderSP"); exist != nil {
         useSitUnderSP = exist.(struct{Key string; Val int}).Val
     }
-
     if exist := getConf(conf["General"],"Key","useSitAboveSP"); exist != nil {
         useSitAboveSP = exist.(struct{Key string; Val int}).Val
     }
@@ -110,8 +112,27 @@ func botLoop() {
         // #####################################################################
         // #####################################################################
 
+        if HPLEFT <= 0 {
+            sendToServer("00B2", []byte{0})
+            resetMobItemList()
+            resetPath()
+            resetBuffList()
+            continue
+        }
+
+
+        MUmobList.Lock()
+        countAggro := 0
+        for _,vv := range mobList {
+            if vv.Priority >= 5 { countAggro = 999; break }
+            if getDist(charCoord,vv.Coords) < 5 && vv.Aggro{ countAggro++ }
+        }
+        MUmobList.Unlock()
+
+        if countAggro >= useTPNbAggro{ useTeleport(); continue}
 
         if (float32(SPLEFT)/float32(SPMAX)*100) < float32(useSitUnderSP) {
+        if countAggro > 0 { useTeleport(); continue }
         if !SIT {
             sendToServer("0437", []byte{0,0,0,0,2})
         }}
@@ -142,7 +163,7 @@ func botLoop() {
         if MAP == lockMap {
 
             if skID > 0 {
-                sendUseSkill(skID, lv, accountID);
+                sendUseSkill(skID, lv, accountID); addWait(100)
             continue }
 
             if itID > 0 {
@@ -202,7 +223,11 @@ func botLoop() {
                 MUgroundItems.Unlock()
                 if distFromDest >= float64(minDist){
                     resetPath()
-                    nextPoint = it.Coords
+                    allCells := firstCircle(it.Coords)
+                    allCells = append(allCells,it.Coords)
+                    rand.Seed(time.Now().UnixNano())
+            		rnd := rand.Intn(len(allCells))
+                    nextPoint = allCells[rnd]
                     movePath = pathfind(charCoord, nextPoint, lgatMaps[MAP])
                     pathIndex = 2 ; minDist = 2;
                 }else{
@@ -215,7 +240,19 @@ func botLoop() {
 
         }
 
-        if exist := getConf(conf["Route"],"Map",MAP); exist != nil {
+        if MAP == lockMap && targetMobID < 0 && targetItemID < 0{ timerNoMob += 150 }else{ timerNoMob = 0 }
+        if timerNoMob > useTPDelay {
+            useTeleport()
+            timerNoMob = 0
+        }
+
+
+        if exist := getConf(conf["Route"],"Map",MAP); exist != nil && movePath == nil{
+
+            if skID > 0 {
+                sendUseSkill(skID, lv, accountID);
+            continue }
+
             nextPoint = Coord{X:exist.(CRoute).X, Y:exist.(CRoute).Y}
             movePath = pathfind(charCoord, nextPoint, lgatMaps[MAP])
             pathIndex = 0 ; minDist = 1;
@@ -225,7 +262,7 @@ func botLoop() {
             if exist := getConf(conf["General"],"Key","WarpPortal"); exist != nil {
             if itemInInventory(717,1) > 0 { // bluegem
                 portalChoice := exist.(struct{Key string; Val string}).Val
-                time.Sleep(2000 * time.Millisecond)
+                time.Sleep(1000 * time.Millisecond)
                 warpPoint := randomPoint(lgatMaps[MAP],charCoord, 3)
                 sendWarpPortal(4,warpPoint.X,warpPoint.Y)
                 time.Sleep(2000 * time.Millisecond)
@@ -241,8 +278,30 @@ func botLoop() {
     fmt.Printf("# lel # %v \n","lel")
 }
 
+func findMobInDb(id int) map[string]interface{}{
+    for _,vv := range mobDB {
+        if int(vv["Id"].(float64)) == id { return vv }
+    }
+    return nil
+}
+func useTeleport()  {
+    if useTPLockMap == 1 {
+        tpId := int(binary.LittleEndian.Uint16([]byte{26,0}))
+        tpLv := int(binary.LittleEndian.Uint16([]byte{1,0}))
+        sendUseSkill(tpId, tpLv, accountID)
+    }
+    if useTPLockMap == 2 {
+        inventID := itemInInventory(601,1) // fly wing
+        if inventID > -1  { sendUseItem(inventID) }
+    }
+}
 func addWait(nw int){ if nw > needWait { needWait = nw } }
 
+func resetBuffList() {
+    MUbuffList.Lock()
+    buffList = map[int][]int64{}
+    MUbuffList.Unlock()
+}
 func resetMobItemList() {
     MUmobList.Lock()
     mobList = map[int]Mob{}
@@ -266,8 +325,16 @@ func isValidLine(start Coord, dest Coord) bool{
 
 func pickMobTarget() int{
     distMobList := map[float64]int{}
+
     for kk,vv := range mobList {
-        if getDist(charCoord, vv.Coords) > 40 { continue }
+        if vv.Aggro {
+        if vv.Priority >= 0 {
+        if getDist(charCoord, vv.Coords) < 8 {
+            return kk
+        }}}
+    }
+    for kk,vv := range mobList {
+        if getDist(charCoord, vv.Coords) > 30 { continue }
         if vv.DeathTime > 0 { continue }
         if vv.Priority > 3 { return kk }
         if vv.Priority > 2 { return kk }
@@ -280,6 +347,7 @@ func pickMobTarget() int{
     for i := 0; i < len(keys); i++ {
         mapID := distMobList[keys[i]]
         mob := mobList[mapID]
+        if getDist(charCoord, mob.Coords) > 30 { continue }
         if mob.Priority < 1 { continue }
         mobPath := pathfind(charCoord, mob.Coords, lgatMaps[MAP])
         if len(mobPath) > 50 { continue }
