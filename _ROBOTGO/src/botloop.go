@@ -51,7 +51,11 @@ func botLoop() {
             MUbuffList.Unlock()
 
             MUmobList.Lock()
-            for kk,vv := range mobList { if getDist(vv.Coords, charCoord) > 40 { delete(mobList, kk) } }
+            for kk,vv := range mobList {
+                mm := vv
+                if getDist(vv.Coords, charCoord) > 25 { mm.AtRange = false }else{ mm.AtRange = true }
+                mobList[kk] = mm
+            }
             refreshMobsCoords()
             cleanMobDeath()
             MUmobList.Unlock()
@@ -69,6 +73,9 @@ func botLoop() {
 
     for {
 
+
+        waitime := time.Now()
+
         addWait(50)
         for{
             if needWait <= 0 { break }
@@ -77,11 +84,21 @@ func botLoop() {
         }
 
         now = time.Now()
+        looptime := int(now.Sub(waitime).Milliseconds())
 
         // #####################################################################
         // #####################################################################
-
-
+        if !SIT {
+            if chkcharCoord == charCoord { chkTimecharCoord += looptime }else{ chkTimecharCoord = 0 }
+            if chktargetMobID == targetMobID && targetMobID > 0 { chkTimetargetMobID += looptime }else{ chkTimetargetMobID = 0 }
+            if chktargetItemID == targetItemID && targetItemID > 0 { chkTimetargetItemID += looptime }else{ chkTimetargetItemID = 0 }
+            if chkTimecharCoord > 20000 { resetPath(); resetMobItemList(); continue}
+            if chkTimetargetMobID > 15000 { resetPath(); resetMobItemList(); continue}
+            if chkTimetargetItemID > 5000 { resetPath(); resetMobItemList(); continue}
+            chkcharCoord = charCoord
+            chktargetMobID = targetMobID
+            chktargetItemID = targetItemID
+        }
 
         MUgroundItems.Lock()
         if targetItemID < 0 { targetItemID = pickItemTarget() }
@@ -120,16 +137,17 @@ func botLoop() {
             continue
         }
 
-
         MUmobList.Lock()
         countAggro := 0
         for _,vv := range mobList {
-            if vv.Priority >= 5 { countAggro = 999; break }
+            if vv.Priority >= 5 && vv.AtRange { countAggro = 999; break }
             if getDist(charCoord,vv.Coords) < 5 && vv.Aggro{ countAggro++ }
         }
         MUmobList.Unlock()
 
         if countAggro >= useTPNbAggro{ useTeleport(); continue}
+
+
 
         if (float32(SPLEFT)/float32(SPMAX)*100) < float32(useSitUnderSP) {
         if countAggro > 0 { useTeleport(); continue }
@@ -137,13 +155,14 @@ func botLoop() {
             sendToServer("0437", []byte{0,0,0,0,2})
         }}
 
-
         if (float32(SPLEFT)/float32(SPMAX)*100) > float32(useSitAboveSP) {
         if SIT {
             sendToServer("0437", []byte{0,0,0,0,3})
         }}
 
         if SIT { addWait(1000); continue }
+
+
 
         if distFromDest <= float64(minDist){
             resetPath()
@@ -197,20 +216,24 @@ func botLoop() {
                     }
                     pathIndex = 2
                 }else {
+                    AtkId := 0; AtkLv := 0
                     if exist := getConf(conf["Mob"],"Id",mob.MobID); exist != nil {
-                        if exist.(CMob).AtkId != 0 {
-                            sendUseSkill(exist.(CMob).AtkId, exist.(CMob).AtkLv, targetMobID)
-                        }else{
-                            arrayBin := []byte{}
-                            mobBin := make([]byte, 4)
-                            binary.LittleEndian.PutUint32(mobBin, uint32(targetMobID))
-                            arrayBin = append(arrayBin,mobBin...)
-                            // 0 = unique autoattack / 7 = start autoattack
-                            arrayBin = append(arrayBin,byte(7))
-                            sendToServer("0437", arrayBin)
-                            addWait(100)
-                        }
+                        AtkId = exist.(CMob).AtkId; AtkLv = exist.(CMob).AtkLv
                     }
+
+                    if AtkId != 0 {
+                        sendUseSkill(AtkId, AtkLv, targetMobID)
+                    }else{
+                        arrayBin := []byte{}
+                        mobBin := make([]byte, 4)
+                        binary.LittleEndian.PutUint32(mobBin, uint32(targetMobID))
+                        arrayBin = append(arrayBin,mobBin...)
+                        // 0 = unique autoattack / 7 = start autoattack
+                        arrayBin = append(arrayBin,byte(7))
+                        sendToServer("0437", arrayBin)
+                        addWait(100)
+                    }
+
                 }
             }
 
@@ -240,7 +263,7 @@ func botLoop() {
 
         }
 
-        if MAP == lockMap && targetMobID < 0 && targetItemID < 0{ timerNoMob += 150 }else{ timerNoMob = 0 }
+        if MAP == lockMap && targetMobID < 0 && targetItemID < 0{ timerNoMob += looptime }else{ timerNoMob = 0 }
         if timerNoMob > useTPDelay {
             useTeleport()
             timerNoMob = 0
@@ -329,12 +352,15 @@ func pickMobTarget() int{
     for kk,vv := range mobList {
         if vv.Aggro {
         if vv.Priority >= 0 {
-        if getDist(charCoord, vv.Coords) < 8 {
+        if getDist(charCoord, vv.Coords) <= 5 {
             return kk
         }}}
     }
+
     for kk,vv := range mobList {
-        if getDist(charCoord, vv.Coords) > 30 { continue }
+        if exist := getConf(conf["Mob"],"Id",vv.MobID); exist == nil { continue }
+        if !vv.AtRange { continue }
+        if vv.IsNotValid { continue }
         if vv.DeathTime > 0 { continue }
         if vv.Priority > 3 { return kk }
         if vv.Priority > 2 { return kk }
@@ -347,7 +373,9 @@ func pickMobTarget() int{
     for i := 0; i < len(keys); i++ {
         mapID := distMobList[keys[i]]
         mob := mobList[mapID]
-        if getDist(charCoord, mob.Coords) > 30 { continue }
+        if mob.IsNotValid { continue }
+        if exist := getConf(conf["Mob"],"Id",mob.MobID); exist == nil { continue }
+        if !mob.AtRange { continue }
         if mob.Priority < 1 { continue }
         mobPath := pathfind(charCoord, mob.Coords, lgatMaps[MAP])
         if len(mobPath) > 50 { continue }

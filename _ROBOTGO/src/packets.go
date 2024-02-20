@@ -166,13 +166,23 @@ func parsePacket(bb []byte){
         // tick := int(binary.LittleEndian.Uint32(bb[10:10+4]))
         now := time.Now()
         MUmobList.Lock()
+        cc := Coord{X:fromto[0],Y:fromto[1]}
+        ccTo := Coord{X:fromto[2],Y:fromto[3]}
+
         if mm, exist := mobList[mapID]; exist {
-            mm.CoordsTo.X = fromto[2]; mm.CoordsTo.Y = fromto[3]
-            mm.Coords.X = fromto[0]; mm.Coords.Y = fromto[1]
+            mm.Coords = cc; mm.CoordsTo = ccTo
             // mm.Coords.X = fromto[2]; mm.Coords.Y = fromto[3]
             mm.LastMoveTime = now.Unix()
             mm.PathMoveTo = pathfind(mm.Coords, mm.CoordsTo, lgatMaps[MAP])
             mobList[mapID] = mm
+        }else{
+            mobList[mapID] = Mob{
+                Coords:ccTo,
+                CoordsTo:cc,
+                LastMoveTime:now.Unix(),
+                PathMoveTo:pathfind(cc, ccTo, lgatMaps[MAP]),
+                MoveSpeed: 200,
+            }
         }
         MUmobList.Unlock()
 
@@ -190,21 +200,21 @@ func parsePacket(bb []byte){
         }
         MUmobList.Unlock()
 
-    case "0080":  //actor_dead_disapear
+    case "0080":  //actor_dead_disappear
         now := time.Now()
         mapID := int(binary.LittleEndian.Uint32(bb[0:0+4]))
         // if bb[4] == 1 { targetMobDead = mapID }
         MUmobList.Lock()
         if mm, exist := mobList[mapID]; exist {
             mm.DeathTime = now.Unix()
+            if mapID != targetMobID { mm.IsNotValid = true }
             mobList[mapID] = mm
         }
         MUmobList.Unlock()
 
-    case "09FD", "09FF", "07F7", "0857", "0915", "09DD","007C":  //actor_appear_exist // actor spawned
-
-        // fmt.Printf("### actor_appear ### [%v][%v] -> [%v] \n", hexID, len(bb),bb)
-
+    case "09FD", "09FF", "07F7", "0857", "0915", "09DD","007C","07f9","0856":
+        //actor_appear_exist // actor spawned
+        // fmt.Printf("### actor_appear ### [%v][%v] \n", hexID, len(bb))
         mapID := int(binary.LittleEndian.Uint32(bb[3:3+4]))
         mobID := int(binary.LittleEndian.Uint16(bb[21:21+4]))
         moveSpeed := int(binary.LittleEndian.Uint16(bb[11:11+2]))

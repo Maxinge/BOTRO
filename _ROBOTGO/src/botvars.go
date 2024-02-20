@@ -14,14 +14,15 @@ type Mob struct {
     Coords Coord
     CoordsTo Coord
     PathMoveTo []Coord
-    HPMax int
-    HPLeft int
+    // HPMax int
+    // HPLeft int
     LastMoveTime int64
     MoveSpeed int
     DeathTime int64
     IsNotValid bool
     Priority int
     Aggro bool
+    AtRange bool
 }
 
 type Item struct {
@@ -90,5 +91,13 @@ var(
 
     targetItemID = -1
     targetMobID = -1
+
+    chkTimecharCoord = 0
+    chkTimetargetMobID = 0
+    chkTimetargetItemID = 0
+
+    chkcharCoord = Coord{}
+    chktargetMobID = 0
+    chktargetItemID = 0
 
 )

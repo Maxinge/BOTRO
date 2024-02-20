@@ -214,7 +214,8 @@ func pathfind(start Coord, finish Coord, lgatMap ROLGatMap) []Coord {
 			return coordList
 		}
 		rand.Seed(time.Now().UnixNano())
-		rn := candidates[rand.Intn(len(candidates))]
+		// rn := candidates[rand.Intn(len(candidates))]
+		rn := candidates[0]
 		coordList = append(coordList, rn);
 
 		PFelapsed = time.Now()
