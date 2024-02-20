@@ -128,6 +128,10 @@ func main() {
 
         imgui.Text(fmt.Sprintf("targetItemID [%v] -- targetMobID [%v] -- timerNoMob [%v]", targetItemID, targetMobID, timerNoMob))
 
+        imgui.Text(fmt.Sprintf("chkTimecharCoord [%v]", chkTimecharCoord))
+        imgui.Text(fmt.Sprintf("chkTimetargetMobID [%v]", chkTimetargetMobID))
+        imgui.Text(fmt.Sprintf("chkTimetargetItemID [%v]", chkTimetargetItemID))
+
 
         MUbuffList.Lock()
         imgui.Text(fmt.Sprintf("### buffList ###\n %v ", prettyPrint(buffList)))

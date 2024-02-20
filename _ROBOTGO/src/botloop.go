@@ -92,13 +92,14 @@ func botLoop() {
             if chkcharCoord == charCoord { chkTimecharCoord += looptime }else{ chkTimecharCoord = 0 }
             if chktargetMobID == targetMobID && targetMobID > 0 { chkTimetargetMobID += looptime }else{ chkTimetargetMobID = 0 }
             if chktargetItemID == targetItemID && targetItemID > 0 { chkTimetargetItemID += looptime }else{ chkTimetargetItemID = 0 }
-            if chkTimecharCoord > 20000 { resetPath(); resetMobItemList(); continue}
-            if chkTimetargetMobID > 15000 { resetPath(); resetMobItemList(); continue}
-            if chkTimetargetItemID > 5000 { resetPath(); resetMobItemList(); continue}
+            if chkTimecharCoord > 20000 { resetPath(); resetMobItemList(); chkTimecharCoord = 0 }
+            if chkTimetargetMobID > 15000 { resetPath(); resetMobItemList(); chkTimetargetMobID = 0 }
+            if chkTimetargetItemID > 5000 { resetPath(); resetMobItemList(); chkTimetargetItemID = 0 }
             chkcharCoord = charCoord
             chktargetMobID = targetMobID
             chktargetItemID = targetItemID
         }
+
 
         MUgroundItems.Lock()
         if targetItemID < 0 { targetItemID = pickItemTarget() }

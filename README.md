@@ -19,5 +19,4 @@ la premiere compilation de cimguigo peu prendre du temps
 - town run
 - mob agressif / priority finir
 - esquive aoe
-- bot detect miss/ stuck
-- fix pathfind
+- command refresh profil

@@ -9,7 +9,7 @@
         ["useTPNbAggro",    4],
         ["useTPLockMap",    1],
         ["useTPOnRoad",     1],
-        ["useTPDelay",      5000],
+        ["useTPDelay",      10000],
         ["useSitHP",        1],
         ["useSitUnderSP",   40],
         ["useSitAboveSP",   95]
@@ -21,7 +21,7 @@
     ],
     "Mob":[
         {"Priority":1, "Id":1261, "Name":"Wild Rose",
-            "AtkName":"Throw Spirit Sphere", "AtkId":267,"AtkLv":2, "MinDist": 7, "MinHP": 0}
+            "AtkName":"Throw Spirit Sphere", "AtkId":267,"AtkLv":2, "MinDist": 9, "MinHP": 0}
     ],
     "ItemLoot":[
         {"Id":528,   "Name":"monsters feed"},
