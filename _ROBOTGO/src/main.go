@@ -105,9 +105,7 @@ func main() {
 
     targetFPS := 15
 	frameTime := time.Second / time.Duration(targetFPS)
-
 	lastFrameTime := time.Now()
-
 
     backend.Run(func () {
         currentTime := time.Now()
@@ -133,9 +131,9 @@ func main() {
         imgui.Text(fmt.Sprintf("chkTimetargetItemID [%v]", chkTimetargetItemID))
 
 
-        MUbuffList.Lock()
-        imgui.Text(fmt.Sprintf("### buffList ###\n %v ", prettyPrint(buffList)))
-        MUbuffList.Unlock()
+        // MUbuffList.Lock()
+        // imgui.Text(fmt.Sprintf("### buffList ###\n %v ", prettyPrint(buffList)))
+        // MUbuffList.Unlock()
 
         // MUgroundItems.Lock()
         // imgui.Text(fmt.Sprintf("### groundItems ###\n %v ", prettyPrint(groundItems)))
@@ -234,7 +232,7 @@ func loadprofil(){
         conf["Route"] = append(conf["Route"], stru)
     }
     for _,vv := range profil["Mob"] {
-        stru := CMob{ Priority:1, AtkLv:1, MinDist:4 }
+        stru := CMob{ Priority:-1, AtkLv:1, MinDist:4 }
         for kkk,vvv := range vv.(map[string]interface{}) {
             fld := reflect.ValueOf(&stru).Elem().FieldByName(kkk); convertField(vvv, fld)
         }

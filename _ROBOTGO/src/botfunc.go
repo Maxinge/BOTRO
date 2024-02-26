@@ -4,6 +4,7 @@ import(
 	"math"
 	"math/rand"
 	"time"
+	// "fmt"
 )
 
 
@@ -112,9 +113,10 @@ func randomPoint(lgatMap ROLGatMap, from Coord, dist int) Coord{
 		rY := rand.Intn(lgatMap.height)
 		gatCell := lgatMap.cells[rX][rY]
 		if isValidCell(gatCell) {
-		if getDist(from,Coord{X:rX, Y:rY}) < float64(dist){
+		if getDist(from,Coord{X:rX, Y:rY}) < float64(dist) {
+		if (Coord{X:rX, Y:rY}) != from {
 			return Coord{X:rX, Y:rY}
-		}}
+		}}}
 	}
 }
 
@@ -167,66 +169,94 @@ func cleanPath(coordList []Coord, sighDist int, lgatMap ROLGatMap) []Coord{
 	return newPath
 }
 
+
+func walkback(ccc Coord,paths *map[Coord]Coord,result *[]Coord){
+	if cc, exist := (*paths)[ccc]; exist {
+		*result = append(*result, cc)
+		if cc != ccc {
+			walkback(cc,paths,result)
+		}
+	}
+}
+
+
 func pathfind(start Coord, finish Coord, lgatMap ROLGatMap) []Coord {
 
 	gatCell := lgatMap.cells[finish.X][finish.Y]
 	if !isValidCell(gatCell) { return []Coord{start} }
+	if start == finish{ return []Coord{start} }
 
-	coordList := []Coord{}
+	paths := map[Coord]Coord{}
 	visited := []Coord{}
+	heads := []Coord{}
+	candidates := []Coord{}
 
-	coordList = append(coordList, start)
-	coordList = append(coordList, start)
-	direction := directionTo(start, finish)
+	paths[start] = start
+	heads = append(heads, start)
 
-	brainSize := (lgatMap.height*lgatMap.width) / 2
+	brainSize := (lgatMap.height*lgatMap.width) / 100
 
 	PFstartTime := time.Now()
     PFelapsed := time.Now()
+	found:
 	for {
-		if PFelapsed.Sub(PFstartTime).Seconds() > float64(5) { return []Coord{start} }
-		_curCoord := coordList[len(coordList)-1]
-		if _curCoord == finish { break }
-		visited = append(visited, _curCoord)
-		if len(visited) > brainSize { visited = visited[1:] }
-		direction = directionTo(_curCoord, finish);
-		nextCell := Coord{X:_curCoord.X + direction.X,Y: _curCoord.Y + direction.Y}
-		gatCell := lgatMap.cells[nextCell.X][nextCell.Y]
-		if isValidCell(gatCell) {
-		if !isIn(nextCell,visited)	{
-			coordList = append(coordList, nextCell); continue
-		}}
-		allDirections := firstCircle(_curCoord)
-		candidates := []Coord{}
-		for _,v := range allDirections {
-			if v.X > lgatMap.width -1 || v.Y > lgatMap.height -1 { break }
-			if v.X < 0 || v.Y < 0 { break }
-			gatCell = lgatMap.cells[v.X][v.Y]
-			if isValidCell(gatCell) {
-			if !isIn(v,visited)	{
-				candidates = append(candidates, v)
-			}}
-		}
-		if len(candidates) == 0{
-			if len(coordList) >= 3 {
-				coordList = coordList[0:len(coordList)-2]; continue
-			}
-			return coordList
-		}
-		rand.Seed(time.Now().UnixNano())
-		// rn := candidates[rand.Intn(len(candidates))]
-		rn := candidates[0]
-		coordList = append(coordList, rn);
+		if PFelapsed.Sub(PFstartTime).Seconds() > float64(2) { return []Coord{start} }
 
+		if len(visited) > brainSize { visited = visited[len(visited)-brainSize:] }
+
+		candidates = []Coord{}
+		for _,vv := range heads {
+			visited = append(visited, vv)
+			allDirections := firstCircle(vv)
+			for _,vvvv := range allDirections {
+				if vvvv == finish { paths[vvvv] = vv; break found }
+				if vvvv.X > lgatMap.width -1 || vvvv.Y > lgatMap.height -1 { continue }
+				if vvvv.X < 0 || vvvv.Y < 0 { continue }
+				gatCell := lgatMap.cells[vvvv.X][vvvv.Y]
+				if isValidCell(gatCell) {
+				if !isIn(vvvv,visited){
+					paths[vvvv] = vv
+					candidates = append(candidates, vvvv)
+				}}
+			}
+		}
+		heads = []Coord{}
+		for _,vv := range candidates {
+			if !isIn(vv,heads){
+				heads = append(heads, vv)
+			}
+		}
+
+		if len(heads) == 0 { break found }
 		PFelapsed = time.Now()
 	}
 
-	path := cleanPath(coordList, 1, lgatMap)
-	path = cleanPath(path, 1, lgatMap)
-	path = cleanPath(path, 4, lgatMap)
-	path = cleanPath(path, 1, lgatMap)
+	result := []Coord{}
+	if _, exist := paths[finish]; exist {
+		walkback(finish,&paths,&result)
+	}
 
-	path = append(path,finish)
+	length := len(result)
+	for i := 0; i < length/2; i++ {
+		result[i], result[length-i-1] = result[length-i-1], result[i]
+	}
+	result = append(result, finish)
+	result = result[1:]
+
+
+	path := cleanPath(result, 2, lgatMap)
+	path = cleanPath(result, 4, lgatMap)
+	path = cleanPath(result, 8, lgatMap)
+	path = cleanPath(result, 16, lgatMap)
+	path = cleanPath(result, 32, lgatMap)
+	path = cleanPath(path, 4, lgatMap)
+	path = cleanPath(path, 2, lgatMap)
+	path = cleanPath(path, 1, lgatMap)
+	//
+	// path = append(path,finish)
+
+
 
 	return path
+
 }

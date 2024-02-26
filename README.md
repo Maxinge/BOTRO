@@ -20,3 +20,4 @@ la premiere compilation de cimguigo peu prendre du temps
 - mob agressif / priority finir
 - esquive aoe
 - command refresh profil
+- fermer fenetre bot

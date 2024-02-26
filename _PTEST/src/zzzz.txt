@@ -1,0 +1,55 @@
+coordList := []Coord{}
+visited := []Coord{}
+
+coordList = append(coordList, start)
+coordList = append(coordList, start)
+direction := directionTo(start, finish)
+
+brainSize := (lgatMap.height*lgatMap.width) / 2
+
+PFstartTime := time.Now()
+PFelapsed := time.Now()
+for {
+    if PFelapsed.Sub(PFstartTime).Seconds() > float64(5) { return []Coord{start} }
+    _curCoord := coordList[len(coordList)-1]
+    if _curCoord == finish { break }
+    visited = append(visited, _curCoord)
+    if len(visited) > brainSize { visited = visited[1:] }
+    direction = directionTo(_curCoord, finish);
+    nextCell := Coord{X:_curCoord.X + direction.X,Y: _curCoord.Y + direction.Y}
+    gatCell := lgatMap.cells[nextCell.X][nextCell.Y]
+    if isValidCell(gatCell) {
+    if !isIn(nextCell,visited)	{
+        coordList = append(coordList, nextCell); continue
+    }}
+    allDirections := firstCircle(_curCoord)
+    candidates := []Coord{}
+    for _,v := range allDirections {
+        if v.X > lgatMap.width -1 || v.Y > lgatMap.height -1 { break }
+        if v.X < 0 || v.Y < 0 { break }
+        gatCell = lgatMap.cells[v.X][v.Y]
+        if isValidCell(gatCell) {
+        if !isIn(v,visited)	{
+            candidates = append(candidates, v)
+        }}
+    }
+    if len(candidates) == 0{
+        if len(coordList) >= 3 {
+            coordList = coordList[0:len(coordList)-2]; continue
+        }
+        return coordList
+    }
+    rand.Seed(time.Now().UnixNano())
+    // rn := candidates[rand.Intn(len(candidates))]
+    rn := candidates[0]
+    coordList = append(coordList, rn);
+
+    PFelapsed = time.Now()
+}
+
+path := cleanPath(coordList, 1, lgatMap)
+path = cleanPath(path, 1, lgatMap)
+path = cleanPath(path, 4, lgatMap)
+path = cleanPath(path, 1, lgatMap)
+
+path = append(path,finish)

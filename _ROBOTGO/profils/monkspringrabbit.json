@@ -3,38 +3,40 @@
         ["Title",    "monk tss spring rabbit"],
         ["accountID",    2014282],
 
-        ["saveMap",      "oldnewpayon"],
+        ["saveMap",      "morocc"],
         ["lockMap",      "mjolnir_04"],
         ["WarpPortal",   "mjolnir_04.gat"],
         ["useTPNbAggro",    1],
+        ["useTPNbAggroLoot",2],
         ["useTPLockMap",    1],
         ["useTPOnRoad",     1],
-        ["useTPDelay",      5000],
+        ["useTPDelay",      3000],
         ["useSitHP",        1],
-        ["useSitUnderSP",   40],
-        ["useSitAboveSP",   95]
+        ["useSitUnderSP",   33],
+        ["useSitAboveSP",   100]
     ],
     "Route":[
         {"Map":"mjolnir_03",    "X":242,    "Y":204},
         {"Map":"mjolnir_08",    "X":159,    "Y":373},
         {"Map":"mjolnir_05",    "X":16,    "Y":171}
-
     ],
     "Mob":[
         {"Priority":1, "Id":1322, "Name":"spring rabbit",
-            "AtkName":"Throw Spirit Sphere", "AtkId":267,"AtkLv":5, "MinDist": 7, "MinHP": 0}
+            "AtkName":"Throw Spirit Sphere", "AtkId":267,"AtkLv":4, "MinDist": 7, "MinHP": 0}
     ],
     "ItemLoot":[
-        {"Id":508,   "Name":"Yellow_Herb"},
-        {"Id":511,   "Name":"Green_Herb"}
+        { "Id":508,   "Name":"Yellow_Herb"},
+        {"Id":511,   "Name":"Green_Herb"},
+        {"Id":949,   "Name":"feather"},
+        {"Priority":5, "Id":4227,   "Name":"Spring Rabbit Card"}
     ],
     "ItemUse":[
         {"Name":"Converter fire", "Id":12114, "MinHP":-1, "MinSP":-1,"BuffId": 1505 }
     ],
     "SKillSelf":[
-        {"Name":"SSS","Lv":5, "Id":666666,              "MinHP": -1, "MinSP": -1, "BuffId": -1},
-        {"Name":"Blessing","Lv":10, "Id":34,            "MinHP": 20, "MinSP": 20, "BuffId": 10},
-        {"Name":"Increase Agility","Lv":10, "Id":29,    "MinHP": 20, "MinSP": 20, "BuffId": 12},
-        {"Name":"Heal", "Lv":7, "Id":28,                "MinHP": 70, "MinSP": 20, "BuffId": -1}
+        {"Name":"SSS","Lv":4, "Id":666666,              "MinHP": -1, "MinSP": -1, "BuffId": -1},
+        {"Name":"Heal", "Lv":7, "Id":28,                "MinHP": 70, "MinSP": 20, "BuffId": -1},
+        {"Name":"Blessing","Lv":10, "Id":34,            "MinHP": -1, "MinSP": 20, "BuffId": 10},
+        {"Name":"Increase Agility","Lv":10, "Id":29,    "MinHP": -1, "MinSP": 20, "BuffId": 12}
     ]
 }

@@ -40,7 +40,7 @@ func parsePacket(bb []byte){
     case "007D":  //map_loaded
         resetMobItemList()
         resetPath()
-        needWait2 = 800
+        resetTargets()
         addWait(1000)
         SSphere = 0
 
@@ -82,8 +82,16 @@ func parsePacket(bb []byte){
         x := int(binary.LittleEndian.Uint16(bb[11:13]))
         y := int(binary.LittleEndian.Uint16(bb[13:15]))
         amount := int(binary.LittleEndian.Uint16(bb[17:19]))
+        prio := -1
+        if exist := getConf(conf["ItemLoot"],"Id",itemID); exist != nil {
+            prio = exist.(CItemLoot).Priority
+        }
+
         MUgroundItems.Lock()
-        groundItems[mapID] = Item{ ItemID:itemID, Coords:Coord{X:x,Y:y}, Amount:amount, DropTime:now.Unix()}
+        groundItems[mapID] = Item{
+            ItemID:itemID, Coords:Coord{X:x,Y:y}, Amount:amount,
+            DropTime:now.Unix(), Priority:prio,
+        }
         MUgroundItems.Unlock()
 
     case "00A1":  //item_disappear
@@ -120,11 +128,11 @@ func parsePacket(bb []byte){
     case "0B1A":  //skill_use_confirm
         sourceID := int(binary.LittleEndian.Uint32(bb[0:0+4]))
         // targetID := int(binary.LittleEndian.Uint32(bb[4:4+4]))
-        skillId := int(binary.LittleEndian.Uint16(bb[12:12+2]))
+        // skillId := int(binary.LittleEndian.Uint16(bb[12:12+2]))
         castTime := int(binary.LittleEndian.Uint32(bb[18:18+4]))
         if sourceID == accountID {
             nw := castTime + 0
-            if skillId == 267{ nw += 300 } // TSS
+            // if skillId == 267{ nw += 300 } // TSS
             addWait(nw)
         }
 
@@ -207,12 +215,18 @@ func parsePacket(bb []byte){
         MUmobList.Lock()
         if mm, exist := mobList[mapID]; exist {
             mm.DeathTime = now.Unix()
-            if mapID != targetMobID { mm.IsNotValid = true }
+            if mapID != targetMobID {
+                mm.IsNotValid = true
+            }else{
+                addWait(200) // wait for loots
+                targetMobID = -1
+            }
             mobList[mapID] = mm
         }
         MUmobList.Unlock()
 
-    case "09FD", "09FF", "07F7", "0857", "0915", "09DD","007C","07f9","0856":
+
+    case "09FD", "09FF":
         //actor_appear_exist // actor spawned
         // fmt.Printf("### actor_appear ### [%v][%v] \n", hexID, len(bb))
         mapID := int(binary.LittleEndian.Uint32(bb[3:3+4]))
@@ -228,14 +242,21 @@ func parsePacket(bb []byte){
         cc.X = bc[0]; cc.Y = bc[1];
         if actorType == 5  {
             MUmobList.Lock()
-            prio := 0
+            prio := -1
             aggro := false
+            name := ""
             mobdata := findMobInDb(mobID)
-            if mobdata != nil { aggro = mobdata["IsAggressive"].(bool) }
+            if mobdata != nil {
+                aggro = mobdata["IsAggressive"].(bool)
+                name = mobdata["Name"].(string)
+            }
             if exist := getConf(conf["Mob"],"Id",mobID); exist != nil {
                 prio = exist.(CMob).Priority
             }
-            mobList[mapID] = Mob{ MobID:mobID, Coords:cc, MoveSpeed:moveSpeed, Priority: prio, Aggro:aggro }
+            mobList[mapID] = Mob{
+                MobID:mobID, Coords:cc, MoveSpeed:moveSpeed,
+                Priority: prio, Aggro:aggro, Name:name,
+            }
             MUmobList.Unlock()
         }
 
@@ -250,21 +271,21 @@ func parsePacket(bb []byte){
         // dmg := int(binary.LittleEndian.Uint32(bb[20:20+4]))
         if hexID == "08C8" && bb[27] != 1 { return } //autoattack
 
-        if sourceID != accountID {
-            MUmobList.Lock()
-            if mm, exist := mobList[targetID]; exist {
-                mm.IsNotValid = true;
-                mobList[targetID] = mm
-            }
-            MUmobList.Unlock()
-        }
         MUmobList.Lock()
-        if mm, exist := mobList[sourceID]; exist {
-        if targetID == accountID {
-            mm.IsNotValid = false;
-            mm.Aggro = true;
-            mobList[sourceID] = mm
+        if mm, exist := mobList[targetID]; exist {
+        if sourceID != accountID {
+            mm.IsNotValid = true;
+            mobList[targetID] = mm
         }}
+        if targetID == accountID {
+            if mm, exist := mobList[sourceID]; exist {
+                    mm.IsNotValid = false;
+                    mm.Aggro = true;
+                    mobList[sourceID] = mm
+            }else{
+                mobList[sourceID] = Mob{ Aggro:true, MoveSpeed:200 }
+            }
+        }
         MUmobList.Unlock()
 
 

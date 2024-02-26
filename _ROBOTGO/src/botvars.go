@@ -22,7 +22,8 @@ type Mob struct {
     IsNotValid bool
     Priority int
     Aggro bool
-    AtRange bool
+    AtSight bool
+    Name string
 }
 
 type Item struct {
@@ -31,9 +32,11 @@ type Item struct {
     Amount int
     DropTime int64
     IsValid bool
+    Priority int
 }
 
 var(
+    accountID = 0
 
     BASEXPMAX = 0
     BASEEXP = 0
@@ -56,7 +59,6 @@ var(
     SIT = false
 
     needWait = 0
-    needWait2 = 0
     now = time.Now()
 
     MUmobList sync.Mutex
@@ -70,10 +72,11 @@ var(
 
     SSphere = 0
 
-    accountID = 0
+
     lockMap = ""
     saveMap = ""
     useTPNbAggro = 10
+    useTPNbAggroLoot = 10
     useTPLockMap = 0
     useTPDelay = 10
     useSitUnderSP = 0
