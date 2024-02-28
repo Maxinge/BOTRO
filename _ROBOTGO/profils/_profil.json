@@ -18,7 +18,7 @@
     "Route":[
         {"Map":"moc_prydb1",    "X":100,    "Y":55, "UseTPdist": 40},
         {"Map":"moc_ruins",    "X":55,    "Y":161},
-        {"Map":"moc_pryd01",    "X":90,    "Y":109, "UseTPdist": 40},
+        {"Map":"moc_pryd01",    "X":90,    "Y":109, "UseTPdist": 100},
         {"Map":"moc_pryd06",    "X":195,    "Y":8}
     ],
     "Mob":[

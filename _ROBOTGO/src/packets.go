@@ -225,6 +225,12 @@ func parsePacket(bb []byte){
         }
         MUmobList.Unlock()
 
+        MUplayerList.Lock()
+        if _, exist := playerList[mapID]; exist {
+            delete(playerList, mapID)
+        }
+        MUplayerList.Unlock()
+
 
     case "09FD", "09FF":
         //actor_appear_exist // actor spawned
@@ -258,6 +264,12 @@ func parsePacket(bb []byte){
                 Priority: prio, Aggro:aggro, Name:name,
             }
             MUmobList.Unlock()
+        }
+
+        if actorType == 0 || actorType == 7 {
+            MUplayerList.Lock()
+            playerList[mapID] = Player{Coords:cc}
+            MUplayerList.Unlock()
         }
 
     case "01DE", "09CB", "08C8":  //skill_used_on_target //skill_no_dmg //actor_action

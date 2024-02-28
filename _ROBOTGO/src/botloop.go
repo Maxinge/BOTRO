@@ -68,6 +68,10 @@ func botLoop() {
             MUmobList.Unlock()
             MUgroundItems.Unlock()
 
+            MUplayerList.Lock()
+            for kk,vv := range playerList { if getDist(vv.Coords, charCoord) > 40 { delete(playerList, kk) } }
+            MUplayerList.Unlock()
+
         }
     }()
 
@@ -106,7 +110,10 @@ func botLoop() {
         MUmobList.Lock()
 
         if targetItemID < 0 { targetItemID = pickItemTarget() }
-        if targetMobID < 0 { targetMobID = pickMobTarget() }
+        if len(playerList) <= 0{
+        if targetMobID < 0 {
+            targetMobID = pickMobTarget()
+        }}
 
         if targetItemID > 0 && targetMobID > 0 {
             mob := mobList[targetMobID]
@@ -120,7 +127,7 @@ func botLoop() {
         countAggro := 0
         for _,vv := range mobList {
             if vv.Priority <= -5 && vv.AtSight { countAggro = 999; break }
-            if getDist(charCoord,vv.Coords) <= 3 && vv.Aggro{ countAggro++ }
+            if getDist(charCoord,vv.Coords) <= 3 && vv.Aggro && vv.DeathTime <= 0{ countAggro++ }
         }
 
         MUmobList.Unlock()
@@ -152,9 +159,13 @@ func botLoop() {
         if countAggro < useTPNbAggroLoot && targetItemID > 0{ countAggro = 0 }
         if countAggro >= useTPNbAggro{ useTeleport(); continue}
 
+        if SIT && countAggro > 0{
+            sendToServer("0437", []byte{0,0,0,0,3})
+            useTeleport(); continue
+        }
 
         if (float32(SPLEFT)/float32(SPMAX)*100) <= float32(useSitUnderSP) {
-        if targetItemID < 0 {
+        if targetItemID < 0{
             if countAggro > 0 { useTeleport(); continue }
         if !SIT {
             sendToServer("0437", []byte{0,0,0,0,2})

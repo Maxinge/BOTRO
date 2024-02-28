@@ -35,6 +35,11 @@ type Item struct {
     Priority int
 }
 
+type Player struct {
+    Name string
+    Coords Coord
+}
+
 var(
     accountID = 0
 
@@ -69,6 +74,8 @@ var(
     inventoryItems = map[int]Item{}
     MUbuffList sync.Mutex
     buffList = map[int][]int64{}
+    MUplayerList sync.Mutex
+    playerList = map[int]Player{}
 
     SSphere = 0
 

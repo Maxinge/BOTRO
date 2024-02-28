@@ -143,6 +143,10 @@ func main() {
         // imgui.Text(fmt.Sprintf(" ### mobList \n %v ", prettyPrint(mobList)))
         // MUmobList.Unlock()
 
+        MUplayerList.Lock()
+        imgui.Text(fmt.Sprintf(" ### playerList \n %v ", prettyPrint(playerList)))
+        MUplayerList.Unlock()
+
         imgui.End()
 
         drawList := imgui.BackgroundDrawListNil()
