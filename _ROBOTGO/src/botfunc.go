@@ -163,7 +163,8 @@ func cleanPath(coordList []Coord, sighDist int, lgatMap ROLGatMap) []Coord{
 	for k, _ := range cleanPath {
 		if k < len(cleanPath) -1 {
 			line := linearInterpolation(cleanPath[k], cleanPath[k+1])
-			 newPath = append(newPath, line ... )
+			newPath = append(newPath,cleanPath[k])
+			newPath = append(newPath,line[:len(line)]...)
 		}
 	}
 	return newPath
@@ -173,9 +174,7 @@ func cleanPath(coordList []Coord, sighDist int, lgatMap ROLGatMap) []Coord{
 func walkback(ccc Coord,paths *map[Coord]Coord,result *[]Coord){
 	if cc, exist := (*paths)[ccc]; exist {
 		*result = append(*result, cc)
-		if cc != ccc {
-			walkback(cc,paths,result)
-		}
+		if cc != ccc { walkback(cc,paths,result) }
 	}
 }
 
@@ -193,14 +192,15 @@ func pathfind(start Coord, finish Coord, lgatMap ROLGatMap) []Coord {
 
 	paths[start] = start
 	heads = append(heads, start)
+	visited = append(visited, start)
 
-	brainSize := (lgatMap.height*lgatMap.width) / 100
+	brainSize := 50*50
 
 	PFstartTime := time.Now()
     PFelapsed := time.Now()
 	found:
 	for {
-		if PFelapsed.Sub(PFstartTime).Seconds() > float64(2) { return []Coord{start} }
+		if PFelapsed.Sub(PFstartTime).Seconds() > float64(1) { return []Coord{start} }
 
 		if len(visited) > brainSize { visited = visited[len(visited)-brainSize:] }
 
@@ -241,22 +241,16 @@ func pathfind(start Coord, finish Coord, lgatMap ROLGatMap) []Coord {
 		result[i], result[length-i-1] = result[length-i-1], result[i]
 	}
 	result = append(result, finish)
-	result = result[1:]
 
+	cleanp := result
+	for ii := 30; ii >=2 ; ii-=4 {
+		cleanp = cleanPath(cleanp, ii, lgatMap)
+	}
 
-	path := cleanPath(result, 2, lgatMap)
-	path = cleanPath(result, 4, lgatMap)
-	path = cleanPath(result, 8, lgatMap)
-	path = cleanPath(result, 16, lgatMap)
-	path = cleanPath(result, 32, lgatMap)
-	path = cleanPath(path, 4, lgatMap)
-	path = cleanPath(path, 2, lgatMap)
-	path = cleanPath(path, 1, lgatMap)
-	//
-	// path = append(path,finish)
+	if len(cleanp) <= 1 { return []Coord{start} }
 
+	cleanp = cleanp[1:]
 
-
-	return path
+	return cleanp
 
 }

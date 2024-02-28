@@ -58,12 +58,29 @@ func main() {
 
 	lastFrameTime := time.Now()
 
+    // MAP := "moc_pryd05"
     MAP := "gl_step"
-    start := Coord{X:20,Y:100}
-    end := Coord{X:20,Y:105}
+
+    start := Coord{X:103,Y:107}
+    end := Coord{X:103,Y:107}
     movePath := pathfind(start, end, lgatMaps[MAP])
 
-    fmt.Printf("movePath -- %v -- \n", movePath)
+
+    go func() {
+        for {time.Sleep(50 * time.Millisecond)
+            
+            start = randomPoint(lgatMaps[MAP], start, 400)
+            end = randomPoint(lgatMaps[MAP], start, 400)
+
+            PFstartTime := time.Now()
+            movePath = pathfind(start, end, lgatMaps[MAP])
+            PFelapsed := time.Now()
+            fmt.Printf("el -- %v -- \n", PFelapsed.Sub(PFstartTime).Milliseconds())
+        }
+    }()
+
+
+    // fmt.Printf("movePath -- %v -- \n", movePath)
 
     // return
 

@@ -93,8 +93,8 @@ func botLoop() {
             if chkcharCoord == charCoord { chkTimecharCoord += looptime }else{ chkTimecharCoord = 0 }
             if chktargetMobID == targetMobID && targetMobID > 0 { chkTimetargetMobID += looptime }else{ chkTimetargetMobID = 0 }
             if chktargetItemID == targetItemID && targetItemID > 0 { chkTimetargetItemID += looptime }else{ chkTimetargetItemID = 0 }
-            if chkTimecharCoord > 20000 { resetPath(); resetMobItemList(); resetTargets() }
-            if chkTimetargetMobID > 15000 { resetPath(); resetMobItemList(); resetTargets() }
+            if chkTimecharCoord > 15000 { resetPath(); resetMobItemList(); resetTargets() }
+            if chkTimetargetMobID > 10000 && targetItemID < 0{ resetPath(); resetMobItemList(); resetTargets() }
             if chkTimetargetItemID > 5000 { resetPath(); resetMobItemList(); resetTargets() }
             chkcharCoord = charCoord
             chktargetMobID = targetMobID
@@ -119,7 +119,7 @@ func botLoop() {
 
         countAggro := 0
         for _,vv := range mobList {
-            if vv.Priority >= 5 && vv.AtSight { countAggro = 999; break }
+            if vv.Priority <= -5 && vv.AtSight { countAggro = 999; break }
             if getDist(charCoord,vv.Coords) <= 3 && vv.Aggro{ countAggro++ }
         }
 
@@ -171,12 +171,13 @@ func botLoop() {
         if distFromDest <= float64(minDist){ resetPath() }
 
         if movePath != nil {
+            if getDist(charCoord, nextStep) <= 6{ pathIndex += 3 }
             if pathIndex > len(movePath)-1 {
                 nextStep = nextPoint
             }else{
                 nextStep = Coord{movePath[pathIndex].X,movePath[pathIndex].Y}
             }
-            if getDist(charCoord, nextStep) <= 6{ pathIndex += 2 }
+
             sendToServer("035F",coordsTo24Bits(nextStep.X,nextStep.Y))
             addWait(150)
         }
@@ -268,13 +269,23 @@ func botLoop() {
         }
 
         if MAP == lockMap && targetMobID < 0 && targetItemID < 0{ timerNoMob += looptime }else{ timerNoMob = 0 }
-        if timerNoMob > useTPDelay { useTeleport(); continue }
+        if timerNoMob > useTPDelay && targetItemID < 0 { useTeleport(); continue }
 
 
         if exist := getConf(conf["Route"],"Map",MAP); exist != nil {
             if skID > 0 {
                 sendUseSkill(skID, lv, accountID);
             continue }
+
+            if exist.(CRoute).UseTPdist > 0 {
+                minDist = 1
+                nextPoint = Coord{X:exist.(CRoute).X, Y:exist.(CRoute).Y}
+                movePath = pathfind(charCoord, nextPoint, lgatMaps[MAP])
+                if len(movePath) > exist.(CRoute).UseTPdist || len(movePath) <= 1{
+                    useTeleport(); continue
+                }
+            }
+
             if movePath == nil {
                 nextPoint = Coord{X:exist.(CRoute).X, Y:exist.(CRoute).Y}
                 movePath = pathfind(charCoord, nextPoint, lgatMaps[MAP])
@@ -283,6 +294,7 @@ func botLoop() {
         }
 
         if MAP == saveMap {
+
             if exist := getConf(conf["General"],"Key","WarpPortal"); exist != nil {
             if itemInInventory(717,1) > 0 { // bluegem
                 portalChoice := exist.(struct{Key string; Val string}).Val
@@ -399,10 +411,11 @@ func pickMobTarget() int{
         if mob.IsNotValid { continue }
         if mob.DeathTime > 0 { continue }
         if exist := getConf(conf["Mob"],"Id",mob.MobID); exist == nil { continue }
-        if !mob.AtSight { continue }
-        if mob.Priority < 0 { continue }
         mobPath := pathfind(charCoord, mob.Coords, lgatMaps[MAP])
         if len(mobPath) > 50 { mob.IsNotValid = true; mobList[mapID] = mob; continue }
+        if !mob.AtSight { continue }
+        if mob.Priority < 0 { continue }
+
         return mapID
     }
     return -1

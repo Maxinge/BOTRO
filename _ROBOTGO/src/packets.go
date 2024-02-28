@@ -273,10 +273,12 @@ func parsePacket(bb []byte){
 
         MUmobList.Lock()
         if mm, exist := mobList[targetID]; exist {
-        if sourceID != accountID {
-            mm.IsNotValid = true;
-            mobList[targetID] = mm
-        }}
+            if sourceID != accountID {
+                mm.IsNotValid = true;
+                mobList[targetID] = mm
+            }
+            // if sourceID == accountID { chkTimetargetMobID = 0 }
+        }
         if targetID == accountID {
             if mm, exist := mobList[sourceID]; exist {
                     mm.IsNotValid = false;

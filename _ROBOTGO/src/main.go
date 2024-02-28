@@ -201,9 +201,9 @@ func main() {
     <-exit
 }
 
-type CRoute struct{ Map string; X int; Y int; WarpPortal string; }
+type CRoute struct{ Map string; X int; Y int; WarpPortal string; UseTPdist int; }
 type CMob struct{ Priority int; Id int; Name string;
-                  AtkName string; AtkId int; AtkLv int; MinDist int; MinHP int;}
+                  AtkName string; AtkId int; AtkLv int; MinDist int; MinHP int; }
 type CItemLoot struct{ Priority int; Id int; Name string; }
 type CItemUse struct{ Id int; Name string; MinHP int; MinSP int; BuffId int; }
 type CSKillSelf struct{ Id int; Lv int; Name string; MinHP int; MinSP int; BuffId int; }

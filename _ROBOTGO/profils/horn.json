@@ -26,6 +26,7 @@
             "AtkName":"Throw Spirit Sphere", "AtkId":267,"AtkLv":1, "MinDist": 7, "MinHP": 0}
     ],
     "ItemLoot":[
+        { "Id":935,   "Name":"Shell"}
     ],
     "ItemUse":[
     ],

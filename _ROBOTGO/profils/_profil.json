@@ -1,13 +1,13 @@
 {
     "General":[
-        ["Title",    "monk tss bigfoot"],
+        ["Title",    "monkmino"],
         ["accountID",    2014282],
 
-        ["saveMap",      ""],
-        ["lockMap",      "mjolnir_09"],
-        ["WarpPortal",   ""],
-        ["useTPNbAggro",    5],
-        ["useTPNbAggroLoot",7],
+        ["saveMap",      "morocc"],
+        ["lockMap",      "moc_pryd05"],
+        ["WarpPortal",   "moc_ruins"],
+        ["useTPNbAggro",    4],
+        ["useTPNbAggroLoot",5],
         ["useTPLockMap",    1],
         ["useTPOnRoad",     1],
         ["useTPDelay",      500],
@@ -16,24 +16,24 @@
         ["useSitAboveSP",   100]
     ],
     "Route":[
-        {"Map":"prt_fild00",    "X":383,    "Y":249},
-        {"Map":"prt_fild05",    "X":105,    "Y":381},
-        {"Map":"mjolnir_08",    "X":185,    "Y":28},
-        {"Map":"prt_fild05",    "X":292,    "Y":385},
-        {"Map":"prt_fild01",    "X":20,    "Y":292}
+        {"Map":"moc_prydb1",    "X":100,    "Y":55, "UseTPdist": 40},
+        {"Map":"moc_ruins",    "X":55,    "Y":161},
+        {"Map":"moc_pryd01",    "X":90,    "Y":109, "UseTPdist": 40},
+        {"Map":"moc_pryd06",    "X":195,    "Y":8}
     ],
     "Mob":[
-        {"Priority":0, "Id":1060, "Name":"bigfoot",
-            "AtkName":"Throw Spirit Sphere", "AtkId":267,"AtkLv":1, "MinDist": 7, "MinHP": 0},
-        {"Priority":0, "Id":1092, "Name":"vagabon",
+        {"Priority":1, "Id":1149, "Name":"mino",
             "AtkName":"Throw Spirit Sphere", "AtkId":267,"AtkLv":3, "MinDist": 7, "MinHP": 0}
     ],
     "ItemLoot":[
-        { "Id":919,   "Name":"(Animal's_Skin)"},
-        { "Id":948 ,   "Name":"(Bear's_Foot)"},
-        { "Id":516,   "Name":"(Sweet_Potato)"}
+        { "Id":508,   "Name":"Yellow_Herb"},
+        {"Id":511,   "Name":"Green_Herb"},
+        {"Id":949,   "Name":"feather"},
+        {"Id":516,   "Name":"potato"},
+        {"Id":1301,   "Name":"axe"}
     ],
     "ItemUse":[
+        {"Name":"Converter fire", "Id":12115, "MinHP":-1, "MinSP":-1,"BuffId": 1505 }
     ],
     "SKillSelf":[
         {"Name":"SSS","Lv":3, "Id":666666,              "MinHP": -1, "MinSP": -1, "BuffId": -1},
