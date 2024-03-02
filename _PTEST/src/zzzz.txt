@@ -1,3 +1,37 @@
+
+// if !isDiago(direct) {
+// 	nextDirect1 := Coord{X:0,Y:0}
+// 	nextDirect2 := Coord{X:0,Y:0}
+// 	if direct == (Coord{X:0,Y:1}){
+// 		nextDirect1 = Coord{X:-1,Y:1}
+// 		nextDirect2 = Coord{X:1,Y:1}
+// 	}
+// 	if direct == (Coord{X:0,Y:-1}){
+// 		nextDirect1 = Coord{X:-1,Y:-1}
+// 		nextDirect2 = Coord{X:1,Y:-1}
+// 	}
+// 	if direct == (Coord{X:-1,Y:0}){
+// 		nextDirect1 = Coord{X:-1,Y:1}
+// 		nextDirect2 = Coord{X:-1,Y:-1}
+// 	}
+// 	if direct == (Coord{X:1,Y:0}){
+// 		nextDirect1 = Coord{X:1,Y:1}
+// 		nextDirect2 = Coord{X:1,Y:-1}
+// 	}
+// 	if nextDirect1 != (Coord{X:0,Y:0}) {
+// 	if nextDirect1 != (Coord{X:0,Y:0}) {
+// 		nextCoord1 := Coord{X:vv.X+nextDirect1.X,Y:vv.Y+nextDirect1.Y}
+// 		paths[nextCoord1] = vv
+// 		candidates = append(candidates, nextCoord1)
+// 		nextCoord2 := Coord{X:vv.X+nextDirect2.X,Y:vv.Y+nextDirect2.Y}
+// 		paths[nextCoord2] = vv
+// 		candidates = append(candidates, nextCoord2)
+// 	}}
+// }
+
+###########
+
+
 coordList := []Coord{}
 visited := []Coord{}
 

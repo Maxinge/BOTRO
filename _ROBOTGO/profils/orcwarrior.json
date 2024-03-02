@@ -1,0 +1,46 @@
+{
+    "General":[
+        ["Title",    "monk tss orcwar"],
+        ["accountID",    2014282],
+
+        ["saveMap",      ""],
+        ["lockMap",      "gef_fild10"],
+        ["WarpPortal",   ""],
+        ["useTPNbAggro",    6],
+        ["useTPNbAggroLoot",7],
+        ["useTPLockMap",    1],
+        ["useTPOnRoad",     1],
+        ["useTPDelay",      200],
+        ["useSitHP",        1],
+        ["useSitUnderSP",   33],
+        ["useSitAboveSP",   100]
+    ],
+    "Route":[
+        {"Map":"gef_fild14",    "X":371,    "Y":219},
+        {"Map":"gef_fild11",    "X":111,    "Y":364},
+        {"Map":"gef_fild09",    "X":225,    "Y":25},
+        {"Map":"gef_fild03",    "X":18,    "Y":52}
+    ],
+    "Mob":[
+        {"Priority":0, "Id":1023, "Name":"orcwarrior",
+            "AtkName":"Throw Spirit Sphere", "AtkId":267,"AtkLv":2, "MinDist": 7, "MinHP": 0},
+        {"Priority":0, "Id":1686, "Name":"orc baby",
+            "AtkName":"Throw Spirit Sphere", "AtkId":267,"AtkLv":2, "MinDist": 7, "MinHP": 0},
+        {"Priority":0, "Id":1031, "Name":"poporing",
+            "AtkName":"Throw Spirit Sphere", "AtkId":267,"AtkLv":1, "MinDist": 7, "MinHP": 0}
+    ],
+    "ItemLoot":[
+        { "Id":919,   "Name":"(Animal's_Skin)"},
+        { "Id":948 ,   "Name":"(Bear's_Foot)"},
+        { "Id":519 ,   "Name":"(milk)"},
+        { "Id":516,   "Name":"(Sweet_Potato)"}
+    ],
+    "ItemUse":[
+    ],
+    "SKillSelf":[
+        {"Name":"SSS","Lv":3, "Id":666666,              "MinHP": -1, "MinSP": -1, "BuffId": -1},
+        {"Name":"Heal", "Lv":7, "Id":28,                "MinHP": 70, "MinSP": 20, "BuffId": -1},
+        {"Name":"Blessing","Lv":10, "Id":34,            "MinHP": -1, "MinSP": 20, "BuffId": 10},
+        {"Name":"Increase Agility","Lv":10, "Id":29,    "MinHP": -1, "MinSP": 20, "BuffId": 12}
+    ]
+}

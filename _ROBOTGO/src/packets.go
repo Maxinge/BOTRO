@@ -234,7 +234,7 @@ func parsePacket(bb []byte){
 
     case "09FD", "09FF":
         //actor_appear_exist // actor spawned
-        // fmt.Printf("### actor_appear ### [%v][%v] \n", hexID, len(bb))
+        // fmt.Printf("### actor_appear ### [%v][%v][%v] \n", hexID, len(bb), bb)
         mapID := int(binary.LittleEndian.Uint32(bb[3:3+4]))
         mobID := int(binary.LittleEndian.Uint16(bb[21:21+4]))
         moveSpeed := int(binary.LittleEndian.Uint16(bb[11:11+2]))
@@ -251,17 +251,19 @@ func parsePacket(bb []byte){
             prio := -1
             aggro := false
             name := ""
+            looter := false
             mobdata := findMobInDb(mobID)
             if mobdata != nil {
                 aggro = mobdata["IsAggressive"].(bool)
                 name = mobdata["Name"].(string)
+                looter = mobdata["IsLooter"].(bool)
             }
             if exist := getConf(conf["Mob"],"Id",mobID); exist != nil {
                 prio = exist.(CMob).Priority
             }
             mobList[mapID] = Mob{
                 MobID:mobID, Coords:cc, MoveSpeed:moveSpeed,
-                Priority: prio, Aggro:aggro, Name:name,
+                Priority: prio, Aggro:aggro, Name:name, IsLooter:looter,
             }
             MUmobList.Unlock()
         }

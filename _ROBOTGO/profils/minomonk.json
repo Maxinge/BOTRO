@@ -5,7 +5,7 @@
 
         ["saveMap",      "morocc"],
         ["lockMap",      "moc_pryd05"],
-        ["WarpPortal",   ""],
+        ["WarpPortal",   "moc_ruins"],
         ["useTPNbAggro",    4],
         ["useTPNbAggroLoot",5],
         ["useTPLockMap",    1],
@@ -16,11 +16,15 @@
         ["useSitAboveSP",   100]
     ],
     "Route":[
-        {"Map":"moc_prydb1",    "X":100,    "Y":55},
+        {"Map":"moc_prydb1",    "X":100,    "Y":55, "UseTPdist": 40},
+        {"Map":"moc_ruins",    "X":55,    "Y":161},
+        {"Map":"moc_pryd01",    "X":90,    "Y":109, "UseTPdist": 100},
         {"Map":"moc_pryd06",    "X":195,    "Y":8}
     ],
     "Mob":[
         {"Priority":1, "Id":1149, "Name":"mino",
+            "AtkName":"Throw Spirit Sphere", "AtkId":267,"AtkLv":3, "MinDist": 7, "MinHP": 0},
+        {"Priority":-1, "Id":1032, "Name":"verit",
             "AtkName":"Throw Spirit Sphere", "AtkId":267,"AtkLv":3, "MinDist": 7, "MinHP": 0}
     ],
     "ItemLoot":[

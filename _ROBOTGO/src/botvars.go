@@ -22,6 +22,7 @@ type Mob struct {
     IsNotValid bool
     Priority int
     Aggro bool
+    IsLooter bool
     AtSight bool
     Name string
 }

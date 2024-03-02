@@ -2,6 +2,7 @@
 	{
 		"Id": 3989,
 		"SpriteName": "ABOMRING",
+		"IsLooter":false,
 		"Name": "Abomring",
 		"Level": 32,
 		"HP": 2265,
@@ -26,7 +27,7 @@
 		"NeedHit": 85,
 		"Element": "Neutral",
 		"ElementLevel": 3,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -156,6 +157,7 @@
 	{
 		"Id": 1219,
 		"SpriteName": "KNIGHT_OF_ABYSS",
+		"IsLooter":false,
 		"Name": "Abysmal Knight",
 		"Level": 79,
 		"HP": 23420,
@@ -304,6 +306,7 @@
 	{
 		"Id": 3058,
 		"SpriteName": "ABZU",
+		"IsLooter":false,
 		"Name": "Abzu",
 		"Level": 61,
 		"HP": 26585,
@@ -328,7 +331,7 @@
 		"NeedHit": 152,
 		"Element": "Water",
 		"ElementLevel": 1,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -384,6 +387,7 @@
 	{
 		"Id": 1193,
 		"SpriteName": "ALARM",
+		"IsLooter":false,
 		"Name": "Alarm",
 		"Level": 58,
 		"HP": 10647,
@@ -538,6 +542,7 @@
 	{
 		"Id": 1275,
 		"SpriteName": "ALICE",
+		"IsLooter":false,
 		"Name": "Alice",
 		"Level": 62,
 		"HP": 10000,
@@ -690,6 +695,7 @@
 	{
 		"Id": 1735,
 		"SpriteName": "ALICEL",
+		"IsLooter":false,
 		"Name": "Alicel",
 		"Level": 75,
 		"HP": 37520,
@@ -821,6 +827,7 @@
 	{
 		"Id": 1271,
 		"SpriteName": "ALLIGATOR",
+		"IsLooter":false,
 		"Name": "Alligator",
 		"Level": 42,
 		"HP": 4488,
@@ -955,6 +962,7 @@
 	{
 		"Id": 1301,
 		"SpriteName": "AM_MUT",
+		"IsLooter":false,
 		"Name": "Am Mut",
 		"Level": 61,
 		"HP": 12099,
@@ -1105,6 +1113,7 @@
 	{
 		"Id": 1094,
 		"SpriteName": "AMBERNITE",
+		"IsLooter":false,
 		"Name": "Ambernite",
 		"Level": 13,
 		"HP": 422,
@@ -1267,6 +1276,7 @@
 	{
 		"Id": 1511,
 		"SpriteName": "AMON_RA",
+		"IsLooter":false,
 		"Name": "Amon Ra",
 		"Level": 88,
 		"HP": 1214138,
@@ -1417,6 +1427,7 @@
 	{
 		"Id": 1030,
 		"SpriteName": "ANACONDAQ",
+		"IsLooter":false,
 		"Name": "Anacondaq",
 		"Level": 23,
 		"HP": 1109,
@@ -1591,6 +1602,7 @@
 	{
 		"Id": 2519,
 		"SpriteName": "ANCIENT_GUARD",
+		"IsLooter":false,
 		"Name": "Ancient Guard",
 		"Level": 41,
 		"HP": 5940,
@@ -1615,7 +1627,7 @@
 		"NeedHit": 86,
 		"Element": "Ghost",
 		"ElementLevel": 1,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -1741,6 +1753,7 @@
 	{
 		"Id": 1297,
 		"SpriteName": "ANCIENT_MUMMY",
+		"IsLooter":false,
 		"Name": "Ancient Mummy",
 		"Level": 64,
 		"HP": 40599,
@@ -1909,6 +1922,7 @@
 	{
 		"Id": 1305,
 		"SpriteName": "ANCIENT_WORM",
+		"IsLooter":false,
 		"Name": "Ancient Worm",
 		"Level": 67,
 		"HP": 22598,
@@ -2049,6 +2063,7 @@
 	{
 		"Id": 1095,
 		"SpriteName": "ANDRE",
+		"IsLooter":false,
 		"Name": "Andre",
 		"Level": 17,
 		"HP": 688,
@@ -2223,6 +2238,7 @@
 	{
 		"Id": 1237,
 		"SpriteName": "META_ANDRE",
+		"IsLooter":false,
 		"Name": "Andre",
 		"Level": 17,
 		"HP": 688,
@@ -2368,6 +2384,7 @@
 	{
 		"Id": 1096,
 		"SpriteName": "ANGELING",
+		"IsLooter":false,
 		"Name": "Angeling",
 		"Level": 20,
 		"HP": 55000,
@@ -2530,6 +2547,7 @@
 	{
 		"Id": 1388,
 		"SpriteName": "ARCHANGELING",
+		"IsLooter":false,
 		"Name": "Arc Angeling",
 		"Level": 60,
 		"HP": 79523,
@@ -2684,6 +2702,7 @@
 	{
 		"Id": 1206,
 		"SpriteName": "ANOLIAN",
+		"IsLooter":false,
 		"Name": "Anolian",
 		"Level": 61,
 		"HP": 16490,
@@ -2838,6 +2857,7 @@
 	{
 		"Id": 2508,
 		"SpriteName": "ANOLIAN_ALT",
+		"IsLooter":false,
 		"Name": "Anolian",
 		"Level": 61,
 		"HP": 16490,
@@ -2862,7 +2882,7 @@
 		"NeedHit": 124,
 		"Element": "Water",
 		"ElementLevel": 2,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -2992,6 +3012,7 @@
 	{
 		"Id": 1097,
 		"SpriteName": "ANT_EGG",
+		"IsLooter":false,
 		"Name": "Ant Egg",
 		"Level": 4,
 		"HP": 420,
@@ -3160,6 +3181,7 @@
 	{
 		"Id": 1098,
 		"SpriteName": "ANUBIS",
+		"IsLooter":false,
 		"Name": "Anubis",
 		"Level": 75,
 		"HP": 38000,
@@ -3310,6 +3332,7 @@
 	{
 		"Id": 1016,
 		"SpriteName": "ARCHER_SKELETON",
+		"IsLooter":false,
 		"Name": "Archer Skeleton",
 		"Level": 31,
 		"HP": 2840,
@@ -3476,6 +3499,7 @@
 	{
 		"Id": 1194,
 		"SpriteName": "ARCLOUSE",
+		"IsLooter":false,
 		"Name": "Arclouze",
 		"Level": 59,
 		"HP": 6075,
@@ -3638,6 +3662,7 @@
 	{
 		"Id": 1477,
 		"SpriteName": "G_ARCLOUSE",
+		"IsLooter":false,
 		"Name": "Pill Bug",
 		"Level": 40,
 		"HP": 4105,
@@ -3755,6 +3780,7 @@
 	{
 		"Id": 1099,
 		"SpriteName": "ARGIOPE",
+		"IsLooter":false,
 		"Name": "Argiope",
 		"Level": 41,
 		"HP": 4382,
@@ -3899,6 +3925,7 @@
 	{
 		"Id": 1100,
 		"SpriteName": "ARGOS",
+		"IsLooter":false,
 		"Name": "Argos",
 		"Level": 25,
 		"HP": 1244,
@@ -4065,6 +4092,7 @@
 	{
 		"Id": 3066,
 		"SpriteName": "ASSASSIN_FLY",
+		"IsLooter":false,
 		"Name": "Assassin Fly",
 		"Level": 85,
 		"HP": 200000,
@@ -4089,7 +4117,7 @@
 		"NeedHit": 210,
 		"Element": "Wind",
 		"ElementLevel": 3,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -4215,6 +4243,7 @@
 	{
 		"Id": 1315,
 		"SpriteName": "ASSULTER",
+		"IsLooter":false,
 		"Name": "Assaulter",
 		"Level": 71,
 		"HP": 11170,
@@ -4387,6 +4416,7 @@
 	{
 		"Id": 1090,
 		"SpriteName": "MASTERING",
+		"IsLooter":false,
 		"Name": "Mastering",
 		"Level": 2,
 		"HP": 2415,
@@ -4565,6 +4595,7 @@
 	{
 		"Id": 1266,
 		"SpriteName": "ASTER",
+		"IsLooter":false,
 		"Name": "Aster",
 		"Level": 18,
 		"HP": 728,
@@ -4717,6 +4748,7 @@
 	{
 		"Id": 1298,
 		"SpriteName": "ZOMBIE_MASTER",
+		"IsLooter":false,
 		"Name": "Zombie Master",
 		"Level": 62,
 		"HP": 14211,
@@ -4875,6 +4907,7 @@
 	{
 		"Id": 1642,
 		"SpriteName": "G_HARWORD",
+		"IsLooter":false,
 		"Name": "MasterSmith Howard",
 		"Level": 99,
 		"HP": 310000,
@@ -4922,6 +4955,7 @@
 	{
 		"Id": 1648,
 		"SpriteName": "B_HARWORD",
+		"IsLooter":false,
 		"Name": "MasterSmith Howard",
 		"Level": 99,
 		"HP": 1460000,
@@ -5067,6 +5101,7 @@
 	{
 		"Id": 1107,
 		"SpriteName": "DESERT_WOLF_B",
+		"IsLooter":false,
 		"Name": "Baby Desert Wolf",
 		"Level": 9,
 		"HP": 158,
@@ -5211,6 +5246,7 @@
 	{
 		"Id": 1415,
 		"SpriteName": "BABY_LEOPARD",
+		"IsLooter":false,
 		"Name": "Baby Leopard",
 		"Level": 32,
 		"HP": 2590,
@@ -5351,6 +5387,7 @@
 	{
 		"Id": 1101,
 		"SpriteName": "BAPHOMET_",
+		"IsLooter":false,
 		"Name": "Baphomet Jr.",
 		"Level": 50,
 		"HP": 6666,
@@ -5501,6 +5538,7 @@
 	{
 		"Id": 1039,
 		"SpriteName": "BAPHOMET",
+		"IsLooter":false,
 		"Name": "Baphomet",
 		"Level": 81,
 		"HP": 668000,
@@ -5651,6 +5689,7 @@
 	{
 		"Id": 1399,
 		"SpriteName": "EVENT_BAPHO",
+		"IsLooter":false,
 		"Name": "Baphomet",
 		"Level": 68,
 		"HP": 1264000,
@@ -5796,6 +5835,7 @@
 	{
 		"Id": 1848,
 		"SpriteName": "EVENT_BAPHOMET",
+		"IsLooter":false,
 		"Name": "Baphomet",
 		"Level": 50,
 		"HP": 45000,
@@ -5828,6 +5868,7 @@
 	{
 		"Id": 1929,
 		"SpriteName": "BAPHOMET_I",
+		"IsLooter":false,
 		"Name": "Unsealed Baphomet",
 		"Level": 98,
 		"HP": 4520000,
@@ -5973,6 +6014,7 @@
 	{
 		"Id": 1102,
 		"SpriteName": "BATHORY",
+		"IsLooter":false,
 		"Name": "Bathory",
 		"Level": 44,
 		"HP": 4999,
@@ -6135,6 +6177,7 @@
 	{
 		"Id": 1494,
 		"SpriteName": "KIND_OF_BEETLE",
+		"IsLooter":false,
 		"Name": "Beetle King",
 		"Level": 34,
 		"HP": 1874,
@@ -6269,6 +6312,7 @@
 	{
 		"Id": 1060,
 		"SpriteName": "BIGFOOT",
+		"IsLooter":false,
 		"Name": "Bigfoot",
 		"Level": 25,
 		"HP": 1421,
@@ -6443,6 +6487,7 @@
 	{
 		"Id": 1084,
 		"SpriteName": "BLACK_MUSHROOM",
+		"IsLooter":false,
 		"Name": "Black Mushroom",
 		"Level": 1,
 		"HP": 15,
@@ -6693,6 +6738,7 @@
 	{
 		"Id": 1367,
 		"SpriteName": "BLAZZER",
+		"IsLooter":false,
 		"Name": "Blazer",
 		"Level": 43,
 		"HP": 8252,
@@ -6791,6 +6837,7 @@
 	{
 		"Id": 1408,
 		"SpriteName": "BLOOD_BUTTERFLY",
+		"IsLooter":false,
 		"Name": "Bloody Butterfly",
 		"Level": 55,
 		"HP": 8082,
@@ -6931,6 +6978,7 @@
 	{
 		"Id": 1268,
 		"SpriteName": "BLOODY_KNIGHT",
+		"IsLooter":false,
 		"Name": "Bloody Knight",
 		"Level": 82,
 		"HP": 57870,
@@ -7081,6 +7129,7 @@
 	{
 		"Id": 1507,
 		"SpriteName": "BLOODY_MURDERER",
+		"IsLooter":false,
 		"Name": "Bloody Murderer",
 		"Level": 72,
 		"HP": 27521,
@@ -7245,6 +7294,7 @@
 	{
 		"Id": 1079,
 		"SpriteName": "BLUE_PLANT",
+		"IsLooter":false,
 		"Name": "Blue Plant",
 		"Level": 1,
 		"HP": 10,
@@ -7523,6 +7573,7 @@
 	{
 		"Id": 1025,
 		"SpriteName": "SNAKE",
+		"IsLooter":false,
 		"Name": "Boa",
 		"Level": 15,
 		"HP": 471,
@@ -7697,6 +7748,7 @@
 	{
 		"Id": 1418,
 		"SpriteName": "DARK_SNAKE_LORD",
+		"IsLooter":false,
 		"Name": "Evil Snake Lord",
 		"Level": 73,
 		"HP": 255000,
@@ -7847,6 +7899,7 @@
 	{
 		"Id": 1747,
 		"SpriteName": "G_SNAKE",
+		"IsLooter":false,
 		"Name": "Great Snake",
 		"Level": 37,
 		"HP": 3128,
@@ -7964,6 +8017,7 @@
 	{
 		"Id": 1841,
 		"SpriteName": "G_SNAKE_",
+		"IsLooter":false,
 		"Name": "Snake Lord's Minion",
 		"Level": 15,
 		"HP": 10,
@@ -8039,6 +8093,7 @@
 	{
 		"Id": 1842,
 		"SpriteName": "G_ANACONDAQ_",
+		"IsLooter":false,
 		"Name": "Snake Lord's Minion",
 		"Level": 23,
 		"HP": 15,
@@ -8114,6 +8169,7 @@
 	{
 		"Id": 3056,
 		"SpriteName": "BOMBO",
+		"IsLooter":false,
 		"Name": "Bombo",
 		"Level": 48,
 		"HP": 6522,
@@ -8138,7 +8194,7 @@
 		"NeedHit": 123,
 		"Element": "Fire",
 		"ElementLevel": 2,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -8240,6 +8296,7 @@
 	{
 		"Id": 1904,
 		"SpriteName": "BOMBPORING",
+		"IsLooter":false,
 		"Name": "Bombring",
 		"Level": 35,
 		"HP": 2745,
@@ -8285,6 +8342,7 @@
 	{
 		"Id": 2523,
 		"SpriteName": "BONECHEWER",
+		"IsLooter":false,
 		"Name": "Bonechewer",
 		"Level": 51,
 		"HP": 8485,
@@ -8309,7 +8367,7 @@
 		"NeedHit": 111,
 		"Element": "Undead",
 		"ElementLevel": 2,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -8421,6 +8479,7 @@
 	{
 		"Id": 1188,
 		"SpriteName": "BON_GUN",
+		"IsLooter":false,
 		"Name": "Bongun",
 		"Level": 32,
 		"HP": 2388,
@@ -8575,6 +8634,7 @@
 	{
 		"Id": 1211,
 		"SpriteName": "BRILIGHT",
+		"IsLooter":false,
 		"Name": "Brilight",
 		"Level": 46,
 		"HP": 5562,
@@ -8729,6 +8789,7 @@
 	{
 		"Id": 1103,
 		"SpriteName": "CARAMEL",
+		"IsLooter":false,
 		"Name": "Caramel",
 		"Level": 23,
 		"HP": 1127,
@@ -8877,6 +8938,7 @@
 	{
 		"Id": 1267,
 		"SpriteName": "CARAT",
+		"IsLooter":false,
 		"Name": "Carat",
 		"Level": 51,
 		"HP": 5200,
@@ -9013,6 +9075,7 @@
 	{
 		"Id": 1307,
 		"SpriteName": "CAT_O_NINE_TAIL",
+		"IsLooter":false,
 		"Name": "Cat o' Nine Tails",
 		"Level": 76,
 		"HP": 64512,
@@ -9163,6 +9226,7 @@
 	{
 		"Id": 1300,
 		"SpriteName": "CATERPILLAR",
+		"IsLooter":false,
 		"Name": "Caterpillar",
 		"Level": 64,
 		"HP": 14439,
@@ -9299,6 +9363,7 @@
 	{
 		"Id": 3065,
 		"SpriteName": "CAVE_VIPER",
+		"IsLooter":false,
 		"Name": "Cave Viper",
 		"Level": 75,
 		"HP": 11455,
@@ -9323,7 +9388,7 @@
 		"NeedHit": 168,
 		"Element": "Poison",
 		"ElementLevel": 2,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -9449,6 +9514,7 @@
 	{
 		"Id": 1250,
 		"SpriteName": "CHEPET",
+		"IsLooter":false,
 		"Name": "Chepet",
 		"Level": 42,
 		"HP": 4950,
@@ -9599,6 +9665,7 @@
 	{
 		"Id": 1283,
 		"SpriteName": "CHIMERA",
+		"IsLooter":false,
 		"Name": "Chimera",
 		"Level": 70,
 		"HP": 32600,
@@ -9749,6 +9816,7 @@
 	{
 		"Id": 1214,
 		"SpriteName": "CHOCO",
+		"IsLooter":false,
 		"Name": "Choco",
 		"Level": 43,
 		"HP": 4300,
@@ -9915,6 +9983,7 @@
 	{
 		"Id": 1861,
 		"SpriteName": "E_CHOCO",
+		"IsLooter":false,
 		"Name": "Choco",
 		"Level": 43,
 		"HP": 4278,
@@ -10060,6 +10129,7 @@
 	{
 		"Id": 1011,
 		"SpriteName": "CHONCHON",
+		"IsLooter":false,
 		"Name": "Chonchon",
 		"Level": 4,
 		"HP": 67,
@@ -10234,6 +10304,7 @@
 	{
 		"Id": 1042,
 		"SpriteName": "STEEL_CHONCHON",
+		"IsLooter":false,
 		"Name": "Steel Chonchon",
 		"Level": 17,
 		"HP": 530,
@@ -10412,6 +10483,7 @@
 	{
 		"Id": 1183,
 		"SpriteName": "CHONCHON_",
+		"IsLooter":false,
 		"Name": "Chonchon",
 		"Level": 4,
 		"HP": 70,
@@ -10552,6 +10624,7 @@
 	{
 		"Id": 1246,
 		"SpriteName": "COOKIE_XMAS",
+		"IsLooter":false,
 		"Name": "Christmas Cookie",
 		"Level": 28,
 		"HP": 2090,
@@ -10706,6 +10779,7 @@
 	{
 		"Id": 1269,
 		"SpriteName": "CLOCK",
+		"IsLooter":false,
 		"Name": "Clock",
 		"Level": 60,
 		"HP": 9800,
@@ -10874,6 +10948,7 @@
 	{
 		"Id": 1270,
 		"SpriteName": "C_TOWER_MANAGER",
+		"IsLooter":false,
 		"Name": "Tower Keeper",
 		"Level": 63,
 		"HP": 18600,
@@ -11036,6 +11111,7 @@
 	{
 		"Id": 1104,
 		"SpriteName": "COCO",
+		"IsLooter":false,
 		"Name": "Coco",
 		"Level": 17,
 		"HP": 817,
@@ -11210,6 +11286,7 @@
 	{
 		"Id": 1860,
 		"SpriteName": "E_COCO",
+		"IsLooter":false,
 		"Name": "Coco",
 		"Level": 17,
 		"HP": 817,
@@ -11355,6 +11432,7 @@
 	{
 		"Id": 1009,
 		"SpriteName": "CONDOR",
+		"IsLooter":false,
 		"Name": "Condor",
 		"Level": 5,
 		"HP": 92,
@@ -11525,6 +11603,7 @@
 	{
 		"Id": 1901,
 		"SpriteName": "E_CONDOR",
+		"IsLooter":false,
 		"Name": "Condor",
 		"Level": 5,
 		"HP": 8000,
@@ -11572,6 +11651,7 @@
 	{
 		"Id": 3991,
 		"SpriteName": "CONDUCTRING",
+		"IsLooter":false,
 		"Name": "Conductring",
 		"Level": 44,
 		"HP": 5065,
@@ -11596,7 +11676,7 @@
 		"NeedHit": 119,
 		"Element": "Wind",
 		"ElementLevel": 1,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -11722,6 +11802,7 @@
 	{
 		"Id": 1265,
 		"SpriteName": "COOKIE",
+		"IsLooter":false,
 		"Name": "Cookie",
 		"Level": 25,
 		"HP": 1010,
@@ -11862,6 +11943,7 @@
 	{
 		"Id": 25013,
 		"SpriteName": "LICHTERN_R2",
+		"IsLooter":false,
 		"Name": "CORE",
 		"Level": 68,
 		"HP": 15800,
@@ -11886,7 +11968,7 @@
 		"NeedHit": 166,
 		"Element": "Fire",
 		"ElementLevel": 2,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -12002,6 +12084,7 @@
 	{
 		"Id": 1067,
 		"SpriteName": "CORNUTUS",
+		"IsLooter":false,
 		"Name": "Cornutus",
 		"Level": 23,
 		"HP": 1366,
@@ -12164,6 +12247,7 @@
 	{
 		"Id": 3993,
 		"SpriteName": "CORRUPTOR",
+		"IsLooter":false,
 		"Name": "Corruptor",
 		"Level": 70,
 		"HP": 13800,
@@ -12188,7 +12272,7 @@
 		"NeedHit": 175,
 		"Element": "Shadow",
 		"ElementLevel": 2,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -12314,6 +12398,7 @@
 	{
 		"Id": 1073,
 		"SpriteName": "CRAB",
+		"IsLooter":false,
 		"Name": "Crab",
 		"Level": 20,
 		"HP": 1022,
@@ -12448,6 +12533,7 @@
 	{
 		"Id": 1209,
 		"SpriteName": "CRAMP",
+		"IsLooter":false,
 		"Name": "Cramp",
 		"Level": 56,
 		"HP": 4720,
@@ -12606,6 +12692,7 @@
 	{
 		"Id": 1293,
 		"SpriteName": "CREMY_FEAR",
+		"IsLooter":false,
 		"Name": "Creamy Fear",
 		"Level": 62,
 		"HP": 13387,
@@ -12746,6 +12833,7 @@
 	{
 		"Id": 1018,
 		"SpriteName": "CREAMY",
+		"IsLooter":false,
 		"Name": "Creamy",
 		"Level": 16,
 		"HP": 595,
@@ -12930,6 +13018,7 @@
 	{
 		"Id": 1231,
 		"SpriteName": "META_CREAMY",
+		"IsLooter":false,
 		"Name": "Creamy",
 		"Level": 16,
 		"HP": 595,
@@ -13061,6 +13150,7 @@
 	{
 		"Id": 1248,
 		"SpriteName": "CRUISER",
+		"IsLooter":false,
 		"Name": "Cruiser",
 		"Level": 35,
 		"HP": 2902,
@@ -13197,6 +13287,7 @@
 	{
 		"Id": 1260,
 		"SpriteName": "DARK_FRAME",
+		"IsLooter":false,
 		"Name": "Dark Frame",
 		"Level": 59,
 		"HP": 7500,
@@ -13323,6 +13414,7 @@
 	{
 		"Id": 1302,
 		"SpriteName": "DARK_ILLUSION",
+		"IsLooter":false,
 		"Name": "Dark Illusion",
 		"Level": 77,
 		"HP": 103631,
@@ -13477,6 +13569,7 @@
 	{
 		"Id": 1272,
 		"SpriteName": "DARK_LORD",
+		"IsLooter":false,
 		"Name": "Dark Lord",
 		"Level": 80,
 		"HP": 720000,
@@ -13617,6 +13710,7 @@
 	{
 		"Id": 1384,
 		"SpriteName": "DELETER",
+		"IsLooter":false,
 		"Name": "Deleter",
 		"Level": 66,
 		"HP": 17292,
@@ -13725,6 +13819,7 @@
 	{
 		"Id": 1385,
 		"SpriteName": "DELETER_",
+		"IsLooter":false,
 		"Name": "Deleter",
 		"Level": 65,
 		"HP": 15168,
@@ -13833,6 +13928,7 @@
 	{
 		"Id": 1378,
 		"SpriteName": "DEMON_PUNGUS",
+		"IsLooter":false,
 		"Name": "Demon Pungus",
 		"Level": 56,
 		"HP": 7259,
@@ -13949,6 +14045,7 @@
 	{
 		"Id": 2515,
 		"SpriteName": "DEMONIC_TUTOR",
+		"IsLooter":false,
 		"Name": "Demonic Tutor",
 		"Level": 74,
 		"HP": 41685,
@@ -13973,7 +14070,7 @@
 		"NeedHit": 169,
 		"Element": "Shadow",
 		"ElementLevel": 2,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [],
 		"Maps": [
@@ -13986,6 +14083,7 @@
 	{
 		"Id": 1105,
 		"SpriteName": "DENIRO",
+		"IsLooter":false,
 		"Name": "Deniro",
 		"Level": 19,
 		"HP": 760,
@@ -14152,6 +14250,7 @@
 	{
 		"Id": 1239,
 		"SpriteName": "META_DENIRO",
+		"IsLooter":false,
 		"Name": "Deniro",
 		"Level": 19,
 		"HP": 760,
@@ -14297,6 +14396,7 @@
 	{
 		"Id": 1106,
 		"SpriteName": "DESERT_WOLF",
+		"IsLooter":false,
 		"Name": "Desert Wolf",
 		"Level": 27,
 		"HP": 1884,
@@ -14451,6 +14551,7 @@
 	{
 		"Id": 1108,
 		"SpriteName": "DEVIACE",
+		"IsLooter":false,
 		"Name": "Deviace",
 		"Level": 47,
 		"HP": 20090,
@@ -14615,6 +14716,7 @@
 	{
 		"Id": 1582,
 		"SpriteName": "DEVILING",
+		"IsLooter":false,
 		"Name": "Deviling",
 		"Level": 31,
 		"HP": 64500,
@@ -14773,6 +14875,7 @@
 	{
 		"Id": 1109,
 		"SpriteName": "DEVIRUCHI",
+		"IsLooter":false,
 		"Name": "Deviruchi",
 		"Level": 46,
 		"HP": 5656,
@@ -14927,6 +15030,7 @@
 	{
 		"Id": 1382,
 		"SpriteName": "DIABOLIC",
+		"IsLooter":false,
 		"Name": "Diabolic",
 		"Level": 67,
 		"HP": 9642,
@@ -15049,6 +15153,7 @@
 	{
 		"Id": 1506,
 		"SpriteName": "DISGUISE",
+		"IsLooter":false,
 		"Name": "Disguise",
 		"Level": 55,
 		"HP": 7543,
@@ -15185,6 +15290,7 @@
 	{
 		"Id": 1110,
 		"SpriteName": "DOKEBI",
+		"IsLooter":false,
 		"Name": "Dokebi",
 		"Level": 33,
 		"HP": 2697,
@@ -15339,6 +15445,7 @@
 	{
 		"Id": 1046,
 		"SpriteName": "DOPPELGANGER",
+		"IsLooter":false,
 		"Name": "Doppelganger",
 		"Level": 72,
 		"HP": 249000,
@@ -15493,6 +15600,7 @@
 	{
 		"Id": 1731,
 		"SpriteName": "G_DOPPELGANGER",
+		"IsLooter":false,
 		"Name": "Outrageous Doppelganger",
 		"Level": 72,
 		"HP": 12000000,
@@ -15540,6 +15648,7 @@
 	{
 		"Id": 3042,
 		"SpriteName": "DORY",
+		"IsLooter":false,
 		"Name": "Dory",
 		"Level": 58,
 		"HP": 9615,
@@ -15564,7 +15673,7 @@
 		"NeedHit": 150,
 		"Element": "Undead",
 		"ElementLevel": 3,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -15704,6 +15813,7 @@
 	{
 		"Id": 3987,
 		"SpriteName": "DOUGHRING",
+		"IsLooter":false,
 		"Name": "Doughring",
 		"Level": 25,
 		"HP": 1204,
@@ -15728,7 +15838,7 @@
 		"NeedHit": 63,
 		"Element": "Neutral",
 		"ElementLevel": 1,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -15840,6 +15950,7 @@
 	{
 		"Id": 1389,
 		"SpriteName": "DRACULA",
+		"IsLooter":false,
 		"Name": "Dracula",
 		"Level": 85,
 		"HP": 320096,
@@ -15990,6 +16101,7 @@
 	{
 		"Id": 1091,
 		"SpriteName": "DRAGON_FLY",
+		"IsLooter":false,
 		"Name": "Dragon Fly",
 		"Level": 8,
 		"HP": 2400,
@@ -16144,6 +16256,7 @@
 	{
 		"Id": 1321,
 		"SpriteName": "DRAGON_TAIL",
+		"IsLooter":false,
 		"Name": "Dragon Tail",
 		"Level": 61,
 		"HP": 8368,
@@ -16302,6 +16415,7 @@
 	{
 		"Id": 1111,
 		"SpriteName": "DRAINLIAR",
+		"IsLooter":false,
 		"Name": "Drainliar",
 		"Level": 24,
 		"HP": 1255,
@@ -16504,6 +16618,7 @@
 	{
 		"Id": 1112,
 		"SpriteName": "DRAKE",
+		"IsLooter":false,
 		"Name": "Drake",
 		"Level": 70,
 		"HP": 327000,
@@ -16640,6 +16755,7 @@
 	{
 		"Id": 25017,
 		"SpriteName": "EXCAVATOR_ROBOT",
+		"IsLooter":false,
 		"Name": "DRILL",
 		"Level": 76,
 		"HP": 31100,
@@ -16664,7 +16780,7 @@
 		"NeedHit": 166,
 		"Element": "Fire",
 		"ElementLevel": 3,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -16790,6 +16906,7 @@
 	{
 		"Id": 1380,
 		"SpriteName": "DRILLER",
+		"IsLooter":false,
 		"Name": "Driller",
 		"Level": 52,
 		"HP": 7452,
@@ -16892,6 +17009,7 @@
 	{
 		"Id": 1113,
 		"SpriteName": "DROPS",
+		"IsLooter":false,
 		"Name": "Drops",
 		"Level": 3,
 		"HP": 55,
@@ -17102,6 +17220,7 @@
 	{
 		"Id": 1493,
 		"SpriteName": "DRYAD",
+		"IsLooter":false,
 		"Name": "Dryad",
 		"Level": 50,
 		"HP": 8791,
@@ -17256,6 +17375,7 @@
 	{
 		"Id": 1504,
 		"SpriteName": "DULLAHAN",
+		"IsLooter":false,
 		"Name": "Dullahan",
 		"Level": 62,
 		"HP": 12437,
@@ -17400,6 +17520,7 @@
 	{
 		"Id": 1409,
 		"SpriteName": "RICE_CAKE_BOY",
+		"IsLooter":false,
 		"Name": "Dumpling Child",
 		"Level": 27,
 		"HP": 2098,
@@ -17536,6 +17657,7 @@
 	{
 		"Id": 1114,
 		"SpriteName": "DUSTINESS",
+		"IsLooter":false,
 		"Name": "Dustiness",
 		"Level": 21,
 		"HP": 1044,
@@ -17696,6 +17818,7 @@
 	{
 		"Id": 1093,
 		"SpriteName": "ECLIPSE",
+		"IsLooter":false,
 		"Name": "Eclipse",
 		"Level": 6,
 		"HP": 1800,
@@ -17854,6 +17977,7 @@
 	{
 		"Id": 1115,
 		"SpriteName": "EDDGA",
+		"IsLooter":false,
 		"Name": "Eddga",
 		"Level": 65,
 		"HP": 152000,
@@ -17994,6 +18118,7 @@
 	{
 		"Id": 1116,
 		"SpriteName": "EGGYRA",
+		"IsLooter":false,
 		"Name": "Eggyra",
 		"Level": 24,
 		"HP": 695,
@@ -18156,6 +18281,7 @@
 	{
 		"Id": 1033,
 		"SpriteName": "ELDER_WILOW",
+		"IsLooter":false,
 		"Name": "Elder Willow",
 		"Level": 20,
 		"HP": 693,
@@ -18314,6 +18440,7 @@
 	{
 		"Id": 1377,
 		"SpriteName": "ELDER",
+		"IsLooter":false,
 		"Name": "Elder",
 		"Level": 64,
 		"HP": 21592,
@@ -18454,6 +18581,7 @@
 	{
 		"Id": 25011,
 		"SpriteName": "KICK_STEP",
+		"IsLooter":false,
 		"Name": "Lost WELDER",
 		"Level": 90,
 		"HP": 33000,
@@ -18478,7 +18606,7 @@
 		"NeedHit": 180,
 		"Element": "Wind",
 		"ElementLevel": 3,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [],
 		"Maps": []
@@ -18486,6 +18614,7 @@
 	{
 		"Id": 25014,
 		"SpriteName": "KICK_STEP2",
+		"IsLooter":false,
 		"Name": "WELDER",
 		"Level": 75,
 		"HP": 21800,
@@ -18510,7 +18639,7 @@
 		"NeedHit": 165,
 		"Element": "Wind",
 		"ElementLevel": 2,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -18654,6 +18783,7 @@
 	{
 		"Id": 1481,
 		"SpriteName": "G_PUNK",
+		"IsLooter":false,
 		"Name": "Elite Punk",
 		"Level": 68,
 		"HP": 10240,
@@ -18804,6 +18934,7 @@
 	{
 		"Id": 1288,
 		"SpriteName": "EMPELIUM",
+		"IsLooter":false,
 		"Name": "Emperium",
 		"Level": 90,
 		"HP": 109000,
@@ -18841,6 +18972,7 @@
 	{
 		"Id": 1410,
 		"SpriteName": "LIVE_PEACH_TREE",
+		"IsLooter":false,
 		"Name": "Enchanted Peach Tree",
 		"Level": 53,
 		"HP": 8905,
@@ -18967,6 +19099,7 @@
 	{
 		"Id": 1117,
 		"SpriteName": "EVIL_DRUID",
+		"IsLooter":false,
 		"Name": "Evil Druid",
 		"Level": 58,
 		"HP": 9999,
@@ -19129,6 +19262,7 @@
 	{
 		"Id": 1416,
 		"SpriteName": "WICKED_NYMPH",
+		"IsLooter":false,
 		"Name": "Evil Nymph",
 		"Level": 63,
 		"HP": 16029,
@@ -19279,6 +19413,7 @@
 	{
 		"Id": 1205,
 		"SpriteName": "EXECUTIONER",
+		"IsLooter":false,
 		"Name": "Executioner",
 		"Level": 65,
 		"HP": 28980,
@@ -19433,6 +19568,7 @@
 	{
 		"Id": 1383,
 		"SpriteName": "EXPLOSION",
+		"IsLooter":false,
 		"Name": "Explosion",
 		"Level": 46,
 		"HP": 8054,
@@ -19555,6 +19691,7 @@
 	{
 		"Id": 1007,
 		"SpriteName": "FABRE",
+		"IsLooter":false,
 		"Name": "Fabre",
 		"Level": 2,
 		"HP": 51,
@@ -19733,6 +19870,7 @@
 	{
 		"Id": 1184,
 		"SpriteName": "FABRE_",
+		"IsLooter":false,
 		"Name": "Fabre",
 		"Level": 1,
 		"HP": 51,
@@ -19893,6 +20031,7 @@
 	{
 		"Id": 1229,
 		"SpriteName": "META_FABRE",
+		"IsLooter":false,
 		"Name": "Fabre",
 		"Level": 2,
 		"HP": 51,
@@ -20038,6 +20177,7 @@
 	{
 		"Id": 1005,
 		"SpriteName": "FARMILIAR",
+		"IsLooter":false,
 		"Name": "Familiar",
 		"Level": 8,
 		"HP": 175,
@@ -20220,6 +20360,7 @@
 	{
 		"Id": 1053,
 		"SpriteName": "THIEF_BUG_",
+		"IsLooter":false,
 		"Name": "Female Thief Bug",
 		"Level": 10,
 		"HP": 175,
@@ -20394,6 +20535,7 @@
 	{
 		"Id": 1403,
 		"SpriteName": "ANTIQUE_FIRELOCK",
+		"IsLooter":false,
 		"Name": "Firelock Soldier",
 		"Level": 47,
 		"HP": 3852,
@@ -20538,6 +20680,7 @@
 	{
 		"Id": 2522,
 		"SpriteName": "FLAME_BEETLE",
+		"IsLooter":false,
 		"Name": "Flame Beetle",
 		"Level": 45,
 		"HP": 3685,
@@ -20562,7 +20705,7 @@
 		"NeedHit": 100,
 		"Element": "Fire",
 		"ElementLevel": 1,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -20688,6 +20831,7 @@
 	{
 		"Id": 1118,
 		"SpriteName": "FLORA",
+		"IsLooter":false,
 		"Name": "Flora",
 		"Level": 26,
 		"HP": 1589,
@@ -20850,6 +20994,7 @@
 	{
 		"Id": 1319,
 		"SpriteName": "FREEZER",
+		"IsLooter":false,
 		"Name": "Freezer",
 		"Level": 72,
 		"HP": 8636,
@@ -21040,6 +21185,7 @@
 	{
 		"Id": 3982,
 		"SpriteName": "FRIGID_LICH",
+		"IsLooter":false,
 		"Name": "Frigid Lich",
 		"Level": 83,
 		"HP": 29758,
@@ -21064,7 +21210,7 @@
 		"NeedHit": 146,
 		"Element": "Water",
 		"ElementLevel": 2,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -21190,6 +21336,7 @@
 	{
 		"Id": 1119,
 		"SpriteName": "FRILLDORA",
+		"IsLooter":false,
 		"Name": "Frilldora",
 		"Level": 30,
 		"HP": 2023,
@@ -21348,6 +21495,7 @@
 	{
 		"Id": 25016,
 		"SpriteName": "SCR_MT_ROBOTS",
+		"IsLooter":false,
 		"Name": "FUEL",
 		"Level": 72,
 		"HP": 20900,
@@ -21372,7 +21520,7 @@
 		"NeedHit": 142,
 		"Element": "Fire",
 		"ElementLevel": 3,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -21498,6 +21646,7 @@
 	{
 		"Id": 1309,
 		"SpriteName": "GAJOMART",
+		"IsLooter":false,
 		"Name": "Gajomart",
 		"Level": 63,
 		"HP": 13669,
@@ -21634,6 +21783,7 @@
 	{
 		"Id": 1391,
 		"SpriteName": "GALAPAGO",
+		"IsLooter":false,
 		"Name": "Galapago",
 		"Level": 61,
 		"HP": 9145,
@@ -21784,6 +21934,7 @@
 	{
 		"Id": 1253,
 		"SpriteName": "GARGOYLE",
+		"IsLooter":false,
 		"Name": "Gargoyle",
 		"Level": 48,
 		"HP": 3950,
@@ -21972,6 +22123,7 @@
 	{
 		"Id": 1368,
 		"SpriteName": "GEOGRAPHER",
+		"IsLooter":false,
 		"Name": "Geographer",
 		"Level": 56,
 		"HP": 8071,
@@ -22120,6 +22272,7 @@
 	{
 		"Id": 3980,
 		"SpriteName": "GHOST_SHROOM",
+		"IsLooter":false,
 		"Name": "Ghost Shroom",
 		"Level": 79,
 		"HP": 27460,
@@ -22144,7 +22297,7 @@
 		"NeedHit": 132,
 		"Element": "Ghost",
 		"ElementLevel": 1,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -22270,6 +22423,7 @@
 	{
 		"Id": 1120,
 		"SpriteName": "GHOSTRING",
+		"IsLooter":false,
 		"Name": "Ghostring",
 		"Level": 18,
 		"HP": 73300,
@@ -22436,6 +22590,7 @@
 	{
 		"Id": 1036,
 		"SpriteName": "GHOUL",
+		"IsLooter":false,
 		"Name": "Ghoul",
 		"Level": 40,
 		"HP": 4888,
@@ -22602,6 +22757,7 @@
 	{
 		"Id": 1303,
 		"SpriteName": "GIANT_HONET",
+		"IsLooter":false,
 		"Name": "Giant Hornet",
 		"Level": 56,
 		"HP": 13105,
@@ -22738,6 +22894,7 @@
 	{
 		"Id": 1304,
 		"SpriteName": "GIANT_SPIDER",
+		"IsLooter":false,
 		"Name": "Giant Spider",
 		"Level": 55,
 		"HP": 11874,
@@ -22892,6 +23049,7 @@
 	{
 		"Id": 1186,
 		"SpriteName": "WHISPER_BOSS",
+		"IsLooter":false,
 		"Name": "Giant Whisper",
 		"Level": 34,
 		"HP": 3744,
@@ -23008,6 +23166,7 @@
 	{
 		"Id": 1503,
 		"SpriteName": "GIBBET",
+		"IsLooter":false,
 		"Name": "Gibbet",
 		"Level": 58,
 		"HP": 6841,
@@ -23152,6 +23311,7 @@
 	{
 		"Id": 1121,
 		"SpriteName": "GIEARTH",
+		"IsLooter":false,
 		"Name": "Giearth",
 		"Level": 29,
 		"HP": 1925,
@@ -23304,6 +23464,7 @@
 	{
 		"Id": 1387,
 		"SpriteName": "GIG",
+		"IsLooter":false,
 		"Name": "Gig",
 		"Level": 60,
 		"HP": 8409,
@@ -23426,6 +23587,7 @@
 	{
 		"Id": 1372,
 		"SpriteName": "GOAT",
+		"IsLooter":false,
 		"Name": "Goat",
 		"Level": 69,
 		"HP": 11077,
@@ -23580,6 +23742,7 @@
 	{
 		"Id": 1258,
 		"SpriteName": "GOBLIN_ARCHER",
+		"IsLooter":false,
 		"Name": "Goblin Archer",
 		"Level": 28,
 		"HP": 1850,
@@ -23738,6 +23901,7 @@
 	{
 		"Id": 1299,
 		"SpriteName": "GOBLIN_LEADER",
+		"IsLooter":false,
 		"Name": "Goblin Leader",
 		"Level": 64,
 		"HP": 20152,
@@ -23888,6 +24052,7 @@
 	{
 		"Id": 1280,
 		"SpriteName": "STEAM_GOBLIN",
+		"IsLooter":false,
 		"Name": "Goblin Steamrider",
 		"Level": 35,
 		"HP": 2490,
@@ -24024,6 +24189,7 @@
 	{
 		"Id": 1122,
 		"SpriteName": "GOBLIN_1",
+		"IsLooter":false,
 		"Name": "Goblin",
 		"Level": 25,
 		"HP": 1288,
@@ -24178,6 +24344,7 @@
 	{
 		"Id": 1123,
 		"SpriteName": "GOBLIN_2",
+		"IsLooter":false,
 		"Name": "Goblin",
 		"Level": 24,
 		"HP": 1255,
@@ -24332,6 +24499,7 @@
 	{
 		"Id": 1124,
 		"SpriteName": "GOBLIN_3",
+		"IsLooter":false,
 		"Name": "Goblin",
 		"Level": 24,
 		"HP": 1202,
@@ -24486,6 +24654,7 @@
 	{
 		"Id": 1125,
 		"SpriteName": "GOBLIN_4",
+		"IsLooter":false,
 		"Name": "Goblin",
 		"Level": 23,
 		"HP": 1359,
@@ -24640,6 +24809,7 @@
 	{
 		"Id": 1126,
 		"SpriteName": "GOBLIN_5",
+		"IsLooter":false,
 		"Name": "Goblin",
 		"Level": 22,
 		"HP": 1288,
@@ -24794,6 +24964,7 @@
 	{
 		"Id": 1086,
 		"SpriteName": "GOLDEN_BUG",
+		"IsLooter":false,
 		"Name": "Golden Thief Bug",
 		"Level": 64,
 		"HP": 126000,
@@ -24944,6 +25115,7 @@
 	{
 		"Id": 1040,
 		"SpriteName": "GOLEM",
+		"IsLooter":false,
 		"Name": "Golem",
 		"Level": 25,
 		"HP": 2300,
@@ -25102,6 +25274,7 @@
 	{
 		"Id": 1278,
 		"SpriteName": "STALACTIC_GOLEM",
+		"IsLooter":false,
 		"Name": "Stalactic Golem",
 		"Level": 60,
 		"HP": 18700,
@@ -25238,6 +25411,7 @@
 	{
 		"Id": 1366,
 		"SpriteName": "LAVA_GOLEM",
+		"IsLooter":false,
 		"Name": "Lava Golem",
 		"Level": 77,
 		"HP": 24324,
@@ -25360,6 +25534,7 @@
 	{
 		"Id": 1497,
 		"SpriteName": "WOODEN_GOLEM",
+		"IsLooter":false,
 		"Name": "Wooden Golem",
 		"Level": 51,
 		"HP": 9200,
@@ -25510,6 +25685,7 @@
 	{
 		"Id": 2024,
 		"SpriteName": "BRADIUM_GOLEM",
+		"IsLooter":false,
 		"Name": "Bradium Golem",
 		"Level": 101,
 		"HP": 45200,
@@ -25599,6 +25775,7 @@
 	{
 		"Id": 1369,
 		"SpriteName": "GRAND_PECO",
+		"IsLooter":false,
 		"Name": "Grand Peco",
 		"Level": 58,
 		"HP": 8054,
@@ -25739,6 +25916,7 @@
 	{
 		"Id": 3064,
 		"SpriteName": "GREAT_SNAKE",
+		"IsLooter":false,
 		"Name": "Great Snake",
 		"Level": 37,
 		"HP": 3128,
@@ -25763,7 +25941,7 @@
 		"NeedHit": 102,
 		"Element": "Earth",
 		"ElementLevel": 1,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -25861,6 +26039,7 @@
 	{
 		"Id": 1277,
 		"SpriteName": "GREATEST_GENERAL",
+		"IsLooter":false,
 		"Name": "Greatest General",
 		"Level": 40,
 		"HP": 3632,
@@ -26019,6 +26198,7 @@
 	{
 		"Id": 1631,
 		"SpriteName": "CHUNG_E_",
+		"IsLooter":false,
 		"Name": "Green Maiden",
 		"Level": 59,
 		"HP": 23900,
@@ -26169,6 +26349,7 @@
 	{
 		"Id": 1080,
 		"SpriteName": "GREEN_PLANT",
+		"IsLooter":false,
 		"Name": "Green Plant",
 		"Level": 1,
 		"HP": 10,
@@ -26523,6 +26704,7 @@
 	{
 		"Id": 1381,
 		"SpriteName": "GRIZZLY",
+		"IsLooter":false,
 		"Name": "Grizzly",
 		"Level": 68,
 		"HP": 11733,
@@ -26621,6 +26803,7 @@
 	{
 		"Id": 1259,
 		"SpriteName": "GRYPHON",
+		"IsLooter":false,
 		"Name": "Gryphon",
 		"Level": 72,
 		"HP": 27800,
@@ -26775,6 +26958,7 @@
 	{
 		"Id": 3052,
 		"SpriteName": "GUARD_QING",
+		"IsLooter":false,
 		"Name": "Guard Qing",
 		"Level": 41,
 		"HP": 5940,
@@ -26799,7 +26983,7 @@
 		"NeedHit": 86,
 		"Element": "Ghost",
 		"ElementLevel": 1,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -26925,6 +27109,7 @@
 	{
 		"Id": 1311,
 		"SpriteName": "GULLINBURSTI",
+		"IsLooter":false,
 		"Name": "Gullinbursti",
 		"Level": 62,
 		"HP": 21331,
@@ -27075,6 +27260,7 @@
 	{
 		"Id": 3047,
 		"SpriteName": "GYOKUTO",
+		"IsLooter":false,
 		"Name": "Gyokuto",
 		"Level": 75,
 		"HP": 12012,
@@ -27099,7 +27285,7 @@
 		"NeedHit": 175,
 		"Element": "Holy",
 		"ElementLevel": 1,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -27243,6 +27429,7 @@
 	{
 		"Id": 1376,
 		"SpriteName": "HARPY",
+		"IsLooter":false,
 		"Name": "Harpy",
 		"Level": 70,
 		"HP": 16599,
@@ -27373,6 +27560,7 @@
 	{
 		"Id": 1515,
 		"SpriteName": "GARM_BABY",
+		"IsLooter":false,
 		"Name": "Hatii Baby",
 		"Level": 61,
 		"HP": 20199,
@@ -27495,6 +27683,7 @@
 	{
 		"Id": 1252,
 		"SpriteName": "GARM",
+		"IsLooter":false,
 		"Name": "Hatii",
 		"Level": 73,
 		"HP": 197000,
@@ -27631,6 +27820,7 @@
 	{
 		"Id": 1888,
 		"SpriteName": "GARM_BABY_R",
+		"IsLooter":false,
 		"Name": "Garm Baby",
 		"Level": 61,
 		"HP": 15199,
@@ -27678,6 +27868,7 @@
 	{
 		"Id": 1318,
 		"SpriteName": "HEATER",
+		"IsLooter":false,
 		"Name": "Heater",
 		"Level": 68,
 		"HP": 9022,
@@ -27832,6 +28023,7 @@
 	{
 		"Id": 1510,
 		"SpriteName": "HYLOZOIST",
+		"IsLooter":false,
 		"Name": "Heirozoist",
 		"Level": 51,
 		"HP": 7186,
@@ -27990,6 +28182,7 @@
 	{
 		"Id": 1413,
 		"SpriteName": "WILD_GINSENG",
+		"IsLooter":false,
 		"Name": "Hermit Plant",
 		"Level": 46,
 		"HP": 6900,
@@ -28144,6 +28337,7 @@
 	{
 		"Id": 1213,
 		"SpriteName": "HIGH_ORC",
+		"IsLooter":false,
 		"Name": "High Orc",
 		"Level": 52,
 		"HP": 7088,
@@ -28298,6 +28492,7 @@
 	{
 		"Id": 1127,
 		"SpriteName": "HODE",
+		"IsLooter":false,
 		"Name": "Hode",
 		"Level": 26,
 		"HP": 2302,
@@ -28464,6 +28659,7 @@
 	{
 		"Id": 1004,
 		"SpriteName": "HORNET",
+		"IsLooter":false,
 		"Name": "Hornet",
 		"Level": 8,
 		"HP": 171,
@@ -28612,6 +28808,7 @@
 	{
 		"Id": 1128,
 		"SpriteName": "HORN",
+		"IsLooter":false,
 		"Name": "Horn",
 		"Level": 18,
 		"HP": 659,
@@ -28764,6 +28961,7 @@
 	{
 		"Id": 1129,
 		"SpriteName": "HORONG",
+		"IsLooter":false,
 		"Name": "Horong",
 		"Level": 34,
 		"HP": 2444,
@@ -28930,6 +29128,7 @@
 	{
 		"Id": 1035,
 		"SpriteName": "HUNTER_FLY",
+		"IsLooter":false,
 		"Name": "Hunter Fly",
 		"Level": 42,
 		"HP": 3688,
@@ -29096,6 +29295,7 @@
 	{
 		"Id": 1068,
 		"SpriteName": "HYDRA",
+		"IsLooter":false,
 		"Name": "Hydra",
 		"Level": 14,
 		"HP": 502,
@@ -29276,6 +29476,7 @@
 	{
 		"Id": 25012,
 		"SpriteName": "BANASPATY",
+		"IsLooter":false,
 		"Name": "Ignis",
 		"Level": 80,
 		"HP": 83200,
@@ -29300,7 +29501,7 @@
 		"NeedHit": 176,
 		"Element": "Fire",
 		"ElementLevel": 3,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -29412,6 +29613,7 @@
 	{
 		"Id": 3978,
 		"SpriteName": "INDIGNANT_SOUL",
+		"IsLooter":false,
 		"Name": "Indignant Soul",
 		"Level": 82,
 		"HP": 15400,
@@ -29436,7 +29638,7 @@
 		"NeedHit": 180,
 		"Element": "Ghost",
 		"ElementLevel": 3,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -29548,6 +29750,7 @@
 	{
 		"Id": 1257,
 		"SpriteName": "INJUSTICE",
+		"IsLooter":false,
 		"Name": "Injustice",
 		"Level": 51,
 		"HP": 7600,
@@ -29698,6 +29901,7 @@
 	{
 		"Id": 1212,
 		"SpriteName": "IRON_FIST",
+		"IsLooter":false,
 		"Name": "Iron Fist",
 		"Level": 47,
 		"HP": 4221,
@@ -29834,6 +30038,7 @@
 	{
 		"Id": 1029,
 		"SpriteName": "ISIS",
+		"IsLooter":false,
 		"Name": "Isis",
 		"Level": 47,
 		"HP": 7003,
@@ -29984,6 +30189,7 @@
 	{
 		"Id": 3043,
 		"SpriteName": "JABBERWOCK",
+		"IsLooter":false,
 		"Name": "Jabberwock",
 		"Level": 66,
 		"HP": 85900,
@@ -30008,7 +30214,7 @@
 		"NeedHit": 166,
 		"Element": "Shadow",
 		"ElementLevel": 2,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -30134,6 +30340,7 @@
 	{
 		"Id": 1130,
 		"SpriteName": "JAKK",
+		"IsLooter":false,
 		"Name": "Jakk",
 		"Level": 38,
 		"HP": 3581,
@@ -30270,6 +30477,7 @@
 	{
 		"Id": 1244,
 		"SpriteName": "JAKK_XMAS",
+		"IsLooter":false,
 		"Name": "Christmas Jakk",
 		"Level": 38,
 		"HP": 3581,
@@ -30415,6 +30623,7 @@
 	{
 		"Id": 1722,
 		"SpriteName": "EVENT_JAKK",
+		"IsLooter":false,
 		"Name": "Halloween Jakk",
 		"Level": 99,
 		"HP": 10310,
@@ -30504,6 +30713,7 @@
 	{
 		"Id": 3990,
 		"SpriteName": "JELRING",
+		"IsLooter":false,
 		"Name": "Jelring",
 		"Level": 22,
 		"HP": 1115,
@@ -30528,7 +30738,7 @@
 		"NeedHit": 59,
 		"Element": "Water",
 		"ElementLevel": 1,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -30648,6 +30858,7 @@
 	{
 		"Id": 1517,
 		"SpriteName": "LI_ME_MANG_RYANG",
+		"IsLooter":false,
 		"Name": "Jing Guai",
 		"Level": 48,
 		"HP": 5920,
@@ -30756,6 +30967,7 @@
 	{
 		"Id": 1131,
 		"SpriteName": "JOKER",
+		"IsLooter":false,
 		"Name": "Joker",
 		"Level": 57,
 		"HP": 8782,
@@ -30910,6 +31122,7 @@
 	{
 		"Id": 1072,
 		"SpriteName": "KAHO",
+		"IsLooter":false,
 		"Name": "Kaho",
 		"Level": 60,
 		"HP": 8409,
@@ -31060,6 +31273,7 @@
 	{
 		"Id": 2520,
 		"SpriteName": "KALEC",
+		"IsLooter":false,
 		"Name": "Kalec",
 		"Level": 42,
 		"HP": 4366,
@@ -31084,7 +31298,7 @@
 		"NeedHit": 88,
 		"Element": "Water",
 		"ElementLevel": 2,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -31182,6 +31396,7 @@
 	{
 		"Id": 1406,
 		"SpriteName": "KAPHA",
+		"IsLooter":false,
 		"Name": "Kapha",
 		"Level": 41,
 		"HP": 7892,
@@ -31318,6 +31533,7 @@
 	{
 		"Id": 1400,
 		"SpriteName": "KARAKASA",
+		"IsLooter":false,
 		"Name": "Karakasa",
 		"Level": 30,
 		"HP": 3092,
@@ -31468,6 +31684,7 @@
 	{
 		"Id": 1132,
 		"SpriteName": "KHALITZBURG",
+		"IsLooter":false,
 		"Name": "Khalitzburg",
 		"Level": 63,
 		"HP": 13888,
@@ -31626,6 +31843,7 @@
 	{
 		"Id": 1294,
 		"SpriteName": "KILLER_MANTIS",
+		"IsLooter":false,
 		"Name": "Killer Mantis",
 		"Level": 56,
 		"HP": 13183,
@@ -31762,6 +31980,7 @@
 	{
 		"Id": 3994,
 		"SpriteName": "KING_PORING",
+		"IsLooter":false,
 		"Name": "King Poring",
 		"Level": 83,
 		"HP": 504000,
@@ -31786,7 +32005,7 @@
 		"NeedHit": 228,
 		"Element": "Ghost",
 		"ElementLevel": 1,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -31926,6 +32145,7 @@
 	{
 		"Id": 1282,
 		"SpriteName": "KOBOLD_ARCHER",
+		"IsLooter":false,
 		"Name": "Kobold Archer",
 		"Level": 33,
 		"HP": 2560,
@@ -32084,6 +32304,7 @@
 	{
 		"Id": 1133,
 		"SpriteName": "KOBOLD_1",
+		"IsLooter":false,
 		"Name": "Kobold",
 		"Level": 36,
 		"HP": 3893,
@@ -32228,6 +32449,7 @@
 	{
 		"Id": 1134,
 		"SpriteName": "KOBOLD_2",
+		"IsLooter":false,
 		"Name": "Kobold",
 		"Level": 31,
 		"HP": 2179,
@@ -32372,6 +32594,7 @@
 	{
 		"Id": 1135,
 		"SpriteName": "KOBOLD_3",
+		"IsLooter":false,
 		"Name": "Kobold",
 		"Level": 31,
 		"HP": 2179,
@@ -32526,6 +32749,7 @@
 	{
 		"Id": 3046,
 		"SpriteName": "KODAMA",
+		"IsLooter":false,
 		"Name": "Kodama",
 		"Level": 67,
 		"HP": 17940,
@@ -32550,7 +32774,7 @@
 		"NeedHit": 145,
 		"Element": "Neutral",
 		"ElementLevel": 3,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -32680,6 +32904,7 @@
 	{
 		"Id": 1587,
 		"SpriteName": "KRABEN",
+		"IsLooter":false,
 		"Name": "Kraben",
 		"Level": 50,
 		"HP": 5880,
@@ -32834,6 +33059,7 @@
 	{
 		"Id": 1070,
 		"SpriteName": "KUKRE",
+		"IsLooter":false,
 		"Name": "Kukre",
 		"Level": 11,
 		"HP": 307,
@@ -32996,6 +33222,7 @@
 	{
 		"Id": 3049,
 		"SpriteName": "LADY_HUO",
+		"IsLooter":false,
 		"Name": "Lady Huo",
 		"Level": 87,
 		"HP": 482500,
@@ -33020,7 +33247,7 @@
 		"NeedHit": 209,
 		"Element": "Holy",
 		"ElementLevel": 1,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -33132,6 +33359,7 @@
 	{
 		"Id": 1688,
 		"SpriteName": "LADY_TANEE",
+		"IsLooter":false,
 		"Name": "Lady Tanee",
 		"Level": 89,
 		"HP": 493000,
@@ -33282,6 +33510,7 @@
 	{
 		"Id": 1586,
 		"SpriteName": "LEAF_CAT",
+		"IsLooter":false,
 		"Name": "Leaf Cat",
 		"Level": 38,
 		"HP": 2396,
@@ -33440,6 +33669,7 @@
 	{
 		"Id": 1306,
 		"SpriteName": "LEIB_OLMAI",
+		"IsLooter":false,
 		"Name": "Leib Olmai",
 		"Level": 58,
 		"HP": 24233,
@@ -33594,6 +33824,7 @@
 	{
 		"Id": 25009,
 		"SpriteName": "LAVA_GOLEM_MJ",
+		"IsLooter":false,
 		"Name": "Living Magma",
 		"Level": 72,
 		"HP": 18300,
@@ -33618,7 +33849,7 @@
 		"NeedHit": 93,
 		"Element": "Fire",
 		"ElementLevel": 3,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -33730,6 +33961,7 @@
 	{
 		"Id": 3983,
 		"SpriteName": "LOGI",
+		"IsLooter":false,
 		"Name": "Logi",
 		"Level": 92,
 		"HP": 585000,
@@ -33754,7 +33986,7 @@
 		"NeedHit": 247,
 		"Element": "Shadow",
 		"ElementLevel": 1,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -33880,6 +34112,7 @@
 	{
 		"Id": 1505,
 		"SpriteName": "LOLI_RURI",
+		"IsLooter":false,
 		"Name": "Loli Ruri",
 		"Level": 71,
 		"HP": 23470,
@@ -34030,6 +34263,7 @@
 	{
 		"Id": 1509,
 		"SpriteName": "LUDE",
+		"IsLooter":false,
 		"Name": "Lude",
 		"Level": 36,
 		"HP": 3214,
@@ -34170,6 +34404,7 @@
 	{
 		"Id": 1812,
 		"SpriteName": "EVENT_LUDE",
+		"IsLooter":false,
 		"Name": "Pumpkin Ghost",
 		"Level": 35,
 		"HP": 2427,
@@ -34287,6 +34522,7 @@
 	{
 		"Id": 1063,
 		"SpriteName": "LUNATIC",
+		"IsLooter":false,
 		"Name": "Lunatic",
 		"Level": 3,
 		"HP": 60,
@@ -34473,6 +34709,7 @@
 	{
 		"Id": 25007,
 		"SpriteName": "EXPLOSION_MJ",
+		"IsLooter":false,
 		"Name": "Magma Familiar",
 		"Level": 59,
 		"HP": 11900,
@@ -34497,7 +34734,7 @@
 		"NeedHit": 129,
 		"Element": "Fire",
 		"ElementLevel": 2,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -34623,6 +34860,7 @@
 	{
 		"Id": 25008,
 		"SpriteName": "DELETER2_MJ",
+		"IsLooter":false,
 		"Name": "Magmawhip",
 		"Level": 66,
 		"HP": 14100,
@@ -34647,7 +34885,7 @@
 		"NeedHit": 143,
 		"Element": "Fire",
 		"ElementLevel": 2,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -34773,6 +35011,7 @@
 	{
 		"Id": 1138,
 		"SpriteName": "MAGNOLIA",
+		"IsLooter":false,
 		"Name": "Magnolia",
 		"Level": 26,
 		"HP": 1138,
@@ -34933,6 +35172,7 @@
 	{
 		"Id": 1856,
 		"SpriteName": "E_MAGNOLIA",
+		"IsLooter":false,
 		"Name": "Magnolia",
 		"Level": 26,
 		"HP": 3195,
@@ -35078,6 +35318,7 @@
 	{
 		"Id": 25018,
 		"SpriteName": "BETA_CLEANER_B",
+		"IsLooter":false,
 		"Name": "MAID",
 		"Level": 81,
 		"HP": 156200,
@@ -35102,7 +35343,7 @@
 		"NeedHit": 181,
 		"Element": "Ghost",
 		"ElementLevel": 3,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -35228,6 +35469,7 @@
 	{
 		"Id": 1310,
 		"SpriteName": "MAJORUROS",
+		"IsLooter":false,
 		"Name": "Majoruros",
 		"Level": 66,
 		"HP": 57991,
@@ -35378,6 +35620,7 @@
 	{
 		"Id": 1054,
 		"SpriteName": "THIEF_BUG__",
+		"IsLooter":false,
 		"Name": "Male Thief Bug",
 		"Level": 19,
 		"HP": 622,
@@ -35536,6 +35779,7 @@
 	{
 		"Id": 1859,
 		"SpriteName": "E_MANDRAGORA",
+		"IsLooter":false,
 		"Name": "Mandragora",
 		"Level": 3,
 		"HP": 152,
@@ -35630,6 +35874,7 @@
 	{
 		"Id": 1020,
 		"SpriteName": "MANDRAGORA",
+		"IsLooter":false,
 		"Name": "Mandragora",
 		"Level": 12,
 		"HP": 350,
@@ -35792,6 +36037,7 @@
 	{
 		"Id": 1139,
 		"SpriteName": "MANTIS",
+		"IsLooter":false,
 		"Name": "Mantis",
 		"Level": 26,
 		"HP": 1824,
@@ -35962,6 +36208,7 @@
 	{
 		"Id": 1513,
 		"SpriteName": "CIVIL_SERVANT",
+		"IsLooter":false,
 		"Name": "Mao Guai",
 		"Level": 62,
 		"HP": 14390,
@@ -36084,6 +36331,7 @@
 	{
 		"Id": 1045,
 		"SpriteName": "MARC",
+		"IsLooter":false,
 		"Name": "Marc",
 		"Level": 36,
 		"HP": 3189,
@@ -36234,6 +36482,7 @@
 	{
 		"Id": 1969,
 		"SpriteName": "E_MARC",
+		"IsLooter":false,
 		"Name": "Marc",
 		"Level": 36,
 		"HP": 6900,
@@ -36379,6 +36628,7 @@
 	{
 		"Id": 1140,
 		"SpriteName": "MARDUK",
+		"IsLooter":false,
 		"Name": "Marduk",
 		"Level": 40,
 		"HP": 4118,
@@ -36529,6 +36779,7 @@
 	{
 		"Id": 1141,
 		"SpriteName": "MARINA",
+		"IsLooter":false,
 		"Name": "Marina",
 		"Level": 21,
 		"HP": 1010,
@@ -36669,6 +36920,7 @@
 	{
 		"Id": 1142,
 		"SpriteName": "MARINE_SPHERE",
+		"IsLooter":false,
 		"Name": "Marine Sphere",
 		"Level": 28,
 		"HP": 2508,
@@ -36809,6 +37061,7 @@
 	{
 		"Id": 1242,
 		"SpriteName": "MARIN",
+		"IsLooter":false,
 		"Name": "Marin",
 		"Level": 15,
 		"HP": 481,
@@ -36965,6 +37218,7 @@
 	{
 		"Id": 1836,
 		"SpriteName": "MAGMARING",
+		"IsLooter":false,
 		"Name": "Magmaring",
 		"Level": 40,
 		"HP": 5300,
@@ -37040,6 +37294,7 @@
 	{
 		"Id": 1857,
 		"SpriteName": "E_MARIN",
+		"IsLooter":false,
 		"Name": "Marin",
 		"Level": 15,
 		"HP": 742,
@@ -37185,6 +37440,7 @@
 	{
 		"Id": 1972,
 		"SpriteName": "E_MARINA",
+		"IsLooter":false,
 		"Name": "Marina",
 		"Level": 21,
 		"HP": 2087,
@@ -37316,6 +37572,7 @@
 	{
 		"Id": 1143,
 		"SpriteName": "MARIONETTE",
+		"IsLooter":false,
 		"Name": "Marionette",
 		"Level": 41,
 		"HP": 3400,
@@ -37474,6 +37731,7 @@
 	{
 		"Id": 1144,
 		"SpriteName": "MARSE",
+		"IsLooter":false,
 		"Name": "Marse",
 		"Level": 31,
 		"HP": 2249,
@@ -37624,6 +37882,7 @@
 	{
 		"Id": 1145,
 		"SpriteName": "MARTIN",
+		"IsLooter":false,
 		"Name": "Martin",
 		"Level": 18,
 		"HP": 788,
@@ -37794,6 +38053,7 @@
 	{
 		"Id": 1862,
 		"SpriteName": "E_MARTIN",
+		"IsLooter":false,
 		"Name": "Martin",
 		"Level": 18,
 		"HP": 1109,
@@ -37939,6 +38199,7 @@
 	{
 		"Id": 2500,
 		"SpriteName": "SPRINTER",
+		"IsLooter":false,
 		"Name": "Master Sprinter",
 		"Level": 75,
 		"HP": 27720,
@@ -37963,7 +38224,7 @@
 		"NeedHit": 153,
 		"Element": "Poison",
 		"ElementLevel": 1,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -38005,6 +38266,7 @@
 	{
 		"Id": 1146,
 		"SpriteName": "MATYR",
+		"IsLooter":false,
 		"Name": "Matyr",
 		"Level": 31,
 		"HP": 2585,
@@ -38157,6 +38419,7 @@
 	{
 		"Id": 1289,
 		"SpriteName": "MAYA_PUPLE",
+		"IsLooter":false,
 		"Name": "Maya Purple",
 		"Level": 81,
 		"HP": 55479,
@@ -38297,6 +38560,7 @@
 	{
 		"Id": 1147,
 		"SpriteName": "MAYA",
+		"IsLooter":false,
 		"Name": "Maya",
 		"Level": 81,
 		"HP": 169000,
@@ -38451,6 +38715,7 @@
 	{
 		"Id": 1148,
 		"SpriteName": "MEDUSA",
+		"IsLooter":false,
 		"Name": "Medusa",
 		"Level": 79,
 		"HP": 16408,
@@ -38587,6 +38852,7 @@
 	{
 		"Id": 2506,
 		"SpriteName": "MEDUSA_ALT",
+		"IsLooter":false,
 		"Name": "Medusa",
 		"Level": 79,
 		"HP": 16408,
@@ -38611,7 +38877,7 @@
 		"NeedHit": 173,
 		"Element": "Neutral",
 		"ElementLevel": 2,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -38723,6 +38989,7 @@
 	{
 		"Id": 1274,
 		"SpriteName": "MEGALITH",
+		"IsLooter":false,
 		"Name": "Megalith",
 		"Level": 45,
 		"HP": 5300,
@@ -38845,6 +39112,7 @@
 	{
 		"Id": 1064,
 		"SpriteName": "MEGALODON",
+		"IsLooter":false,
 		"Name": "Megalodon",
 		"Level": 24,
 		"HP": 1140,
@@ -38995,6 +39263,7 @@
 	{
 		"Id": 1264,
 		"SpriteName": "MERMAN",
+		"IsLooter":false,
 		"Name": "Merman",
 		"Level": 53,
 		"HP": 10101,
@@ -39171,6 +39440,7 @@
 	{
 		"Id": 1058,
 		"SpriteName": "METALLER",
+		"IsLooter":false,
 		"Name": "Metaller",
 		"Level": 22,
 		"HP": 926,
@@ -39341,6 +39611,7 @@
 	{
 		"Id": 1516,
 		"SpriteName": "INCREASE_SOIL",
+		"IsLooter":false,
 		"Name": "Mi Gao",
 		"Level": 51,
 		"HP": 8230,
@@ -39457,6 +39728,7 @@
 	{
 		"Id": 3981,
 		"SpriteName": "MIASMUS",
+		"IsLooter":false,
 		"Name": "Miasmus",
 		"Level": 85,
 		"HP": 32545,
@@ -39481,7 +39753,7 @@
 		"NeedHit": 164,
 		"Element": "Poison",
 		"ElementLevel": 3,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -39607,6 +39879,7 @@
 	{
 		"Id": 1191,
 		"SpriteName": "MIMIC",
+		"IsLooter":false,
 		"Name": "Mimic",
 		"Level": 51,
 		"HP": 6000,
@@ -39813,6 +40086,7 @@
 	{
 		"Id": 1699,
 		"SpriteName": "ANCIENT_MIMIC",
+		"IsLooter":false,
 		"Name": "Ancient Mimic",
 		"Level": 60,
 		"HP": 8080,
@@ -39958,6 +40232,7 @@
 	{
 		"Id": 1292,
 		"SpriteName": "MINI_DEMON",
+		"IsLooter":false,
 		"Name": "Mini Demon",
 		"Level": 68,
 		"HP": 32538,
@@ -40094,6 +40369,7 @@
 	{
 		"Id": 1149,
 		"SpriteName": "MINOROUS",
+		"IsLooter":false,
 		"Name": "Minorous",
 		"Level": 52,
 		"HP": 7431,
@@ -40248,6 +40524,7 @@
 	{
 		"Id": 2507,
 		"SpriteName": "MINOROUS_ALT",
+		"IsLooter":false,
 		"Name": "Minorous",
 		"Level": 52,
 		"HP": 7431,
@@ -40272,7 +40549,7 @@
 		"NeedHit": 114,
 		"Element": "Fire",
 		"ElementLevel": 2,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -40398,6 +40675,7 @@
 	{
 		"Id": 1059,
 		"SpriteName": "MISTRESS",
+		"IsLooter":false,
 		"Name": "Mistress",
 		"Level": 74,
 		"HP": 212000,
@@ -40534,6 +40812,7 @@
 	{
 		"Id": 1701,
 		"SpriteName": "SHELTER",
+		"IsLooter":false,
 		"Name": "Mistress of Shelter",
 		"Level": 80,
 		"HP": 38000,
@@ -40665,6 +40944,7 @@
 	{
 		"Id": 1404,
 		"SpriteName": "MIYABI_NINGYO",
+		"IsLooter":false,
 		"Name": "Miyabi Doll",
 		"Level": 33,
 		"HP": 6300,
@@ -40813,6 +41093,7 @@
 	{
 		"Id": 1313,
 		"SpriteName": "MOBSTER",
+		"IsLooter":false,
 		"Name": "Mobster",
 		"Level": 61,
 		"HP": 8000,
@@ -40963,6 +41244,7 @@
 	{
 		"Id": 1851,
 		"SpriteName": "EVENT_MOBSTER",
+		"IsLooter":false,
 		"Name": "Mobster",
 		"Level": 61,
 		"HP": 7991,
@@ -40995,6 +41277,7 @@
 	{
 		"Id": 3045,
 		"SpriteName": "MOONRABBIT",
+		"IsLooter":false,
 		"Name": "Moon Rabbit",
 		"Level": 74,
 		"HP": 11585,
@@ -41019,7 +41302,7 @@
 		"NeedHit": 163,
 		"Element": "Holy",
 		"ElementLevel": 1,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -41149,6 +41432,7 @@
 	{
 		"Id": 1150,
 		"SpriteName": "MOONLIGHT",
+		"IsLooter":false,
 		"Name": "Moonlight Flower",
 		"Level": 67,
 		"HP": 120000,
@@ -41271,6 +41555,7 @@
 	{
 		"Id": 1814,
 		"SpriteName": "EVENT_MOON",
+		"IsLooter":false,
 		"Name": "Fox Queen",
 		"Level": 80,
 		"HP": 30000,
@@ -41303,6 +41588,7 @@
 	{
 		"Id": 1055,
 		"SpriteName": "MUKA",
+		"IsLooter":false,
 		"Name": "Muka",
 		"Level": 17,
 		"HP": 704,
@@ -41465,6 +41751,7 @@
 	{
 		"Id": 1854,
 		"SpriteName": "E_MUKA",
+		"IsLooter":false,
 		"Name": "Muka",
 		"Level": 17,
 		"HP": 704,
@@ -41610,6 +41897,7 @@
 	{
 		"Id": 1041,
 		"SpriteName": "MUMMY",
+		"IsLooter":false,
 		"Name": "Mummy",
 		"Level": 37,
 		"HP": 4800,
@@ -41772,6 +42060,7 @@
 	{
 		"Id": 1026,
 		"SpriteName": "MUNAK",
+		"IsLooter":false,
 		"Name": "Munak",
 		"Level": 30,
 		"HP": 2422,
@@ -41916,6 +42205,7 @@
 	{
 		"Id": 1262,
 		"SpriteName": "MUTANT_DRAGON",
+		"IsLooter":false,
 		"Name": "Mutant Dragonoid",
 		"Level": 65,
 		"HP": 62600,
@@ -42052,6 +42342,7 @@
 	{
 		"Id": 1249,
 		"SpriteName": "MYSTCASE",
+		"IsLooter":false,
 		"Name": "Myst Case",
 		"Level": 38,
 		"HP": 3288,
@@ -42206,6 +42497,7 @@
 	{
 		"Id": 1151,
 		"SpriteName": "MYST",
+		"IsLooter":false,
 		"Name": "Myst",
 		"Level": 38,
 		"HP": 3745,
@@ -42356,6 +42648,7 @@
 	{
 		"Id": 1203,
 		"SpriteName": "MYSTELTAINN",
+		"IsLooter":false,
 		"Name": "Mysteltainn",
 		"Level": 76,
 		"HP": 33350,
@@ -42514,6 +42807,7 @@
 	{
 		"Id": 3054,
 		"SpriteName": "NAIAD",
+		"IsLooter":false,
 		"Name": "Naiad",
 		"Level": 55,
 		"HP": 9115,
@@ -42538,7 +42832,7 @@
 		"NeedHit": 143,
 		"Element": "Water",
 		"ElementLevel": 4,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -42636,6 +42930,7 @@
 	{
 		"Id": 3057,
 		"SpriteName": "NEEDLEFISH",
+		"IsLooter":false,
 		"Name": "Needlefish",
 		"Level": 50,
 		"HP": 7005,
@@ -42660,7 +42955,7 @@
 		"NeedHit": 130,
 		"Element": "Fire",
 		"ElementLevel": 1,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -42748,6 +43043,7 @@
 	{
 		"Id": 1255,
 		"SpriteName": "NERAID",
+		"IsLooter":false,
 		"Name": "Nereid",
 		"Level": 40,
 		"HP": 4120,
@@ -42902,6 +43198,7 @@
 	{
 		"Id": 1379,
 		"SpriteName": "NIGHTMARE_TERROR",
+		"IsLooter":false,
 		"Name": "Nightmare Terror",
 		"Level": 78,
 		"HP": 22605,
@@ -43052,6 +43349,7 @@
 	{
 		"Id": 1061,
 		"SpriteName": "NIGHTMARE",
+		"IsLooter":false,
 		"Name": "Nightmare",
 		"Level": 49,
 		"HP": 4437,
@@ -43206,6 +43504,7 @@
 	{
 		"Id": 1964,
 		"SpriteName": "NIGHTMARE_T",
+		"IsLooter":false,
 		"Name": "Nightmare",
 		"Level": 30,
 		"HP": 2000,
@@ -43281,6 +43580,7 @@
 	{
 		"Id": 1180,
 		"SpriteName": "NINE_TAIL",
+		"IsLooter":false,
 		"Name": "Nine Tail",
 		"Level": 51,
 		"HP": 7766,
@@ -43439,6 +43739,7 @@
 	{
 		"Id": 1541,
 		"SpriteName": "G_GREATEST_GENERAL",
+		"IsLooter":false,
 		"Name": "Not So Great a General",
 		"Level": 3,
 		"HP": 105,
@@ -43476,6 +43777,7 @@
 	{
 		"Id": 1044,
 		"SpriteName": "OBEAUNE",
+		"IsLooter":false,
 		"Name": "Obeaune",
 		"Level": 31,
 		"HP": 3084,
@@ -43626,6 +43928,7 @@
 	{
 		"Id": 1970,
 		"SpriteName": "E_OBEAUNE",
+		"IsLooter":false,
 		"Name": "Obeaune",
 		"Level": 31,
 		"HP": 3952,
@@ -43771,6 +44074,7 @@
 	{
 		"Id": 1486,
 		"SpriteName": "G_TIRFING",
+		"IsLooter":false,
 		"Name": "Ogretooth",
 		"Level": 80,
 		"HP": 84600,
@@ -43907,6 +44211,7 @@
 	{
 		"Id": 1204,
 		"SpriteName": "TIRFING",
+		"IsLooter":false,
 		"Name": "Ogretooth",
 		"Level": 71,
 		"HP": 29900,
@@ -44069,6 +44374,7 @@
 	{
 		"Id": 3048,
 		"SpriteName": "ONIGIRING",
+		"IsLooter":false,
 		"Name": "Onigiring",
 		"Level": 72,
 		"HP": 9999,
@@ -44093,7 +44399,7 @@
 		"NeedHit": 153,
 		"Element": "Poison",
 		"ElementLevel": 2,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -44219,6 +44525,7 @@
 	{
 		"Id": 3062,
 		"SpriteName": "ORANGE_PLANT",
+		"IsLooter":false,
 		"Name": "Orange Plant",
 		"Level": 1,
 		"HP": 20,
@@ -44243,7 +44550,7 @@
 		"NeedHit": 22,
 		"Element": "Holy",
 		"ElementLevel": 1,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [],
 		"Maps": [
@@ -44256,6 +44563,7 @@
 	{
 		"Id": 1189,
 		"SpriteName": "ORC_ARCHER",
+		"IsLooter":false,
 		"Name": "Orc Archer",
 		"Level": 49,
 		"HP": 7440,
@@ -44410,6 +44718,7 @@
 	{
 		"Id": 1087,
 		"SpriteName": "ORK_HERO",
+		"IsLooter":false,
 		"Name": "Orc Hero",
 		"Level": 77,
 		"HP": 585700,
@@ -44546,6 +44855,7 @@
 	{
 		"Id": 1273,
 		"SpriteName": "ORC_LADY",
+		"IsLooter":false,
 		"Name": "Orc Lady",
 		"Level": 31,
 		"HP": 2701,
@@ -44672,6 +44982,7 @@
 	{
 		"Id": 1190,
 		"SpriteName": "ORC_LORD",
+		"IsLooter":false,
 		"Name": "Orc Lord",
 		"Level": 74,
 		"HP": 783000,
@@ -44822,6 +45133,7 @@
 	{
 		"Id": 1152,
 		"SpriteName": "ORC_SKELETON",
+		"IsLooter":false,
 		"Name": "Orc Skeleton",
 		"Level": 28,
 		"HP": 2278,
@@ -44962,6 +45274,7 @@
 	{
 		"Id": 1023,
 		"SpriteName": "ORK_WARRIOR",
+		"IsLooter":false,
 		"Name": "Orc Warrior",
 		"Level": 24,
 		"HP": 1555,
@@ -45116,6 +45429,7 @@
 	{
 		"Id": 1153,
 		"SpriteName": "ORC_ZOMBIE",
+		"IsLooter":false,
 		"Name": "Orc Zombie",
 		"Level": 24,
 		"HP": 1388,
@@ -45210,6 +45524,7 @@
 	{
 		"Id": 1038,
 		"SpriteName": "OSIRIS",
+		"IsLooter":false,
 		"Name": "Osiris",
 		"Level": 78,
 		"HP": 415400,
@@ -45360,6 +45675,7 @@
 	{
 		"Id": 1849,
 		"SpriteName": "EVENT_OSIRIS",
+		"IsLooter":false,
 		"Name": "Osiris",
 		"Level": 60,
 		"HP": 125000,
@@ -45392,6 +45708,7 @@
 	{
 		"Id": 1295,
 		"SpriteName": "OWL_BARON",
+		"IsLooter":false,
 		"Name": "Owl Baron",
 		"Level": 75,
 		"HP": 30746,
@@ -45546,6 +45863,7 @@
 	{
 		"Id": 1320,
 		"SpriteName": "OWL_DUKE",
+		"IsLooter":false,
 		"Name": "Owl Duke",
 		"Level": 75,
 		"HP": 20134,
@@ -45700,6 +46018,7 @@
 	{
 		"Id": 1308,
 		"SpriteName": "PANZER_GOBLIN",
+		"IsLooter":false,
 		"Name": "Panzer Goblin",
 		"Level": 59,
 		"HP": 14130,
@@ -45836,6 +46155,7 @@
 	{
 		"Id": 1500,
 		"SpriteName": "PARASITE",
+		"IsLooter":false,
 		"Name": "Parasite",
 		"Level": 49,
 		"HP": 5188,
@@ -45972,6 +46292,7 @@
 	{
 		"Id": 1154,
 		"SpriteName": "PASANA",
+		"IsLooter":false,
 		"Name": "Pasana",
 		"Level": 61,
 		"HP": 8289,
@@ -46116,6 +46437,7 @@
 	{
 		"Id": 1047,
 		"SpriteName": "PECOPECO_EGG",
+		"IsLooter":false,
 		"Name": "Peco Peco Egg",
 		"Level": 3,
 		"HP": 227,
@@ -46286,6 +46608,7 @@
 	{
 		"Id": 1019,
 		"SpriteName": "PECOPECO",
+		"IsLooter":false,
 		"Name": "Peco Peco",
 		"Level": 19,
 		"HP": 668,
@@ -46426,6 +46749,7 @@
 	{
 		"Id": 1216,
 		"SpriteName": "PENOMENA",
+		"IsLooter":false,
 		"Name": "Penomena",
 		"Level": 57,
 		"HP": 5844,
@@ -46580,6 +46904,7 @@
 	{
 		"Id": 1314,
 		"SpriteName": "PERMETER",
+		"IsLooter":false,
 		"Name": "Permeter",
 		"Level": 63,
 		"HP": 8228,
@@ -46746,6 +47071,7 @@
 	{
 		"Id": 1256,
 		"SpriteName": "PEST",
+		"IsLooter":false,
 		"Name": "Pest",
 		"Level": 40,
 		"HP": 3240,
@@ -46902,6 +47228,7 @@
 	{
 		"Id": 1155,
 		"SpriteName": "PETIT",
+		"IsLooter":false,
 		"Name": "Petite",
 		"Level": 44,
 		"HP": 4899,
@@ -47056,6 +47383,7 @@
 	{
 		"Id": 1156,
 		"SpriteName": "PETIT_",
+		"IsLooter":false,
 		"Name": "Petite",
 		"Level": 45,
 		"HP": 5747,
@@ -47196,6 +47524,7 @@
 	{
 		"Id": 1157,
 		"SpriteName": "PHARAOH",
+		"IsLooter":false,
 		"Name": "Pharaoh",
 		"Level": 93,
 		"HP": 446000,
@@ -47346,6 +47675,7 @@
 	{
 		"Id": 1158,
 		"SpriteName": "PHEN",
+		"IsLooter":false,
 		"Name": "Phen",
 		"Level": 26,
 		"HP": 1814,
@@ -47490,6 +47820,7 @@
 	{
 		"Id": 1202,
 		"SpriteName": "PHENDARK",
+		"IsLooter":false,
 		"Name": "Phendark",
 		"Level": 73,
 		"HP": 22729,
@@ -47640,6 +47971,7 @@
 	{
 		"Id": 1159,
 		"SpriteName": "PHREEONI",
+		"IsLooter":false,
 		"Name": "Phreeoni",
 		"Level": 69,
 		"HP": 188000,
@@ -47776,6 +48108,7 @@
 	{
 		"Id": 1049,
 		"SpriteName": "PICKY",
+		"IsLooter":false,
 		"Name": "Picky",
 		"Level": 3,
 		"HP": 80,
@@ -47936,6 +48269,7 @@
 	{
 		"Id": 1050,
 		"SpriteName": "PICKY_",
+		"IsLooter":false,
 		"Name": "Picky",
 		"Level": 4,
 		"HP": 88,
@@ -48102,6 +48436,7 @@
 	{
 		"Id": 1240,
 		"SpriteName": "META_PICKY",
+		"IsLooter":false,
 		"Name": "Picky",
 		"Level": 3,
 		"HP": 80,
@@ -48233,6 +48568,7 @@
 	{
 		"Id": 1241,
 		"SpriteName": "META_PICKY_",
+		"IsLooter":false,
 		"Name": "Picky",
 		"Level": 4,
 		"HP": 83,
@@ -48364,6 +48700,7 @@
 	{
 		"Id": 1160,
 		"SpriteName": "PIERE",
+		"IsLooter":false,
 		"Name": "Piere",
 		"Level": 18,
 		"HP": 733,
@@ -48534,6 +48871,7 @@
 	{
 		"Id": 1238,
 		"SpriteName": "META_PIERE",
+		"IsLooter":false,
 		"Name": "Piere",
 		"Level": 18,
 		"HP": 733,
@@ -48679,6 +49017,7 @@
 	{
 		"Id": 3063,
 		"SpriteName": "PILL_BUG",
+		"IsLooter":false,
 		"Name": "Pill Bug",
 		"Level": 40,
 		"HP": 4105,
@@ -48703,7 +49042,7 @@
 		"NeedHit": 105,
 		"Element": "Earth",
 		"ElementLevel": 2,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -48805,6 +49144,7 @@
 	{
 		"Id": 1071,
 		"SpriteName": "PIRATE_SKEL",
+		"IsLooter":false,
 		"Name": "Pirate Skeleton",
 		"Level": 25,
 		"HP": 1444,
@@ -48945,6 +49285,7 @@
 	{
 		"Id": 1161,
 		"SpriteName": "PLANKTON",
+		"IsLooter":false,
 		"Name": "Plankton",
 		"Level": 10,
 		"HP": 236,
@@ -49107,6 +49448,7 @@
 	{
 		"Id": 1077,
 		"SpriteName": "POISON_SPORE",
+		"IsLooter":false,
 		"Name": "Poison Spore",
 		"Level": 19,
 		"HP": 665,
@@ -49277,6 +49619,7 @@
 	{
 		"Id": 1402,
 		"SpriteName": "POISON_TOAD",
+		"IsLooter":false,
 		"Name": "Poisonous Toad",
 		"Level": 46,
 		"HP": 6629,
@@ -49431,6 +49774,7 @@
 	{
 		"Id": 1031,
 		"SpriteName": "POPORING",
+		"IsLooter":true,
 		"Name": "Poporing",
 		"Level": 14,
 		"HP": 366,
@@ -49725,6 +50069,7 @@
 	{
 		"Id": 1002,
 		"SpriteName": "PORING",
+		"IsLooter":false,
 		"Name": "Poring",
 		"Level": 1,
 		"HP": 42,
@@ -49967,6 +50312,7 @@
 	{
 		"Id": 1062,
 		"SpriteName": "PORING_",
+		"IsLooter":false,
 		"Name": "Santa Poring",
 		"Level": 3,
 		"HP": 69,
@@ -50084,6 +50430,7 @@
 	{
 		"Id": 1847,
 		"SpriteName": "EVENT_PORING",
+		"IsLooter":false,
 		"Name": "Poring",
 		"Level": 98,
 		"HP": 10000000,
@@ -50116,6 +50463,7 @@
 	{
 		"Id": 3988,
 		"SpriteName": "PROTORING",
+		"IsLooter":false,
 		"Name": "Protoring",
 		"Level": 38,
 		"HP": 3640,
@@ -50140,7 +50488,7 @@
 		"NeedHit": 109,
 		"Element": "Earth",
 		"ElementLevel": 1,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -50256,6 +50604,7 @@
 	{
 		"Id": 2525,
 		"SpriteName": "PUCK",
+		"IsLooter":false,
 		"Name": "Puck",
 		"Level": 40,
 		"HP": 4408,
@@ -50280,7 +50629,7 @@
 		"NeedHit": 110,
 		"Element": "Neutral",
 		"ElementLevel": 1,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -50406,6 +50755,7 @@
 	{
 		"Id": 1199,
 		"SpriteName": "PUNK",
+		"IsLooter":false,
 		"Name": "Punk",
 		"Level": 43,
 		"HP": 3620,
@@ -50564,6 +50914,7 @@
 	{
 		"Id": 1008,
 		"SpriteName": "PUPA",
+		"IsLooter":false,
 		"Name": "Pupa",
 		"Level": 2,
 		"HP": 255,
@@ -50758,6 +51109,7 @@
 	{
 		"Id": 1230,
 		"SpriteName": "META_PUPA",
+		"IsLooter":false,
 		"Name": "Pupa",
 		"Level": 2,
 		"HP": 255,
@@ -50903,6 +51255,7 @@
 	{
 		"Id": 1508,
 		"SpriteName": "QUVE",
+		"IsLooter":false,
 		"Name": "Quve",
 		"Level": 40,
 		"HP": 4559,
@@ -51029,6 +51382,7 @@
 	{
 		"Id": 1254,
 		"SpriteName": "RAGGLER",
+		"IsLooter":false,
 		"Name": "Raggler",
 		"Level": 21,
 		"HP": 1020,
@@ -51183,6 +51537,7 @@
 	{
 		"Id": 1276,
 		"SpriteName": "RAYDRIC_ARCHER",
+		"IsLooter":false,
 		"Name": "Raydric Archer",
 		"Level": 52,
 		"HP": 5477,
@@ -51331,6 +51686,7 @@
 	{
 		"Id": 1163,
 		"SpriteName": "RAYDRIC",
+		"IsLooter":false,
 		"Name": "Raydric",
 		"Level": 52,
 		"HP": 8613,
@@ -51489,6 +51845,7 @@
 	{
 		"Id": 1085,
 		"SpriteName": "RED_MUSHROOM",
+		"IsLooter":false,
 		"Name": "Red Mushroom",
 		"Level": 1,
 		"HP": 15,
@@ -51711,6 +52068,7 @@
 	{
 		"Id": 1078,
 		"SpriteName": "RED_PLANT",
+		"IsLooter":false,
 		"Name": "Red Plant",
 		"Level": 1,
 		"HP": 10,
@@ -51941,6 +52299,7 @@
 	{
 		"Id": 25006,
 		"SpriteName": "EP19_HEARTHUNTER_AT",
+		"IsLooter":false,
 		"Name": "Rekenber General",
 		"Level": 50,
 		"HP": 41700,
@@ -51965,7 +52324,7 @@
 		"NeedHit": 125,
 		"Element": "Neutral",
 		"ElementLevel": 1,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -52091,6 +52450,7 @@
 	{
 		"Id": 25005,
 		"SpriteName": "EP18_MD_HEARTHUNTER_R2",
+		"IsLooter":false,
 		"Name": "Rekenber Guard",
 		"Level": 45,
 		"HP": 4400,
@@ -52115,7 +52475,7 @@
 		"NeedHit": 115,
 		"Element": "Neutral",
 		"ElementLevel": 1,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -52227,6 +52587,7 @@
 	{
 		"Id": 25003,
 		"SpriteName": "HEART_HUNTER_N",
+		"IsLooter":false,
 		"Name": "Rekenber Mercenary",
 		"Level": 35,
 		"HP": 4700,
@@ -52251,7 +52612,7 @@
 		"NeedHit": 99,
 		"Element": "Neutral",
 		"ElementLevel": 1,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -52349,6 +52710,7 @@
 	{
 		"Id": 25004,
 		"SpriteName": "EP18_MD_HEARTHUNTER_F",
+		"IsLooter":false,
 		"Name": "Rekenber Soldier",
 		"Level": 51,
 		"HP": 7200,
@@ -52373,7 +52735,7 @@
 		"NeedHit": 121,
 		"Element": "Neutral",
 		"ElementLevel": 1,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -52485,6 +52847,7 @@
 	{
 		"Id": 1164,
 		"SpriteName": "REQUIEM",
+		"IsLooter":false,
 		"Name": "Requiem",
 		"Level": 35,
 		"HP": 3089,
@@ -52625,6 +52988,7 @@
 	{
 		"Id": 1195,
 		"SpriteName": "RIDEWORD",
+		"IsLooter":false,
 		"Name": "Rideword",
 		"Level": 59,
 		"HP": 11638,
@@ -52809,6 +53173,7 @@
 	{
 		"Id": 1478,
 		"SpriteName": "G_RIDEWORD",
+		"IsLooter":false,
 		"Name": "Elite Rideword",
 		"Level": 71,
 		"HP": 18638,
@@ -52954,6 +53319,7 @@
 	{
 		"Id": 1052,
 		"SpriteName": "ROCKER",
+		"IsLooter":false,
 		"Name": "Rocker",
 		"Level": 9,
 		"HP": 195,
@@ -53120,6 +53486,7 @@
 	{
 		"Id": 1012,
 		"SpriteName": "RODA_FROG",
+		"IsLooter":false,
 		"Name": "Roda Frog",
 		"Level": 5,
 		"HP": 133,
@@ -53266,6 +53633,7 @@
 	{
 		"Id": 3979,
 		"SpriteName": "ROPER",
+		"IsLooter":false,
 		"Name": "Roper",
 		"Level": 81,
 		"HP": 29500,
@@ -53290,7 +53658,7 @@
 		"NeedHit": 152,
 		"Element": "Earth",
 		"ElementLevel": 2,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -53416,6 +53784,7 @@
 	{
 		"Id": 1392,
 		"SpriteName": "ROTAR_ZAIRO",
+		"IsLooter":false,
 		"Name": "Rotar Zairo",
 		"Level": 25,
 		"HP": 1209,
@@ -53566,6 +53935,7 @@
 	{
 		"Id": 1201,
 		"SpriteName": "RYBIO",
+		"IsLooter":false,
 		"Name": "Rybio",
 		"Level": 71,
 		"HP": 12155,
@@ -53720,6 +54090,7 @@
 	{
 		"Id": 1281,
 		"SpriteName": "SAGEWORM",
+		"IsLooter":false,
 		"Name": "Sage Worm",
 		"Level": 43,
 		"HP": 3988,
@@ -53874,6 +54245,7 @@
 	{
 		"Id": 1492,
 		"SpriteName": "INCANTATION_SAMURAI",
+		"IsLooter":false,
 		"Name": "Samurai Specter",
 		"Level": 71,
 		"HP": 218652,
@@ -54024,6 +54396,7 @@
 	{
 		"Id": 1165,
 		"SpriteName": "SAND_MAN",
+		"IsLooter":false,
 		"Name": "Sandman",
 		"Level": 34,
 		"HP": 3300,
@@ -54178,6 +54551,7 @@
 	{
 		"Id": 1243,
 		"SpriteName": "SASQUATCH",
+		"IsLooter":false,
 		"Name": "Sasquatch",
 		"Level": 30,
 		"HP": 2522,
@@ -54332,6 +54706,7 @@
 	{
 		"Id": 1167,
 		"SpriteName": "SAVAGE_BABE",
+		"IsLooter":false,
 		"Name": "Savage Babe",
 		"Level": 7,
 		"HP": 151,
@@ -54490,6 +54865,7 @@
 	{
 		"Id": 1221,
 		"SpriteName": "M_SAVAGE",
+		"IsLooter":false,
 		"Name": "Savage",
 		"Level": 26,
 		"HP": 1944,
@@ -54626,6 +55002,7 @@
 	{
 		"Id": 1166,
 		"SpriteName": "SAVAGE",
+		"IsLooter":false,
 		"Name": "Savage",
 		"Level": 26,
 		"HP": 1844,
@@ -54792,6 +55169,7 @@
 	{
 		"Id": 1840,
 		"SpriteName": "GOLDEN_SAVAGE",
+		"IsLooter":false,
 		"Name": "Golden Savage",
 		"Level": 99,
 		"HP": 500,
@@ -54937,6 +55315,7 @@
 	{
 		"Id": 1001,
 		"SpriteName": "SCORPION",
+		"IsLooter":false,
 		"Name": "Scorpion",
 		"Level": 24,
 		"HP": 1109,
@@ -55091,6 +55470,7 @@
 	{
 		"Id": 25015,
 		"SpriteName": "RECON_ROBOT",
+		"IsLooter":false,
 		"Name": "SCOUT",
 		"Level": 71,
 		"HP": 18000,
@@ -55115,7 +55495,7 @@
 		"NeedHit": 161,
 		"Element": "Fire",
 		"ElementLevel": 2,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -55241,6 +55621,7 @@
 	{
 		"Id": 1858,
 		"SpriteName": "E_PLANKTON",
+		"IsLooter":false,
 		"Name": "Scummy Grime",
 		"Level": 5,
 		"HP": 110,
@@ -55335,6 +55716,7 @@
 	{
 		"Id": 1323,
 		"SpriteName": "SEE_OTTER",
+		"IsLooter":false,
 		"Name": "Sea Otter",
 		"Level": 59,
 		"HP": 8489,
@@ -55485,6 +55867,7 @@
 	{
 		"Id": 1317,
 		"SpriteName": "FUR_SEAL",
+		"IsLooter":false,
 		"Name": "Seal",
 		"Level": 63,
 		"HP": 9114,
@@ -55635,6 +56018,7 @@
 	{
 		"Id": 3055,
 		"SpriteName": "SELKIE",
+		"IsLooter":false,
 		"Name": "Selkie",
 		"Level": 52,
 		"HP": 8352,
@@ -55659,7 +56043,7 @@
 		"NeedHit": 133,
 		"Element": "Water",
 		"ElementLevel": 2,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -55757,6 +56141,7 @@
 	{
 		"Id": 2524,
 		"SpriteName": "SHADE_OF_PAYON",
+		"IsLooter":false,
 		"Name": "Shade of Payon",
 		"Level": 55,
 		"HP": 10122,
@@ -55781,7 +56166,7 @@
 		"NeedHit": 154,
 		"Element": "Ghost",
 		"ElementLevel": 3,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -55907,6 +56292,7 @@
 	{
 		"Id": 1074,
 		"SpriteName": "SHELLFISH",
+		"IsLooter":false,
 		"Name": "Shellfish",
 		"Level": 15,
 		"HP": 499,
@@ -56063,6 +56449,7 @@
 	{
 		"Id": 1083,
 		"SpriteName": "SHINING_PLANT",
+		"IsLooter":false,
 		"Name": "Shining Plant",
 		"Level": 1,
 		"HP": 20,
@@ -56343,6 +56730,7 @@
 	{
 		"Id": 1401,
 		"SpriteName": "SHINOBI",
+		"IsLooter":false,
 		"Name": "Shinobi",
 		"Level": 69,
 		"HP": 12700,
@@ -56487,6 +56875,7 @@
 	{
 		"Id": 1037,
 		"SpriteName": "SIDE_WINDER",
+		"IsLooter":false,
 		"Name": "Side Winder",
 		"Level": 43,
 		"HP": 4284,
@@ -56661,6 +57050,7 @@
 	{
 		"Id": 1290,
 		"SpriteName": "SKELETON_GENERAL",
+		"IsLooter":false,
 		"Name": "Skeleton General",
 		"Level": 73,
 		"HP": 17402,
@@ -56801,6 +57191,7 @@
 	{
 		"Id": 1196,
 		"SpriteName": "SKEL_PRISONER",
+		"IsLooter":false,
 		"Name": "Skeleton Prisoner",
 		"Level": 52,
 		"HP": 9560,
@@ -56951,6 +57342,7 @@
 	{
 		"Id": 1169,
 		"SpriteName": "SKEL_WORKER",
+		"IsLooter":false,
 		"Name": "Skeleton Worker",
 		"Level": 30,
 		"HP": 2488,
@@ -57105,6 +57497,7 @@
 	{
 		"Id": 1028,
 		"SpriteName": "SOLDIER_SKELETON",
+		"IsLooter":false,
 		"Name": "Soldier Skeleton",
 		"Level": 29,
 		"HP": 2334,
@@ -57267,6 +57660,7 @@
 	{
 		"Id": 1076,
 		"SpriteName": "SKELETON",
+		"IsLooter":false,
 		"Name": "Skeleton",
 		"Level": 10,
 		"HP": 207,
@@ -57403,6 +57797,7 @@
 	{
 		"Id": 1386,
 		"SpriteName": "SLEEPER",
+		"IsLooter":false,
 		"Name": "Sleeper",
 		"Level": 67,
 		"HP": 8237,
@@ -57561,6 +57956,7 @@
 	{
 		"Id": 1056,
 		"SpriteName": "SMOKIE",
+		"IsLooter":false,
 		"Name": "Smokie",
 		"Level": 18,
 		"HP": 641,
@@ -57731,6 +58127,7 @@
 	{
 		"Id": 1170,
 		"SpriteName": "SOHEE",
+		"IsLooter":false,
 		"Name": "Sohee",
 		"Level": 33,
 		"HP": 2988,
@@ -57881,6 +58278,7 @@
 	{
 		"Id": 1316,
 		"SpriteName": "SOLIDER",
+		"IsLooter":false,
 		"Name": "Solider",
 		"Level": 70,
 		"HP": 12099,
@@ -58031,6 +58429,7 @@
 	{
 		"Id": 3992,
 		"SpriteName": "SPECTRING",
+		"IsLooter":false,
 		"Name": "Spectring",
 		"Level": 59,
 		"HP": 7955,
@@ -58055,7 +58454,7 @@
 		"NeedHit": 147,
 		"Element": "Ghost",
 		"ElementLevel": 1,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -58153,6 +58552,7 @@
 	{
 		"Id": 1014,
 		"SpriteName": "SPORE",
+		"IsLooter":false,
 		"Name": "Spore",
 		"Level": 16,
 		"HP": 466,
@@ -58339,6 +58739,7 @@
 	{
 		"Id": 1855,
 		"SpriteName": "E_POISONSPORE",
+		"IsLooter":false,
 		"Name": "Poison Spore",
 		"Level": 19,
 		"HP": 665,
@@ -58484,6 +58885,7 @@
 	{
 		"Id": 1322,
 		"SpriteName": "SPRING_RABBIT",
+		"IsLooter":false,
 		"Name": "Spring Rabbit",
 		"Level": 58,
 		"HP": 9045,
@@ -58638,6 +59040,7 @@
 	{
 		"Id": 1174,
 		"SpriteName": "STAINER",
+		"IsLooter":false,
 		"Name": "Stainer",
 		"Level": 16,
 		"HP": 538,
@@ -58796,6 +59199,7 @@
 	{
 		"Id": 1215,
 		"SpriteName": "STEM_WORM",
+		"IsLooter":false,
 		"Name": "Stem Worm",
 		"Level": 40,
 		"HP": 4477,
@@ -58970,6 +59374,7 @@
 	{
 		"Id": 1207,
 		"SpriteName": "STING",
+		"IsLooter":false,
 		"Name": "Sting",
 		"Level": 61,
 		"HP": 9500,
@@ -59124,6 +59529,7 @@
 	{
 		"Id": 1495,
 		"SpriteName": "STONE_SHOOTER",
+		"IsLooter":false,
 		"Name": "Stone Shooter",
 		"Level": 42,
 		"HP": 4104,
@@ -59264,6 +59670,7 @@
 	{
 		"Id": 1251,
 		"SpriteName": "KNIGHT_OF_WINDSTORM",
+		"IsLooter":false,
 		"Name": "Stormy Knight",
 		"Level": 77,
 		"HP": 240000,
@@ -59414,6 +59821,7 @@
 	{
 		"Id": 1065,
 		"SpriteName": "STROUF",
+		"IsLooter":false,
 		"Name": "Strouf",
 		"Level": 48,
 		"HP": 7248,
@@ -59564,6 +59972,7 @@
 	{
 		"Id": 1968,
 		"SpriteName": "E_STROUF",
+		"IsLooter":false,
 		"Name": "Strouf",
 		"Level": 48,
 		"HP": 11990,
@@ -59709,6 +60118,7 @@
 	{
 		"Id": 1069,
 		"SpriteName": "SWORD_FISH",
+		"IsLooter":false,
 		"Name": "Swordfish",
 		"Level": 30,
 		"HP": 2588,
@@ -59863,6 +60273,7 @@
 	{
 		"Id": 1584,
 		"SpriteName": "TAMRUAN",
+		"IsLooter":false,
 		"Name": "Tamruan",
 		"Level": 52,
 		"HP": 10234,
@@ -59985,6 +60396,7 @@
 	{
 		"Id": 1583,
 		"SpriteName": "TAO_GUNKA",
+		"IsLooter":false,
 		"Name": "Tao Gunka",
 		"Level": 70,
 		"HP": 193000,
@@ -60135,6 +60547,7 @@
 	{
 		"Id": 1412,
 		"SpriteName": "EVIL_CLOUD_HERMIT",
+		"IsLooter":false,
 		"Name": "Taoist Hermit",
 		"Level": 56,
 		"HP": 10392,
@@ -60289,6 +60702,7 @@
 	{
 		"Id": 1175,
 		"SpriteName": "TAROU",
+		"IsLooter":false,
 		"Name": "Tarou",
 		"Level": 11,
 		"HP": 308,
@@ -60431,6 +60845,7 @@
 	{
 		"Id": 1405,
 		"SpriteName": "TENGU",
+		"IsLooter":false,
 		"Name": "Tengu",
 		"Level": 65,
 		"HP": 16940,
@@ -60567,6 +60982,7 @@
 	{
 		"Id": 1034,
 		"SpriteName": "THARA_FROG",
+		"IsLooter":false,
 		"Name": "Thara Frog",
 		"Level": 22,
 		"HP": 1355,
@@ -60715,6 +61131,7 @@
 	{
 		"Id": 2517,
 		"SpriteName": "THE_GROVEKEEPER",
+		"IsLooter":false,
 		"Name": "The Grovekeeper",
 		"Level": 73,
 		"HP": 63455,
@@ -60739,7 +61156,7 @@
 		"NeedHit": 118,
 		"Element": "Earth",
 		"ElementLevel": 2,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [],
 		"Maps": [
@@ -60752,6 +61169,7 @@
 	{
 		"Id": 1375,
 		"SpriteName": "THE_PAPER",
+		"IsLooter":false,
 		"Name": "The Paper",
 		"Level": 56,
 		"HP": 18557,
@@ -60876,6 +61294,7 @@
 	{
 		"Id": 1048,
 		"SpriteName": "THIEF_BUG_EGG",
+		"IsLooter":false,
 		"Name": "Thief Bug Egg",
 		"Level": 4,
 		"HP": 81,
@@ -61046,6 +61465,7 @@
 	{
 		"Id": 1051,
 		"SpriteName": "THIEF_BUG",
+		"IsLooter":false,
 		"Name": "Thief Bug",
 		"Level": 6,
 		"HP": 150,
@@ -61222,6 +61642,7 @@
 	{
 		"Id": 1182,
 		"SpriteName": "THIEF_MUSHROOM",
+		"IsLooter":false,
 		"Name": "Thief Mushroom",
 		"Level": 1,
 		"HP": 10,
@@ -61292,6 +61713,7 @@
 	{
 		"Id": 1089,
 		"SpriteName": "TOAD",
+		"IsLooter":false,
 		"Name": "Toad",
 		"Level": 10,
 		"HP": 5065,
@@ -61450,6 +61872,7 @@
 	{
 		"Id": 2518,
 		"SpriteName": "TOMB_CRAWLER",
+		"IsLooter":false,
 		"Name": "Tomb Crawler",
 		"Level": 40,
 		"HP": 3250,
@@ -61474,7 +61897,7 @@
 		"NeedHit": 88,
 		"Element": "Fire",
 		"ElementLevel": 2,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -61572,6 +61995,7 @@
 	{
 		"Id": 1279,
 		"SpriteName": "TRI_JOINT",
+		"IsLooter":false,
 		"Name": "Tri Joint",
 		"Level": 32,
 		"HP": 2394,
@@ -61708,6 +62132,7 @@
 	{
 		"Id": 1312,
 		"SpriteName": "TURTLE_GENERAL",
+		"IsLooter":false,
 		"Name": "Turtle General",
 		"Level": 97,
 		"HP": 320700,
@@ -61858,6 +62283,7 @@
 	{
 		"Id": 3977,
 		"SpriteName": "TWINORC",
+		"IsLooter":false,
 		"Name": "Twinorc",
 		"Level": 80,
 		"HP": 27800,
@@ -61882,7 +62308,7 @@
 		"NeedHit": 150,
 		"Element": "Shadow",
 		"ElementLevel": 2,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -61994,6 +62420,7 @@
 	{
 		"Id": 1066,
 		"SpriteName": "VADON",
+		"IsLooter":false,
 		"Name": "Vadon",
 		"Level": 19,
 		"HP": 802,
@@ -62152,6 +62579,7 @@
 	{
 		"Id": 1971,
 		"SpriteName": "E_VADON",
+		"IsLooter":false,
 		"Name": "Vadon",
 		"Level": 19,
 		"HP": 1017,
@@ -62297,6 +62725,7 @@
 	{
 		"Id": 1092,
 		"SpriteName": "VAGABOND_WOLF",
+		"IsLooter":false,
 		"Name": "Vagabond Wolf",
 		"Level": 24,
 		"HP": 12240,
@@ -62463,6 +62892,7 @@
 	{
 		"Id": 1985,
 		"SpriteName": "DANDELION",
+		"IsLooter":false,
 		"Name": "Vampiric Drudge",
 		"Level": 62,
 		"HP": 8795,
@@ -62599,6 +63029,7 @@
 	{
 		"Id": 2026,
 		"SpriteName": "DANDELION_",
+		"IsLooter":false,
 		"Name": "Runaway Dandelion Membe",
 		"Level": 90,
 		"HP": 552000,
@@ -62744,6 +63175,7 @@
 	{
 		"Id": 1032,
 		"SpriteName": "VERIT",
+		"IsLooter":true,
 		"Name": "Verit",
 		"Level": 38,
 		"HP": 3218,
@@ -62902,6 +63334,7 @@
 	{
 		"Id": 1176,
 		"SpriteName": "VITATA",
+		"IsLooter":false,
 		"Name": "Vitata",
 		"Level": 20,
 		"HP": 894,
@@ -63056,6 +63489,7 @@
 	{
 		"Id": 1088,
 		"SpriteName": "VOCAL",
+		"IsLooter":false,
 		"Name": "Vocal",
 		"Level": 18,
 		"HP": 3015,
@@ -63214,6 +63648,7 @@
 	{
 		"Id": 1208,
 		"SpriteName": "WANDER_MAN",
+		"IsLooter":false,
 		"Name": "Wanderer",
 		"Level": 74,
 		"HP": 8800,
@@ -63376,6 +63811,7 @@
 	{
 		"Id": 1179,
 		"SpriteName": "WHISPER",
+		"IsLooter":false,
 		"Name": "Whisper",
 		"Level": 34,
 		"HP": 1796,
@@ -63512,6 +63948,7 @@
 	{
 		"Id": 1185,
 		"SpriteName": "WHISPER_",
+		"IsLooter":false,
 		"Name": "Whisper",
 		"Level": 34,
 		"HP": 1796,
@@ -63596,6 +64033,7 @@
 	{
 		"Id": 1630,
 		"SpriteName": "BACSOJIN_",
+		"IsLooter":false,
 		"Name": "White Lady",
 		"Level": 85,
 		"HP": 253221,
@@ -63732,6 +64170,7 @@
 	{
 		"Id": 1082,
 		"SpriteName": "WHITE_PLANT",
+		"IsLooter":false,
 		"Name": "White Plant",
 		"Level": 1,
 		"HP": 10,
@@ -63946,6 +64385,7 @@
 	{
 		"Id": 1261,
 		"SpriteName": "WILD_ROSE",
+		"IsLooter":false,
 		"Name": "Wild Rose",
 		"Level": 38,
 		"HP": 2980,
@@ -64096,6 +64536,7 @@
 	{
 		"Id": 1010,
 		"SpriteName": "WILOW",
+		"IsLooter":false,
 		"Name": "Willow",
 		"Level": 4,
 		"HP": 95,
@@ -64270,6 +64711,7 @@
 	{
 		"Id": 1263,
 		"SpriteName": "WIND_GHOST",
+		"IsLooter":false,
 		"Name": "Wind Ghost",
 		"Level": 51,
 		"HP": 5120,
@@ -64434,6 +64876,7 @@
 	{
 		"Id": 1013,
 		"SpriteName": "WOLF",
+		"IsLooter":false,
 		"Name": "Wolf",
 		"Level": 25,
 		"HP": 1004,
@@ -64600,6 +65043,7 @@
 	{
 		"Id": 1220,
 		"SpriteName": "M_DESERT_WOLF",
+		"IsLooter":false,
 		"Name": "Desert Wolf",
 		"Level": 27,
 		"HP": 1884,
@@ -64731,6 +65175,7 @@
 	{
 		"Id": 3044,
 		"SpriteName": "WOLPERTINGER",
+		"IsLooter":false,
 		"Name": "Wolpertinger",
 		"Level": 69,
 		"HP": 9250,
@@ -64755,7 +65200,7 @@
 		"NeedHit": 151,
 		"Element": "Neutral",
 		"ElementLevel": 3,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -64885,6 +65330,7 @@
 	{
 		"Id": 1499,
 		"SpriteName": "WOOTAN_FIGHTER",
+		"IsLooter":false,
 		"Name": "Wootan Fighter",
 		"Level": 41,
 		"HP": 4457,
@@ -65047,6 +65493,7 @@
 	{
 		"Id": 1498,
 		"SpriteName": "WOOTAN_SHOOTER",
+		"IsLooter":false,
 		"Name": "Wootan Shooter",
 		"Level": 39,
 		"HP": 3977,
@@ -65205,6 +65652,7 @@
 	{
 		"Id": 1024,
 		"SpriteName": "WORM_TAIL",
+		"IsLooter":false,
 		"Name": "Wormtail",
 		"Level": 14,
 		"HP": 377,
@@ -65367,6 +65815,7 @@
 	{
 		"Id": 1291,
 		"SpriteName": "WRAITH_DEAD",
+		"IsLooter":false,
 		"Name": "Wraith Dead",
 		"Level": 74,
 		"HP": 43021,
@@ -65517,6 +65966,7 @@
 	{
 		"Id": 1192,
 		"SpriteName": "WRAITH",
+		"IsLooter":false,
 		"Name": "Wraith",
 		"Level": 53,
 		"HP": 9666,
@@ -65671,6 +66121,7 @@
 	{
 		"Id": 1512,
 		"SpriteName": "HYEGUN",
+		"IsLooter":false,
 		"Name": "Yao Jun",
 		"Level": 56,
 		"HP": 9981,
@@ -65811,6 +66262,7 @@
 	{
 		"Id": 1081,
 		"SpriteName": "YELLOW_PLANT",
+		"IsLooter":false,
 		"Name": "Yellow Plant",
 		"Level": 1,
 		"HP": 10,
@@ -66117,6 +66569,7 @@
 	{
 		"Id": 1057,
 		"SpriteName": "YOYO",
+		"IsLooter":false,
 		"Name": "Yoyo",
 		"Level": 21,
 		"HP": 744,
@@ -66283,6 +66736,7 @@
 	{
 		"Id": 1234,
 		"SpriteName": "PROVOKE_YOYO",
+		"IsLooter":false,
 		"Name": "Yoyo",
 		"Level": 19,
 		"HP": 744,
@@ -66428,6 +66882,7 @@
 	{
 		"Id": 2521,
 		"SpriteName": "YSER",
+		"IsLooter":false,
 		"Name": "Yser",
 		"Level": 43,
 		"HP": 4794,
@@ -66452,7 +66907,7 @@
 		"NeedHit": 111,
 		"Element": "Wind",
 		"ElementLevel": 2,
-		"IsAggressive": null,
+		"IsAggressive": false,
 		"CanDetectCast": null,
 		"Drops": [
 			{
@@ -66550,6 +67005,7 @@
 	{
 		"Id": 1200,
 		"SpriteName": "ZHERLTHSH",
+		"IsLooter":false,
 		"Name": "Zealotus",
 		"Level": 63,
 		"HP": 18300,
@@ -66700,6 +67156,7 @@
 	{
 		"Id": 1177,
 		"SpriteName": "ZENORC",
+		"IsLooter":false,
 		"Name": "Zenorc",
 		"Level": 31,
 		"HP": 2688,
@@ -66836,6 +67293,7 @@
 	{
 		"Id": 1178,
 		"SpriteName": "ZEROM",
+		"IsLooter":false,
 		"Name": "Zerom",
 		"Level": 23,
 		"HP": 1202,
@@ -66990,6 +67448,7 @@
 	{
 		"Id": 1514,
 		"SpriteName": "DANCING_DRAGON",
+		"IsLooter":false,
 		"Name": "Zhu Po Long",
 		"Level": 54,
 		"HP": 9136,
@@ -67130,6 +67589,7 @@
 	{
 		"Id": 1417,
 		"SpriteName": "ZIPPER_BEAR",
+		"IsLooter":false,
 		"Name": "Zipper Bear",
 		"Level": 35,
 		"HP": 2901,
@@ -67256,6 +67716,7 @@
 	{
 		"Id": 1197,
 		"SpriteName": "ZOMBIE_PRISONER",
+		"IsLooter":false,
 		"Name": "Zombie Prisoner",
 		"Level": 53,
 		"HP": 11048,
@@ -67406,6 +67867,7 @@
 	{
 		"Id": 1015,
 		"SpriteName": "ZOMBIE",
+		"IsLooter":false,
 		"Name": "Zombie",
 		"Level": 15,
 		"HP": 498,
@@ -67532,6 +67994,7 @@
 	{
 		"Id": 1864,
 		"SpriteName": "ZOMBIE_SLAUGHTER",
+		"IsLooter":false,
 		"Name": "Zombie Slaughter",
 		"Level": 77,
 		"HP": 43000,

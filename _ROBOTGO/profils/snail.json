@@ -16,9 +16,8 @@
         ["useSitAboveSP",   100]
     ],
     "Route":[
-        {"Map":"gef_fild12", "X": 37, "Y": 50},
-        {"Map":"gef_fild12", "X": 36, "Y": 180},
-        {"Map":"gef_fild07", "X": 40, "Y":19},
+        {"Map":"gef_fild12", "X": 372, "Y": 50},
+        {"Map":"gef_fild07", "X": 40, "Y":19, "UseTPdist": 100},
         {"Map":"gefg_cas03", "X": 68, "Y":290},
         {"Map":"gefg_cas03", "X": 93, "Y":159},
         {"Map":"gefg_cas03", "X": 10, "Y": 283},

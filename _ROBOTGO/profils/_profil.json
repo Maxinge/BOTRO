@@ -6,8 +6,8 @@
         ["saveMap",      "morocc"],
         ["lockMap",      "moc_pryd05"],
         ["WarpPortal",   "moc_ruins"],
-        ["useTPNbAggro",    4],
-        ["useTPNbAggroLoot",5],
+        ["useTPNbAggro",    5],
+        ["useTPNbAggroLoot",6],
         ["useTPLockMap",    1],
         ["useTPOnRoad",     1],
         ["useTPDelay",      500],
@@ -23,6 +23,8 @@
     ],
     "Mob":[
         {"Priority":1, "Id":1149, "Name":"mino",
+            "AtkName":"Throw Spirit Sphere", "AtkId":267,"AtkLv":3, "MinDist": 7, "MinHP": 0},
+        {"Priority":-1, "Id":1032, "Name":"verit",
             "AtkName":"Throw Spirit Sphere", "AtkId":267,"AtkLv":3, "MinDist": 7, "MinHP": 0}
     ],
     "ItemLoot":[

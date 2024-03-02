@@ -62,22 +62,16 @@ func botLoop() {
             MUmobList.Unlock()
 
             MUgroundItems.Lock()
-            for kk,vv := range groundItems { if getDist(vv.Coords, charCoord) > 40 { delete(groundItems, kk) } }
             MUmobList.Lock()
             flagGoodItems()
             MUmobList.Unlock()
             MUgroundItems.Unlock()
-
-            MUplayerList.Lock()
-            for kk,vv := range playerList { if getDist(vv.Coords, charCoord) > 40 { delete(playerList, kk) } }
-            MUplayerList.Unlock()
 
         }
     }()
 
 
     for {
-
 
         waitime := time.Now()
 
@@ -97,23 +91,22 @@ func botLoop() {
             if chkcharCoord == charCoord { chkTimecharCoord += looptime }else{ chkTimecharCoord = 0 }
             if chktargetMobID == targetMobID && targetMobID > 0 { chkTimetargetMobID += looptime }else{ chkTimetargetMobID = 0 }
             if chktargetItemID == targetItemID && targetItemID > 0 { chkTimetargetItemID += looptime }else{ chkTimetargetItemID = 0 }
-            if chkTimecharCoord > 15000 { resetPath(); resetMobItemList(); resetTargets() }
-            if chkTimetargetMobID > 10000 && targetItemID < 0{ resetPath(); resetMobItemList(); resetTargets() }
+            if chkTimecharCoord > 15000 { resetPath(); resetMobItemList(); resetTargets(); useTeleport() }
+            if chkTimetargetMobID > 15000 && targetItemID < 0{ resetPath(); resetMobItemList(); resetTargets() }
             if chkTimetargetItemID > 5000 { resetPath(); resetMobItemList(); resetTargets() }
             chkcharCoord = charCoord
             chktargetMobID = targetMobID
             chktargetItemID = targetItemID
         }
 
-
         MUgroundItems.Lock()
         MUmobList.Lock()
 
         if targetItemID < 0 { targetItemID = pickItemTarget() }
-        if len(playerList) <= 0{
+
         if targetMobID < 0 {
             targetMobID = pickMobTarget()
-        }}
+        }
 
         if targetItemID > 0 && targetMobID > 0 {
             mob := mobList[targetMobID]
@@ -132,6 +125,8 @@ func botLoop() {
 
         MUmobList.Unlock()
         MUgroundItems.Unlock()
+
+        if len(playerList) > 0 { targetMobID = -1; }
 
         MUbuffList.Lock()
         MUinventoryItems.Lock()
@@ -182,13 +177,12 @@ func botLoop() {
         if distFromDest <= float64(minDist){ resetPath() }
 
         if movePath != nil {
-            if getDist(charCoord, nextStep) <= 6{ pathIndex += 3 }
+            if getDist(charCoord, nextStep) <= 7{ pathIndex += 4 }
             if pathIndex > len(movePath)-1 {
                 nextStep = nextPoint
             }else{
                 nextStep = Coord{movePath[pathIndex].X,movePath[pathIndex].Y}
             }
-
             sendToServer("035F",coordsTo24Bits(nextStep.X,nextStep.Y))
             addWait(150)
         }
@@ -288,20 +282,19 @@ func botLoop() {
                 sendUseSkill(skID, lv, accountID);
             continue }
 
-            if exist.(CRoute).UseTPdist > 0 {
-                minDist = 1
-                nextPoint = Coord{X:exist.(CRoute).X, Y:exist.(CRoute).Y}
-                movePath = pathfind(charCoord, nextPoint, lgatMaps[MAP])
-                if len(movePath) > exist.(CRoute).UseTPdist || len(movePath) <= 1{
-                    useTeleport(); continue
-                }
-            }
 
             if movePath == nil {
                 nextPoint = Coord{X:exist.(CRoute).X, Y:exist.(CRoute).Y}
                 movePath = pathfind(charCoord, nextPoint, lgatMaps[MAP])
                 pathIndex = 0 ; minDist = 1;
             }
+
+            if exist.(CRoute).UseTPdist > 0 {
+                if len(movePath) > exist.(CRoute).UseTPdist || len(movePath) <= 1{
+                    useTeleport();
+                }
+            }
+
         }
 
         if MAP == saveMap {
@@ -323,6 +316,13 @@ func botLoop() {
     }
 
     fmt.Printf("# lel # %v \n","lel")
+}
+
+func getIndex(cc Coord, path []Coord) int{
+    for kk,vv := range path {
+        if vv == cc { return kk }
+    }
+    return -1
 }
 
 func refreshUI(){
@@ -372,6 +372,9 @@ func resetBuffList() {
     MUbuffList.Unlock()
 }
 func resetMobItemList() {
+    MUplayerList.Lock()
+    playerList = map[int]Player{}
+    MUplayerList.Unlock()
     MUmobList.Lock()
     mobList = map[int]Mob{}
     MUmobList.Unlock()
@@ -383,14 +386,6 @@ func resetPath() {
     movePath = nil; pathIndex = 0; nextPoint = Coord{};
 }
 
-func isValidLine(start Coord, dest Coord) bool{
-    line := linearInterpolation(start, dest)
-    for _,vv := range line {
-    	gatcell := lgatMaps[MAP].cells[vv.X][vv.Y]
-    	if !isValidCell(gatcell) { return false }
-    }
-    return true
-}
 
 func pickMobTarget() int{
     distMobList := map[float64]int{}
@@ -411,7 +406,11 @@ func pickMobTarget() int{
         if vv.Priority > 3 { return kk }
         if vv.Priority > 2 { return kk }
         if vv.Priority > 1 { return kk }
-        distMobList[getDist(vv.Coords, charCoord)] = kk
+
+        // distMobList[getDist(vv.Coords, charCoord)] = kk
+        dist := float64(len(pathfind(charCoord, vv.Coords, lgatMaps[MAP])))
+        distMobList[dist] = kk
+
     }
 
     keys := sortFloatKeys(keyMap(distMobList))
@@ -421,14 +420,14 @@ func pickMobTarget() int{
         mob := mobList[mapID]
         if mob.IsNotValid { continue }
         if mob.DeathTime > 0 { continue }
+        if mob.IsLooter == true && keys[i] <= 3 { return mapID }
         if exist := getConf(conf["Mob"],"Id",mob.MobID); exist == nil { continue }
-        mobPath := pathfind(charCoord, mob.Coords, lgatMaps[MAP])
-        if len(mobPath) > 50 { mob.IsNotValid = true; mobList[mapID] = mob; continue }
+        if keys[i] > 50 { mob.IsNotValid = true; mobList[mapID] = mob; continue }
         if !mob.AtSight { continue }
         if mob.Priority < 0 { continue }
-
         return mapID
     }
+
     return -1
 }
 

@@ -8,17 +8,11 @@ import(
 )
 
 
-
-func coordInCoords(c Coord, cc []Coord) bool{
-    for _,vv := range cc { if vv == c { return true } }
-    return false
-}
-
 func getDist(from Coord, to Coord) float64 {
 	return math.Sqrt(math.Pow(float64(to.X-from.X), 2) + math.Pow(float64(to.Y-from.Y), 2))
 }
 
-func isValidCell(cell uint8)  bool{
+func isValidGatCell(cell uint8)  bool{
 	if cell == 0 || cell == 3 { return true } ; return false
 }
 
@@ -105,14 +99,13 @@ func linearInterpolation(from Coord, to Coord) []Coord {
 
 
 func randomPoint(lgatMap ROLGatMap, from Coord, dist int) Coord{
-
 	for {
 		rand.Seed(time.Now().UnixNano())
 		rX := rand.Intn(lgatMap.width)
 		// rand.Seed(time.Now().UnixNano())
 		rY := rand.Intn(lgatMap.height)
 		gatCell := lgatMap.cells[rX][rY]
-		if isValidCell(gatCell) {
+		if isValidGatCell(gatCell) {
 		if getDist(from,Coord{X:rX, Y:rY}) < float64(dist) {
 		if (Coord{X:rX, Y:rY}) != from {
 			return Coord{X:rX, Y:rY}
@@ -135,14 +128,10 @@ func cleanPath(coordList []Coord, sighDist int, lgatMap ROLGatMap) []Coord{
 			beamCellList := linearInterpolation(_curCoord, beamLine)
 			badbeam:
 			for _,beamCell := range beamCellList {
-				if beamCell.X > lgatMap.width -1 || beamCell.Y > lgatMap.height -1 { break }
-				if beamCell.X < 0 || beamCell.Y < 0 { break }
-				gatCell := lgatMap.cells[beamCell.X][beamCell.Y]
-				if !isValidCell(gatCell) { break badbeam }
+				if !isValidCell(beamCell,lgatMap) { break badbeam }
 				betweens := linearInterpolation(beamCell, coordList[k-1])
 				for _,bw := range betweens {
-					bwgatCell := lgatMap.cells[bw.X][bw.Y]
-					if !isValidCell(bwgatCell) { break badbeam }
+					if !isValidCell(bw,lgatMap) { break badbeam }
 				}
 				beamPoints = append(beamPoints,beamCell)
 			}
@@ -171,6 +160,25 @@ func cleanPath(coordList []Coord, sighDist int, lgatMap ROLGatMap) []Coord{
 }
 
 
+func isValidLine(start Coord, dest Coord, lgatMap ROLGatMap) bool{
+    line := linearInterpolation(start, dest)
+    for _,vv := range line {
+    	gatcell := lgatMap.cells[vv.X][vv.Y]
+    	if !isValidGatCell(gatcell) { return false }
+    }
+    return true
+}
+
+func isValidCell(cc Coord, lgatMap ROLGatMap) bool{
+	if cc.X > lgatMap.width -1 || cc.Y > lgatMap.height -1 { return false }
+	if cc.X < 0 || cc.Y < 0 { return false }
+	gatCell := lgatMap.cells[cc.X][cc.Y]
+	if isValidGatCell(gatCell) { return true }
+	return false
+}
+
+
+
 func walkback(ccc Coord,paths *map[Coord]Coord,result *[]Coord){
 	if cc, exist := (*paths)[ccc]; exist {
 		*result = append(*result, cc)
@@ -181,53 +189,44 @@ func walkback(ccc Coord,paths *map[Coord]Coord,result *[]Coord){
 
 func pathfind(start Coord, finish Coord, lgatMap ROLGatMap) []Coord {
 
-	gatCell := lgatMap.cells[finish.X][finish.Y]
-	if !isValidCell(gatCell) { return []Coord{start} }
+	if !isValidCell(finish, lgatMap) { return []Coord{start} }
 	if start == finish{ return []Coord{start} }
 
 	paths := map[Coord]Coord{}
-	visited := []Coord{}
 	heads := []Coord{}
-	candidates := []Coord{}
 
 	paths[start] = start
 	heads = append(heads, start)
-	visited = append(visited, start)
-
-	brainSize := 50*50
 
 	PFstartTime := time.Now()
-    PFelapsed := time.Now()
+	PFelapsed := time.Now()
 	found:
 	for {
 		if PFelapsed.Sub(PFstartTime).Seconds() > float64(1) { return []Coord{start} }
-
-		if len(visited) > brainSize { visited = visited[len(visited)-brainSize:] }
-
-		candidates = []Coord{}
+		banned := []Coord{}
 		for _,vv := range heads {
-			visited = append(visited, vv)
-			allDirections := firstCircle(vv)
-			for _,vvvv := range allDirections {
-				if vvvv == finish { paths[vvvv] = vv; break found }
-				if vvvv.X > lgatMap.width -1 || vvvv.Y > lgatMap.height -1 { continue }
-				if vvvv.X < 0 || vvvv.Y < 0 { continue }
-				gatCell := lgatMap.cells[vvvv.X][vvvv.Y]
-				if isValidCell(gatCell) {
-				if !isIn(vvvv,visited){
+			count := 0
+			for _,vvvv := range firstCircle(vv) {
+				if isValidCell(vvvv,lgatMap) {
+				if _, ok := paths[vvvv]; !ok {
 					paths[vvvv] = vv
-					candidates = append(candidates, vvvv)
+					heads = append(heads, vvvv)
+					count ++
+					if finish == vvvv{ break found }
 				}}
 			}
+			if count == 0 { banned = append(banned,vv) }
 		}
-		heads = []Coord{}
-		for _,vv := range candidates {
-			if !isIn(vv,heads){
-				heads = append(heads, vv)
+		for _,vv := range banned {
+			if isIn(vv,heads) {
+				for kk,vvvv := range heads {
+					if vvvv == vv {
+						heads = append(heads[:kk], heads[kk+1:]...)
+					}
+				}
 			}
 		}
-
-		if len(heads) == 0 { break found }
+		if len(heads) == 0 { break }
 		PFelapsed = time.Now()
 	}
 
@@ -242,13 +241,9 @@ func pathfind(start Coord, finish Coord, lgatMap ROLGatMap) []Coord {
 	}
 	result = append(result, finish)
 
+
 	cleanp := result
-	for ii := 30; ii >=2 ; ii-=4 {
-		cleanp = cleanPath(cleanp, ii, lgatMap)
-	}
-
-	if len(cleanp) <= 1 { return []Coord{start} }
-
+	cleanp = cleanPath(cleanp, 100, lgatMap)
 	cleanp = cleanp[1:]
 
 	return cleanp

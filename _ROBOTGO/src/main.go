@@ -144,7 +144,7 @@ func main() {
         // MUmobList.Unlock()
 
         MUplayerList.Lock()
-        imgui.Text(fmt.Sprintf(" ### playerList \n %v ", prettyPrint(playerList)))
+        imgui.Text(fmt.Sprintf(" ### playerList \n %v - %v  ", len(playerList), prettyPrint(playerList)))
         MUplayerList.Unlock()
 
         imgui.End()
