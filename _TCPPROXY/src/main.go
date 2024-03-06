@@ -101,12 +101,17 @@ func main() {
 
             bb := []byte{20,20}
 
-            // XPOS ## 0x00F2EA98
-            windows.ReadProcessMemory(processHandle, 0x00F2EA98, &buffer2[0], uintptr(4), nil)
-            bb = append(bb,buffer2[0:4]...)
+            //
+            // // XPOS ## 0x00F2EA98
+            // windows.ReadProcessMemory(processHandle, 0x00F2EA98, &buffer2[0], uintptr(4), nil)
+            // bb = append(bb,buffer2[0:4]...)
+            //
+            // // YPOS ## 0x00F2EA9C
+            // windows.ReadProcessMemory(processHandle, 0x00F2EA9C, &buffer2[0], uintptr(4), nil)
+            // bb = append(bb,buffer2[0:4]...)
 
-            // YPOS ## 0x00F2EA9C
-            windows.ReadProcessMemory(processHandle, 0x00F2EA9C, &buffer2[0], uintptr(4), nil)
+            // MOVESPEED ## 0x00F4235C
+            windows.ReadProcessMemory(processHandle, 0x00F4235C, &buffer2[0], uintptr(4), nil)
             bb = append(bb,buffer2[0:4]...)
 
             // BASEXPMAX ## 0x00F422A0
@@ -188,7 +193,7 @@ func routeFromClient(tcpConn net.Conn, port int){
     if port == 5121 { sendConn = serverConn; clientConn = tcpConn}
 
     go func() {
-        recvbuffer := make([]byte, 20000)
+        recvbuffer := make([]byte, 100000)
         for {
             n, err := serverConn.Read(recvbuffer)
             if err != nil { fmt.Printf("err serverConn -- %v -- \n", err); return }
@@ -200,7 +205,7 @@ func routeFromClient(tcpConn net.Conn, port int){
     }()
 
 
-    sendbuffer := make([]byte, 20000)
+    sendbuffer := make([]byte, 100000)
 	for {
         n, err := tcpConn.Read(sendbuffer)
         if err != nil { fmt.Printf("err tcpConn -- %v -- \n", err); return }

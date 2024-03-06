@@ -77,8 +77,8 @@ func main() {
     fmt.Printf("movePath -- %v -- \n", movePath)
 
 
-    return;
-
+    // return;
+    //
     go func() {
         for {time.Sleep(100 * time.Millisecond)
 

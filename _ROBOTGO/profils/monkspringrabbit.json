@@ -6,11 +6,11 @@
         ["saveMap",      "morocc"],
         ["lockMap",      "mjolnir_04"],
         ["WarpPortal",   "mjolnir_04.gat"],
-        ["useTPNbAggro",    1],
-        ["useTPNbAggroLoot",2],
+        ["useTPNbAggro",    4],
+        ["useTPNbAggroLoot",5],
         ["useTPLockMap",    1],
         ["useTPOnRoad",     1],
-        ["useTPDelay",      3000],
+        ["useTPDelay",      300],
         ["useSitHP",        1],
         ["useSitUnderSP",   33],
         ["useSitAboveSP",   100]
@@ -27,8 +27,7 @@
     "ItemLoot":[
         { "Id":508,   "Name":"Yellow_Herb"},
         {"Id":511,   "Name":"Green_Herb"},
-        {"Id":949,   "Name":"feather"},
-        {"Priority":5, "Id":4227,   "Name":"Spring Rabbit Card"}
+        {"Id":949,   "Name":"feather"}
     ],
     "ItemUse":[
         {"Name":"Converter fire", "Id":12114, "MinHP":-1, "MinSP":-1,"BuffId": 1505 }

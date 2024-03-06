@@ -41,9 +41,23 @@ type Player struct {
     Coords Coord
 }
 
+type Trap struct {
+    TrapID int
+    Coords Coord
+    Radius int
+}
+
 var(
     accountID = 0
 
+    lastMoveTime = time.Now().Unix()
+    ccFrom = Coord{}
+    ccTo = Coord{}
+    pathTo = []Coord{}
+    XPOS = 0
+    YPOS = 0
+
+    MOVESPEED = 0
     BASEXPMAX = 0
     BASEEXP = 0
     JOBXPMAX = 0
@@ -53,8 +67,6 @@ var(
     JOBLV = 0
     ZENY = 0
     MAP = ""
-    XPOS = 0
-    YPOS = 0
     HPLEFT = 0
     HPMAX = 0
     WEIGHTMAX = 0
@@ -77,12 +89,15 @@ var(
     buffList = map[int][]int64{}
     MUplayerList sync.Mutex
     playerList = map[int]Player{}
+    MUtrapList sync.Mutex
+    trapList = map[int]Trap{}
 
     SSphere = 0
 
 
     lockMap = ""
     saveMap = ""
+    killBeforeLoot = false
     useTPNbAggro = 10
     useTPNbAggroLoot = 10
     useTPLockMap = 0

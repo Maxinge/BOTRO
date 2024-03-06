@@ -113,50 +113,40 @@ func randomPoint(lgatMap ROLGatMap, from Coord, dist int) Coord{
 	}
 }
 
-func cleanPath(coordList []Coord, sighDist int, lgatMap ROLGatMap) []Coord{
-	if len(coordList) < sighDist  { return coordList }
+func cleanPath(coordList []Coord, sighDist int, lgatMap ROLGatMap, bannedCells []Coord) []Coord{
+	if len(coordList) < 2  { return coordList }
 	k := 0
-	cleanPath := []Coord{}
-	cleanPath = append(cleanPath, coordList[0])
+
 	for {
-		k += 1 ; if k > len(coordList) -1 { break }
-		_curCoord := coordList[k]
-		beamPoints := []Coord{}
-		beamDirections := secondCircleVectors()
-		for _,vect := range beamDirections {
-			beamLine := Coord{ X:_curCoord.X + (vect.X * sighDist), Y: _curCoord.Y + (vect.Y * sighDist)}
-			beamCellList := linearInterpolation(_curCoord, beamLine)
-			badbeam:
-			for _,beamCell := range beamCellList {
-				if !isValidCell(beamCell,lgatMap) { break badbeam }
-				betweens := linearInterpolation(beamCell, coordList[k-1])
-				for _,bw := range betweens {
-					if !isValidCell(bw,lgatMap) { break badbeam }
-				}
-				beamPoints = append(beamPoints,beamCell)
-			}
-		}
+		k += 1 ; if k > len(coordList)-1 { break }
+		curCoord := coordList[k]
+
 		best := 0
-		for _,bPoint := range beamPoints {
-			pos := isInPos(bPoint, coordList)
-			if pos > -1 && pos > best && pos > k{
-				best = pos
+		for _,vect := range secondCircleVectors() {
+			beamLine := Coord{ X:curCoord.X + (vect.X * sighDist), Y: curCoord.Y + (vect.Y * sighDist)}
+			for _, beamCell := range linearInterpolation(curCoord, beamLine) {
+				if !isValidCell(beamCell,lgatMap) { break }
+				if isIn(beamCell, bannedCells) { break }
+				pos := isInPos(beamCell, coordList)
+				if pos > -1 && pos > best && pos > k{
+					best = pos
+				}
 			}
 		}
+
+
 		if best > 0 {
-			cleanPath = append(cleanPath, coordList[best])
-			k = best -1
+			temp := []Coord{}
+			temp = append(temp,coordList[0:k+1]...)
+			line := linearInterpolation(coordList[k], coordList[best])
+			temp = append(temp,line[:]...)
+			temp = append(temp,coordList[best:len(coordList)]...)
+			coordList = temp
+			k++
 		}
 	}
-	newPath := []Coord{}
-	for k, _ := range cleanPath {
-		if k < len(cleanPath) -1 {
-			line := linearInterpolation(cleanPath[k], cleanPath[k+1])
-			newPath = append(newPath,cleanPath[k])
-			newPath = append(newPath,line[:len(line)]...)
-		}
-	}
-	return newPath
+
+	return coordList
 }
 
 
@@ -187,10 +177,27 @@ func walkback(ccc Coord,paths *map[Coord]Coord,result *[]Coord){
 }
 
 
-func pathfind(start Coord, finish Coord, lgatMap ROLGatMap) []Coord {
+func pathfind(start Coord, finish Coord, lgatMap ROLGatMap, bannedCells []Coord) []Coord {
 
 	if !isValidCell(finish, lgatMap) { return []Coord{start} }
 	if start == finish{ return []Coord{start} }
+
+	if isIn(finish, bannedCells) {
+		ccc := []Coord{}
+		ccc = append(ccc, firstCircle(finish)...)
+		ccc = append(ccc, secondCircle(finish)...)
+		for _,vv := range ccc{
+			if isValidCell(vv, lgatMap) && !isIn(vv, bannedCells) {
+				finish = vv; break;
+			}
+		}
+	}
+
+	// rand.Seed(time.Now().UnixNano())
+	// rX := rand.Intn(lgatMap.width)
+	// // rand.Seed(time.Now().UnixNano())
+	// rY := rand.Intn(lgatMap.height)
+	// gatCell := lgatMap.cells[rX][rY]
 
 	paths := map[Coord]Coord{}
 	heads := []Coord{}
@@ -202,18 +209,19 @@ func pathfind(start Coord, finish Coord, lgatMap ROLGatMap) []Coord {
 	PFelapsed := time.Now()
 	found:
 	for {
-		if PFelapsed.Sub(PFstartTime).Seconds() > float64(1) { return []Coord{start} }
+		if PFelapsed.Sub(PFstartTime).Milliseconds() > 500 { return []Coord{start} }
 		banned := []Coord{}
 		for _,vv := range heads {
 			count := 0
 			for _,vvvv := range firstCircle(vv) {
 				if isValidCell(vvvv,lgatMap) {
+				if !isIn(finish, bannedCells) {
 				if _, ok := paths[vvvv]; !ok {
 					paths[vvvv] = vv
 					heads = append(heads, vvvv)
 					count ++
 					if finish == vvvv{ break found }
-				}}
+				}}}
 			}
 			if count == 0 { banned = append(banned,vv) }
 		}
@@ -243,7 +251,7 @@ func pathfind(start Coord, finish Coord, lgatMap ROLGatMap) []Coord {
 
 
 	cleanp := result
-	cleanp = cleanPath(cleanp, 100, lgatMap)
+	cleanp = cleanPath(cleanp, 100, lgatMap, bannedCells)
 	cleanp = cleanp[1:]
 
 	return cleanp

@@ -10,7 +10,7 @@
         ["useTPNbAggroLoot",5],
         ["useTPLockMap",    1],
         ["useTPOnRoad",     1],
-        ["useTPDelay",      500],
+        ["useTPDelay",      300],
         ["useSitHP",        1],
         ["useSitUnderSP",   33],
         ["useSitAboveSP",   100]

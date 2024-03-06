@@ -32,6 +32,7 @@ func main() {
     fmt.Println("#--- ROBOTGO START ---#")
     fmt.Printf("current dir -- %v -- \n", CurDir())
 
+
     loadprofil()
     // fmt.Printf("conf -- %v -- \n", prettyPrint(conf)); return
 
@@ -71,7 +72,6 @@ func main() {
         buffer := make([]byte, 100000)
         for {
             n ,_ := proxyCo.Read(buffer)
-            // if err != nil { fmt.Printf("err localConn -- %v -- \n", err); return }
             if n < 2 { continue }
             ii := -1
             for {
@@ -92,8 +92,19 @@ func main() {
         }
     }()
 
-    go botLoop()
 
+    // sendToServer("0090", []byte{180,120,142,6,1}) //
+    // time.Sleep(time.Duration(1000) * time.Millisecond)
+    // sendToServer("00B9", []byte{180,120,142,6})
+    // time.Sleep(time.Duration(1000) * time.Millisecond)
+    // sendToServer("00B8", []byte{180,120,142,6,2}) //
+    // time.Sleep(time.Duration(1000) * time.Millisecond)
+    // sendToServer("00B9", []byte{180,120,142,6})
+
+
+    // return
+
+    go botLoop()
 
     // ########################
     backend := imgui.CreateBackend(imgui.NewGLFWBackend())
@@ -106,6 +117,10 @@ func main() {
     targetFPS := 15
 	frameTime := time.Second / time.Duration(targetFPS)
 	lastFrameTime := time.Now()
+
+    // backend.SetCloseCallback(func(b imgui.Backend[imgui.GLFWWindowFlags]) {
+	// 	exit <- true
+	// })
 
     backend.Run(func () {
         currentTime := time.Now()
@@ -143,9 +158,13 @@ func main() {
         // imgui.Text(fmt.Sprintf(" ### mobList \n %v ", prettyPrint(mobList)))
         // MUmobList.Unlock()
 
-        MUplayerList.Lock()
-        imgui.Text(fmt.Sprintf(" ### playerList \n %v - %v  ", len(playerList), prettyPrint(playerList)))
-        MUplayerList.Unlock()
+        // MUplayerList.Lock()
+        // imgui.Text(fmt.Sprintf(" ### playerList \n %v - %v  ", len(playerList), prettyPrint(playerList)))
+        // MUplayerList.Unlock()
+
+        // MUtrapList.Lock()
+        // imgui.Text(fmt.Sprintf(" ### trapList \n %v - %v  ", len(trapList), prettyPrint(trapList)))
+        // MUtrapList.Unlock()
 
         imgui.End()
 

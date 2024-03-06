@@ -17,7 +17,9 @@ la premiere compilation de cimguigo peu prendre du temps
 
 ## TODO ##
 - town run
-- mob agressif / priority finir
 - esquive aoe
 - command refresh profil
 - fermer fenetre bot
+- revoir move mob
+- position
+- map interieur

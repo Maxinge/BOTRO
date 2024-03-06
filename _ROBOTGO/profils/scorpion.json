@@ -3,27 +3,29 @@
         ["Title",    "monk tss scorpion"],
         ["accountID",    2014282],
 
-        ["saveMap",      "morocc"],
+        ["saveMap",      ""],
         ["lockMap",      "moc_fild08"],
-        ["WarpPortal",   "moc_fild08.gat"],
+        ["WarpPortal",   ""],
         ["useTPNbAggro",    5],
         ["useTPNbAggroLoot",7],
         ["useTPLockMap",    1],
         ["useTPOnRoad",     1],
-        ["useTPDelay",      3000],
+        ["useTPDelay",      300],
         ["useSitHP",        1],
         ["useSitUnderSP",   33],
         ["useSitAboveSP",   100]
     ],
     "Route":[
         {"Map":"moc_fild04",    "X":175,    "Y":19},
-        {"Map":"moc_fild13",    "X":32,    "Y":171},
+        {"Map":"moc_fild13",    "X":30,    "Y":172},
         {"Map":"moc_fild09",    "X":374,    "Y":195},
         {"Map":"moc_fild14",    "X":196,    "Y":381}
     ],
     "Mob":[
         {"Priority":0, "Id":1001, "Name":"scorpion",
-            "AtkName":"Throw Spirit Sphere", "AtkId":267,"AtkLv":2, "MinDist": 7, "MinHP": 0}
+            "AtkName":"Throw Spirit Sphere", "AtkId":267,"AtkLv":2, "MinDist": 7, "MinHP": 0},
+        {"Priority":-1, "Id":1138, "Name":"magnolia",
+            "AtkName":"Throw Spirit Sphere", "AtkId":267,"AtkLv":1, "MinDist": 7, "MinHP": 0}
     ],
     "ItemLoot":[
     ],

@@ -17,10 +17,36 @@ func parsePacket(bb []byte){
     default:
         // fmt.Printf("### no_fct ### [%v][%v] -> [%v] \n", hexID, len(bb),bb)
 
+    case "0090":  //npc_talk
+        // fmt.Printf("### ??? ### [%v][%v] -> [%v] \n", hexID, len(bb),bb)
+    case "00B9": //npc_next
+    case "00B8": //npc_choice
+        // fmt.Printf("### ??? ### [%v][%v] -> [%v] \n", hexID, len(bb),bb)
+
+
+
+    // 184 0 180 120 142 6 2
+
+    case "0091","0092":  //map_change
+
+        XPOS = int(binary.LittleEndian.Uint16(bb[16:16+2]))
+        YPOS = int(binary.LittleEndian.Uint16(bb[18:18+2]))
+
+    case "0087":  //recv_self_move_to
+        fromto := bits48ToCoords(bb[4:4+6])
+
+        ccFrom = Coord{X:fromto[0],Y:fromto[1]}
+        ccTo = Coord{X:fromto[2],Y:fromto[3]}
+        lastMoveTime = time.Now().Unix()
+        pathTo = pathfind(ccFrom, ccTo, lgatMaps[MAP],[]Coord{})
+        pathTo = pathTo[1:]
+
     case "1414":  //mem_data
         ii := 0
-        XPOS = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));           ii += 4
-        YPOS = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));           ii += 4
+
+        // XPOS = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));           ii += 4
+        // YPOS = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));           ii += 4
+        MOVESPEED = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));      ii += 4
         BASEXPMAX = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));      ii += 4
         BASEEXP = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));        ii += 4
         JOBXPMAX = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));       ii += 4
@@ -39,6 +65,8 @@ func parsePacket(bb []byte){
 
     case "007D":  //map_loaded
         resetMobItemList()
+        resetPlayerList()
+        resetTrapList()
         resetPath()
         resetTargets()
         addWait(1000)
@@ -46,6 +74,15 @@ func parsePacket(bb []byte){
 
     case "0B09", "0B0A":  //inventory_info
         // inventoryType := bb[2]
+        // fmt.Printf("### inventory_info ### [%v][%v] \n", hexID, len(bb))
+        // lennn := int(binary.LittleEndian.Uint16(bb[0:0+2]))
+        // fmt.Printf("### lennn ### [%v] \n", lennn)
+
+        // MUinventoryItems.Lock()
+        // inventoryItems = map[int]Item{}
+        // MUinventoryItems.Unlock()
+        // fmt.Printf("### inventoryType ### [%v] \n", inventoryType)
+
         if hexID == "0B09" {
             for ii := 3; ii < len(bb); ii+=34 {
                 inventoryID := int(binary.LittleEndian.Uint16(bb[ii:ii+2]))
@@ -65,6 +102,14 @@ func parsePacket(bb []byte){
                 MUinventoryItems.Unlock()
             }
         }
+
+        // MUinventoryItems.Lock()
+        // fmt.Printf("### len ### [%v]\n", len(inventoryItems))
+        //
+        // for _,vv := range inventoryItems {
+        //     fmt.Printf("### ii ### [%v][%v] \n", vv.ItemID, vv.Amount)
+        // }
+        // MUinventoryItems.Unlock()
 
     case "01C8":  //item_use
         inventoryID := int(binary.LittleEndian.Uint16(bb[0:0+2]))
@@ -173,24 +218,15 @@ func parsePacket(bb []byte){
         fromto := bits48ToCoords(bb[4:4+6])
         // tick := int(binary.LittleEndian.Uint32(bb[10:10+4]))
         now := time.Now()
-        MUmobList.Lock()
         cc := Coord{X:fromto[0],Y:fromto[1]}
         ccTo := Coord{X:fromto[2],Y:fromto[3]}
-
+        pathto := pathfind(cc, ccTo, lgatMaps[MAP],[]Coord{})
+        MUmobList.Lock()
         if mm, exist := mobList[mapID]; exist {
             mm.Coords = cc; mm.CoordsTo = ccTo
-            // mm.Coords.X = fromto[2]; mm.Coords.Y = fromto[3]
             mm.LastMoveTime = now.Unix()
-            mm.PathMoveTo = pathfind(mm.Coords, mm.CoordsTo, lgatMaps[MAP])
+            mm.PathMoveTo = pathto
             mobList[mapID] = mm
-        }else{
-            mobList[mapID] = Mob{
-                Coords:ccTo,
-                CoordsTo:cc,
-                LastMoveTime:now.Unix(),
-                PathMoveTo:pathfind(cc, ccTo, lgatMaps[MAP]),
-                MoveSpeed: 200,
-            }
         }
         MUmobList.Unlock()
 
@@ -218,7 +254,7 @@ func parsePacket(bb []byte){
             if mapID != targetMobID {
                 mm.IsNotValid = true
             }else{
-                addWait(200) // wait for loots
+                addWait(300) // wait for loots
                 targetMobID = -1
             }
             mobList[mapID] = mm
@@ -231,9 +267,27 @@ func parsePacket(bb []byte){
         }
         MUplayerList.Unlock()
 
+        MUtrapList.Lock()
+        if _, exist := trapList[mapID]; exist {
+            delete(trapList, mapID)
+        }
+        MUtrapList.Unlock()
 
-    case "09FD", "09FF":
-        //actor_appear_exist // actor spawned
+    case "09CA":  //traps
+        // SkillID := int(binary.LittleEndian.Uint32(bb[2:2+4]))
+        mapID := int(binary.LittleEndian.Uint32(bb[6:6+4]))
+        x := int(binary.LittleEndian.Uint16(bb[10:10+2]))
+        y := int(binary.LittleEndian.Uint16(bb[12:12+2]))
+        job := int(binary.LittleEndian.Uint32(bb[14:14+4]))
+        radius := int(bb[18])
+        if job == 148 {
+            MUtrapList.Lock()
+            trapList[mapID] = Trap{ TrapID:job, Coords:Coord{X:x,Y:y}, Radius:radius }
+            MUtrapList.Unlock()
+        }
+
+    case "0120":  //traps disa ??
+    case "09FD", "09FF", "09FE":     //actor_appear_exist // actor_spawn/connected
         // fmt.Printf("### actor_appear ### [%v][%v][%v] \n", hexID, len(bb), bb)
         mapID := int(binary.LittleEndian.Uint32(bb[3:3+4]))
         mobID := int(binary.LittleEndian.Uint16(bb[21:21+4]))
@@ -244,6 +298,7 @@ func parsePacket(bb []byte){
         index := 0
         if sliceEqual(bb[0:2],[]byte{114,0}){ index = 65 }
         if sliceEqual(bb[0:2],[]byte{108,0}){ index = 61 }
+        if sliceEqual(bb[0:2],[]byte{107,0}){ index = 61 }
         bc := bits24ToCoords(bb[index:index+3])
         cc.X = bc[0]; cc.Y = bc[1];
         if actorType == 5  {
@@ -267,8 +322,7 @@ func parsePacket(bb []byte){
             }
             MUmobList.Unlock()
         }
-
-        if actorType == 0 || actorType == 7 {
+        if actorType == 0 {
             MUplayerList.Lock()
             playerList[mapID] = Player{Coords:cc}
             MUplayerList.Unlock()
@@ -306,7 +360,9 @@ func parsePacket(bb []byte){
 
 
     // #######################
-    case "0A30":  //actor_info
+
+    case "6847":  //???
+    // case "0A30":  //actor_info
     case "00C0":  //emote
     case "0438":  //skill_use_send
     case "0360":  //send_sync_serv
@@ -318,7 +374,7 @@ func parsePacket(bb []byte){
     case "0362":  //try_item_loot
     case "0A0A":  //storage_item_added
     case "035F":  //send_self_move_to
-    case "0087":  //recv_self_move_to
+    // case "0087":  //recv_self_move_to
     case "011B":  //warp_portal_choice_send
     case "0ABE":  //warp_portal_choice_recv
     case "0AF4":  //skill_use_aoe_recv

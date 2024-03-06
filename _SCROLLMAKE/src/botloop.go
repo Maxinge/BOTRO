@@ -50,35 +50,35 @@ func botLoop() {
 
         if scroll > -1 && tail > -1 {
             sendToServer("0438", []byte{1,0,239,3,85,188,30,0})
-            time.Sleep(time.Duration(200) * time.Millisecond)
+            time.Sleep(time.Duration(300) * time.Millisecond)
             sendToServer("01AE", []byte{82,47,0,0})
-            time.Sleep(time.Duration(200) * time.Millisecond)
+            time.Sleep(time.Duration(300) * time.Millisecond)
             refreshUI()
-            time.Sleep(time.Duration(1000) * time.Millisecond)
+            time.Sleep(time.Duration(1100) * time.Millisecond)
         }
         if scroll > -1 && snail > -1 {
             sendToServer("0438", []byte{1,0,239,3,85,188,30,0})
-            time.Sleep(time.Duration(200) * time.Millisecond)
+            time.Sleep(time.Duration(300) * time.Millisecond)
             sendToServer("01AE", []byte{83,47,0,0})
-            time.Sleep(time.Duration(200) * time.Millisecond)
+            time.Sleep(time.Duration(300) * time.Millisecond)
             refreshUI()
-            time.Sleep(time.Duration(1000) * time.Millisecond)
+            time.Sleep(time.Duration(1100) * time.Millisecond)
         }
         if scroll > -1 && horn > -1 {
             sendToServer("0438", []byte{1,0,239,3,85,188,30,0})
-            time.Sleep(time.Duration(200) * time.Millisecond)
+            time.Sleep(time.Duration(300) * time.Millisecond)
             sendToServer("01AE", []byte{84,47,0,0})
-            time.Sleep(time.Duration(200) * time.Millisecond)
+            time.Sleep(time.Duration(300) * time.Millisecond)
             refreshUI()
-            time.Sleep(time.Duration(1000) * time.Millisecond)
+            time.Sleep(time.Duration(1100) * time.Millisecond)
         }
         if scroll > -1 && rainbow > -1 {
             sendToServer("0438", []byte{1,0,239,3,85,188,30,0})
-            time.Sleep(time.Duration(200) * time.Millisecond)
+            time.Sleep(time.Duration(300) * time.Millisecond)
             sendToServer("01AE", []byte{85,47,0,0})
-            time.Sleep(time.Duration(200) * time.Millisecond)
+            time.Sleep(time.Duration(300) * time.Millisecond)
             refreshUI()
-            time.Sleep(time.Duration(1000) * time.Millisecond)
+            time.Sleep(time.Duration(1100) * time.Millisecond)
         }
 
     }
