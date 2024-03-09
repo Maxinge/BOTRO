@@ -254,6 +254,8 @@ func pathfind(start Coord, finish Coord, lgatMap ROLGatMap, bannedCells []Coord)
 	cleanp = cleanPath(cleanp, 100, lgatMap, bannedCells)
 	cleanp = cleanp[1:]
 
+	if len(cleanp) == 0 { return []Coord{start} }
+
 	return cleanp
 
 }

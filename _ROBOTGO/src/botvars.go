@@ -27,6 +27,12 @@ type Mob struct {
     Name string
 }
 
+type Npc struct {
+    NpcID int
+    Coords Coord
+    Name string
+}
+
 type Item struct {
     ItemID int
     Coords Coord
@@ -34,6 +40,7 @@ type Item struct {
     DropTime int64
     IsValid bool
     Priority int
+    EqSlot int
 }
 
 type Player struct {
@@ -50,10 +57,7 @@ type Trap struct {
 var(
     accountID = 0
 
-    lastMoveTime = time.Now().Unix()
-    ccFrom = Coord{}
-    ccTo = Coord{}
-    pathTo = []Coord{}
+
     XPOS = 0
     YPOS = 0
 
@@ -77,14 +81,20 @@ var(
     SIT = false
 
     needWait = 0
-    now = time.Now()
+    nowLoop = time.Now()
 
+    MUnpcList sync.Mutex
+    npcList = map[int]Npc{}
     MUmobList sync.Mutex
     mobList = map[int]Mob{}
     MUgroundItems sync.Mutex
     groundItems = map[int]Item{}
     MUinventoryItems sync.Mutex
     inventoryItems = map[int]Item{}
+    MUstorageItems sync.Mutex
+    storageItems = map[int]Item{}
+    MUcartItems sync.Mutex
+    cartItems = map[int]Item{}
     MUbuffList sync.Mutex
     buffList = map[int][]int64{}
     MUplayerList sync.Mutex
@@ -101,19 +111,27 @@ var(
     useTPNbAggro = 10
     useTPNbAggroLoot = 10
     useTPLockMap = 0
+    useTPOnRoad = 0
     useTPDelay = 10
     useSitUnderSP = 0
     useSitAboveSP = 99
     timerNoMob = 0
+    storageWeight = 49
+    storageX = 0
+    storageY = 0
+
 
     // ##### BOT
+    lastMoveTime = time.Now().Unix()
+    ccFrom = Coord{}
+    ccTo = Coord{}
+    pathTo = []Coord{}
+
     charCoord = Coord{}
     nextPoint = Coord{}
-    nextStep = Coord{}
     movePath = []Coord{}
-    pathIndex = 0
-    minDist = 1
-    distFromDest = float64(0)
+
+    townRun = false
 
     targetItemID = -1
     targetMobID = -1

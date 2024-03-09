@@ -3,17 +3,29 @@
         ["Title",    "choco"],
         ["accountID",    2014282],
 
-        ["saveMap",      ""],
+        ["saveMap",      "umbala"],
         ["lockMap",      "um_fild02"],
         ["WarpPortal",   ""],
         ["useTPNbAggro",    7],
         ["useTPNbAggroLoot",10],
         ["useTPLockMap",    3],
         ["useTPOnRoad",     1],
-        ["useTPDelay",      300],
+        ["useTPDelay",      10],
         ["useSitHP",        1],
         ["useSitUnderSP",   33],
-        ["useSitAboveSP",   100]
+        ["useSitAboveSP",   100],
+        ["storageWeight",   68],
+        ["storageX",   87],
+        ["storageY",   160]
+    ],
+    "Storage":[
+        {"Name":"blue gem", "Id":717, "Min":0, "Max":10},
+        {"Name":"butt fly", "Id":602, "Min":0, "Max":10},
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":600},
+        {"Name":"red herb", "Id":507, "Min":0, "Max":20}
+    ],
+    "StorageCart":[
+
     ],
     "Route":[
         {"Map":"um_fild04",    "X":182,    "Y":13, "UseTPdist": 100},
@@ -28,8 +40,8 @@
             "AtkName":"Throw Spirit Sphere", "AtkId":267,"AtkLv":3, "MinDist": 6, "MinHP": 0}
     ],
     "ItemLoot":[
-        { "Id":508,   "Name":"Yellow_Herb"},
-        { "Id":942,   "Name":"yoyotail"},
+        {"Id":508,   "Name":"Yellow_Herb"},
+        {"Id":942,   "Name":"yoyotail"},
         {"Id":511,   "Name":"Green_Herb"},
         {"Id":949,   "Name":"feather"},
         {"Id":513,   "Name":"banana"},

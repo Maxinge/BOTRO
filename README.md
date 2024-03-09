@@ -20,6 +20,5 @@ la premiere compilation de cimguigo peu prendre du temps
 - esquive aoe
 - command refresh profil
 - fermer fenetre bot
-- revoir move mob
-- position
 - map interieur
+- npc sequence

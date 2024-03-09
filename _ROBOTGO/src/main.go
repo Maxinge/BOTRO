@@ -93,18 +93,9 @@ func main() {
     }()
 
 
-    // sendToServer("0090", []byte{180,120,142,6,1}) //
-    // time.Sleep(time.Duration(1000) * time.Millisecond)
-    // sendToServer("00B9", []byte{180,120,142,6})
-    // time.Sleep(time.Duration(1000) * time.Millisecond)
-    // sendToServer("00B8", []byte{180,120,142,6,2}) //
-    // time.Sleep(time.Duration(1000) * time.Millisecond)
-    // sendToServer("00B9", []byte{180,120,142,6})
-
-
-    // return
-
+    go infoLoop()
     go botLoop()
+
 
     // ########################
     backend := imgui.CreateBackend(imgui.NewGLFWBackend())
@@ -136,7 +127,7 @@ func main() {
         imgui.SetNextWindowSize(imgui.Vec2{X: baseSize.X-2, Y: baseSize.Y - 400-2})
         imgui.Begin("Info")
 
-        imgui.Text(fmt.Sprintf("[%v:%v] => %v %v (distFromDest : %.2f - %v)", charCoord.X, charCoord.Y, nextPoint, MAP, distFromDest, minDist))
+        imgui.Text(fmt.Sprintf("[%v:%v] => %v %v ", charCoord.X, charCoord.Y, nextPoint, MAP))
         imgui.Text(fmt.Sprintf("ID: %v | %v [%v/%v] zeny : %v | Sit : %v", accountID, CHARNAME, BASELV, JOBLV, ZENY, SIT))
 
         imgui.Text(fmt.Sprintf("targetItemID [%v] -- targetMobID [%v] -- timerNoMob [%v]", targetItemID, targetMobID, timerNoMob))
@@ -165,6 +156,22 @@ func main() {
         // MUtrapList.Lock()
         // imgui.Text(fmt.Sprintf(" ### trapList \n %v - %v  ", len(trapList), prettyPrint(trapList)))
         // MUtrapList.Unlock()
+
+        // MUinventoryItems.Lock()
+        // imgui.Text(fmt.Sprintf(" ### inventoryItems \n %v - %v  ", len(inventoryItems), prettyPrint(inventoryItems)))
+        // MUinventoryItems.Unlock()
+
+        // MUcartItems.Lock()
+        // imgui.Text(fmt.Sprintf(" ### cartItems \n %v - %v  ", len(cartItems), prettyPrint(cartItems)))
+        // MUcartItems.Unlock()
+
+        // MUstorageItems.Lock()
+        // imgui.Text(fmt.Sprintf(" ### storageItems \n %v - %v  ", len(storageItems), prettyPrint(storageItems)))
+        // MUstorageItems.Unlock()
+
+        // MUnpcList.Lock()
+        // imgui.Text(fmt.Sprintf(" ### npcList \n %v - %v  ", len(npcList), prettyPrint(npcList)))
+        // MUnpcList.Unlock()
 
         imgui.End()
 
@@ -224,7 +231,9 @@ func main() {
     <-exit
 }
 
+
 type CRoute struct{ Map string; X int; Y int; WarpPortal string; UseTPdist int; }
+type CStorage struct{ Name string; Id int; Y int; Min int; Max int; }
 type CMob struct{ Priority int; Id int; Name string;
                   AtkName string; AtkId int; AtkLv int; MinDist int; MinHP int; }
 type CItemLoot struct{ Priority int; Id int; Name string; }
@@ -253,6 +262,13 @@ func loadprofil(){
             fld := reflect.ValueOf(&stru).Elem().FieldByName(kkk); convertField(vvv, fld)
         }
         conf["Route"] = append(conf["Route"], stru)
+    }
+    for _,vv := range profil["Storage"] {
+        stru := CStorage{}
+        for kkk,vvv := range vv.(map[string]interface{}) {
+            fld := reflect.ValueOf(&stru).Elem().FieldByName(kkk); convertField(vvv, fld)
+        }
+        conf["Storage"] = append(conf["Storage"], stru)
     }
     for _,vv := range profil["Mob"] {
         stru := CMob{ Priority:-1, AtkLv:1, MinDist:4 }
