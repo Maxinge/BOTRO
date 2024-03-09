@@ -34,8 +34,7 @@ func parsePacket(bb []byte){
 
         ccFrom = Coord{X:XPOS,Y:YPOS}
         ccTo = Coord{X:XPOS,Y:YPOS}
-        pathTo = pathfind(ccFrom, ccTo, lgatMaps[MAP],[]Coord{})
-        pathTo = pathTo[1:]
+        pathTo = []Coord{ccTo}
 
     case "0087":  //recv_self_move_to
         fromto := bits48ToCoords(bb[4:4+6])
@@ -229,9 +228,17 @@ func parsePacket(bb []byte){
         x := int(binary.LittleEndian.Uint16(bb[4:4+2]))
         y := int(binary.LittleEndian.Uint16(bb[6:6+2]))
 
+        if mapID == accountID {
+            ccFrom = Coord{X:x,Y:y}
+            ccTo = Coord{X:x,Y:y}
+            pathTo = []Coord{ccTo}
+            lastMoveTime = 0
+        }
+
         MUmobList.Lock()
         if mm, exist := mobList[mapID]; exist {
             mm.Coords.X = x; mm.Coords.Y = y
+            mm.CoordsTo.X = x; mm.CoordsTo.Y = y
             mm.LastMoveTime = 0
             mm.PathMoveTo = []Coord{}
             mobList[mapID] = mm

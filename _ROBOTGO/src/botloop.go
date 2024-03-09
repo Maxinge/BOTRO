@@ -216,6 +216,21 @@ func botLoop() {
 
         if SIT { addWait(1000); continue }
 
+        if MAP == saveMap && !townRun{
+            if exist := getConf(conf["General"],"Key","WarpPortal"); exist != nil {
+            portalChoice := exist.(struct{Key string; Val string}).Val
+            if itemInInventory(717,1) > 0 && portalChoice != "" { // bluegem
+                time.Sleep(1000 * time.Millisecond)
+                warpPoint := randomPoint(lgatMaps[MAP],charCoord, 3)
+                sendWarpPortal(4,warpPoint.X,warpPoint.Y)
+                time.Sleep(2000 * time.Millisecond)
+                sendWarpPortalConfirm(portalChoice)
+                time.Sleep(2000 * time.Millisecond)
+                sendToServer("035F",coordsTo24Bits(warpPoint.X,warpPoint.Y))
+                time.Sleep(2000 * time.Millisecond)
+                continue
+            }}
+        }
 
         if MAP == saveMap && townRun{
             if movePath != nil {
@@ -275,22 +290,6 @@ func botLoop() {
                 movePath = pathfind(charCoord, nextPoint, lgatMaps[MAP], []Coord{})
             }
         continue }
-
-        if MAP == saveMap && !townRun{
-            if exist := getConf(conf["General"],"Key","WarpPortal"); exist != nil {
-            portalChoice := exist.(struct{Key string; Val string}).Val
-            if itemInInventory(717,1) > 0 && portalChoice != "" { // bluegem
-                time.Sleep(1000 * time.Millisecond)
-                warpPoint := randomPoint(lgatMaps[MAP],charCoord, 3)
-                sendWarpPortal(4,warpPoint.X,warpPoint.Y)
-                time.Sleep(2000 * time.Millisecond)
-                sendWarpPortalConfirm(portalChoice)
-                time.Sleep(2000 * time.Millisecond)
-                sendToServer("035F",coordsTo24Bits(warpPoint.X,warpPoint.Y))
-                time.Sleep(2000 * time.Millisecond)
-                continue
-            }}
-        }
 
 
         if exist := getConf(conf["Route"],"Map", MAP); exist != nil && !townRun{
@@ -380,8 +379,7 @@ func botLoop() {
                 if exist := getConf(conf["Mob"],"Id",mob.MobID); exist != nil {
                     atkDist = exist.(CMob).MinDist
                 }
-
-                if len(movePath) <= int(float64(atkDist)){
+                if len(movePath) <= atkDist{
                     AtkId := 0; AtkLv := 0
                     if exist := getConf(conf["Mob"],"Id",mob.MobID); exist != nil {
                         AtkId = exist.(CMob).AtkId; AtkLv = exist.(CMob).AtkLv
@@ -422,7 +420,7 @@ func botLoop() {
                 sendToServer("035F",coordsTo24Bits(movePath[ii].X,movePath[ii].Y))
                 addWait(300)
 
-                if len(movePath) <= int(float64(2)){
+                if len(movePath) <= 4{
                     itemBin := make([]byte, 4) ;
                     binary.LittleEndian.PutUint32(itemBin, uint32(targetItemID))
                     sendToServer("0362", itemBin)
