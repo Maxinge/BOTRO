@@ -1,0 +1,55 @@
+{
+    "General":[
+        ["Title",    "smithkaho"],
+        ["accountID",    2014282],
+
+        ["saveMap",      "yuno"],
+        ["lockMap",      "mag_dun01"],
+        ["WarpPortal",   ""],
+        ["useGreed",        1],
+        ["useTPNbAggro",    7],
+        ["useTPNbAggroLoot",12],
+        ["useTPLockMap",    2],
+        ["useTPOnRoad",     2],
+        ["useTPDelay",      50],
+        ["useTPUnderHP",    20],
+        ["useSitHP",        0],
+        ["useSitUnderSP",   20],
+        ["useSitAboveSP",   100],
+        ["storageWeight",   68],
+        ["storageX",   152],
+        ["storageY",   187]
+    ],
+    "Route":[
+        {"Map":"yuno",    "X":160,    "Y":13},
+        {"Map":"yuno_fild04",    "X":374,    "Y":149, "UseTPdist": 150},
+        {"Map":"yuno_fild03",    "X":33,    "Y":140, "UseTPdist": 150},
+        {"Map":"mag_dun02",    "X":48,    "Y":33, "UseTPdist": 100}
+    ],
+    "Storage":[
+        {"Name":"Converter water", "Id":12115, "Min":0, "Max":20 },
+        {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
+        {"Name":"zerk pot", "Id":657, "Min":0, "Max":5},
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":250},
+        {"Name":"bread", "Id":8076, "Min":5, "Max":250}
+    ],
+    "Mob":[
+        {"Priority":1, "Id":1072, "Name":"kaho",
+            "AtkName":"mamonite", "AtkId":42,"AtkLv":5, "MinDist": 3, "MinHP": 0}
+    ],
+    "ItemLoot":[
+        { "Id":508,   "Name":"Yellow_Herb"}
+    ],
+    "ItemUse":[
+        {"Name":"Converter water", "Id":12115, "MinHP":-1, "MinSP":-1,"BuffId": 1505 },
+        {"Name":"zerk pot", "Id":657, "MinHP":-1, "MinSP":-1,"BuffId": 39 },
+        {"Name":"bread", "Id":8076, "MinHP":80, "MinSP":-1,"BuffId": -1 }
+    ],
+    "SKillSelf":[
+        {"Name":"adrenaline rush","Lv":5, "Id":111,     "MinHP": -1, "MinSP": 10, "BuffId": 23},
+        {"Name":"maximize","Lv":5, "Id":114,     "MinHP": -1, "MinSP": 10, "BuffId": 26},
+        {"Name":"crazy upraor","Lv":1, "Id":155,            "MinHP": -1, "MinSP": 10, "BuffId": 30},
+        {"Name":"weap perfe","Lv":5, "Id":112,            "MinHP": -1, "MinSP": 10, "BuffId": 24},
+        {"Name":"over trust","Lv":5, "Id":113,    "MinHP": -1, "MinSP": 10, "BuffId": 25}
+    ]
+}

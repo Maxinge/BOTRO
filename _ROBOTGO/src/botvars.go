@@ -11,7 +11,7 @@ type Coord struct {
 
 type Mob struct {
     MobID int
-    Coords Coord
+    CoordsFrom Coord
     CoordsTo Coord
     PathMoveTo []Coord
     // HPMax int
@@ -25,6 +25,9 @@ type Mob struct {
     IsLooter bool
     AtSight bool
     Name string
+    Bexp int
+    Jexp int
+    TPdist int
 }
 
 type Npc struct {
@@ -58,9 +61,6 @@ var(
     accountID = 0
 
 
-    XPOS = 0
-    YPOS = 0
-
     MOVESPEED = 0
     BASEXPMAX = 0
     BASEEXP = 0
@@ -80,8 +80,7 @@ var(
 
     SIT = false
 
-    needWait = 0
-    nowLoop = time.Now()
+
 
     MUnpcList sync.Mutex
     npcList = map[int]Npc{}
@@ -102,23 +101,27 @@ var(
     MUtrapList sync.Mutex
     trapList = map[int]Trap{}
 
+    MUmobDeadList sync.Mutex
+    mobDeadList = map[int]Mob{}
+
     SSphere = 0
 
 
     lockMap = ""
     saveMap = ""
-    killBeforeLoot = false
     useTPNbAggro = 10
-    useTPNbAggroLoot = 10
     useTPLockMap = 0
     useTPOnRoad = 0
     useTPDelay = 10
+    useTPUnderHP = 5
     useSitUnderSP = 0
     useSitAboveSP = 99
-    timerNoMob = 0
+
     storageWeight = 49
+
     storageX = 0
     storageY = 0
+    useGreed = 0
 
 
     // ##### BOT
@@ -128,13 +131,18 @@ var(
     pathTo = []Coord{}
 
     charCoord = Coord{}
-    nextPoint = Coord{}
     movePath = []Coord{}
 
     townRun = false
 
     targetItemID = -1
     targetMobID = -1
+
+    needWait = 0
+
+    noMobTimer = 0
+    useItemTimer = 0
+    clickMoveTimer = 0
 
     chkTimecharCoord = 0
     chkTimetargetMobID = 0

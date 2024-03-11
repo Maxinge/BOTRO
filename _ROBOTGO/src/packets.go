@@ -19,6 +19,7 @@ func parsePacket(bb []byte){
 
     case "0091","0092":  //map_change
 
+        resetInventoryList()
         resetMobItemList()
         resetPlayerList()
         resetTrapList()
@@ -27,28 +28,25 @@ func parsePacket(bb []byte){
 
         SSphere = 0
         addWait(500)
-        lastMoveTime = time.Now().Unix() + 500
+        lastMoveTime = 0
 
-        XPOS = int(binary.LittleEndian.Uint16(bb[16:16+2]))
-        YPOS = int(binary.LittleEndian.Uint16(bb[18:18+2]))
-
-        ccFrom = Coord{X:XPOS,Y:YPOS}
-        ccTo = Coord{X:XPOS,Y:YPOS}
-        pathTo = []Coord{ccTo}
+        ccFrom = Coord{
+            X:int(binary.LittleEndian.Uint16(bb[16:16+2])),
+            Y:int(binary.LittleEndian.Uint16(bb[18:18+2])),
+        }
+        ccTo = Coord{X:ccFrom.X,Y:ccFrom.Y}
+        pathTo = []Coord{ccFrom,ccTo}
 
     case "0087":  //recv_self_move_to
         fromto := bits48ToCoords(bb[4:4+6])
         ccFrom = Coord{X:fromto[0],Y:fromto[1]}
         ccTo = Coord{X:fromto[2],Y:fromto[3]}
-        lastMoveTime = time.Now().Unix()
+        lastMoveTime = 0
         pathTo = pathfind(ccFrom, ccTo, lgatMaps[MAP],[]Coord{})
-        pathTo = pathTo[1:]
 
     case "1414":  //mem_data
         ii := 0
 
-        // XPOS = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));           ii += 4
-        // YPOS = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));           ii += 4
         MOVESPEED = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));      ii += 4
         BASEXPMAX = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));      ii += 4
         BASEEXP = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));        ii += 4
@@ -66,9 +64,8 @@ func parsePacket(bb []byte){
         SPLEFT = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));         ii += 4
         SPMAX = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));          ii += 4
 
-
-
     case "0B09", "0B0A":  //inventory_info
+
         inventoryType := bb[2]
         pad := 34
         if hexID == "0B09" { pad = 34 }
@@ -79,6 +76,8 @@ func parsePacket(bb []byte){
             itemID := int(binary.LittleEndian.Uint32(bb[ii+2:ii+2+4]))
             amount := 1
             eqSlot := 0
+
+
             if hexID == "0B09" {
                 amount = int(binary.LittleEndian.Uint16(bb[ii+7:ii+7+2]))
 
@@ -86,6 +85,7 @@ func parsePacket(bb []byte){
             if hexID == "0B0A" {
                 eqSlot = int(binary.LittleEndian.Uint16(bb[ii+11:ii+11+2]))
             }
+
             if inventoryType == 0 {
                 MUinventoryItems.Lock()
                 inventoryItems[inventoryID] = Item{ ItemID:itemID, Amount:amount, EqSlot:eqSlot}
@@ -109,7 +109,11 @@ func parsePacket(bb []byte){
         // itemID := int(binary.LittleEndian.Uint32(bb[2:2+4]))
         amountLeft := int(binary.LittleEndian.Uint16(bb[10:10+2]))
         if ii, exist := inventoryItems[inventoryID]; exist {
-            ii.Amount = amountLeft
+            if amountLeft == 0{
+                ii.Amount -= 1
+            }else{
+                ii.Amount = amountLeft
+            }
             inventoryItems[inventoryID] = ii
         }
 
@@ -184,18 +188,29 @@ func parsePacket(bb []byte){
         target := int(binary.LittleEndian.Uint32(bb[2:2+4]))
         flag := bb[6]
         timeLeft := int(binary.LittleEndian.Uint32(bb[11:11+4]))
-
         if target == accountID {
         if buffID == 622{
             if flag == 1 { SIT = true } else { SIT = false }
             return
         }}
 
+        if hexID == "0196" {
+        if target == accountID {
+        if flag == 0 {
+            MUbuffList.Lock()
+            if _, exist := buffList[buffID]; exist {
+                delete(buffList, buffID)
+            }
+            MUbuffList.Unlock()
+        }}}
+
         if target == accountID && hexID == "0983"{
             if buffID == 46 {
-                if timeLeft == 0 { timeLeft = 200 };
-                addWait(timeLeft); return
+                if timeLeft == 0 { timeLeft = 200 }
+                addWait(timeLeft)
+                return
             }
+            if timeLeft == 9999 { timeLeft = 9999999999999999 };
             if timeLeft > 0 {
                 tnow := time.Now()
                 MUbuffList.Lock()
@@ -210,14 +225,13 @@ func parsePacket(bb []byte){
         mapID := int(binary.LittleEndian.Uint32(bb[0:4]))
         fromto := bits48ToCoords(bb[4:4+6])
         // tick := int(binary.LittleEndian.Uint32(bb[10:10+4]))
-        tnow := time.Now()
-        cc := Coord{X:fromto[0],Y:fromto[1]}
+        ccFrom := Coord{X:fromto[0],Y:fromto[1]}
         ccTo := Coord{X:fromto[2],Y:fromto[3]}
-        pathto := pathfind(cc, ccTo, lgatMaps[MAP],[]Coord{})
+        pathto := pathfind(ccFrom, ccTo, lgatMaps[MAP],[]Coord{})
         MUmobList.Lock()
         if mm, exist := mobList[mapID]; exist {
-            mm.Coords = cc; mm.CoordsTo = ccTo
-            mm.LastMoveTime = tnow.Unix()
+            mm.CoordsFrom = ccFrom; mm.CoordsTo = ccTo
+            mm.LastMoveTime = 0
             mm.PathMoveTo = pathto
             mobList[mapID] = mm
         }
@@ -227,20 +241,12 @@ func parsePacket(bb []byte){
         mapID := int(binary.LittleEndian.Uint32(bb[0:4]))
         x := int(binary.LittleEndian.Uint16(bb[4:4+2]))
         y := int(binary.LittleEndian.Uint16(bb[6:6+2]))
-
-        if mapID == accountID {
-            ccFrom = Coord{X:x,Y:y}
-            ccTo = Coord{X:x,Y:y}
-            pathTo = []Coord{ccTo}
-            lastMoveTime = 0
-        }
-
         MUmobList.Lock()
         if mm, exist := mobList[mapID]; exist {
-            mm.Coords.X = x; mm.Coords.Y = y
-            mm.CoordsTo.X = x; mm.CoordsTo.Y = y
+            cc := Coord{X:x,Y:y}
+            mm.CoordsFrom = cc; mm.CoordsTo = cc
             mm.LastMoveTime = 0
-            mm.PathMoveTo = []Coord{}
+            mm.PathMoveTo = []Coord{cc,cc}
             mobList[mapID] = mm
         }
         MUmobList.Unlock()
@@ -251,14 +257,18 @@ func parsePacket(bb []byte){
         // if bb[4] == 1 { targetMobDead = mapID }
         MUmobList.Lock()
         if mm, exist := mobList[mapID]; exist {
-            mm.DeathTime = tnow.Unix()
-            if mapID != targetMobID {
-                mm.IsNotValid = true
+            if bb[4] == 1 { // killed
+                mm.DeathTime = tnow.Unix()
+                if mapID != targetMobID {
+                    mm.IsNotValid = true
+                }else{
+                    addWait(100)
+                    targetMobID = -1
+                }
+                mobList[mapID] = mm
             }else{
-                addWait(300) // wait for loots
-                targetMobID = -1
+                delete(mobList, mapID)
             }
-            mobList[mapID] = mm
         }
         MUmobList.Unlock()
 
@@ -296,6 +306,7 @@ func parsePacket(bb []byte){
     case "0120":  //traps disa ??
     case "09FD", "09FF", "09FE":     //actor_appear_exist // actor_spawn/connected
         // fmt.Printf("### actor_appear ### [%v][%v][%v] \n", hexID, len(bb), bb)
+        if len(bb) == 0 { return }
         mapID := int(binary.LittleEndian.Uint32(bb[3:3+4]))
         actorID := int(binary.LittleEndian.Uint16(bb[21:21+4]))
         moveSpeed := int(binary.LittleEndian.Uint16(bb[11:11+2]))
@@ -315,17 +326,24 @@ func parsePacket(bb []byte){
             name := ""
             looter := false
             mobdata := findMobInDb(actorID)
+            bexp := 0
+            jexp := 0
+            tpdist := 0
             if mobdata != nil {
                 aggro = mobdata["IsAggressive"].(bool)
                 name = mobdata["Name"].(string)
                 looter = mobdata["IsLooter"].(bool)
+                bexp = int(mobdata["BaseExp"].(float64))
+                jexp = int(mobdata["JobExp"].(float64))
             }
             if exist := getConf(conf["Mob"],"Id",actorID); exist != nil {
                 prio = exist.(CMob).Priority
+                tpdist = exist.(CMob).TPdist
             }
             mobList[mapID] = Mob{
-                MobID:actorID, Coords:cc, MoveSpeed:moveSpeed,
+                MobID:actorID, CoordsFrom:cc, CoordsTo:cc, MoveSpeed:moveSpeed,
                 Priority: prio, Aggro:aggro, Name:name, IsLooter:looter,
+                Bexp:bexp, Jexp:jexp, TPdist:tpdist,
             }
             MUmobList.Unlock()
         }
@@ -351,8 +369,13 @@ func parsePacket(bb []byte){
         if hexID == "08C8" { sourceii = 0 ; targetii = 4 }
         sourceID := int(binary.LittleEndian.Uint32(bb[sourceii:sourceii+4]))
         targetID := int(binary.LittleEndian.Uint32(bb[targetii:targetii+4]))
-        // dmg := int(binary.LittleEndian.Uint32(bb[20:20+4]))
-        if hexID == "08C8" && bb[27] != 1 { return } //autoattack
+        dmg := int(binary.LittleEndian.Uint32(bb[20:20+4]))
+        if hexID == "08C8" && bb[27] != 1 {
+            if targetID == accountID && dmg > 0{
+                sendToServer("035F",coordsTo24Bits(ccFrom.X,ccFrom.Y))
+            }
+            return
+        } //autoattack
 
         MUmobList.Lock()
         if mm, exist := mobList[targetID]; exist {

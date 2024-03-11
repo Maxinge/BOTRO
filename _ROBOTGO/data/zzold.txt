@@ -1,4 +1,84 @@
 
+
+{"Priority":1, "Id":1155, "Name":"muka",
+    "AtkName":"mamonite", "AtkId":42,"AtkLv":6, "MinDist": 1, "MinHP": 0}
+    
+func botLoop() {
+
+    addWait(3000)
+
+    for {
+
+        addWait(50)
+        for{
+            if needWait <= 0 { break }
+            time.Sleep(time.Duration(50) * time.Millisecond)
+            needWait -= 50
+        }
+
+        now = time.Now()
+
+
+        // fmt.Printf("# SIT # %v \n",SIT)
+
+        // #####################################################################
+
+        if (float32(SPLEFT)/float32(SPMAX)*100) <= float32(10) {
+        if !SIT {
+            sendToServer("0437", []byte{0,0,0,0,2})
+        }}
+
+        if (float32(SPLEFT)/float32(SPMAX)*100) >= float32(100) {
+        if SIT {
+            sendToServer("0437", []byte{0,0,0,0,3})
+        }}
+
+        if SIT { addWait(1000); continue }
+
+        scroll := itemInInventory(7433,1)
+        tail := itemInInventory(904,3) // [82 47 0 0] // fire
+        snail := itemInInventory(946,3) // [83 47 0 0] // water
+        horn := itemInInventory(947,3) // [84 47 0 0] // earth
+        rainbow := itemInInventory(1013,3) // [85 47 0 0] // wind
+
+        if scroll > -1 && tail > -1 {
+            sendToServer("0438", []byte{1,0,239,3,85,188,30,0})
+            time.Sleep(time.Duration(300) * time.Millisecond)
+            sendToServer("01AE", []byte{82,47,0,0})
+            time.Sleep(time.Duration(300) * time.Millisecond)
+            refreshUI()
+            time.Sleep(time.Duration(1100) * time.Millisecond)
+        }
+        if scroll > -1 && snail > -1 {
+            sendToServer("0438", []byte{1,0,239,3,85,188,30,0})
+            time.Sleep(time.Duration(300) * time.Millisecond)
+            sendToServer("01AE", []byte{83,47,0,0})
+            time.Sleep(time.Duration(300) * time.Millisecond)
+            refreshUI()
+            time.Sleep(time.Duration(1100) * time.Millisecond)
+        }
+        if scroll > -1 && horn > -1 {
+            sendToServer("0438", []byte{1,0,239,3,85,188,30,0})
+            time.Sleep(time.Duration(300) * time.Millisecond)
+            sendToServer("01AE", []byte{84,47,0,0})
+            time.Sleep(time.Duration(300) * time.Millisecond)
+            refreshUI()
+            time.Sleep(time.Duration(1100) * time.Millisecond)
+        }
+        if scroll > -1 && rainbow > -1 {
+            sendToServer("0438", []byte{1,0,239,3,85,188,30,0})
+            time.Sleep(time.Duration(300) * time.Millisecond)
+            sendToServer("01AE", []byte{85,47,0,0})
+            time.Sleep(time.Duration(300) * time.Millisecond)
+            refreshUI()
+            time.Sleep(time.Duration(1100) * time.Millisecond)
+        }
+
+    }
+
+    fmt.Printf("# lel # %v \n","lel")
+}
+
 ### ddd ### [[9 0 90 2 0 0 2 5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1]]
 ### ddd ### [[12 0 251 1 0 0 0 28 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1]]
 ### ddd ### [[14 0 174 3 0 0 3 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1]]

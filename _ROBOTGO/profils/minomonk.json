@@ -1,18 +1,20 @@
 {
     "General":[
-        ["Title",    "monkmino"],
+        ["Title",    "smithmino"],
         ["accountID",    2014282],
 
         ["saveMap",      "morocc"],
         ["lockMap",      "moc_pryd05"],
-        ["WarpPortal",   "moc_ruins"],
-        ["useTPNbAggro",    4],
-        ["useTPNbAggroLoot",6],
-        ["useTPLockMap",    1],
-        ["useTPOnRoad",     1],
+        ["WarpPortal",   ""],
+        ["useGreed",        1],
+        ["useTPNbAggro",    7],
+        ["useTPNbAggroLoot",12],
+        ["useTPLockMap",    2],
+        ["useTPOnRoad",     2],
         ["useTPDelay",      50],
-        ["useSitHP",        1],
-        ["useSitUnderSP",   33],
+        ["useTPUnderHP",    20],
+        ["useSitHP",        0],
+        ["useSitUnderSP",   20],
         ["useSitAboveSP",   100],
         ["storageWeight",   68],
         ["storageX",   156],
@@ -20,36 +22,43 @@
     ],
     "Route":[
         {"Map":"moc_prydb1",    "X":100,    "Y":55, "UseTPdist": 40},
-        {"Map":"moc_ruins",    "X":55,    "Y":161},
-        {"Map":"moc_pryd01",    "X":90,    "Y":109, "UseTPdist": 100},
-        {"Map":"moc_pryd06",    "X":195,    "Y":8}
+        {"Map":"moc_ruins",    "X":55,    "Y":161,"UseTPdist": 100},
+        {"Map":"morocc",    "X":25,    "Y":294,"UseTPdist": 150},
+        {"Map":"moc_pryd01",    "X":90,    "Y":109, "UseTPdist": 150},
+        {"Map":"moc_pryd06",    "X":195,    "Y":8,"UseTPdist": 150}
     ],
     "Storage":[
-        {"Name":"Converter water", "Id":12115, "Min":0, "Max":50 },
-        {"Name":"blue gem", "Id":717, "Min":0, "Max":10},
-        {"Name":"butt fly", "Id":602, "Min":0, "Max":10},
-        {"Name":"red herb", "Id":507, "Min":0, "Max":20}
+        {"Name":"Converter water", "Id":12115, "Min":0, "Max":30 },
+        {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
+        {"Name":"zerk pot", "Id":657, "Min":0, "Max":5},
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":250},
+        {"Name":"bread", "Id":8076, "Min":5, "Max":250}
     ],
     "Mob":[
         {"Priority":1, "Id":1149, "Name":"mino",
-            "AtkName":"Throw Spirit Sphere", "AtkId":267,"AtkLv":3, "MinDist": 7, "MinHP": 0},
+            "AtkName":"mamonite", "AtkId":42,"AtkLv":6, "MinDist": 2, "MinHP": 0},
         {"Priority":-1, "Id":1032, "Name":"verit",
-            "AtkName":"Throw Spirit Sphere", "AtkId":267,"AtkLv":3, "MinDist": 7, "MinHP": 0}
+            "AtkName":"mamonite", "AtkId":42,"AtkLv":5, "MinDist": 1, "MinHP": 0}
     ],
     "ItemLoot":[
-        { "Id":508,   "Name":"Yellow_Herb"},
+        {"Id":508,   "Name":"Yellow_Herb"},
         {"Id":511,   "Name":"Green_Herb"},
         {"Id":949,   "Name":"feather"},
+        {"Id":2609,   "Name":"skullring"},
+        {"Id":2612,   "Name":"flowering"},
         {"Id":516,   "Name":"potato"},
         {"Id":1301,   "Name":"axe"}
     ],
     "ItemUse":[
-        {"Name":"Converter water", "Id":12115, "MinHP":-1, "MinSP":-1,"BuffId": 1505 }
+        {"Name":"Converter water", "Id":12115, "MinHP":-1, "MinSP":-1,"BuffId": 1505 },
+        {"Name":"zerk pot", "Id":657, "MinHP":-1, "MinSP":-1,"BuffId": 39 },
+        {"Name":"bread", "Id":8076, "MinHP":80, "MinSP":-1,"BuffId": -1 }
     ],
     "SKillSelf":[
-        {"Name":"SSS","Lv":3, "Id":666666,              "MinHP": -1, "MinSP": -1, "BuffId": -1},
-        {"Name":"Heal", "Lv":7, "Id":28,                "MinHP": 70, "MinSP": 20, "BuffId": -1},
-        {"Name":"Blessing","Lv":10, "Id":34,            "MinHP": -1, "MinSP": 20, "BuffId": 10},
-        {"Name":"Increase Agility","Lv":10, "Id":29,    "MinHP": -1, "MinSP": 20, "BuffId": 12}
+        {"Name":"adrenaline rush","Lv":5, "Id":111,     "MinHP": -1, "MinSP": 10, "BuffId": 23},
+        {"Name":"maximize","Lv":5, "Id":114,     "MinHP": -1, "MinSP": 10, "BuffId": 26},
+        {"Name":"crazy upraor","Lv":1, "Id":155,            "MinHP": -1, "MinSP": 10, "BuffId": 30},
+        {"Name":"weap perfe","Lv":5, "Id":112,            "MinHP": -1, "MinSP": 10, "BuffId": 24},
+        {"Name":"over trust","Lv":5, "Id":113,    "MinHP": -1, "MinSP": 10, "BuffId": 25}
     ]
 }

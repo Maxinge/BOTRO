@@ -16,9 +16,10 @@ la premiere compilation de cimguigo peu prendre du temps
 
 
 ## TODO ##
-- town run
 - esquive aoe
 - command refresh profil
-- fermer fenetre bot
+- fermer fenetre
 - map interieur
 - npc sequence
+- greed
+- timer generic

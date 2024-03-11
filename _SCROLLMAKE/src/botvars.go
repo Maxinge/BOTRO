@@ -22,7 +22,16 @@ type Mob struct {
     IsNotValid bool
     Priority int
     Aggro bool
+    IsLooter bool
     AtSight bool
+    Name string
+    Bexp int
+    Jexp int
+}
+
+type Npc struct {
+    NpcID int
+    Coords Coord
     Name string
 }
 
@@ -33,11 +42,28 @@ type Item struct {
     DropTime int64
     IsValid bool
     Priority int
+    EqSlot int
+}
+
+type Player struct {
+    Name string
+    Coords Coord
+}
+
+type Trap struct {
+    TrapID int
+    Coords Coord
+    Radius int
 }
 
 var(
     accountID = 2014293
 
+
+    XPOS = 0
+    YPOS = 0
+
+    MOVESPEED = 0
     BASEXPMAX = 0
     BASEEXP = 0
     JOBXPMAX = 0
@@ -47,8 +73,6 @@ var(
     JOBLV = 0
     ZENY = 0
     MAP = ""
-    XPOS = 0
-    YPOS = 0
     HPLEFT = 0
     HPMAX = 0
     WEIGHTMAX = 0
@@ -59,19 +83,70 @@ var(
     SIT = false
 
     needWait = 0
-    now = time.Now()
 
+
+    MUnpcList sync.Mutex
+    npcList = map[int]Npc{}
     MUmobList sync.Mutex
     mobList = map[int]Mob{}
     MUgroundItems sync.Mutex
     groundItems = map[int]Item{}
     MUinventoryItems sync.Mutex
     inventoryItems = map[int]Item{}
+    MUstorageItems sync.Mutex
+    storageItems = map[int]Item{}
+    MUcartItems sync.Mutex
+    cartItems = map[int]Item{}
     MUbuffList sync.Mutex
     buffList = map[int][]int64{}
+    MUplayerList sync.Mutex
+    playerList = map[int]Player{}
+    MUtrapList sync.Mutex
+    trapList = map[int]Trap{}
+
+    MUmobDeadList sync.Mutex
+    mobDeadList = map[int]Mob{}
+
+    SSphere = 0
 
 
+    lockMap = ""
+    saveMap = ""
+    killBeforeLoot = false
+    useTPNbAggro = 10
+    useTPNbAggroLoot = 10
+    useTPLockMap = 0
+    useTPOnRoad = 0
+    useTPDelay = 10
+    useSitUnderSP = 0
+    useSitAboveSP = 99
+    timerNoMob = 0
+    storageWeight = 49
+    storageX = 0
+    storageY = 0
 
 
+    // ##### BOT
+    lastMoveTime = time.Now().Unix()
+    ccFrom = Coord{}
+    ccTo = Coord{}
+    pathTo = []Coord{}
+
+    charCoord = Coord{}
+    nextPoint = Coord{}
+    movePath = []Coord{}
+
+    townRun = false
+
+    targetItemID = -1
+    targetMobID = -1
+
+    chkTimecharCoord = 0
+    chkTimetargetMobID = 0
+    chkTimetargetItemID = 0
+
+    chkcharCoord = Coord{}
+    chktargetMobID = 0
+    chktargetItemID = 0
 
 )

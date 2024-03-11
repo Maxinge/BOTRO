@@ -52,6 +52,14 @@ func main() {
         }
     }
 
+    if mm, exist := lgatMaps["moc_pryd01"]; exist {
+        mm.cells[104][82] = 1
+        mm.cells[104][83] = 1
+        lgatMaps["moc_pryd01"] = mm
+    }
+
+
+
     err = json.Unmarshal([]byte(readFileString(CurDir()+"data/mobs_db.json")), &mobDB)
     if err != nil { fmt.Printf("err -- %v -- \n", err); return }
 
@@ -127,51 +135,38 @@ func main() {
         imgui.SetNextWindowSize(imgui.Vec2{X: baseSize.X-2, Y: baseSize.Y - 400-2})
         imgui.Begin("Info")
 
-        imgui.Text(fmt.Sprintf("[%v:%v] => %v %v ", charCoord.X, charCoord.Y, nextPoint, MAP))
+        imgui.Text(fmt.Sprintf("[%v:%v] ", charCoord.X, charCoord.Y, MAP))
         imgui.Text(fmt.Sprintf("ID: %v | %v [%v/%v] zeny : %v | Sit : %v", accountID, CHARNAME, BASELV, JOBLV, ZENY, SIT))
 
-        imgui.Text(fmt.Sprintf("targetItemID [%v] -- targetMobID [%v] -- timerNoMob [%v]", targetItemID, targetMobID, timerNoMob))
+        imgui.Text(fmt.Sprintf("targetItemID [%v] -- targetMobID [%v] -- noMobTimer [%v]", targetItemID, targetMobID, noMobTimer))
 
         imgui.Text(fmt.Sprintf("chkTimecharCoord [%v]", chkTimecharCoord))
         imgui.Text(fmt.Sprintf("chkTimetargetMobID [%v]", chkTimetargetMobID))
         imgui.Text(fmt.Sprintf("chkTimetargetItemID [%v]", chkTimetargetItemID))
 
 
-        // MUbuffList.Lock()
-        // imgui.Text(fmt.Sprintf("### buffList ###\n %v ", prettyPrint(buffList)))
-        // MUbuffList.Unlock()
+        MUmobDeadList.Lock()
+        res := map[string][]int{}
+        for _,vv := range mobDeadList {
+            if len(res[vv.Name]) == 0  { res[vv.Name] = []int{0,0,0} }
+            res[vv.Name][0] += 1
+            res[vv.Name][1] += vv.Bexp
+            res[vv.Name][2] += vv.Jexp
+        }
+        imgui.Text(fmt.Sprintf(" ### kill stats \n %v ", prettyPrint(res)))
+        MUmobDeadList.Unlock()
 
-        // MUgroundItems.Lock()
-        // imgui.Text(fmt.Sprintf("### groundItems ###\n %v ", prettyPrint(groundItems)))
-        // MUgroundItems.Unlock()
+        // MUbuffList.Lock()
+        // imgui.Text(fmt.Sprintf(" ### buffList \n %v ", prettyPrint(buffList)))
+        // MUbuffList.Unlock()
 
         // MUmobList.Lock()
         // imgui.Text(fmt.Sprintf(" ### mobList \n %v ", prettyPrint(mobList)))
         // MUmobList.Unlock()
 
-        // MUplayerList.Lock()
-        // imgui.Text(fmt.Sprintf(" ### playerList \n %v - %v  ", len(playerList), prettyPrint(playerList)))
-        // MUplayerList.Unlock()
-
-        // MUtrapList.Lock()
-        // imgui.Text(fmt.Sprintf(" ### trapList \n %v - %v  ", len(trapList), prettyPrint(trapList)))
-        // MUtrapList.Unlock()
-
         // MUinventoryItems.Lock()
-        // imgui.Text(fmt.Sprintf(" ### inventoryItems \n %v - %v  ", len(inventoryItems), prettyPrint(inventoryItems)))
+        // imgui.Text(fmt.Sprintf(" ### inventoryItems \n %v ", prettyPrint(inventoryItems)))
         // MUinventoryItems.Unlock()
-
-        // MUcartItems.Lock()
-        // imgui.Text(fmt.Sprintf(" ### cartItems \n %v - %v  ", len(cartItems), prettyPrint(cartItems)))
-        // MUcartItems.Unlock()
-
-        // MUstorageItems.Lock()
-        // imgui.Text(fmt.Sprintf(" ### storageItems \n %v - %v  ", len(storageItems), prettyPrint(storageItems)))
-        // MUstorageItems.Unlock()
-
-        // MUnpcList.Lock()
-        // imgui.Text(fmt.Sprintf(" ### npcList \n %v - %v  ", len(npcList), prettyPrint(npcList)))
-        // MUnpcList.Unlock()
 
         imgui.End()
 
@@ -215,7 +210,7 @@ func main() {
 
                 MUmobList.Lock()
                 for _,vv := range mobList {
-                    if vv.Coords.X == x && vv.Coords.Y == y{
+                    if vv.CoordsFrom.X == x && vv.CoordsFrom.Y == y{
                         bbcolor[0] = 33; bbcolor[1] = 200; bbcolor[2] = 220;
                         size = float32(3) * scale
                     }
@@ -234,7 +229,9 @@ func main() {
 
 type CRoute struct{ Map string; X int; Y int; WarpPortal string; UseTPdist int; }
 type CStorage struct{ Name string; Id int; Y int; Min int; Max int; }
-type CMob struct{ Priority int; Id int; Name string;
+type CStorageCart struct{ Name string; Id int; Y int; Min int; Max int; }
+type CCartTransfert struct{ Name string; Id int; Am int; From bool; }
+type CMob struct{ Priority int; Id int; Name string; TPdist int;
                   AtkName string; AtkId int; AtkLv int; MinDist int; MinHP int; }
 type CItemLoot struct{ Priority int; Id int; Name string; }
 type CItemUse struct{ Id int; Name string; MinHP int; MinSP int; BuffId int; }
@@ -270,8 +267,22 @@ func loadprofil(){
         }
         conf["Storage"] = append(conf["Storage"], stru)
     }
+    for _,vv := range profil["StorageCart"] {
+        stru := CStorageCart{}
+        for kkk,vvv := range vv.(map[string]interface{}) {
+            fld := reflect.ValueOf(&stru).Elem().FieldByName(kkk); convertField(vvv, fld)
+        }
+        conf["StorageCart"] = append(conf["StorageCart"], stru)
+    }
+    for _,vv := range profil["CartTransfert"] {
+        stru := CCartTransfert{}
+        for kkk,vvv := range vv.(map[string]interface{}) {
+            fld := reflect.ValueOf(&stru).Elem().FieldByName(kkk); convertField(vvv, fld)
+        }
+        conf["CartTransfert"] = append(conf["CartTransfert"], stru)
+    }
     for _,vv := range profil["Mob"] {
-        stru := CMob{ Priority:-1, AtkLv:1, MinDist:4 }
+        stru := CMob{ Priority:-1, AtkLv:1, MinDist:1, TPdist:10 }
         for kkk,vvv := range vv.(map[string]interface{}) {
             fld := reflect.ValueOf(&stru).Elem().FieldByName(kkk); convertField(vvv, fld)
         }

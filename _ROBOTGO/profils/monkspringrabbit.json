@@ -8,12 +8,15 @@
         ["WarpPortal",   "mjolnir_04.gat"],
         ["useTPNbAggro",    4],
         ["useTPNbAggroLoot",5],
-        ["useTPLockMap",    1],
+        ["useTPLockMap",    3],
         ["useTPOnRoad",     1],
-        ["useTPDelay",      300],
+        ["useTPDelay",      50],
         ["useSitHP",        1],
         ["useSitUnderSP",   33],
-        ["useSitAboveSP",   100]
+        ["useSitAboveSP",   100],
+        ["storageWeight",   68],
+        ["storageX",   156],
+        ["storageY",   97]
     ],
     "Route":[
         {"Map":"mjolnir_03",    "X":242,    "Y":204},
@@ -23,6 +26,12 @@
     "Mob":[
         {"Priority":1, "Id":1322, "Name":"spring rabbit",
             "AtkName":"Throw Spirit Sphere", "AtkId":267,"AtkLv":4, "MinDist": 7, "MinHP": 0}
+    ],
+    "Storage":[
+        {"Name":"Converter fire", "Id":12114, "Min":0, "Max":50 },
+        {"Name":"blue gem", "Id":717, "Min":0, "Max":10},
+        {"Name":"butt fly", "Id":602, "Min":0, "Max":10},
+        {"Name":"red herb", "Id":507, "Min":0, "Max":25}
     ],
     "ItemLoot":[
         { "Id":508,   "Name":"Yellow_Herb"},
