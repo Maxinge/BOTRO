@@ -100,7 +100,7 @@ func main() {
         }
     }()
 
-
+    initConf()
     go infoLoop()
     go botLoop()
 
@@ -135,17 +135,12 @@ func main() {
         imgui.SetNextWindowSize(imgui.Vec2{X: baseSize.X-2, Y: baseSize.Y - 400-2})
         imgui.Begin("Info")
 
-        imgui.Text(fmt.Sprintf("[%v:%v] ", charCoord.X, charCoord.Y, MAP))
+        imgui.Text(fmt.Sprintf("[%v:%v] %v - aggro : %v", charCoord.X, charCoord.Y, MAP, countAggro))
         imgui.Text(fmt.Sprintf("ID: %v | %v [%v/%v] zeny : %v | Sit : %v", accountID, CHARNAME, BASELV, JOBLV, ZENY, SIT))
+        imgui.Text(fmt.Sprintf("targetItemID [%v] -- targetMobID [%v] ", targetItemID, targetMobID))
 
-        imgui.Text(fmt.Sprintf("targetItemID [%v] -- targetMobID [%v] -- noMobTimer [%v]", targetItemID, targetMobID, noMobTimer))
+        imgui.Text(fmt.Sprintf(" ### timers \n %v ", printStruct(timers)))
 
-        imgui.Text(fmt.Sprintf("chkTimecharCoord [%v]", chkTimecharCoord))
-        imgui.Text(fmt.Sprintf("chkTimetargetMobID [%v]", chkTimetargetMobID))
-        imgui.Text(fmt.Sprintf("chkTimetargetItemID [%v]", chkTimetargetItemID))
-
-
-        MUmobDeadList.Lock()
         res := map[string][]int{}
         for _,vv := range mobDeadList {
             if len(res[vv.Name]) == 0  { res[vv.Name] = []int{0,0,0} }
@@ -154,11 +149,7 @@ func main() {
             res[vv.Name][2] += vv.Jexp
         }
         imgui.Text(fmt.Sprintf(" ### kill stats \n %v ", prettyPrint(res)))
-        MUmobDeadList.Unlock()
 
-        // MUbuffList.Lock()
-        // imgui.Text(fmt.Sprintf(" ### buffList \n %v ", prettyPrint(buffList)))
-        // MUbuffList.Unlock()
 
         // MUmobList.Lock()
         // imgui.Text(fmt.Sprintf(" ### mobList \n %v ", prettyPrint(mobList)))

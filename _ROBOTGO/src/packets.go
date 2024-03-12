@@ -27,7 +27,7 @@ func parsePacket(bb []byte){
         resetTargets()
 
         SSphere = 0
-        addWait(500)
+        pauseLoop(400)
         lastMoveTime = 0
 
         ccFrom = Coord{
@@ -173,9 +173,7 @@ func parsePacket(bb []byte){
         // skillId := int(binary.LittleEndian.Uint16(bb[12:12+2]))
         castTime := int(binary.LittleEndian.Uint32(bb[18:18+4]))
         if sourceID == accountID {
-            nw := castTime + 0
-            // if skillId == 267{ nw += 300 } // TSS
-            addWait(nw+200)
+            if castTime > 0 { pauseLoop(castTime) }
         }
 
     case "01D0":  //spirit_sphere
@@ -207,7 +205,7 @@ func parsePacket(bb []byte){
         if target == accountID && hexID == "0983"{
             if buffID == 46 {
                 if timeLeft == 0 { timeLeft = 200 }
-                addWait(timeLeft)
+                timers.TuseSkill = timeLeft
                 return
             }
             if timeLeft == 9999 { timeLeft = 9999999999999999 };
@@ -262,7 +260,8 @@ func parsePacket(bb []byte){
                 if mapID != targetMobID {
                     mm.IsNotValid = true
                 }else{
-                    addWait(100)
+                    mobDeadList = append(mobDeadList,mm)
+                    pauseLoop(150)
                     targetMobID = -1
                 }
                 mobList[mapID] = mm
@@ -303,22 +302,31 @@ func parsePacket(bb []byte){
             MUtrapList.Unlock()
         }
 
-    case "0120":  //traps disa ??
     case "09FD", "09FF", "09FE":     //actor_appear_exist // actor_spawn/connected
-        // fmt.Printf("### actor_appear ### [%v][%v][%v] \n", hexID, len(bb), bb)
         if len(bb) == 0 { return }
         mapID := int(binary.LittleEndian.Uint32(bb[3:3+4]))
         actorID := int(binary.LittleEndian.Uint16(bb[21:21+4]))
         moveSpeed := int(binary.LittleEndian.Uint16(bb[11:11+2]))
         actorType := byte(bb[2])
         if bb[17] == 4 || bb[17] == 2 { return } // hided
-        cc := Coord{X:0,Y:0}
-        index := 0
-        if sliceEqual(bb[0:2],[]byte{114,0}){ index = 65 }
-        if sliceEqual(bb[0:2],[]byte{108,0}){ index = 61 }
-        if sliceEqual(bb[0:2],[]byte{107,0}){ index = 61 }
-        bc := bits24ToCoords(bb[index:index+3])
-        cc.X = bc[0]; cc.Y = bc[1];
+        mccFrom := Coord{X:0,Y:0}
+        mccTo := Coord{X:0,Y:0}
+
+        mpathTo := []Coord{}
+        if  hexID == "09FD" {
+            index := 65
+            bc := bits48ToCoords(bb[index:index+6])
+            mccFrom.X = bc[0]; mccFrom.Y = bc[1];
+            mccTo.X = bc[2]; mccTo.Y = bc[3];
+            mpathTo = pathfind(mccFrom, mccTo, lgatMaps[MAP],[]Coord{})
+        }
+        if  hexID == "09FF" || hexID == "09FE" {
+            index := 61
+            bc := bits24ToCoords(bb[index:index+3])
+            mccFrom.X = bc[0]; mccFrom.Y = bc[1];
+            mccTo.X = bc[0]; mccTo.Y = bc[1];
+        }
+
         if actorType == 5  {
             MUmobList.Lock()
             prio := -1
@@ -341,21 +349,21 @@ func parsePacket(bb []byte){
                 tpdist = exist.(CMob).TPdist
             }
             mobList[mapID] = Mob{
-                MobID:actorID, CoordsFrom:cc, CoordsTo:cc, MoveSpeed:moveSpeed,
+                MobID:actorID, CoordsFrom:mccFrom, CoordsTo:mccTo, MoveSpeed:moveSpeed,
                 Priority: prio, Aggro:aggro, Name:name, IsLooter:looter,
-                Bexp:bexp, Jexp:jexp, TPdist:tpdist,
+                Bexp:bexp, Jexp:jexp, TPdist:tpdist, PathMoveTo:mpathTo, LastMoveTime:0,
             }
             MUmobList.Unlock()
         }
         if actorType == 0 {
             MUplayerList.Lock()
-            playerList[mapID] = Player{Coords:cc}
+            playerList[mapID] = Player{Coords:mccFrom}
             MUplayerList.Unlock()
         }
 
         if actorType == 6 {
             MUnpcList.Lock()
-            npcList[mapID] = Npc{NpcID:actorID,Coords:cc,Name:""}
+            npcList[mapID] = Npc{NpcID:actorID,Coords:mccFrom,Name:""}
             MUnpcList.Unlock()
         }
 
@@ -372,7 +380,7 @@ func parsePacket(bb []byte){
         dmg := int(binary.LittleEndian.Uint32(bb[20:20+4]))
         if hexID == "08C8" && bb[27] != 1 {
             if targetID == accountID && dmg > 0{
-                sendToServer("035F",coordsTo24Bits(ccFrom.X,ccFrom.Y))
+                timers.TclickMove = 80
             }
             return
         } //autoattack

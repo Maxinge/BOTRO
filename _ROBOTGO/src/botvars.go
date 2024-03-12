@@ -57,9 +57,20 @@ type Trap struct {
     Radius int
 }
 
+type Timer struct {
+    ThpTeleport int
+    TnoMob int
+    TuseItem int
+    TuseSkill int
+    TuseSkillSelf int
+    TclickMove int
+    TsameCoord int
+    TsameMob int
+    TsameItem int
+}
+
 var(
     accountID = 0
-
 
     MOVESPEED = 0
     BASEXPMAX = 0
@@ -77,9 +88,9 @@ var(
     WEIGHT = 0
     SPLEFT = 0
     SPMAX = 0
-
     SIT = false
 
+    SSphere = 0
 
 
     MUnpcList sync.Mutex
@@ -101,11 +112,7 @@ var(
     MUtrapList sync.Mutex
     trapList = map[int]Trap{}
 
-    MUmobDeadList sync.Mutex
-    mobDeadList = map[int]Mob{}
-
-    SSphere = 0
-
+    mobDeadList = []Mob{}
 
     lockMap = ""
     saveMap = ""
@@ -116,9 +123,7 @@ var(
     useTPUnderHP = 5
     useSitUnderSP = 0
     useSitAboveSP = 99
-
     storageWeight = 49
-
     storageX = 0
     storageY = 0
     useGreed = 0
@@ -138,18 +143,23 @@ var(
     targetItemID = -1
     targetMobID = -1
 
+    timers = Timer{
+        ThpTeleport:0,
+        TnoMob:0,
+        TuseItem:0,
+        TuseSkill:0,
+        TuseSkillSelf:0,
+        TclickMove:0,
+        TsameCoord:0,
+        TsameMob:0,
+        TsameItem:0,
+    }
+
     needWait = 0
+    countAggro = 0
 
-    noMobTimer = 0
-    useItemTimer = 0
-    clickMoveTimer = 0
-
-    chkTimecharCoord = 0
-    chkTimetargetMobID = 0
-    chkTimetargetItemID = 0
-
-    chkcharCoord = Coord{}
-    chktargetMobID = 0
-    chktargetItemID = 0
+    sameCoord = Coord{}
+    sameMob = 0
+    sameItem = 0
 
 )

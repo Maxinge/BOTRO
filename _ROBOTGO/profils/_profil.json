@@ -6,12 +6,11 @@
         ["saveMap",      "yuno"],
         ["lockMap",      "mag_dun01"],
         ["WarpPortal",   ""],
-        ["useGreed",        1],
-        ["useTPNbAggro",    9],
+        ["useTPNbAggro",    8],
         ["useTPLockMap",    2],
         ["useTPOnRoad",     2],
-        ["useTPDelay",      50],
-        ["useTPUnderHP",    20],
+        ["useTPDelay",      30],
+        ["useTPUnderHP",    70],
         ["useSitHP",        0],
         ["useSitUnderSP",   20],
         ["useSitAboveSP",   100],
@@ -26,11 +25,12 @@
         {"Map":"mag_dun02",    "X":48,    "Y":33, "UseTPdist": 100}
     ],
     "Storage":[
-        {"Name":"Converter water", "Id":12115, "Min":0, "Max":30 },
+        {"Name":"Converter water", "Id":12115, "Min":0, "Max":12 },
         {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
+        {"Name":"petfood", "Id":537, "Min":0, "Max":10},
         {"Name":"zerk pot", "Id":657, "Min":0, "Max":5},
-        {"Name":"fly wings", "Id":601, "Min":5, "Max":250},
-        {"Name":"bread", "Id":8076, "Min":5, "Max":250}
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":300},
+        {"Name":"bread", "Id":8076, "Min":5, "Max":300}
     ],
     "StorageCart":[
         {"Name":"fly wings", "Id":601, "Min":5, "Max":400},
@@ -43,9 +43,7 @@
     ],
     "Mob":[
         {"Priority":1, "Id":1072, "Name":"kaho",
-            "AtkName":"mamonite", "AtkId":42,"AtkLv":5, "MinDist": 2, "MinHP": 0},
-        {"Priority":-4, "Id":1366, "Name":"lavagolem", "TPdist": 1}
-
+            "AtkName":"mamonite", "AtkId":42,"AtkLv":5, "MinDist": 2, "MinHP": 0}
     ],
     "ItemLoot":[
         { "Id":508,   "Name":"Yellow_Herb"}
@@ -53,7 +51,7 @@
     "ItemUse":[
         {"Name":"Converter water", "Id":12115, "MinHP":-1, "MinSP":-1,"BuffId": 1505 },
         {"Name":"zerk pot", "Id":657, "MinHP":-1, "MinSP":-1,"BuffId": 39 },
-        {"Name":"bread", "Id":8076, "MinHP":80, "MinSP":-1,"BuffId": -1 }
+        {"Name":"bread", "Id":8076, "MinHP":95, "MinSP":-1,"BuffId": -1 }
     ],
     "SKillSelf":[
         {"Name":"adrenaline rush","Lv":5, "Id":111,     "MinHP": -1, "MinSP": 10, "BuffId": 23},
