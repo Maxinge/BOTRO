@@ -179,8 +179,8 @@ func walkback(ccc Coord,paths *map[Coord]Coord,result *[]Coord){
 
 func pathfind(start Coord, finish Coord, lgatMap ROLGatMap, bannedCells []Coord) []Coord {
 
-	if !isValidCell(finish, lgatMap) { return []Coord{start, finish} }
-	if start == finish{ return []Coord{start, finish} }
+	if !isValidCell(finish, lgatMap) { return []Coord{start, start} }
+	if start == finish{ return []Coord{start, start} }
 
 	if isIn(finish, bannedCells) {
 		ccc := []Coord{}
@@ -209,7 +209,7 @@ func pathfind(start Coord, finish Coord, lgatMap ROLGatMap, bannedCells []Coord)
 	PFelapsed := time.Now()
 	found:
 	for {
-		if PFelapsed.Sub(PFstartTime).Milliseconds() > 500 { return []Coord{start, finish} }
+		if PFelapsed.Sub(PFstartTime).Milliseconds() > 500 { return []Coord{start, start} }
 		banned := []Coord{}
 		for _,vv := range heads {
 			count := 0
@@ -263,9 +263,8 @@ func pathfind(start Coord, finish Coord, lgatMap ROLGatMap, bannedCells []Coord)
 		}}}
 	}
 
-	tmp = append([]Coord{start},tmp...)
-	tmp = append(tmp,finish)
-
-	return tmp
-
+	tt := []Coord{start}
+	tt = append(tt,tmp...)
+	tt = append(tt,finish)
+	return tt
 }

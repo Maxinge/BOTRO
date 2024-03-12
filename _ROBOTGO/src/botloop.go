@@ -225,7 +225,7 @@ func botLoop() {
         if (float32(HPLEFT)/float32(HPMAX)*100) <= float32(useTPUnderHP) {
         if MAP != saveMap {
             if timers.ThpTeleport <= 0 {
-                useTeleport(); timers.ThpTeleport = 2000
+                useTeleport(); timers.ThpTeleport = 10000
             }
         }}
         // #####################################################################
@@ -239,14 +239,14 @@ func botLoop() {
             resetTargets(); resetPath(); useTeleport()
         }
         if sameMob != targetMobID || targetMobID < 0{
-            timers.TsameMob = 10000
+            timers.TsameMob = 15000
         }
         sameMob = targetMobID
         if timers.TsameMob <= 0 {
-            timers.TsameMob = 10000
+            timers.TsameMob = 15000
             resetTargets();resetPath();
         }
-        if sameItem != targetItemID || targetItemID > 0{
+        if sameItem != targetItemID || targetItemID < 0{
             timers.TsameItem = 10000
         }
         sameItem = targetItemID
@@ -342,7 +342,7 @@ func botLoop() {
 
                 if timers.TclickMove <= 0 {
                     ii := getClosestPoint(charCoord,movePath) + 5
-                    if ii >= len(movePath)-1{ ii = len(movePath)-1 }
+                    if ii >= len(movePath)-1{ ii = len(movePath)-1 }; if ii < 0 { ii = 0 }
                     sendToServer("035F",coordsTo24Bits(movePath[ii].X,movePath[ii].Y))
                     timers.TclickMove = 250
                 }
@@ -426,6 +426,7 @@ func botLoop() {
                         closeStorage()
                         resetPath()
                         townRun = false
+                        timers.TsameCoord = 10000
                     }
                 }
             }
@@ -490,7 +491,7 @@ func botLoop() {
                 }
                 if timers.TclickMove <= 0 {
                     ii := getClosestPoint(charCoord,movePath) + 5
-                    if ii >= len(movePath)-1{ ii = len(movePath)-1 }
+                    if ii >= len(movePath)-1{ ii = len(movePath)-1 }; if ii < 0 { ii = 0 }
                     sendToServer("035F",coordsTo24Bits(movePath[ii].X,movePath[ii].Y))
                     timers.TclickMove = 250
                     if int(getDist(movePath[len(movePath)-1],charCoord)) <= 1{
@@ -512,7 +513,7 @@ func botLoop() {
             if movePath != nil {
                 if timers.TclickMove <= 0 {
                     ii := getClosestPoint(charCoord,movePath) + 5
-                    if ii >= len(movePath)-1{ ii = len(movePath)-1 }
+                    if ii >= len(movePath)-1{ ii = len(movePath)-1 }; if ii < 0 { ii = 0 }
                     sendToServer("035F",coordsTo24Bits(movePath[ii].X,movePath[ii].Y))
                     timers.TclickMove = 250
                     if int(getDist(movePath[len(movePath)-1],charCoord)) <= 2{
@@ -568,7 +569,7 @@ func botLoop() {
             }else{
                 if timers.TclickMove <= 0 {
                     ii := getClosestPoint(charCoord,movePath) + 5
-                    if ii >= len(movePath)-1{ ii = len(movePath)-1 }
+                    if ii >= len(movePath)-1{ ii = len(movePath)-1 }; if ii < 0 { ii = 0 }
                     sendToServer("035F",coordsTo24Bits(movePath[ii].X,movePath[ii].Y))
                     timers.TclickMove = 250
                 }
@@ -588,7 +589,7 @@ func botLoop() {
 
             if timers.TclickMove <= 0 {
                 ii := getClosestPoint(charCoord,movePath) + 5
-                if ii >= len(movePath)-1{ ii = len(movePath)-1 }
+                if ii >= len(movePath)-1{ ii = len(movePath)-1 }; if ii < 0 { ii = 0 }
                 sendToServer("035F",coordsTo24Bits(movePath[ii].X,movePath[ii].Y))
                 timers.TclickMove = 250
             }

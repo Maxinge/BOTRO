@@ -88,6 +88,9 @@ var(
     WEIGHT = 0
     SPLEFT = 0
     SPMAX = 0
+    CARTMIN = 0
+    CARTMAX = 0
+
     SIT = false
 
     SSphere = 0

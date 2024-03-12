@@ -63,6 +63,8 @@ func parsePacket(bb []byte){
         WEIGHT = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));         ii += 4
         SPLEFT = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));         ii += 4
         SPMAX = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));          ii += 4
+        CARTMIN = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));        ii += 4
+        CARTMAX = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));        ii += 4
 
     case "0B09", "0B0A":  //inventory_info
 
@@ -76,8 +78,6 @@ func parsePacket(bb []byte){
             itemID := int(binary.LittleEndian.Uint32(bb[ii+2:ii+2+4]))
             amount := 1
             eqSlot := 0
-
-
             if hexID == "0B09" {
                 amount = int(binary.LittleEndian.Uint16(bb[ii+7:ii+7+2]))
 
@@ -85,7 +85,6 @@ func parsePacket(bb []byte){
             if hexID == "0B0A" {
                 eqSlot = int(binary.LittleEndian.Uint16(bb[ii+11:ii+11+2]))
             }
-
             if inventoryType == 0 {
                 MUinventoryItems.Lock()
                 inventoryItems[inventoryID] = Item{ ItemID:itemID, Amount:amount, EqSlot:eqSlot}

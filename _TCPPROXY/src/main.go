@@ -174,6 +174,15 @@ func main() {
             windows.ReadProcessMemory(processHandle, 0x00F45E60, &buffer2[0], uintptr(4), nil)
             bb = append(bb,buffer2[0:4]...)
 
+            // CARTMIN ## 0x00F41BB4
+            windows.ReadProcessMemory(processHandle, 0x00F41BB4, &buffer2[0], uintptr(4), nil)
+            bb = append(bb,buffer2[0:4]...)
+
+            // CARTMAX ## 0x00F41BB8
+            windows.ReadProcessMemory(processHandle, 0x00F41BB8, &buffer2[0], uintptr(4), nil)
+            bb = append(bb,buffer2[0:4]...)
+
+
             if botConn != nil { botConn.Write(bb) }
         }
     }()
