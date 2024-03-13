@@ -4,16 +4,16 @@
         ["accountID",    2014282],
 
         ["saveMap",      "geffen"],
-        ["lockMap",      "gl_sew01"],
+        ["lockMap",      "gl_step"],
         ["WarpPortal",   ""],
         ["useTPNbAggro",    10],
         ["useTPLockMap",    2],
         ["useTPOnRoad",     2],
         ["useTPDelay",      30],
-        ["useTPUnderHP",    70],
+        ["useTPUnderHP",    30],
         ["useSitHP",        0],
-        ["useSitUnderSP",   20],
-        ["useSitAboveSP",   100],
+        ["useSitUnderSP",   10],
+        ["useSitAboveSP",   30],
         ["storageWeight",   68],
         ["storageX",   110],
         ["storageY",   65]
@@ -27,7 +27,7 @@
         {"Map":"gl_sew02",    "X":290,    "Y":156}
     ],
     "Storage":[
-        {"Name":"Converter earth", "Id":12116, "Min":0, "Max":12 },
+        {"Name":"Converter earth", "Id":12116, "Min":0, "Max":20 },
         {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
         {"Name":"petfood", "Id":537, "Min":0, "Max":10},
         {"Name":"zerk pot", "Id":657, "Min":0, "Max":5},
@@ -45,7 +45,7 @@
     ],
     "Mob":[
         {"Priority":1, "Id":1263, "Name":"windghost",
-            "AtkName":"mamonite", "AtkId":42,"AtkLv":7, "MinDist": 2, "MinHP": 0}
+            "AtkName":"mamonite", "AtkId":42,"AtkLv":8, "MinDist": 1, "MinHP": 0}
     ],
     "ItemLoot":[
     ],

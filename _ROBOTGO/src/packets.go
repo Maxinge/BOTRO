@@ -238,6 +238,11 @@ func parsePacket(bb []byte){
         mapID := int(binary.LittleEndian.Uint32(bb[0:4]))
         x := int(binary.LittleEndian.Uint16(bb[4:4+2]))
         y := int(binary.LittleEndian.Uint16(bb[6:6+2]))
+        if mapID == accountID {
+        cc := Coord{X:x,Y:y}
+           pathTo = []Coord{cc,cc}
+           lastMoveTime = 0
+       }
         MUmobList.Lock()
         if mm, exist := mobList[mapID]; exist {
             cc := Coord{X:x,Y:y}

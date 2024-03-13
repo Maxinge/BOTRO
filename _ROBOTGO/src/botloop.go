@@ -263,15 +263,15 @@ func botLoop() {
                 if itId >= 0 {
                     putItemIn("inventory","cart", itId, am)
                     pauseLoop(250)
+                    MUinventoryItems.Lock()
                     ii := inventoryItems[itId]
                     ii.Amount -= am
                     if ii.Amount <= 0 {
-                        MUinventoryItems.Lock()
                         delete(inventoryItems, itId)
-                        MUinventoryItems.Unlock()
                     }else{
                         inventoryItems[itId] = ii
                     }
+                    MUinventoryItems.Unlock()
                     continue
                 }
             }else{
@@ -347,7 +347,7 @@ func botLoop() {
                     timers.TclickMove = 250
                 }
 
-                if int(getDist(movePath[len(movePath)-1],charCoord)) <= 6 {
+                if int(getDist(movePath[len(movePath)-1],charCoord)) <= 8 {
                     ActorID := 0
                     MUnpcList.Lock()
                     for kk,vv := range npcList {
@@ -460,6 +460,7 @@ func botLoop() {
                     timers.TuseSkillSelf = 300
                     timers.TuseSkill = 300
                     timers.TuseItem = 300
+                    timers.TclickMove = 300
                 }
             }
             if exist := getConf(conf["SKillSelf"],"Id",666666); exist != nil {
@@ -467,7 +468,9 @@ func botLoop() {
             if timers.TuseSkillSelf <= 0 {
                 sendUseSkill(261, 5, accountID)
                 timers.TuseSkillSelf = 300
+                timers.TuseSkill = 300
                 timers.TuseItem = 300
+                timers.TclickMove = 300
             }}}
         }}
         // #####################################################################
@@ -544,7 +547,7 @@ func botLoop() {
             }
             movePath = movePath[:len(movePath)-1]
 
-            if int(getDist(charCoord,mob.CoordsFrom)) <= atkDist{ // ### int !!
+            if int(math.Round(getDist(charCoord,mob.CoordsFrom))) <= atkDist{ // ### int !!
                 AtkId := 0; AtkLv := 0
                 if exist := getConf(conf["Mob"],"Id",mob.MobID); exist != nil {
                     AtkId = exist.(CMob).AtkId; AtkLv = exist.(CMob).AtkLv
@@ -594,7 +597,7 @@ func botLoop() {
                 timers.TclickMove = 250
             }
 
-            if getDist(charCoord,it.Coords) <= float64(3){
+            if int(math.Round(getDist(charCoord,it.Coords))) <= 3{
                 itemBin := make([]byte, 4) ;
                 binary.LittleEndian.PutUint32(itemBin, uint32(targetItemID))
                 sendToServer("0362", itemBin)
