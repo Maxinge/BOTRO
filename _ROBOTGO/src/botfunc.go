@@ -111,6 +111,7 @@ func randomPoint(lgatMap ROLGatMap, from Coord, dist int) Coord{
 			return Coord{X:rX, Y:rY}
 		}}}
 	}
+	return Coord{X:0, Y:0}
 }
 
 func cleanPath(coordList []Coord, sighDist int, lgatMap ROLGatMap, bannedCells []Coord) []Coord{
@@ -266,5 +267,6 @@ func pathfind(start Coord, finish Coord, lgatMap ROLGatMap, bannedCells []Coord)
 	tt := []Coord{start}
 	tt = append(tt,tmp...)
 	tt = append(tt,finish)
+
 	return tt
 }

@@ -29,7 +29,7 @@
     "Storage":[
         {"Name":"Converter earth", "Id":12116, "Min":0, "Max":20 },
         {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
-        {"Name":"petfood", "Id":537, "Min":0, "Max":10},
+        {"Name":"iron ore", "Id":1002, "Min":0, "Max":10},
         {"Name":"zerk pot", "Id":657, "Min":0, "Max":5},
         {"Name":"fly wings", "Id":601, "Min":5, "Max":300},
         {"Name":"bread", "Id":8076, "Min":5, "Max":300}

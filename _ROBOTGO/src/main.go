@@ -32,7 +32,6 @@ func main() {
     fmt.Println("#--- ROBOTGO START ---#")
     fmt.Printf("current dir -- %v -- \n", CurDir())
 
-
     loadprofil()
     // fmt.Printf("conf -- %v -- \n", prettyPrint(conf)); return
 
@@ -57,8 +56,6 @@ func main() {
         mm.cells[104][83] = 1
         lgatMaps["moc_pryd01"] = mm
     }
-
-
 
     err = json.Unmarshal([]byte(readFileString(CurDir()+"data/mobs_db.json")), &mobDB)
     if err != nil { fmt.Printf("err -- %v -- \n", err); return }
@@ -151,9 +148,9 @@ func main() {
         imgui.Text(fmt.Sprintf(" ### kill stats \n %v ", prettyPrint(res)))
 
 
-        // MUmobList.Lock()
-        // imgui.Text(fmt.Sprintf(" ### mobList \n %v ", prettyPrint(mobList)))
-        // MUmobList.Unlock()
+        MUplayerList.Lock()
+        imgui.Text(fmt.Sprintf(" ### playerList \n %v ", prettyPrint(playerList)))
+        MUplayerList.Unlock()
 
         // MUinventoryItems.Lock()
         // imgui.Text(fmt.Sprintf(" ### inventoryItems \n %v ", prettyPrint(inventoryItems)))

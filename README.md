@@ -23,3 +23,4 @@ la premiere compilation de cimguigo peu prendre du temps
 - npc sequence
 - greed
 - cart mieu
+- fix kafra

@@ -208,6 +208,7 @@ func botLoop() {
                 targetMobID = -1
             }
         }
+        if len(playerList) > 0 { targetMobID = -1; }
         MUmobList.Unlock()
 
         bannedCells := []Coord{}
@@ -236,7 +237,8 @@ func botLoop() {
         sameCoord = charCoord
         if timers.TsameCoord <= 0 {
             timers.TsameCoord = 10000
-            resetTargets(); resetPath(); useTeleport()
+            resetTargets(); resetPath()
+            // useTeleport()
         }
         if sameMob != targetMobID || targetMobID < 0{
             timers.TsameMob = 15000
@@ -342,7 +344,7 @@ func botLoop() {
 
                 if timers.TclickMove <= 0 {
                     ii := getClosestPoint(charCoord,movePath) + 5
-                    if ii >= len(movePath)-1{ ii = len(movePath)-1 }; if ii < 0 { ii = 0 }
+                    if ii >= len(movePath)-1{ ii = len(movePath)-1 }
                     sendToServer("035F",coordsTo24Bits(movePath[ii].X,movePath[ii].Y))
                     timers.TclickMove = 250
                 }
@@ -460,26 +462,35 @@ func botLoop() {
                     timers.TuseSkillSelf = 300
                     timers.TuseSkill = 300
                     timers.TuseItem = 300
-                    timers.TclickMove = 300
+                    timers.TclickMove = 500
                 }
             }
             if exist := getConf(conf["SKillSelf"],"Id",666666); exist != nil {
-            if SSphere < exist.(CSKillSelf).Lv {
-            if timers.TuseSkillSelf <= 0 {
-                sendUseSkill(261, 5, accountID)
-                timers.TuseSkillSelf = 300
-                timers.TuseSkill = 300
-                timers.TuseItem = 300
-                timers.TclickMove = 300
-            }}}
+                if targetMobID > 0 && SSphere <= 0{
+                if timers.TuseSkillSelf <= 0 {
+                    sendUseSkill(261, 5, accountID)
+                    timers.TuseSkillSelf = 300
+                    timers.TuseSkill = 300
+                    timers.TuseItem = 300
+                    timers.TclickMove = 500
+                }}
+                if targetMobID < 0 && SSphere < exist.(CSKillSelf).Lv {
+                if timers.TuseSkillSelf <= 0 {
+                        sendUseSkill(261, 5, accountID)
+                        timers.TuseSkillSelf = 300
+                        timers.TuseSkill = 300
+                        timers.TuseItem = 300
+                        timers.TclickMove = 500
+                }}
+            }
         }}
         // #####################################################################
         // #####################################################################
         if exist := getConf(conf["Route"],"Map", MAP); exist != nil {
         if !townRun {
-            if movePath != nil {
+            if movePath != nil && len(movePath) > 2 {
                 if exist.(CRoute).UseTPdist > 0 {
-                    if len(movePath) > exist.(CRoute).UseTPdist || len(movePath) <= 2{
+                    if len(movePath) > exist.(CRoute).UseTPdist{
                         if useTPOnRoad == 1 {
                             tpId := int(binary.LittleEndian.Uint16([]byte{26,0}))
                             tpLv := int(binary.LittleEndian.Uint16([]byte{1,0}))
@@ -494,7 +505,7 @@ func botLoop() {
                 }
                 if timers.TclickMove <= 0 {
                     ii := getClosestPoint(charCoord,movePath) + 5
-                    if ii >= len(movePath)-1{ ii = len(movePath)-1 }; if ii < 0 { ii = 0 }
+                    if ii >= len(movePath)-1{ ii = len(movePath)-1 }
                     sendToServer("035F",coordsTo24Bits(movePath[ii].X,movePath[ii].Y))
                     timers.TclickMove = 250
                     if int(getDist(movePath[len(movePath)-1],charCoord)) <= 1{
@@ -510,13 +521,15 @@ func botLoop() {
         // #####################################################################
         if MAP == lockMap && targetMobID < 0 && targetItemID < 0 {
             if timers.TnoMob <= 0 {
+            if timers.TuseSkillSelf <= 0 {
+            if timers.TuseSkill <= 0 {
                 useTeleport()
                 timers.TnoMob = useTPDelay
-            }
-            if movePath != nil {
+            }}}
+            if movePath != nil && len(movePath) > 2 {
                 if timers.TclickMove <= 0 {
                     ii := getClosestPoint(charCoord,movePath) + 5
-                    if ii >= len(movePath)-1{ ii = len(movePath)-1 }; if ii < 0 { ii = 0 }
+                    if ii >= len(movePath)-1{ ii = len(movePath)-1 }
                     sendToServer("035F",coordsTo24Bits(movePath[ii].X,movePath[ii].Y))
                     timers.TclickMove = 250
                     if int(getDist(movePath[len(movePath)-1],charCoord)) <= 2{
@@ -572,7 +585,7 @@ func botLoop() {
             }else{
                 if timers.TclickMove <= 0 {
                     ii := getClosestPoint(charCoord,movePath) + 5
-                    if ii >= len(movePath)-1{ ii = len(movePath)-1 }; if ii < 0 { ii = 0 }
+                    if ii >= len(movePath)-1{ ii = len(movePath)-1 }
                     sendToServer("035F",coordsTo24Bits(movePath[ii].X,movePath[ii].Y))
                     timers.TclickMove = 250
                 }
@@ -592,7 +605,7 @@ func botLoop() {
 
             if timers.TclickMove <= 0 {
                 ii := getClosestPoint(charCoord,movePath) + 5
-                if ii >= len(movePath)-1{ ii = len(movePath)-1 }; if ii < 0 { ii = 0 }
+                if ii >= len(movePath)-1{ ii = len(movePath)-1 }
                 sendToServer("035F",coordsTo24Bits(movePath[ii].X,movePath[ii].Y))
                 timers.TclickMove = 250
             }
@@ -733,6 +746,7 @@ func goTown(){
 }
 
 func useTeleport()  {
+
     if useTPLockMap == 1 {
         tpId := int(binary.LittleEndian.Uint16([]byte{26,0}))
         tpLv := int(binary.LittleEndian.Uint16([]byte{1,0}))

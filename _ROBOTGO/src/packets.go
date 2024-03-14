@@ -18,24 +18,22 @@ func parsePacket(bb []byte){
         // fmt.Printf("### no_fct ### [%v][%v] -> [%v] \n", hexID, len(bb),bb)
 
     case "0091","0092":  //map_change
-
         resetInventoryList()
         resetMobItemList()
         resetPlayerList()
         resetTrapList()
-        resetPath()
         resetTargets()
-
+        movePath = []Coord{Coord{X:0,Y:0},Coord{X:0,Y:0}}
         SSphere = 0
-        pauseLoop(400)
+        pauseLoop(700)
         lastMoveTime = 0
-
         ccFrom = Coord{
             X:int(binary.LittleEndian.Uint16(bb[16:16+2])),
             Y:int(binary.LittleEndian.Uint16(bb[18:18+2])),
         }
         ccTo = Coord{X:ccFrom.X,Y:ccFrom.Y}
         pathTo = []Coord{ccFrom,ccTo}
+
 
     case "0087":  //recv_self_move_to
         fromto := bits48ToCoords(bb[4:4+6])
