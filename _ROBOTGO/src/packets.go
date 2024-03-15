@@ -23,17 +23,25 @@ func parsePacket(bb []byte){
         resetPlayerList()
         resetTrapList()
         resetTargets()
-        movePath = []Coord{Coord{X:0,Y:0},Coord{X:0,Y:0}}
+
+        timers.TuseSkillSelf = 100
+        timers.TuseSkill = 100
+        timers.TuseItem = 100
+        timers.TclickMove = 200
+
         SSphere = 0
-        pauseLoop(700)
-        lastMoveTime = 0
+        pauseLoop(600)
         ccFrom = Coord{
             X:int(binary.LittleEndian.Uint16(bb[16:16+2])),
             Y:int(binary.LittleEndian.Uint16(bb[18:18+2])),
         }
+        strMAP := strings.Split(string(bb[0:0+16]), "\x00")[0]
+        strMAP = strings.Split(strMAP, ".gat")[0]
+        MAP = strMAP
+        movePath = []Coord{Coord{X:0,Y:0},Coord{X:0,Y:0}}
         ccTo = Coord{X:ccFrom.X,Y:ccFrom.Y}
         pathTo = []Coord{ccFrom,ccTo}
-
+        lastMoveTime = 0
 
     case "0087":  //recv_self_move_to
         fromto := bits48ToCoords(bb[4:4+6])
@@ -170,7 +178,13 @@ func parsePacket(bb []byte){
         // skillId := int(binary.LittleEndian.Uint16(bb[12:12+2]))
         castTime := int(binary.LittleEndian.Uint32(bb[18:18+4]))
         if sourceID == accountID {
-            if castTime > 0 { pauseLoop(castTime) }
+            if castTime > 0 {
+                pauseLoop(castTime)
+                timers.TclickLoot =  100
+                timers.TuseSkillSelf =  100
+                timers.TuseSkill =  100
+                timers.TclickMove =  100
+            }
         }
 
     case "01D0":  //spirit_sphere
@@ -240,7 +254,7 @@ func parsePacket(bb []byte){
         cc := Coord{X:x,Y:y}
            pathTo = []Coord{cc,cc}
            lastMoveTime = 0
-       }
+        }
         MUmobList.Lock()
         if mm, exist := mobList[mapID]; exist {
             cc := Coord{X:x,Y:y}
@@ -263,6 +277,10 @@ func parsePacket(bb []byte){
                     mm.IsNotValid = true
                 }else{
                     mobDeadList = append(mobDeadList,mm)
+                    timers.TclickMove = 300
+                    timers.TclickLoot = 200
+                    timers.TuseSkill = 200
+                    timers.TuseSkillSelf = 200
                     pauseLoop(150)
                     targetMobID = -1
                 }
@@ -313,8 +331,8 @@ func parsePacket(bb []byte){
         if bb[17] == 4 || bb[17] == 2 { return } // hided
         mccFrom := Coord{X:0,Y:0}
         mccTo := Coord{X:0,Y:0}
-
         mpathTo := []Coord{}
+
         if  hexID == "09FD" {
             index := 65
             bc := bits48ToCoords(bb[index:index+6])
@@ -393,7 +411,6 @@ func parsePacket(bb []byte){
                 mm.IsNotValid = true;
                 mobList[targetID] = mm
             }
-            // if sourceID == accountID { chkTimetargetMobID = 0 }
         }
         if targetID == accountID {
             if mm, exist := mobList[sourceID]; exist {
@@ -405,7 +422,6 @@ func parsePacket(bb []byte){
             }
         }
         MUmobList.Unlock()
-
 
     // #######################
 

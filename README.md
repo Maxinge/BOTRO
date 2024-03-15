@@ -18,9 +18,9 @@ la premiere compilation de cimguigo peu prendre du temps
 ## TODO ##
 - esquive aoe
 - command refresh profil
-- fermer fenetre
+- close window
 - map interieur
-- npc sequence
 - greed
 - cart mieu
-- fix kafra
+- raw fish
+- player management

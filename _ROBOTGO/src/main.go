@@ -215,15 +215,15 @@ func main() {
 }
 
 
-type CRoute struct{ Map string; X int; Y int; WarpPortal string; UseTPdist int; }
+type CRoute struct{ Map string; X int; Y int; WarpPortal string; UseTPdist int; NPC string;}
 type CStorage struct{ Name string; Id int; Y int; Min int; Max int; }
 type CStorageCart struct{ Name string; Id int; Y int; Min int; Max int; }
 type CCartTransfert struct{ Name string; Id int; Am int; From bool; }
 type CMob struct{ Priority int; Id int; Name string; TPdist int;
                   AtkName string; AtkId int; AtkLv int; MinDist int; MinHP int; }
 type CItemLoot struct{ Priority int; Id int; Name string; }
-type CItemUse struct{ Id int; Name string; MinHP int; MinSP int; BuffId int; }
-type CSKillSelf struct{ Id int; Lv int; Name string; MinHP int; MinSP int; BuffId int; }
+type CItemUse struct{ Id int; Name string; MinHP int; MinSP int; BuffId int; DeBuffId int; }
+type CSKillSelf struct{ Id int; Lv int; Name string; MinHP int; MinSP int; BuffId int; DeBuffId int; }
 
 func loadprofil(){
     err := json.Unmarshal([]byte(readFileString(CurDir()+"profils/_profil.json")), &profil)
@@ -284,14 +284,14 @@ func loadprofil(){
         conf["ItemLoot"] = append(conf["ItemLoot"], stru)
     }
     for _,vv := range profil["ItemUse"] {
-        stru := CItemUse{ MinHP:-1, MinSP:-1, BuffId:-1 }
+        stru := CItemUse{ MinHP:-1, MinSP:-1, BuffId:-1, DeBuffId:-1 }
         for kkk,vvv := range vv.(map[string]interface{}) {
             fld := reflect.ValueOf(&stru).Elem().FieldByName(kkk); convertField(vvv, fld)
         }
         conf["ItemUse"] = append(conf["ItemUse"], stru)
     }
     for _,vv := range profil["SKillSelf"] {
-        stru := CSKillSelf{ MinHP:-1, MinSP:-1, BuffId:-1 }
+        stru := CSKillSelf{ MinHP:-1, MinSP:-1, BuffId:-1, DeBuffId:-1 }
         for kkk,vvv := range vv.(map[string]interface{}) {
             fld := reflect.ValueOf(&stru).Elem().FieldByName(kkk); convertField(vvv, fld)
         }

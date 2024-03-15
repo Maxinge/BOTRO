@@ -67,6 +67,7 @@ type Timer struct {
     TsameCoord int
     TsameMob int
     TsameItem int
+    TclickLoot int
 }
 
 var(
@@ -136,7 +137,7 @@ var(
     lastMoveTime = time.Now().Unix()
     ccFrom = Coord{}
     ccTo = Coord{}
-    pathTo = []Coord{}
+    pathTo = []Coord{ccFrom,ccTo}
 
     charCoord = Coord{}
     movePath = []Coord{}
