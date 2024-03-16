@@ -43,6 +43,12 @@ func parsePacket(bb []byte){
         pathTo = []Coord{ccFrom,ccTo}
         lastMoveTime = 0
 
+        go func() {
+            time.Sleep(time.Duration(1000) * time.Millisecond)
+            if MAP == saveMap && !townRun{ resetPath() }
+        }()
+
+
     case "0087":  //recv_self_move_to
         fromto := bits48ToCoords(bb[4:4+6])
         ccFrom = Coord{X:fromto[0],Y:fromto[1]}
@@ -279,7 +285,6 @@ func parsePacket(bb []byte){
                     mobDeadList = append(mobDeadList,mm)
                     timers.TclickMove = 300
                     timers.TclickLoot = 200
-                    timers.TuseSkill = 200
                     timers.TuseSkillSelf = 200
                     pauseLoop(150)
                     targetMobID = -1

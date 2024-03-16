@@ -1,9 +1,9 @@
 {
     "General":[
-        ["Title",    "monk tss windghost"],
+        ["Title",    "monk phendark"],
         ["accountID",    2014282],
 
-        ["saveMap",      "morocc"],
+        ["saveMap",      "alberta"],
         ["lockMap",      "gl_prison1"],
         ["WarpPortal",   "glast_01.gat"],
         ["useTPNbAggro",    5],
@@ -15,8 +15,8 @@
         ["useSitUnderSP",   20],
         ["useSitAboveSP",   98],
         ["storageWeight",   68],
-        ["storageX",   156],
-        ["storageY",   97]
+        ["storageX",   113],
+        ["storageY",   60]
     ],
     "Route":[
         {"Map":"gl_sew01",    "X":258,    "Y":258, "UseTPdist": 150},
@@ -29,14 +29,17 @@
         {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
         {"Name":"red herb", "Id":507, "Min":0, "Max":10},
         {"Name":"green herb herb", "Id":511, "Min":0, "Max":10},
-        {"Name":"fly wings", "Id":601, "Min":5, "Max":450},
-        {"Name":"lemons", "Id":568, "Min":5, "Max":150}
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":500},
+        {"Name":"blue potion", "Id":505, "Min":0, "Max":30}
     ],
     "ItemUse":[
-        {"Name":"lemon", "Id":568, "MinHP":-1, "MinSP":50,"BuffId": -1 }
+        {"Name":"lemon", "Id":568, "MinHP":-1, "MinSP":40,"BuffId": -1 },
+        {"Name":"blue potion", "Id":505, "MinHP":-1, "MinSP":40,"BuffId": -1 },
+        {"Name":"honey", "Id":518, "MinHP":-1, "MinSP":40,"BuffId": -1 }
     ],
     "ItemLoot":[
-        {"Id":1971,   "Name":"electric wire"}
+        {"Id":1971,   "Name":"electric wire"},
+        {"Id":1015,   "Name":"tongue"}
     ],
     "Mob":[
         {"Priority":1, "Id":1202, "Name":"phendark",

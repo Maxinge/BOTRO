@@ -207,7 +207,7 @@ func botLoop() {
 
         if (float32(HPLEFT)/float32(HPMAX)*100) <= float32(useTPUnderHP) {
         if MAP != saveMap {
-            if timers.ThpTeleport <= 0 {
+            if timers.ThpTeleport <= 0 && countAggro > 0{
                 useTeleport(); timers.ThpTeleport = 10000; continue
             }
         }}
@@ -332,7 +332,6 @@ func botLoop() {
                 townRun = true;
             }
         }
-
         // #####################################################################
         // #####################################################################
         if MAP != saveMap && townRun{
@@ -360,6 +359,7 @@ func botLoop() {
                     }
                     MUnpcList.Unlock()
                     if ActorID != 0 && int(getDist(Coord{X:storageX,Y:storageY},charCoord)) <= 8{
+                        time.Sleep(time.Duration(500) * time.Millisecond)
                         talkNpc(ActorID)
                         time.Sleep(time.Duration(500) * time.Millisecond)
                         talkNpcNext(ActorID)
@@ -469,7 +469,7 @@ func botLoop() {
                     timers.TclickMove = 500
                 }
             }
-            if exist := getConf(conf["SKillSelf"],"Id",666666); exist != nil {
+            if exist := getConf(conf["SKillSelf"],"Id",666666); exist != nil && MAP == lockMap{
                 if targetMobID > 0 && SSphere <= 0{
                 if timers.TuseSkillSelf <= 0 {
                     sendUseSkill(261, 5, accountID)
@@ -492,9 +492,23 @@ func botLoop() {
         // #####################################################################
         if exist := getConf(conf["Route"],"Map", MAP); exist != nil {
         if !townRun {
+
+            if len(movePath) == 2 && timers.TsameCoord <= 9000 {
+                if useTPOnRoad == 1 {
+                    tpId := int(binary.LittleEndian.Uint16([]byte{26,0}))
+                    tpLv := int(binary.LittleEndian.Uint16([]byte{1,0}))
+                    sendUseSkill(tpId, tpLv, accountID)
+                }
+                if useTPOnRoad == 2 {
+                    _,inventID := itemInInventory(601,1) // fly wing
+                    if inventID > -1  {  sendUseItem(inventID)  }
+                }
+                continue
+            }
+
             if movePath != nil && len(movePath) > 2 {
                 if exist.(CRoute).UseTPdist > 0 {
-                    if len(movePath) > exist.(CRoute).UseTPdist{
+                    if len(movePath) > exist.(CRoute).UseTPdist {
                         if useTPOnRoad == 1 {
                             tpId := int(binary.LittleEndian.Uint16([]byte{26,0}))
                             tpLv := int(binary.LittleEndian.Uint16([]byte{1,0}))
@@ -870,7 +884,9 @@ func pickMobTarget() int{
         if vv.IsNotValid { continue }
         if vv.DeathTime > 0 { continue }
         // distMobList[getDist(vv.CoordsFrom, charCoord)] = kk
-        dist := float64(len(pathfind(charCoord, vv.CoordsFrom, lgatMaps[MAP], []Coord{})))
+        pf := pathfind(charCoord, vv.CoordsFrom, lgatMaps[MAP], []Coord{})
+        if pf[0] == pf[1] { continue }
+        dist := float64(len(pf))
         distMobList[dist] = kk
     }
 
