@@ -215,7 +215,8 @@ func main() {
 }
 
 
-type CRoute struct{ Map string; X int; Y int; WarpPortal string; UseTPdist int; NPC string;}
+type CRoute struct{ Map string; X int; Y int; WarpPortal string; UseTPdist int; NPC string; }
+type CStorageRoute struct{ Map string; X int; Y int; WarpPortal string; UseTPdist int; NPC string; }
 type CStorage struct{ Name string; Id int; Y int; Min int; Max int; }
 type CStorageCart struct{ Name string; Id int; Y int; Min int; Max int; }
 type CCartTransfert struct{ Name string; Id int; Am int; From bool; }
@@ -247,6 +248,13 @@ func loadprofil(){
             fld := reflect.ValueOf(&stru).Elem().FieldByName(kkk); convertField(vvv, fld)
         }
         conf["Route"] = append(conf["Route"], stru)
+    }
+    for _,vv := range profil["StorageRoute"] {
+        stru := CStorageRoute{}
+        for kkk,vvv := range vv.(map[string]interface{}) {
+            fld := reflect.ValueOf(&stru).Elem().FieldByName(kkk); convertField(vvv, fld)
+        }
+        conf["StorageRoute"] = append(conf["StorageRoute"], stru)
     }
     for _,vv := range profil["Storage"] {
         stru := CStorage{}
@@ -299,15 +307,6 @@ func loadprofil(){
     }
 }
 
-// ### example ###
-// if exist := getConf(conf["Route"],"Map","prontera"); exist != nil {
-//     fmt.Printf("exist -- %v -- \n", exist.(CRoute).X)
-// }
-//
-// if exist := getConf(conf["General"],"Key","useTP"); exist != nil {
-//     TP := exist.(struct{Key string;Val int}).Val
-//     fmt.Printf("TP -- %v -- \n", TP)
-// }
 
 func getConf(iiconf []interface{}, key2 string, iii interface{}) interface{} {
     for _,vv := range iiconf {

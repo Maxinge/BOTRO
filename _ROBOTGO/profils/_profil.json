@@ -1,74 +1,67 @@
 {
     "General":[
-        ["Title",    "smithmino"],
         ["accountID",    2014282],
 
-        ["saveMap",      "morocc"],
-        ["lockMap",      "moc_pryd05"],
-        ["WarpPortal",   ""],
-        ["useTPNbAggro",    7],
+        ["saveMap",      "morocc_in"],
+        ["lockMap",      "tur_dun02"],
+        ["storageWeight",   69],
+        ["storageX",   156],
+        ["storageY",   97],
+        ["innSP",   5],
+        ["innX",   80],
+        ["innY",   100],
+
+        ["useTPNbAggro",    5],
         ["useTPLockMap",    2],
         ["useTPOnRoad",     2],
-        ["useTPDelay",      30],
-        ["useTPUnderHP",    50],
-        ["useSitHP",        0],
-        ["useSitUnderSP",   20],
-        ["useSitAboveSP",   99],
-        ["storageWeight",   68],
-        ["storageX",   156],
-        ["storageY",   97]
+        ["useTPDelay",      50],
+        ["useTPUnderHP",    40],
+
+        ["useSphere",   5],
+        ["useSphereCombat",   0],
+        ["useHeal",   60],
+        ["useHealCombat",   60],
+        ["useHealLv",   10],
+
+        ["useSitUnderSP",   -1],
+        ["useSitAboveSP",   98]
+    ],
+    "StorageRoute":[
+        {"Map":"morocc_in",    "X":85,    "Y":90},
+        {"Map":"morocc",    "X":156,    "Y":97}
     ],
     "Route":[
-        {"Map":"moc_prydb1",    "X":100,    "Y":55, "UseTPdist": 40},
-        {"Map":"moc_ruins",    "X":55,    "Y":161, "UseTPdist": 100},
-        {"Map":"morocc",    "X":25,    "Y":294 },
-        {"Map":"moc_pryd01",    "X":90,    "Y":109, "UseTPdist": 150},
-        {"Map":"moc_pryd06",    "X":195,    "Y":8,"UseTPdist": 150}
-    ],
-    "CartTransfert":[
-        {"Name":"rough elu", "Id":757, "Am":5, "From":true},
-        {"Name":"rough ori", "Id":756, "Am":5, "From":true},
-        {"Name":"nose ring", "Id":941, "Am":50, "From":true}
+        {"Map":"alberta",    "X":247,    "Y":122, "NPC": "N0 C2 N0 N0 C1 N0"},
+        {"Map":"morocc",        "WarpPortal":"alberta.gat"},
+        {"Map":"morocc_in",     "WarpPortal":"alberta.gat"},
+        {"Map":"tur_dun01",    "X":154,    "Y":241, "UseTPdist": 100},
+        {"Map":"tur_dun03",    "X":132,    "Y":193, "UseTPdist": 100}
     ],
     "Storage":[
-        {"Name":"Converter water", "Id":12115, "Min":0, "Max":30 },
-        {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
-        {"Name":"zerk pot", "Id":657, "Min":0, "Max":5},
-        {"Name":"fly wings", "Id":601, "Min":5, "Max":250},
-        {"Name":"bread", "Id":8076, "Min":5, "Max":250}
-    ],
-    "StorageCart":[
-        {"Name":"fly wings", "Id":601, "Min":5, "Max":600}
-    ],
-    "CartTransfert":[
-        {"Name":"fly wings", "Id":601, "Am":50 }
-    ],
-    "Mob":[
-        {"Priority":1, "Id":1149, "Name":"mino",
-            "AtkName":"mamonite", "AtkId":42,"AtkLv":6, "MinDist": 2, "MinHP": 0},
-        {"Priority":-1, "Id":1032, "Name":"verit",
-            "AtkName":"mamonite", "AtkId":42,"AtkLv":5, "MinDist": 1, "MinHP": 0}
-    ],
-    "ItemLoot":[
-        {"Id":508,   "Name":"Yellow_Herb"},
-        {"Id":511,   "Name":"Green_Herb"},
-        {"Id":949,   "Name":"feather"},
-        {"Id":2609,   "Name":"skullring"},
-        {"Id":2612,   "Name":"flowering"},
-        {"Id":1005,   "Name":"hammerof"},
-        {"Id":516,   "Name":"potato"},
-        {"Id":1301,   "Name":"axe"}
+        {"Name":"blue gem", "Id":717, "Min":0, "Max":30},
+        {"Name":"butt fly", "Id":602, "Min":0, "Max":30},
+        {"Name":"red herb", "Id":507, "Min":0, "Max":10},
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":500},
+        {"Name":"green herb", "Id":511, "Min":0, "Max":10}
     ],
     "ItemUse":[
-        {"Name":"Converter water", "Id":12115, "MinHP":-1, "MinSP":-1,"BuffId": 1505 },
-        {"Name":"zerk pot", "Id":657, "MinHP":-1, "MinSP":-1,"BuffId": 39 },
-        {"Name":"bread", "Id":8076, "MinHP":80, "MinSP":-1,"BuffId": -1 }
+        {"Name":"green herb", "Id":511, "MinHP":-1, "MinSP":-1,"DeBuffId": 440 },
+        {"Name":"lemon", "Id":568, "MinHP":-1, "MinSP":40,"BuffId": -1 },
+        {"Name":"straw", "Id":578, "MinHP":-1, "MinSP":40,"BuffId": -1 },
+        {"Name":"orange", "Id":582, "MinHP":-1, "MinSP":40,"BuffId": -1 },
+        {"Name":"bluepot", "Id":505, "MinHP":-1, "MinSP":40,"BuffId": -1 },
+        {"Name":"honey", "Id":518, "MinHP":-1, "MinSP":40,"BuffId": -1 },
+        {"Name":"bread", "Id":8076, "MinHP":97, "MinSP":-1,"BuffId": -1 }
+    ],
+    "ItemLoot":[
+        {"Id":8068,   "Name":"chalice"}
+    ],
+    "Mob":[
+        {"Priority":1, "Id":1319, "Name":"freezer",
+            "AtkName":"investigate", "AtkId":266,"AtkLv":5, "MinDist": 1, "MinHP": 0}
     ],
     "SKillSelf":[
-        {"Name":"adrenaline rush","Lv":5, "Id":111,     "MinHP": -1, "MinSP": 10, "BuffId": 23},
-        {"Name":"maximize","Lv":5, "Id":114,     "MinHP": -1, "MinSP": 10, "BuffId": 26},
-        {"Name":"crazy upraor","Lv":1, "Id":155,            "MinHP": -1, "MinSP": 10, "BuffId": 30},
-        {"Name":"weap perfe","Lv":5, "Id":112,            "MinHP": -1, "MinSP": 10, "BuffId": 24},
-        {"Name":"over trust","Lv":5, "Id":113,    "MinHP": -1, "MinSP": 10, "BuffId": 25}
+        {"Name":"Blessing","Lv":10, "Id":34,            "MinHP": -1, "MinSP": 5, "BuffId": 10},
+        {"Name":"Increase Agility","Lv":10, "Id":29,    "MinHP": -1, "MinSP": 5, "BuffId": 12}
     ]
 }

@@ -121,16 +121,24 @@ var(
     lockMap = ""
     saveMap = ""
     useTPNbAggro = 10
-    useTPLockMap = 0
-    useTPOnRoad = 0
+    useTPLockMap = -1
+    useTPOnRoad = -1
     useTPDelay = 10
     useTPUnderHP = 5
-    useSitUnderSP = 0
+    useSitUnderSP = -1
     useSitAboveSP = 99
     storageWeight = 49
-    storageX = 0
-    storageY = 0
-    useGreed = 0
+    storageX = -1
+    storageY = -1
+    useGreed = -1
+    useSphere = -1
+    useSphereCombat = -1
+    useHeal = -1
+    useHealCombat = -1
+    useHealLv = 10
+    innSP = -1
+    innX = -1
+    innY = -1
 
 
     // ##### BOT
@@ -143,6 +151,7 @@ var(
     movePath = []Coord{}
 
     townRun = false
+    innRun = false
 
     targetItemID = -1
     targetMobID = -1

@@ -24,13 +24,13 @@ func parsePacket(bb []byte){
         resetTrapList()
         resetTargets()
 
-        timers.TuseSkillSelf = 100
-        timers.TuseSkill = 100
-        timers.TuseItem = 100
+        timers.TuseSkillSelf = 300
+        timers.TuseSkill = 300
+        timers.TuseItem = 300
         timers.TclickMove = 200
 
         SSphere = 0
-        pauseLoop(600)
+        pauseLoop(500)
         ccFrom = Coord{
             X:int(binary.LittleEndian.Uint16(bb[16:16+2])),
             Y:int(binary.LittleEndian.Uint16(bb[18:18+2])),
@@ -44,8 +44,8 @@ func parsePacket(bb []byte){
         lastMoveTime = 0
 
         go func() {
-            time.Sleep(time.Duration(1000) * time.Millisecond)
-            if MAP == saveMap && !townRun{ resetPath() }
+            time.Sleep(time.Duration(800) * time.Millisecond)
+            if exist := getConf(conf["StorageRoute"],"Map", MAP); exist != nil && townRun{ resetPath() }
         }()
 
 
@@ -119,6 +119,7 @@ func parsePacket(bb []byte){
         inventoryID := int(binary.LittleEndian.Uint16(bb[0:0+2]))
         // itemID := int(binary.LittleEndian.Uint32(bb[2:2+4]))
         amountLeft := int(binary.LittleEndian.Uint16(bb[10:10+2]))
+        MUinventoryItems.Lock()
         if ii, exist := inventoryItems[inventoryID]; exist {
             if amountLeft == 0{
                 ii.Amount -= 1
@@ -127,6 +128,7 @@ func parsePacket(bb []byte){
             }
             inventoryItems[inventoryID] = ii
         }
+        MUinventoryItems.Unlock()
 
     case "0ADD":  //item_appear
         tnow := time.Now()
@@ -167,16 +169,16 @@ func parsePacket(bb []byte){
     case "00AF":  //inventory_item_removed
         inventoryID := int(binary.LittleEndian.Uint16(bb[0:0+2]))
         amount := int(binary.LittleEndian.Uint16(bb[2:2+2]))
+        MUinventoryItems.Lock()
         if ii, exist := inventoryItems[inventoryID]; exist {
             ii.Amount -= amount
             if ii.Amount <= 0 {
-                MUinventoryItems.Lock()
                 delete(inventoryItems, inventoryID)
-                MUinventoryItems.Unlock()
             }else{
                 inventoryItems[inventoryID] = ii
             }
         }
+        MUinventoryItems.Unlock()
 
     case "0B1A":  //skill_use_confirm
         sourceID := int(binary.LittleEndian.Uint32(bb[0:0+4]))
@@ -188,7 +190,6 @@ func parsePacket(bb []byte){
                 pauseLoop(castTime)
                 timers.TclickLoot =  100
                 timers.TuseSkillSelf =  100
-                timers.TuseSkill =  100
                 timers.TclickMove =  100
             }
         }
@@ -286,7 +287,8 @@ func parsePacket(bb []byte){
                     timers.TclickMove = 300
                     timers.TclickLoot = 200
                     timers.TuseSkillSelf = 200
-                    pauseLoop(150)
+                    timers.TnoMob = 200
+                    pauseLoop(200)
                     targetMobID = -1
                 }
                 mobList[mapID] = mm

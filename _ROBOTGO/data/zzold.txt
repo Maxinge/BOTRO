@@ -1,4 +1,10 @@
-S> Kaho card 4.5m
+
+{"Name":"green herb", "Id":511, "MinHP":-1, "MinSP":-1,"DeBuffId": 883 },
+
+### buff_active_time ### [0196][7] -> [[184 1 74 188 30 0 0]]
+### buffID ### [440]
+
+
 
 ### actor_appear ### [09FE][105][[107 0 7 106 83 82 7 0 0 0 0 150 0 0 0 0 0 0 0 0 0 243 3 100 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 11 138 32 0 0 0 0 0 0 255 255 255 255 255 255 255 255 0 0 0 67 104 111 110 67 104 111 110 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]]
 ### actor_appear ### [09FF][106][[108 0 6 106 134 142 6 0 0 0 0 200 0 0 0 0 0 0 0 0 0 84 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 10 150 244 0 0 0 0 0 0 0 255 255 255 255 255 255 255 255 0 0 0 83 99 104 119 97 114 122 119 97 108 100 32 83 111 108 100 105 101 114 35 101 0 0 0]]
@@ -16,7 +22,17 @@ S> Kaho card 4.5m
 ### actor_appear ### [09FE][105][[107 0 7 106 83 82 7 0 0 0 0 150 0 0 0 0 0 0 0 0 0 243 3 100 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 85 8 16 0 0 0 0 0 0 255 255 255 255 255 255 255 255 0 0 0 67 104 111 110 67 104 111 110 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]]
 ### actor_appear ### [09FD][112][[114 0 5 147 101 82 7 0 0 0 0 165 0 0 0 0 0 0 0 0 0 100 5 0 0 0 0 0 0 0 0 0 0 0 0 137 203 220 78 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 79 135 197 4 128 136 0 0 52 0 0 0 255 255 255 255 255 255 255 255 0 0 0 68 114 105 108 108 101 114 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]]
 
+The consensus of improving the loot system is shared by mostly everyone on this server. I still don't know why something doesn't exist yet (for exemple arealoot)
 
+And don't serv me the greeder role in party, I main smith since 15 years and what I can say is most main smith doesn't care of greed in party because they exp solo, as for farming its efficient in 3 maps of the entire game, because it does cost 10 sp per greed.
+
+As well, forge smith crying about not be able to find party, they could still mob with perflect flee gear : you don't design en entire loot system just for a specific slave build
+
+I can guarantee, I would totally trade greed for either a arealoot or the ability to pickup items with a key instead of a mouseclic
+
+the problem is not looting, the problem is looting in this game, it's toxic cause mobs overlap with ground items + all the bug position this server didn't fix yet
+
+we asking a QoL update of loot system
 ,
 {"Priority":-4, "Id":1366, "Name":"lavagolem", "TPdist": 1}
 

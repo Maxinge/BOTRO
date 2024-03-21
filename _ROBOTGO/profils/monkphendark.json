@@ -1,22 +1,29 @@
 {
     "General":[
-        ["Title",    "monk phendark"],
         ["accountID",    2014282],
 
         ["saveMap",      "alberta"],
         ["lockMap",      "gl_prison1"],
         ["WarpPortal",   "glast_01.gat"],
+        ["storageX",   113],
+        ["storageY",   60],
+        ["storageWeight",   69],
+
         ["useTPNbAggro",    5],
         ["useTPLockMap",    2],
         ["useTPOnRoad",     2],
-        ["useTPDelay",      30],
-        ["useTPUnderHP",    50],
+        ["useTPDelay",      50],
+        ["useTPUnderHP",    30],
+
+        ["useSphere",   5],
+        ["useSphereCombat",   0],
+        ["useHeal",   70],
+        ["useHealCombat",   30],
+        ["useHealLv",   10],
+
         ["useSitHP",        0],
         ["useSitUnderSP",   20],
-        ["useSitAboveSP",   98],
-        ["storageWeight",   68],
-        ["storageX",   113],
-        ["storageY",   60]
+        ["useSitAboveSP",   98]
     ],
     "Route":[
         {"Map":"gl_sew01",    "X":258,    "Y":258, "UseTPdist": 150},
@@ -29,13 +36,15 @@
         {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
         {"Name":"red herb", "Id":507, "Min":0, "Max":10},
         {"Name":"green herb herb", "Id":511, "Min":0, "Max":10},
-        {"Name":"fly wings", "Id":601, "Min":5, "Max":500},
-        {"Name":"blue potion", "Id":505, "Min":0, "Max":30}
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":340},
+        {"Name":"blue potion", "Id":505, "Min":0, "Max":10},
+        {"Name":"bread", "Id":8076, "Min":5, "Max":160}
     ],
     "ItemUse":[
         {"Name":"lemon", "Id":568, "MinHP":-1, "MinSP":40,"BuffId": -1 },
         {"Name":"blue potion", "Id":505, "MinHP":-1, "MinSP":40,"BuffId": -1 },
-        {"Name":"honey", "Id":518, "MinHP":-1, "MinSP":40,"BuffId": -1 }
+        {"Name":"honey", "Id":518, "MinHP":-1, "MinSP":40,"BuffId": -1 },
+        {"Name":"bread", "Id":8076, "MinHP":95, "MinSP":-1,"BuffId": -1 }
     ],
     "ItemLoot":[
         {"Id":1971,   "Name":"electric wire"},
@@ -43,11 +52,11 @@
     ],
     "Mob":[
         {"Priority":1, "Id":1202, "Name":"phendark",
+            "AtkName":"investigate", "AtkId":266,"AtkLv":5, "MinDist": 1, "MinHP": 0},
+        {"Priority":1, "Id":1200, "Name":"zealotus",
             "AtkName":"investigate", "AtkId":266,"AtkLv":5, "MinDist": 1, "MinHP": 0}
     ],
     "SKillSelf":[
-        {"Name":"SSS","Lv":5, "Id":666666,              "MinHP": -1, "MinSP": -1, "BuffId": -1},
-        {"Name":"Heal", "Lv":7, "Id":28,                "MinHP": 70, "MinSP": 20, "BuffId": -1},
         {"Name":"Blessing","Lv":10, "Id":34,            "MinHP": -1, "MinSP": 20, "BuffId": 10},
         {"Name":"Increase Agility","Lv":10, "Id":29,    "MinHP": -1, "MinSP": 20, "BuffId": 12}
     ]

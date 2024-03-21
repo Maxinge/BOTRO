@@ -23,4 +23,6 @@ la premiere compilation de cimguigo peu prendre du temps
 - greed
 - cart mieu
 - raw fish
-- player management
+- green herb
+- agro wieght
+- inn sp run

@@ -1,0 +1,57 @@
+{
+    "General":[
+        ["accountID",    2014282],
+
+        ["saveMap",      "alberta"],
+        ["lockMap",      "tur_dun02"],
+        ["WarpPortal",   ""],
+        ["storageX",   113],
+        ["storageY",   60],
+        ["storageWeight",   69],
+
+        ["useTPNbAggro",    4],
+        ["useTPLockMap",    2],
+        ["useTPOnRoad",     2],
+        ["useTPDelay",      50],
+        ["useTPUnderHP",    20],
+
+        ["useSphere",   5],
+        ["useSphereCombat",   0],
+        ["useHeal",   60],
+        ["useHealCombat",   30],
+        ["useHealLv",   10],
+
+        ["useSitHP",        0],
+        ["useSitUnderSP",   20],
+        ["useSitAboveSP",   98]
+    ],
+    "Route":[
+        {"Map":"alberta",    "X":247,    "Y":122, "NPC": "N0 C2 N0 N0 C1 N0"},
+        {"Map":"tur_dun01",    "X":154,    "Y":241, "UseTPdist": 100}
+    ],
+    "Storage":[
+        {"Name":"blue gem", "Id":717, "Min":0, "Max":5},
+        {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
+        {"Name":"red herb", "Id":507, "Min":0, "Max":10},
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":400},
+        {"Name":"blue potion", "Id":505, "Min":0, "Max":30},
+        {"Name":"green herb herb", "Id":511, "Min":0, "Max":10}
+    ],
+    "ItemUse":[
+        {"Name":"lemon", "Id":568, "MinHP":-1, "MinSP":40,"BuffId": -1 },
+        {"Name":"blue potion", "Id":505, "MinHP":-1, "MinSP":40,"BuffId": -1 },
+        {"Name":"honey", "Id":518, "MinHP":-1, "MinSP":40,"BuffId": -1 },
+        {"Name":"bread", "Id":8076, "MinHP":97, "MinSP":-1,"BuffId": -1 }
+    ],
+    "ItemLoot":[
+        {"Id":8068,   "Name":"chalice"}
+    ],
+    "Mob":[
+        {"Priority":1, "Id":1319, "Name":"freezer",
+            "AtkName":"investigate", "AtkId":266,"AtkLv":5, "MinDist": 1, "MinHP": 0}
+    ],
+    "SKillSelf":[
+        {"Name":"Blessing","Lv":10, "Id":34,            "MinHP": -1, "MinSP": 20, "BuffId": 10},
+        {"Name":"Increase Agility","Lv":10, "Id":29,    "MinHP": -1, "MinSP": 20, "BuffId": 12}
+    ]
+}

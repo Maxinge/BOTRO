@@ -1,50 +1,57 @@
 {
     "General":[
-        ["Title",    "monk AK"],
         ["accountID",    2014282],
 
         ["saveMap",      "alberta"],
         ["lockMap",      "gl_knt01"],
         ["WarpPortal",   "glast_01.gat"],
-        ["useTPNbAggro",    6],
+        ["storageX",   113],
+        ["storageY",   60],
+        ["storageWeight",   69],
+
+        ["useTPNbAggro",    5],
         ["useTPLockMap",    2],
         ["useTPOnRoad",     2],
-        ["useTPDelay",      30],
-        ["useTPUnderHP",    50],
+        ["useTPDelay",      100],
+        ["useTPUnderHP",    25],
+
+        ["useSphere",   5],
+        ["useSphereCombat",   2],
+        ["useHeal",   70],
+        ["useHealCombat",   30],
+        ["useHealLv",   10],
+
         ["useSitHP",        0],
         ["useSitUnderSP",   20],
-        ["useSitAboveSP",   98],
-        ["storageWeight",   68],
-        ["storageX",   113],
-        ["storageY",   60]
+        ["useSitAboveSP",   98]
     ],
     "Route":[
-        {"Map":"glast_01",    "X":77,    "Y":193, "UseTPdist": 150}
+        {"Map":"glast_01",    "X":77,    "Y":193}
     ],
     "Storage":[
         {"Name":"blue gem", "Id":717, "Min":0, "Max":5},
         {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
         {"Name":"red herb", "Id":507, "Min":0, "Max":10},
-        {"Name":"green herb herb", "Id":511, "Min":0, "Max":10},
-        {"Name":"fly wings", "Id":601, "Min":5, "Max":400},
-        {"Name":"blue potion", "Id":505, "Min":0, "Max":50}
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":200},
+        {"Name":"blue potion", "Id":505, "Min":0, "Max":15},
+        {"Name":"bread", "Id":8076, "Min":5, "Max":250}
     ],
     "ItemUse":[
         {"Name":"lemon", "Id":568, "MinHP":-1, "MinSP":40,"BuffId": -1 },
         {"Name":"blue potion", "Id":505, "MinHP":-1, "MinSP":40,"BuffId": -1 },
-        {"Name":"honey", "Id":518, "MinHP":-1, "MinSP":40,"BuffId": -1 }
+        {"Name":"honey", "Id":518, "MinHP":-1, "MinSP":40,"BuffId": -1 },
+        {"Name":"bread", "Id":8076, "MinHP":95, "MinSP":-1,"BuffId": -1 }
     ],
     "ItemLoot":[
         {"Id":1971,   "Name":"electric wire"},
+        {"Id":1064,   "Name":"reims"},
         {"Id":1015,   "Name":"tongue"}
     ],
     "Mob":[
-        {"Priority":1, "Id":1219, "Name":"phendark",
+        {"Priority":1, "Id":1219, "Name":"AK",
             "AtkName":"investigate", "AtkId":266,"AtkLv":5, "MinDist": 1, "MinHP": 0}
     ],
     "SKillSelf":[
-        {"Name":"SSS","Lv":5, "Id":666666,              "MinHP": -1, "MinSP": -1, "BuffId": -1},
-        {"Name":"Heal", "Lv":7, "Id":28,                "MinHP": 80, "MinSP": 20, "BuffId": -1},
         {"Name":"Blessing","Lv":10, "Id":34,            "MinHP": -1, "MinSP": 20, "BuffId": 10},
         {"Name":"Increase Agility","Lv":10, "Id":29,    "MinHP": -1, "MinSP": 20, "BuffId": 12}
     ]

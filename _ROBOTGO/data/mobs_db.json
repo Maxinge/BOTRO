@@ -47412,6 +47412,20 @@
 		"CanDetectCast": true,
 		"Drops": [
 			{
+				"Chance": 0.06,
+				"Item": {
+					"Id": 13006,
+					"AegisName": "kukri",
+					"Name": "kukri",
+					"Type": "Misc",
+					"Buy": 240000,
+					"Sell": 120000,
+					"Weight": 1,
+					"Slots": 0,
+					"SellOvercharged": 150000
+				}
+			},
+			{
 				"Chance": 53.36,
 				"Item": {
 					"Id": 1036,

@@ -41,7 +41,9 @@
         {"Name":"fly wings", "Id":601, "Min":5, "Max":600}
     ],
     "CartTransfert":[
-        {"Name":"fly wings", "Id":601, "Am":50 }
+        {"Name":"rough elu", "Id":757, "Am":5, "From":true},
+        {"Name":"rough ori", "Id":756, "Am":5, "From":true},
+        {"Name":"nose ring", "Id":941, "Am":50, "From":true}
     ],
     "Mob":[
         {"Priority":1, "Id":1149, "Name":"mino",
