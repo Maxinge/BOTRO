@@ -5,7 +5,7 @@ import(
     "time"
     "encoding/binary"
     "math"
-    // "math/rand"
+    "math/rand"
     "strings"
 )
 
@@ -75,6 +75,9 @@ func initConf(){
     }
     if exist := getConf(conf["General"],"Key","innY"); exist != nil {
         innY = exist.(struct{Key string; Val int}).Val
+    }
+    if exist := getConf(conf["General"],"Key","storageChoice"); exist != nil {
+        storageChoice = exist.(struct{Key string; Val int}).Val
     }
 
 }
@@ -177,6 +180,7 @@ func botLoop() {
         if timers.TsameMob >= -10000000000 { timers.TsameMob -= 50 }
         if timers.TsameItem >= -10000000000 { timers.TsameItem -= 50 }
         if timers.TclickLoot >= -10000000000 { timers.TclickLoot -= 50 }
+        if timers.TloadTP >= -10000000000 { timers.TloadTP -= 50 }
 
         loopTimeEnd = time.Now()
         waitfor := 50 - int(loopTimeEnd.Sub(loopTimeStart).Milliseconds())
@@ -187,8 +191,9 @@ func botLoop() {
         // #####################################################################
         // #####################################################################
         if HPLEFT <= 0 {
+            time.Sleep(time.Duration(1000) * time.Millisecond)
             sendToServer("00B2", []byte{0})
-            pauseLoop(1000)
+            pauseLoop(1500)
             continue
         }
 
@@ -208,13 +213,16 @@ func botLoop() {
         MUgroundItems.Unlock()
 
         MUmobList.Lock()
+
+        if (float32(HPLEFT)/float32(HPMAX)*100) > float32(useHeal) {
         if countAggro < useTPNbAggro {
         if SSphere >= useSphereCombat {
         if targetMobID < 0 {
+        if !innRun {
         if !townRun {
         if len(playerList) <= 0 {
             targetMobID = pickMobTarget()
-        }}}}}
+        }}}}}}}
         mob := mobList[targetMobID]
         if targetMobID > 0 && len(playerList) > 0 {
             MUplayerList.Lock()
@@ -249,7 +257,7 @@ func botLoop() {
         if (float32(HPLEFT)/float32(HPMAX)*100) <= float32(useTPUnderHP) {
         if MAP != saveMap {
             if timers.ThpTeleport <= 0 && countAggro > 0{
-                useTeleport(); timers.ThpTeleport = 10000; continue
+                useTeleport(); timers.ThpTeleport = 5000; continue
             }
         }}
         if countAggro >= 100 { useTeleport(); continue }
@@ -281,8 +289,8 @@ func botLoop() {
         sameCoord = charCoord
         if timers.TsameCoord <= 0 {
             timers.TsameCoord = 10000
-            // resetTargets(); resetPath()
-            useTeleport()
+            resetTargets(); resetPath()
+            // useTeleport()
         }
         if sameMob != targetMobID || targetMobID < 0{
             timers.TsameMob = 10000
@@ -361,19 +369,22 @@ func botLoop() {
             }
         }
 
+
+        spPc := (float32(SPLEFT)/float32(SPMAX)*100)
+        if innRun == true { spPc = 0 }
         innRun = false
-        if (float32(SPLEFT)/float32(SPMAX)*100) <= float32(innSP) && !townRun{
+        if spPc <= float32(innSP) && !townRun {
             innRun = true
         }
 
         if innRun && MAP != saveMap {
         if targetMobID < 0 && targetItemID < 0{
-            goTown()
+            goTown(); pauseLoop(2000)
         }}
 
         if exist := getConf(conf["StorageRoute"],"Map", MAP); exist == nil && townRun{
-        if targetMobID < 0 && targetItemID < 0{
-            goTown()
+        if targetMobID < 0 && targetItemID < 0 && timers.TloadTP < 100{
+            goTown(); pauseLoop(2000)
         }}
         // #####################################################################
         // #####################################################################
@@ -396,39 +407,31 @@ func botLoop() {
                 time.Sleep(time.Duration(500) * time.Millisecond)
                 talkNpcNext(ActorID)
                 time.Sleep(time.Duration(500) * time.Millisecond)
+                innRun = false
                 continue
             }
         }
         // #####################################################################
         // #####################################################################
-        if exist := getConf(conf["StorageRoute"],"Map", MAP); exist != nil && townRun{
+        if exist := getConf(conf["StorageRoute"],"Map", MAP); exist != nil && townRun && timers.TloadTP < 0{
             if movePath != nil && len(movePath) > 2 {
-                if timers.TclickMove <= 0 {
-                    ii := getClosestPoint(charCoord,movePath) + 5
-                    if ii >= len(movePath)-1{ ii = len(movePath)-1 }
-                    if int(getDist(movePath[len(movePath)-1],charCoord)) >= 8 {
-                        sendToServer("035F",coordsTo24Bits(movePath[ii].X,movePath[ii].Y))
-                        timers.TclickMove = 250
-                    }
-                }
 
-                if int(getDist(movePath[len(movePath)-1],charCoord)) < 8 {
+                storageCoord := Coord{X:storageX, Y:storageY}
+                if int(getDist(storageCoord,charCoord)) < 12 {
                     ActorID := 0
                     MUnpcList.Lock()
                     for kk,vv := range npcList {
-                        if vv.Coords.X == storageX && vv.Coords.Y == storageY  {
-                            ActorID = kk
-                        }
+                        if vv.Coords == storageCoord { ActorID = kk }
                     }
                     MUnpcList.Unlock()
                     if ActorID != 0 {
-                        sendToServer("035F",coordsTo24Bits(charCoord.X,charCoord.Y))
+                        sendToServer("035F",coordsTo24Bits(ccTo.X,ccTo.Y))
                         time.Sleep(time.Duration(500) * time.Millisecond)
                         talkNpc(ActorID)
                         time.Sleep(time.Duration(500) * time.Millisecond)
                         talkNpcNext(ActorID)
                         time.Sleep(time.Duration(500) * time.Millisecond)
-                        talkNpcChoice(ActorID, 2)
+                        talkNpcChoice(ActorID, storageChoice)
                         time.Sleep(time.Duration(500) * time.Millisecond)
                         talkNpcClose(ActorID)
                         time.Sleep(time.Duration(500) * time.Millisecond)
@@ -461,7 +464,7 @@ func botLoop() {
                         time.Sleep(time.Duration(500) * time.Millisecond)
                         talkNpcNext(ActorID)
                         time.Sleep(time.Duration(500) * time.Millisecond)
-                        talkNpcChoice(ActorID, 2)
+                        talkNpcChoice(ActorID, storageChoice)
                         time.Sleep(time.Duration(500) * time.Millisecond)
                         talkNpcClose(ActorID)
                         time.Sleep(time.Duration(500) * time.Millisecond)
@@ -494,8 +497,19 @@ func botLoop() {
                         resetPath()
                         townRun = false
                         timers.TsameCoord = 10000
+                        continue
                     }
                 }
+
+                if timers.TclickMove <= 0 {
+                    ii := getClosestPoint(charCoord,movePath) + 5
+                    if ii >= len(movePath)-1{ ii = len(movePath)-1 }
+                    if int(getDist(movePath[len(movePath)-1],charCoord)) >= 8 {
+                        sendToServer("035F",coordsTo24Bits(movePath[ii].X,movePath[ii].Y))
+                        timers.TclickMove = 250
+                    }
+                }
+
             }else{
                 nextCoord := Coord{X:exist.(CStorageRoute).X, Y:exist.(CStorageRoute).Y}
                 movePath = pathfind(charCoord, nextCoord, lgatMaps[MAP], []Coord{})
@@ -503,6 +517,7 @@ func botLoop() {
         }
         // #####################################################################
         // #####################################################################
+
         if exist := getConf(conf["Route"],"Map", MAP); exist != nil || MAP == lockMap {
         if !townRun && MAP != saveMap{
 
@@ -520,7 +535,7 @@ func botLoop() {
                     MUinventoryItems.Unlock()
                     if it.ItemID == 12114 || it.ItemID == 12115 ||
                         it.ItemID == 12116 || it.ItemID == 12117 ||
-                        it.ItemID == 655 || it.ItemID == 656 || it.ItemID == 657 {
+                        it.ItemID == 645 || it.ItemID == 656 || it.ItemID == 657 {
                         timers.TuseSkillSelf = 300
                         timers.TuseSkill = 300
                     }
@@ -542,7 +557,7 @@ func botLoop() {
                 sendUseSkill(28, useHealLv, accountID)
                 timers.TuseSkillSelf = 300
                 timers.TuseSkill = 300
-                timers.TuseItem = 300
+                timers.TuseItem = 150
                 timers.TclickMove = 500
             }}
 
@@ -551,7 +566,7 @@ func botLoop() {
                 sendUseSkill(28, useHealLv, accountID)
                 timers.TuseSkillSelf = 300
                 timers.TuseSkill = 300
-                timers.TuseItem = 300
+                timers.TuseItem = 150
                 timers.TclickMove = 500
             }}
 
@@ -609,12 +624,12 @@ func botLoop() {
             if movePath != nil && len(movePath) > 2 {
                 if exist.(CRoute).UseTPdist > 0 {
                     if len(movePath) > exist.(CRoute).UseTPdist {
-                        if useTPOnRoad == 1 {
+                        if useTPOnRoad == 1 && timers.TloadTP <= 0{
                             tpId := int(binary.LittleEndian.Uint16([]byte{26,0}))
                             tpLv := int(binary.LittleEndian.Uint16([]byte{1,0}))
                             sendUseSkill(tpId, tpLv, accountID)
                         }
-                        if useTPOnRoad == 2 {
+                        if useTPOnRoad == 2 && timers.TloadTP <= 0{
                             _,inventID := itemInInventory(601,1) // fly wing
                             if inventID > -1  {  sendUseItem(inventID)  }
                         }
@@ -622,18 +637,15 @@ func botLoop() {
                     }
                 }
                 if timers.TclickMove <= 0 {
-                    ii := getClosestPoint(charCoord,movePath) + 5
-                    if ii >= len(movePath)-1{ ii = len(movePath)-1 }
-                    sendToServer("035F",coordsTo24Bits(movePath[ii].X,movePath[ii].Y))
-                    timers.TclickMove = 250
+
                     if exist.(CRoute).NPC != "" {
-                        if int(getDist(movePath[len(movePath)-1],charCoord)) <= 8{
-                            sendToServer("035F",coordsTo24Bits(charCoord.X,charCoord.Y))
-                            ccc := movePath[len(movePath)-1]
+                        npcCoord := movePath[len(movePath)-1]
+                        if int(getDist(npcCoord,charCoord)) < 12{
+                            sendToServer("035F",coordsTo24Bits(ccTo.X,ccTo.Y))
                             ActorID := 0
                             MUnpcList.Lock()
                             for kk,vv := range npcList {
-                                if vv.Coords.X == ccc.X && vv.Coords.Y == ccc.Y  { ActorID = kk }
+                                if vv.Coords == npcCoord { ActorID = kk }
                             }
                             MUnpcList.Unlock()
                             if ActorID != 0 {
@@ -651,9 +663,16 @@ func botLoop() {
                         }
                     }else{
                         if int(getDist(movePath[len(movePath)-1],charCoord)) <= 1{
+                            lastCoord := movePath[len(movePath)-1]
+                            sendToServer("035F",coordsTo24Bits(lastCoord.X,lastCoord.Y))
                             resetPath(); pauseLoop(500); continue
                         }
                     }
+
+                    ii := getClosestPoint(charCoord,movePath) + 5
+                    if ii >= len(movePath)-1{ ii = len(movePath)-1 }
+                    sendToServer("035F",coordsTo24Bits(movePath[ii].X,movePath[ii].Y))
+                    timers.TclickMove = 250
                 }
             }else{
                 warpCoord := Coord{X:exist.(CRoute).X, Y:exist.(CRoute).Y}
@@ -665,10 +684,12 @@ func botLoop() {
         if MAP == lockMap && targetMobID < 0 && targetItemID < 0 {
             if timers.TnoMob <= 0 {
             if timers.TuseSkillSelf <= 0 {
+            if timers.TloadTP <= 0 {
             if timers.TuseSkill <= 0 {
                 useTeleport()
                 timers.TnoMob = useTPDelay
-            }}}
+                continue
+            }}}}
             if movePath != nil && len(movePath) > 2 {
                 if timers.TclickMove <= 0 {
                     ii := getClosestPoint(charCoord,movePath) + 5
@@ -713,7 +734,8 @@ func botLoop() {
                 }
                 if AtkId != 0 {
                     if timers.TuseSkill <= 0 {
-                        sendUseSkill(AtkId, AtkLv, targetMobID);
+                        sendUseSkill(AtkId, AtkLv, targetMobID)
+                        timers.TuseSkill = 100
                         timers.TuseItem = 200
                         timers.TuseSkillSelf = 300
                     }
@@ -726,6 +748,15 @@ func botLoop() {
                     arrayBin = append(arrayBin,byte(7))
                     sendToServer("0437", arrayBin)
                     pauseLoop(200)
+                    if timers.TsameMob < 5000 && timers.TsameMob > 4000{
+                        resetPath()
+                        rcells := firstCircle(mob.CoordsFrom)
+                        rand.Seed(time.Now().UnixNano())
+                        rnd := rand.Intn(len(rcells)-1)
+                        if isValidCell(rcells[rnd], lgatMaps[MAP]){
+                            sendToServer("035F",coordsTo24Bits(rcells[rnd].X,rcells[rnd].Y))
+                        }
+                    }
                 }
             }else{
                 if timers.TclickMove <= 0 {
@@ -733,14 +764,6 @@ func botLoop() {
                     if ii >= len(movePath)-1{ ii = len(movePath)-1 }
                     sendToServer("035F",coordsTo24Bits(movePath[ii].X,movePath[ii].Y))
                     timers.TclickMove = 250
-                    // if timers.TsameMob < 6000{
-                    //     rcells := firstCircle(movePath[ii])
-                    //     rand.Seed(time.Now().UnixNano())
-                    //     rnd := rand.Intn(len(rcells)-1)
-                    //     if isValidCell(rcells[rnd], lgatMaps[MAP]){
-                    //         sendToServer("035F",coordsTo24Bits(rcells[rnd].X,rcells[rnd].Y))
-                    //     }
-                    // }
                 }
             }
         }
@@ -944,6 +967,11 @@ func resetPlayerList(){
     MUplayerList.Lock()
     playerList = map[int]Player{}
     MUplayerList.Unlock()
+}
+func resetNpcList(){
+    MUnpcList.Lock()
+    npcList = map[int]Npc{}
+    MUnpcList.Unlock()
 }
 func resetTrapList(){
     MUtrapList.Lock()

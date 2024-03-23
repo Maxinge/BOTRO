@@ -1,0 +1,67 @@
+{
+    "General":[
+        ["accountID",    2014282],
+
+        ["saveMap",      "morocc_in"],
+        ["lockMap",      "gef_fild13"],
+        ["storageWeight",   69],
+        ["storageX",   156],
+        ["storageY",   97],
+        ["innSP",   5],
+        ["innX",   80],
+        ["innY",   100],
+
+        ["useTPNbAggro",    5],
+        ["useTPLockMap",    1],
+        ["useTPOnRoad",     1],
+        ["useTPDelay",      50],
+        ["useTPUnderHP",    40],
+
+        ["useSphere",   1],
+        ["useSphereCombat",   0],
+        ["useHeal",   60],
+        ["useHealCombat",   60],
+        ["useHealLv",   10],
+
+        ["useSitUnderSP",   -1],
+        ["useSitAboveSP",   98]
+    ],
+    "StorageRoute":[
+        {"Map":"morocc_in",    "X":85,    "Y":90},
+        {"Map":"morocc",    "X":156,    "Y":97}
+    ],
+    "Storage":[
+        {"Name":"blue gem", "Id":717, "Min":0, "Max":30},
+        {"Name":"butt fly", "Id":602, "Min":0, "Max":30},
+        {"Name":"red herb", "Id":507, "Min":0, "Max":10}
+    ],
+    "Route":[
+        {"Map":"morocc",        "WarpPortal":"gef_fild13.gat"},
+        {"Map":"morocc_in",     "WarpPortal":"gef_fild13.gat"},
+        {"Map":"gef_fild12", "X": 372, "Y": 50},
+        {"Map":"gef_fild07", "X": 40, "Y":19, "UseTPdist": 150},
+        {"Map":"gefg_cas03", "X": 68, "Y":290},
+        {"Map":"gefg_cas03", "X": 93, "Y":159},
+        {"Map":"gefg_cas03", "X": 10, "Y": 283},
+        {"Map":"gefg_cas03", "X": 13, "Y": 250},
+        {"Map":"gefg_cas01", "X": 34, "Y":136},
+        {"Map":"gefg_cas04", "X": 24, "Y":145},
+        {"Map":"gef_fild14", "X": 18, "Y": 360},
+        {"Map":"gefg_cas01", "X": 99, "Y":178},
+        {"Map":"gefg_cas05", "X": 7 , "Y":34},
+        {"Map":"gefg_cas05", "X": 99, "Y":204},
+        {"Map":"gefg_cas02", "X": 70, "Y":147},
+        {"Map":"gef_fild09", "X": 23, "Y":56}
+    ],
+    "Mob":[
+        {"Priority":0, "Id":1094, "Name":"ambernite",
+            "AtkName":"Throw Spirit Sphere", "AtkId":0,"AtkLv":1, "MinDist": 2, "MinHP": 0}
+    ],
+    "ItemLoot":[
+        { "Id":935,   "Name":"Shell"}
+    ],
+    "SKillSelf":[
+        {"Name":"Blessing","Lv":10, "Id":34,            "MinHP": -1, "MinSP": 5, "BuffId": 10},
+        {"Name":"Increase Agility","Lv":10, "Id":29,    "MinHP": -1, "MinSP": 5, "BuffId": 12}
+    ]
+}

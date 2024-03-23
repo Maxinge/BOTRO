@@ -21,16 +21,18 @@ func parsePacket(bb []byte){
         resetInventoryList()
         resetMobItemList()
         resetPlayerList()
+        resetNpcList()
         resetTrapList()
         resetTargets()
 
-        timers.TuseSkillSelf = 300
-        timers.TuseSkill = 300
-        timers.TuseItem = 300
-        timers.TclickMove = 200
+        timers.TuseSkillSelf = 400
+        timers.TuseSkill = 400
+        timers.TuseItem = 400
+        timers.TclickMove = 400
+        timers.TloadTP = 400
 
         SSphere = 0
-        pauseLoop(500)
+        pauseLoop(300)
         ccFrom = Coord{
             X:int(binary.LittleEndian.Uint16(bb[16:16+2])),
             Y:int(binary.LittleEndian.Uint16(bb[18:18+2])),
@@ -44,8 +46,10 @@ func parsePacket(bb []byte){
         lastMoveTime = 0
 
         go func() {
-            time.Sleep(time.Duration(800) * time.Millisecond)
-            if exist := getConf(conf["StorageRoute"],"Map", MAP); exist != nil && townRun{ resetPath() }
+            time.Sleep(time.Duration(300) * time.Millisecond)
+            resetPath()
+            // if exist := getConf(conf["StorageRoute"],"Map", MAP); exist != nil {  }
+            // if MAP := saveMap{ resetPath() }
         }()
 
 
@@ -284,10 +288,10 @@ func parsePacket(bb []byte){
                     mm.IsNotValid = true
                 }else{
                     mobDeadList = append(mobDeadList,mm)
-                    timers.TclickMove = 300
-                    timers.TclickLoot = 200
-                    timers.TuseSkillSelf = 200
-                    timers.TnoMob = 200
+                    timers.TclickMove = 200
+                    timers.TclickLoot = 180
+                    timers.TuseSkillSelf = 180
+                    timers.TnoMob = 180
                     pauseLoop(200)
                     targetMobID = -1
                 }
@@ -407,7 +411,7 @@ func parsePacket(bb []byte){
         dmg := int(binary.LittleEndian.Uint32(bb[20:20+4]))
         if hexID == "08C8" && bb[27] != 1 {
             if targetID == accountID && dmg > 0{
-                timers.TclickMove = 80
+                timers.TclickMove = 30
             }
             return
         } //autoattack

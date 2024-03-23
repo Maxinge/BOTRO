@@ -68,6 +68,7 @@ type Timer struct {
     TsameMob int
     TsameItem int
     TclickLoot int
+    TloadTP int
 }
 
 var(
@@ -128,6 +129,7 @@ var(
     useSitUnderSP = -1
     useSitAboveSP = 99
     storageWeight = 49
+    storageChoice = 2
     storageX = -1
     storageY = -1
     useGreed = -1
