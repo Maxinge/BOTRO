@@ -2,66 +2,76 @@
     "General":[
         ["accountID",    2014282],
 
-        ["saveMap",      "morocc_in"],
-        ["lockMap",      "gef_fild13"],
-        ["storageWeight",   69],
-        ["storageX",   156],
-        ["storageY",   97],
-        ["innSP",   5],
-        ["innX",   80],
-        ["innY",   100],
+        ["saveMap",      "prontera"],
+        ["lockMap",      "moc_fild02"],
+        ["storageWeight",   100],
+        ["storageX",   146],
+        ["storageY",   89],
+        ["storageChoice",   2],
+
 
         ["useTPNbAggro",    5],
-        ["useTPLockMap",    1],
-        ["useTPOnRoad",     1],
-        ["useTPDelay",      50],
-        ["useTPUnderHP",    40],
+        ["useTPLockMap",    2],
+        ["useTPOnRoad",     2],
+        ["useTPDelay",      100],
+        ["useTPUnderHP",    40]
 
-        ["useSphere",   1],
-        ["useSphereCombat",   0],
-        ["useHeal",   60],
-        ["useHealCombat",   60],
-        ["useHealLv",   10],
-
-        ["useSitUnderSP",   -1],
-        ["useSitAboveSP",   98]
     ],
     "StorageRoute":[
-        {"Map":"morocc_in",    "X":85,    "Y":90},
-        {"Map":"morocc",    "X":156,    "Y":97}
-    ],
-    "Storage":[
-        {"Name":"blue gem", "Id":717, "Min":0, "Max":30},
-        {"Name":"butt fly", "Id":602, "Min":0, "Max":30},
-        {"Name":"red herb", "Id":507, "Min":0, "Max":10}
+        {"Map":"prontera",    "X":146,    "Y":89}
     ],
     "Route":[
-        {"Map":"morocc",        "WarpPortal":"gef_fild13.gat"},
-        {"Map":"morocc_in",     "WarpPortal":"gef_fild13.gat"},
-        {"Map":"gef_fild12", "X": 372, "Y": 50},
-        {"Map":"gef_fild07", "X": 40, "Y":19, "UseTPdist": 150},
-        {"Map":"gefg_cas03", "X": 68, "Y":290},
-        {"Map":"gefg_cas03", "X": 93, "Y":159},
-        {"Map":"gefg_cas03", "X": 10, "Y": 283},
-        {"Map":"gefg_cas03", "X": 13, "Y": 250},
-        {"Map":"gefg_cas01", "X": 34, "Y":136},
-        {"Map":"gefg_cas04", "X": 24, "Y":145},
-        {"Map":"gef_fild14", "X": 18, "Y": 360},
-        {"Map":"gefg_cas01", "X": 99, "Y":178},
-        {"Map":"gefg_cas05", "X": 7 , "Y":34},
-        {"Map":"gefg_cas05", "X": 99, "Y":204},
-        {"Map":"gefg_cas02", "X": 70, "Y":147},
-        {"Map":"gef_fild09", "X": 23, "Y":56}
+        {"Map":"moc_fild01",    "X":321,    "Y":16, "UseTPdist": 150},
+        {"Map":"moc_fild13",    "X":146,    "Y":368, "UseTPdist": 150},
+        {"Map":"moc_fild13",    "X":298,    "Y":370, "UseTPdist": 150},
+        {"Map":"moc_fild03",    "X":70,    "Y":341, "UseTPdist": 150},
+        {"Map":"pay_fild04",    "X":194,    "Y":17, "UseTPdist": 150},
+        {"Map":"moc_fild04",    "X":318,    "Y":380, "UseTPdist": 150},
+        {"Map":"pay_fild04",    "X":17,    "Y":165, "UseTPdist": 150},
+        {"Map":"prontera",    "X":156,    "Y":22, "UseTPdist": 150},
+        {"Map":"prt_fild08",    "X":233,    "Y":16, "UseTPdist": 150}
     ],
-    "Mob":[
-        {"Priority":0, "Id":1094, "Name":"ambernite",
-            "AtkName":"Throw Spirit Sphere", "AtkId":0,"AtkLv":1, "MinDist": 2, "MinHP": 0}
+    "Storage":[
+        {"Name":"concentr pot", "Id":645, "Min":0, "Max":5},
+        {"Name":"Converter water", "Id":12115, "Min":0, "Max":12 },
+        {"Name":"red herb", "Id":507, "Min":0, "Max":10},
+        {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":200},
+        {"Name":"bread", "Id":8076, "Min":5, "Max":100}
+    ],
+    "ItemUse":[
+        {"Name":"concentr pot", "Id":645, "MinHP":-1, "MinSP":-1,"BuffId": 37 },
+        {"Name":"Converter water", "Id":12115, "MinHP":-1, "MinSP":-1,"BuffId": 1505 },
+        {"Name":"greenpot", "Id":506, "MinHP":-1, "MinSP":-1,"DeBuffId": 440 },
+        {"Name":"bread", "Id":8076, "MinHP":40, "MinSP":-1,"BuffId": -1 }
     ],
     "ItemLoot":[
-        { "Id":935,   "Name":"Shell"}
+        {"Id":925,   "Name":"Bill_Of_Birds"},
+        {"Id":508,   "Name":"Yellow_Herb"},
+        {"Id":507,   "Name":"Red_Herb"},
+        {"Id":1604,   "Name":"Wand"},
+        {"Id":909,   "Name":"jllopy"},
+        {"Id":938,   "Name":"stickymu"},
+        {"Id":508,   "Name":"Yellow_Herb"},
+        {"Id":511,   "Name":"Green_Herb"},
+        {"Id":949,   "Name":"feather"},
+        {"Id":2609,   "Name":"skullring"},
+        {"Id":2612,   "Name":"flowering"},
+        {"Id":1005,   "Name":"hammerof"},
+        {"Id":516,   "Name":"potato"},
+        {"Id":517,   "Name":"meat"},
+        {"Id":919,   "Name":"animalskin"},
+        {"Id":2306,   "Name":"adventuresuit"},
+        {"Id":942,   "Name":"yoyotail"},
+        {"Id":2301,   "Name":"cotonshirt"},
+        {"Id":513,   "Name":"banana"},
+        {"Id":507,   "Name":"Red_Herb"},
+        {"Id":1301,   "Name":"axe"}
+    ],
+    "Mob":[
+        {"Priority":1, "Id":1019, "Name":"pecopeco",
+            "AtkName":"investigate", "AtkId":0,"AtkLv":5, "MinDist": 5, "MinHP": 0}
     ],
     "SKillSelf":[
-        {"Name":"Blessing","Lv":10, "Id":34,            "MinHP": -1, "MinSP": 5, "BuffId": 10},
-        {"Name":"Increase Agility","Lv":10, "Id":29,    "MinHP": -1, "MinSP": 5, "BuffId": 12}
     ]
 }

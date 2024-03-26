@@ -5,8 +5,10 @@
         ["saveMap",      "morocc_in"],
         ["lockMap",      "tur_dun02"],
         ["storageWeight",   69],
-        ["storageX",   156],
-        ["storageY",   97],
+        ["storageX",   76],
+        ["storageY",   100],
+        ["storageChoice",   1],
+
         ["innSP",   5],
         ["innX",   80],
         ["innY",   100],
@@ -27,8 +29,7 @@
         ["useSitAboveSP",   98]
     ],
     "StorageRoute":[
-        {"Map":"morocc_in",    "X":85,    "Y":90},
-        {"Map":"morocc",    "X":156,    "Y":97}
+        {"Map":"morocc_in",    "X":76,    "Y":100}
     ],
     "Route":[
         {"Map":"alberta",    "X":247,    "Y":122, "NPC": "N0 C2 N0 N0 C1 N0"},

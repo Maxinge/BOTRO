@@ -5,8 +5,10 @@
         ["saveMap",      "morocc_in"],
         ["lockMap",      "gl_prison1"],
         ["storageWeight",   69],
-        ["storageX",   156],
-        ["storageY",   97],
+        ["storageX",   76],
+        ["storageY",   100],
+        ["storageChoice",   1],
+
         ["innSP",   5],
         ["innX",   80],
         ["innY",   100],
@@ -27,8 +29,7 @@
         ["useSitAboveSP",   98]
     ],
     "StorageRoute":[
-        {"Map":"morocc_in",    "X":85,    "Y":90},
-        {"Map":"morocc",    "X":156,    "Y":97}
+        {"Map":"morocc_in",    "X":76,    "Y":100}
     ],
     "Route":[
         {"Map":"morocc",        "WarpPortal":"glast_01.gat"},
@@ -60,7 +61,7 @@
     ],
     "Mob":[
         {"Priority":1, "Id":1202, "Name":"phendark",
-            "AtkName":"investigate", "AtkId":266,"AtkLv":5, "MinDist": 1, "MinHP": 0}
+            "AtkName":"investigate", "AtkId":266,"AtkLv":5, "MinDist": 2, "MinHP": 0}
     ],
     "SKillSelf":[
         {"Name":"Blessing","Lv":10, "Id":34,            "MinHP": -1, "MinSP": 5, "BuffId": 10},

@@ -688,7 +688,6 @@ func botLoop() {
             if timers.TuseSkill <= 0 {
                 useTeleport()
                 timers.TnoMob = useTPDelay
-                continue
             }}}}
             if movePath != nil && len(movePath) > 2 {
                 if timers.TclickMove <= 0 {
@@ -735,7 +734,7 @@ func botLoop() {
                 if AtkId != 0 {
                     if timers.TuseSkill <= 0 {
                         sendUseSkill(AtkId, AtkLv, targetMobID)
-                        timers.TuseSkill = 100
+                        timers.TuseSkill = 250
                         timers.TuseItem = 200
                         timers.TuseSkillSelf = 300
                     }

@@ -25,7 +25,7 @@
         {"Map":"mag_dun02",    "X":48,    "Y":33, "UseTPdist": 100}
     ],
     "Storage":[
-        {"Name":"Converter earth", "Id":12115, "Min":0, "Max":12 },
+        {"Name":"Converter water", "Id":12115, "Min":0, "Max":12 },
         {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
         {"Name":"iron ore", "Id":1002, "Min":0, "Max":10},
         {"Name":"red herb", "Id":507, "Min":0, "Max":10},
