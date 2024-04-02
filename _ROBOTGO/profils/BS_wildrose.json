@@ -1,0 +1,74 @@
+{
+    "General":[
+        ["accountID",    2014282],
+
+        ["saveMap",      "geffen"],
+        ["lockMap",      "gef_fild05"],
+        ["storageWeight",   100],
+        ["storageX",   110],
+        ["storageY",   65],
+        ["storageChoice",   2],
+
+        ["aspd",    163],
+
+        ["useSitUnderSP",   20],
+        ["useSitAboveSP",   99],
+
+        ["useTPNbAggro",    5],
+        ["useTPLockMap",    2],
+        ["useTPOnRoad",     2],
+        ["useTPDelay",      50],
+        ["useTPUnderHP",    40]
+
+    ],
+    "StorageRoute":[
+        {"Map":"geffen",    "X":110,    "Y":65}
+    ],
+    "Route":[
+        {"Map":"geffen",    "X":119,    "Y":213},
+        {"Map":"gef_fild06",    "X":382,    "Y":211, "UseTPdist": 150},
+        {"Map":"gef_fild07",    "X":64,    "Y":363, "UseTPdist": 150},
+        {"Map":"gef_fild04",    "X":16,    "Y":309, "UseTPdist": 150}
+    ],
+    "CartTransfert":[
+        {"Name":"fly wings", "Id":601, "Am":50 },
+        {"Name":"bread", "Id":8076, "Am":50 }
+    ],
+    "Storage":[
+        {"Name":"iron ore", "Id":1002, "Min":0, "Max":10},
+        {"Name":"Converterearth", "Id":12116, "Min":0, "Max":30 },
+        {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
+        {"Name":"awakpot", "Id":656, "Min":0, "Max":5},
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":200},
+        {"Name":"bread", "Id":8076, "Min":5, "Max":200},
+        {"Name":"greenpot", "Id":506, "Min":0, "Max":20}
+    ],
+    "StorageCart":[
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":300},
+        {"Name":"bread", "Id":8076, "Min":5, "Max":300}
+    ],
+    "ItemUse":[
+        {"Name":"awakpot", "Id":656, "MinHP":-1, "MinSP":-1,"BuffId": 38 },
+        {"Name":"greenpot", "Id":506, "MinHP":-1, "MinSP":-1,"DeBuffId": 440 },
+        {"Name":"bread", "Id":8076, "MinHP":95, "MinSP":-1,"BuffId": -1 },
+        {"Name":"Converterearth", "Id":12116, "MinHP":-1, "MinSP":-1,"BuffId": 1505 }
+    ],
+    "Mob":[
+        {"Priority":1, "Id":1261, "Name":"wildrose",
+            "AtkName":"mamonite", "AtkId":42,"AtkLv":9, "MinDist": 1, "MinHP": 0},
+        {"Priority":-4, "Id":1159, "Name":"phreoo","TPdist":20}
+    ],
+    "ItemLoot":[
+          {"Id":1767,   "Name":"Arrow_Of_Shadow"},
+          {"Id":5037,   "Name":"Fruit_Shell"},
+          {"Id":528,   "Name":"Monster"},
+          {"Id":2244,   "Name":"Big_Sis_Ribbon"}
+    ],
+    "SKillSelf":[
+        {"Name":"adrenaline rush","Lv":5, "Id":111,     "MinHP": -1, "MinSP": 10, "BuffId": 23},
+        {"Name":"maximize","Lv":5, "Id":114,     "MinHP": -1, "MinSP": 10, "BuffId": 26},
+        {"Name":"crazy upraor","Lv":1, "Id":155,            "MinHP": -1, "MinSP": 10, "BuffId": 30},
+        {"Name":"weap perfe","Lv":5, "Id":112,            "MinHP": -1, "MinSP": 10, "BuffId": 24},
+        {"Name":"over trust","Lv":5, "Id":113,    "MinHP": -1, "MinSP": 10, "BuffId": 25}
+    ]
+}

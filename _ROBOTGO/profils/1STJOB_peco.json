@@ -1,0 +1,81 @@
+{
+    "General":[
+        ["accountID",    2014282],
+
+        ["saveMap",      "prontera"],
+        ["lockMap",      "moc_fild02"],
+        ["storageWeight",   100],
+        ["storageX",   146],
+        ["storageY",   89],
+        ["storageChoice",   2],
+
+
+        ["useTPNbAggro",    5],
+        ["useTPLockMap",    2],
+        ["useTPOnRoad",     2],
+        ["useTPDelay",      100],
+        ["useTPUnderHP",    40]
+
+    ],
+    "StorageRoute":[
+        {"Map":"prontera",    "X":146,    "Y":89}
+    ],
+    "Route":[
+        {"Map":"moc_fild01",    "X":321,    "Y":16, "UseTPdist": 150},
+        {"Map":"moc_fild13",    "X":146,    "Y":368, "UseTPdist": 150},
+        {"Map":"moc_fild13",    "X":298,    "Y":370, "UseTPdist": 150},
+        {"Map":"moc_fild03",    "X":70,    "Y":341, "UseTPdist": 150},
+        {"Map":"pay_fild04",    "X":194,    "Y":17, "UseTPdist": 150},
+        {"Map":"moc_fild04",    "X":318,    "Y":380, "UseTPdist": 150},
+        {"Map":"pay_fild04",    "X":17,    "Y":165, "UseTPdist": 150},
+        {"Map":"prontera",    "X":156,    "Y":22, "UseTPdist": 150},
+        {"Map":"prt_fild08",    "X":233,    "Y":16, "UseTPdist": 150}
+    ],
+    "Storage":[
+        {"Name":"concentr pot", "Id":645, "Min":0, "Max":5},
+        {"Name":"Converter water", "Id":12115, "Min":0, "Max":12 },
+        {"Name":"red herb", "Id":507, "Min":0, "Max":10},
+        {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":200},
+        {"Name":"bread", "Id":8076, "Min":5, "Max":100}
+    ],
+    "ItemUse":[
+        {"Name":"concentr pot", "Id":645, "MinHP":-1, "MinSP":-1,"BuffId": 37 },
+        {"Name":"Converter water", "Id":12115, "MinHP":-1, "MinSP":-1,"BuffId": 1505 },
+        {"Name":"greenpot", "Id":506, "MinHP":-1, "MinSP":-1,"DeBuffId": 440 },
+        {"Name":"bread", "Id":8076, "MinHP":60, "MinSP":-1,"BuffId": -1 }
+    ],
+    "ItemLoot":[
+        {"Id":925,   "Name":"Bill_Of_Birds"},
+        {"Id":508,   "Name":"Yellow_Herb"},
+        {"Id":507,   "Name":"Red_Herb"},
+        {"Id":1604,   "Name":"Wand"},
+        {"Id":909,   "Name":"jllopy"},
+        {"Id":938,   "Name":"stickymu"},
+        {"Id":508,   "Name":"Yellow_Herb"},
+        {"Id":511,   "Name":"Green_Herb"},
+        {"Id":949,   "Name":"feather"},
+        {"Id":2609,   "Name":"skullring"},
+        {"Id":2612,   "Name":"flowering"},
+        {"Id":1005,   "Name":"hammerof"},
+        {"Id":516,   "Name":"potato"},
+        {"Id":517,   "Name":"meat"},
+        {"Id":919,   "Name":"animalskin"},
+        {"Id":2306,   "Name":"adventuresuit"},
+        {"Id":942,   "Name":"yoyotail"},
+        {"Id":2301,   "Name":"cotonshirt"},
+        {"Id":513,   "Name":"banana"},
+        {"Id":507,   "Name":"Red_Herb"},
+        {"Id":512,   "Name":"Apple"},
+        {"Id":1602,   "Name":"Rod_"},
+        {"Id":1301,   "Name":"axe"}
+    ],
+    "Mob":[
+        {"Priority":-1, "Id":1113, "Name":"dops",
+            "AtkName":"investigate", "AtkId":0,"AtkLv":5, "MinDist": 5, "MinHP": 0},
+        {"Priority":1, "Id":1019, "Name":"pecopeco",
+            "AtkName":"investigate", "AtkId":0,"AtkLv":5, "MinDist": 5, "MinHP": 0}
+    ],
+    "SKillSelf":[
+    ]
+}

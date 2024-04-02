@@ -17,6 +17,7 @@ func parsePacket(bb []byte){
     default:
         // fmt.Printf("### no_fct ### [%v][%v] -> [%v] \n", hexID, len(bb),bb)
 
+
     case "0091","0092":  //map_change
         resetInventoryList()
         resetMobItemList()
@@ -226,8 +227,7 @@ func parsePacket(bb []byte){
 
         if target == accountID && hexID == "0983"{
             if buffID == 46 {
-                if timeLeft == 0 { timeLeft = 200 }
-                timers.TuseSkill = timeLeft
+                if timeLeft != 0 { timers.TuseSkill = timeLeft }
                 return
             }
             if timeLeft == 9999 { timeLeft = 9999999999999999 };
@@ -276,27 +276,37 @@ func parsePacket(bb []byte){
         }
         MUmobList.Unlock()
 
-    case "0080":  //actor_dead_disappear
-        tnow := time.Now()
+    case "0A30":  //actor_info
         mapID := int(binary.LittleEndian.Uint32(bb[0:0+4]))
-        // if bb[4] == 1 { targetMobDead = mapID }
+        tnow := time.Now()
         MUmobList.Lock()
         if mm, exist := mobList[mapID]; exist {
-            if bb[4] == 1 { // killed
+        if string(bb[28:28+2]) == "HP"{
+            tt := strings.Split(string(bb[32:32+32]), "|")[0]
+            ttt := strings.Split(tt, "/")[0]
+            if ttt == "0" {
                 mm.DeathTime = tnow.Unix()
                 if mapID != targetMobID {
                     mm.IsNotValid = true
                 }else{
                     mobDeadList = append(mobDeadList,mm)
-                    timers.TclickMove = 200
-                    timers.TclickLoot = 180
-                    timers.TuseSkillSelf = 180
+                    timers.TclickMove = 220
+                    timers.TclickLoot = 250
+                    timers.TuseSkillSelf = 400
                     timers.TnoMob = 180
-                    pauseLoop(200)
                     targetMobID = -1
+                    pauseLoop(100)
                 }
                 mobList[mapID] = mm
-            }else{
+            }
+        }}
+        MUmobList.Unlock()
+
+    case "0080":  //actor_dead_disappear
+        mapID := int(binary.LittleEndian.Uint32(bb[0:0+4]))
+        MUmobList.Lock()
+        if _, exist := mobList[mapID]; exist {
+            if bb[4] != 1 { //  1 = ded
                 delete(mobList, mapID)
             }
         }
@@ -360,32 +370,41 @@ func parsePacket(bb []byte){
 
         if actorType == 5  {
             MUmobList.Lock()
-            prio := -1
-            aggro := false
-            name := ""
-            looter := false
-            mobdata := findMobInDb(actorID)
-            bexp := 0
-            jexp := 0
-            tpdist := 0
-            if mobdata != nil {
-                aggro = mobdata["IsAggressive"].(bool)
-                name = mobdata["Name"].(string)
-                looter = mobdata["IsLooter"].(bool)
-                bexp = int(mobdata["BaseExp"].(float64))
-                jexp = int(mobdata["JobExp"].(float64))
-            }
-            if exist := getConf(conf["Mob"],"Id",actorID); exist != nil {
-                prio = exist.(CMob).Priority
-                tpdist = exist.(CMob).TPdist
-            }
-            mobList[mapID] = Mob{
-                MobID:actorID, CoordsFrom:mccFrom, CoordsTo:mccTo, MoveSpeed:moveSpeed,
-                Priority: prio, Aggro:aggro, Name:name, IsLooter:looter,
-                Bexp:bexp, Jexp:jexp, TPdist:tpdist, PathMoveTo:mpathTo, LastMoveTime:0,
+            if mm, exist := mobList[mapID]; exist {
+                 mm.CoordsFrom = mccFrom
+                 mm.CoordsTo = mccTo
+                 mm.PathMoveTo = mpathTo
+                 mm.LastMoveTime = 0
+                 mobList[mapID] = mm
+            }else{
+                prio := -1
+                aggro := false
+                name := ""
+                looter := false
+                mobdata := findMobInDb(actorID)
+                bexp := 0
+                jexp := 0
+                tpdist := 0
+                if mobdata != nil {
+                    aggro = mobdata["IsAggressive"].(bool)
+                    name = mobdata["Name"].(string)
+                    looter = mobdata["IsLooter"].(bool)
+                    bexp = int(mobdata["BaseExp"].(float64))
+                    jexp = int(mobdata["JobExp"].(float64))
+                }
+                if exist := getConf(conf["Mob"],"Id",actorID); exist != nil {
+                    prio = exist.(CMob).Priority
+                    tpdist = exist.(CMob).TPdist
+                }
+                mobList[mapID] = Mob{
+                    MobID:actorID, CoordsFrom:mccFrom, CoordsTo:mccTo, MoveSpeed:moveSpeed,
+                    Priority: prio, Aggro:aggro, Name:name, IsLooter:looter,
+                    Bexp:bexp, Jexp:jexp, TPdist:tpdist, PathMoveTo:mpathTo, LastMoveTime:0,
+                }
             }
             MUmobList.Unlock()
         }
+
         if actorType == 0 {
             MUplayerList.Lock()
             playerList[mapID] = Player{Coords:mccFrom}
@@ -409,12 +428,22 @@ func parsePacket(bb []byte){
         sourceID := int(binary.LittleEndian.Uint32(bb[sourceii:sourceii+4]))
         targetID := int(binary.LittleEndian.Uint32(bb[targetii:targetii+4]))
         dmg := int(binary.LittleEndian.Uint32(bb[20:20+4]))
+
+
+
         if hexID == "08C8" && bb[27] != 1 {
             if targetID == accountID && dmg > 0{
                 timers.TclickMove = 30
             }
             return
         } //autoattack
+
+
+
+        if targetID == targetMobID {
+        if sourceID == accountID {
+            timers.TsameMob += 300
+        }}
 
         MUmobList.Lock()
         if mm, exist := mobList[targetID]; exist {
@@ -437,7 +466,6 @@ func parsePacket(bb []byte){
     // #######################
 
     case "6847":  //???
-    // case "0A30":  //actor_info
     case "00C0":  //emote
     case "0438":  //skill_use_send
     case "0360":  //send_sync_serv

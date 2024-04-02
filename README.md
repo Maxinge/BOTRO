@@ -21,8 +21,5 @@ la premiere compilation de cimguigo peu prendre du temps
 - close window
 - map interieur
 - greed
-- cart mieu
 - raw fish
-- green herb
-- agro wieght
-- inn sp run
+- revoir death mob

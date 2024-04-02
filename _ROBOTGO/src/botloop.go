@@ -5,7 +5,7 @@ import(
     "time"
     "encoding/binary"
     "math"
-    "math/rand"
+    // "math/rand"
     "strings"
 )
 
@@ -78,6 +78,9 @@ func initConf(){
     }
     if exist := getConf(conf["General"],"Key","storageChoice"); exist != nil {
         storageChoice = exist.(struct{Key string; Val int}).Val
+    }
+    if exist := getConf(conf["General"],"Key","aspd"); exist != nil {
+        aspd = exist.(struct{Key string; Val int}).Val
     }
 
 }
@@ -727,35 +730,54 @@ func botLoop() {
             movePath = movePath[:len(movePath)-1]
 
             if int(math.Round(getDist(charCoord,mob.CoordsFrom))) <= atkDist{ // ### int !!
+
+                linecells := linearInterpolation(charCoord, mob.CoordsFrom)
+                linevalid := true
+                for _,vv := range linecells {
+                    if !isValidCell(vv,lgatMaps[MAP]) { linevalid = false }
+                }
+                if !linevalid {
+                    if timers.TclickMove <= 0 {
+                        ii := getClosestPoint(charCoord,movePath) + 5
+                        if ii >= len(movePath)-1{ ii = len(movePath)-1 }
+                        sendToServer("035F",coordsTo24Bits(movePath[ii].X,movePath[ii].Y))
+                        timers.TclickMove = 250
+                    }
+                }
+
                 AtkId := 0; AtkLv := 0
                 if exist := getConf(conf["Mob"],"Id",mob.MobID); exist != nil {
                     AtkId = exist.(CMob).AtkId; AtkLv = exist.(CMob).AtkLv
                 }
+
+                HitPS := float32(50)/(float32(200)-float32(aspd))
+                TBA := int(((1/HitPS)*1000)*0.5)
                 if AtkId != 0 {
                     if timers.TuseSkill <= 0 {
                         sendUseSkill(AtkId, AtkLv, targetMobID)
-                        timers.TuseSkill = 250
-                        timers.TuseItem = 200
-                        timers.TuseSkillSelf = 300
+                        timers.TuseSkill = TBA
+                        timers.TuseSkillSelf = TBA + 200
                     }
                 }else{
-                    arrayBin := []byte{}
-                    mobBin := make([]byte, 4)
-                    binary.LittleEndian.PutUint32(mobBin, uint32(targetMobID))
-                    arrayBin = append(arrayBin,mobBin...)
-                    // 0 = unique autoattack / 7 = start autoattack
-                    arrayBin = append(arrayBin,byte(7))
-                    sendToServer("0437", arrayBin)
-                    pauseLoop(200)
-                    if timers.TsameMob < 5000 && timers.TsameMob > 4000{
-                        resetPath()
-                        rcells := firstCircle(mob.CoordsFrom)
-                        rand.Seed(time.Now().UnixNano())
-                        rnd := rand.Intn(len(rcells)-1)
-                        if isValidCell(rcells[rnd], lgatMaps[MAP]){
-                            sendToServer("035F",coordsTo24Bits(rcells[rnd].X,rcells[rnd].Y))
-                        }
+                    if timers.TuseSkill <= 0 {
+                        arrayBin := []byte{}
+                        mobBin := make([]byte, 4)
+                        binary.LittleEndian.PutUint32(mobBin, uint32(targetMobID))
+                        arrayBin = append(arrayBin,mobBin...)
+                        // 0 = unique autoattack / 7 = start autoattack
+                        arrayBin = append(arrayBin,byte(7))
+                        sendToServer("0437", arrayBin)
+                        timers.TuseSkill = TBA
                     }
+                    // if timers.TsameMob < 5000 && timers.TsameMob > 4000{
+                    //     resetPath()
+                    //     rcells := firstCircle(mob.CoordsFrom)
+                    //     rand.Seed(time.Now().UnixNano())
+                    //     rnd := rand.Intn(len(rcells)-1)
+                    //     if isValidCell(rcells[rnd], lgatMaps[MAP]){
+                    //         sendToServer("035F",coordsTo24Bits(rcells[rnd].X,rcells[rnd].Y))
+                    //     }
+                    // }
                 }
             }else{
                 if timers.TclickMove <= 0 {
@@ -790,8 +812,8 @@ func botLoop() {
                     itemBin := make([]byte, 4) ;
                     binary.LittleEndian.PutUint32(itemBin, uint32(targetItemID))
                     sendToServer("0362", itemBin)
-                    timers.TclickLoot = 400
-                    timers.TclickMove = 300
+                    timers.TclickLoot = 300
+                    timers.TclickMove = 200
                     timers.TuseSkill = 300
                     timers.TuseSkillSelf = 300
                 }
@@ -1209,9 +1231,7 @@ func cleanMobDeath(){
     for kk,vv  := range mobList {
         if vv.DeathTime > 0 {
             tDeath := time.Unix(vv.DeathTime, 0)
-            if time.Now().Sub(tDeath).Milliseconds() > 3000{
-                delete(mobList,kk)
-            }
+            if time.Now().Sub(tDeath).Milliseconds() > 3000{ delete(mobList,kk) }
         }
     }
 }
@@ -1227,7 +1247,7 @@ func flagGoodItems(){
                 tDeath := time.Unix(vvv.DeathTime, 0)
                 tItem := time.Unix(vv.DropTime, 0)
                 if tItem.Sub(tDeath).Milliseconds() < 1500{
-                    ii.IsValid = true  ; groundItems[kk] = ii
+                    ii.IsValid = true; groundItems[kk] = ii
                 }
             }}}
         }

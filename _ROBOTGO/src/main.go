@@ -57,6 +57,11 @@ func main() {
         lgatMaps["moc_pryd01"] = mm
     }
 
+    if mm, exist := lgatMaps["gef_fild05"]; exist {
+        mm.cells[54][298] = 1
+        lgatMaps["gef_fild05"] = mm
+    }
+
     err = json.Unmarshal([]byte(readFileString(CurDir()+"data/mobs_db.json")), &mobDB)
     if err != nil { fmt.Printf("err -- %v -- \n", err); return }
 
@@ -151,6 +156,14 @@ func main() {
         MUplayerList.Lock()
         imgui.Text(fmt.Sprintf(" ### playerList \n %v ", prettyPrint(playerList)))
         MUplayerList.Unlock()
+
+        // sss := ""
+        // for kk,vv := range mobList {
+        //     sss += Itos(kk) +"-"+ Itos(int(vv.DeathTime))+"\n"
+        // }
+        // MUplayerList.Lock()
+        // imgui.Text(fmt.Sprintf(" ### mobList \n %v ", sss))
+        // MUplayerList.Unlock()
 
         // MUinventoryItems.Lock()
         // imgui.Text(fmt.Sprintf(" ### inventoryItems \n %v ", prettyPrint(inventoryItems)))
