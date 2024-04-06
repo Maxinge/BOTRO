@@ -4,7 +4,7 @@
 
         ["saveMap",      "izlude"],
         ["lockMap",      "iz_dun03"],
-        ["WarpPortal",   ""],
+    
         ["useTPNbAggro",    7],
         ["useTPLockMap",    2],
         ["useTPOnRoad",     2],

@@ -36,8 +36,8 @@
         {"Map":"morocc_in",     "WarpPortal":"glast_01.gat"},
         {"Map":"gl_sew01",    "X":258,    "Y":258, "UseTPdist": 150},
         {"Map":"gl_prison",    "X":149,    "Y":183, "UseTPdist": 150},
-        {"Map":"gl_cas01",    "X":234,    "Y":192, "UseTPdist": 150},
-        {"Map":"glast_01",    "X":200,    "Y":297, "UseTPdist": 150}
+        {"Map":"gl_cas01",    "X":370,    "Y":302, "UseTPdist": 150},
+        {"Map":"glast_01",    "X":200,    "Y":296, "UseTPdist": 150}
     ],
     "Storage":[
         {"Name":"blue gem", "Id":717, "Min":0, "Max":30},

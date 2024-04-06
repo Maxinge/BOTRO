@@ -1,11 +1,12 @@
 {
     "General":[
-        ["Title",    "smithmino"],
         ["accountID",    2014282],
 
         ["saveMap",      "morocc"],
         ["lockMap",      "moc_pryd05"],
-        ["WarpPortal",   ""],
+
+        ["aspd",    177],
+
         ["useTPNbAggro",    7],
         ["useTPLockMap",    2],
         ["useTPOnRoad",     2],
@@ -18,6 +19,9 @@
         ["storageX",   156],
         ["storageY",   97]
     ],
+    "StorageRoute":[
+        {"Map":"morocc",    "X":156,    "Y":97}
+    ],
     "Route":[
         {"Map":"moc_prydb1",    "X":100,    "Y":55, "UseTPdist": 40},
         {"Map":"moc_ruins",    "X":55,    "Y":161, "UseTPdist": 100},
@@ -25,22 +29,23 @@
         {"Map":"moc_pryd01",    "X":90,    "Y":109, "UseTPdist": 150},
         {"Map":"moc_pryd06",    "X":195,    "Y":8,"UseTPdist": 150}
     ],
-    "CartTransfert":[
-        {"Name":"rough elu", "Id":757, "Am":5, "From":true},
-        {"Name":"rough ori", "Id":756, "Am":5, "From":true},
-        {"Name":"nose ring", "Id":941, "Am":50, "From":true}
-    ],
     "Storage":[
+        {"Name":"iron ore", "Id":1002, "Min":0, "Max":10},
+        {"Name":"red herb", "Id":507, "Min":0, "Max":10},
         {"Name":"Converter water", "Id":12115, "Min":0, "Max":30 },
         {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
         {"Name":"zerk pot", "Id":657, "Min":0, "Max":5},
         {"Name":"fly wings", "Id":601, "Min":5, "Max":250},
-        {"Name":"bread", "Id":8076, "Min":5, "Max":250}
+        {"Name":"bread", "Id":8076, "Min":5, "Max":250},
+        {"Name":"bluepot", "Id":505, "Min":0, "Max":20 }
     ],
     "StorageCart":[
-        {"Name":"fly wings", "Id":601, "Min":5, "Max":600}
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":400},
+        {"Name":"bread", "Id":8076, "Min":5, "Max":400}
     ],
     "CartTransfert":[
+        {"Name":"fly wings", "Id":601, "Am":50 },
+        {"Name":"bread", "Id":8076, "Am":50 },
         {"Name":"rough elu", "Id":757, "Am":5, "From":true},
         {"Name":"rough ori", "Id":756, "Am":5, "From":true},
         {"Name":"nose ring", "Id":941, "Am":50, "From":true}
@@ -49,7 +54,7 @@
         {"Priority":1, "Id":1149, "Name":"mino",
             "AtkName":"mamonite", "AtkId":42,"AtkLv":6, "MinDist": 2, "MinHP": 0},
         {"Priority":-1, "Id":1032, "Name":"verit",
-            "AtkName":"mamonite", "AtkId":42,"AtkLv":5, "MinDist": 1, "MinHP": 0}
+            "AtkName":"mamonite", "AtkId":42,"AtkLv":6, "MinDist": 1, "MinHP": 0}
     ],
     "ItemLoot":[
         {"Id":508,   "Name":"Yellow_Herb"},
@@ -62,15 +67,16 @@
         {"Id":1301,   "Name":"axe"}
     ],
     "ItemUse":[
-        {"Name":"Converter water", "Id":12115, "MinHP":-1, "MinSP":-1,"BuffId": 1505 },
+        {"Name":"lemon", "Id":568, "MinHP":-1, "MinSP":50,"BuffId": -1 },
         {"Name":"zerk pot", "Id":657, "MinHP":-1, "MinSP":-1,"BuffId": 39 },
-        {"Name":"bread", "Id":8076, "MinHP":80, "MinSP":-1,"BuffId": -1 }
+        {"Name":"Converter water", "Id":12115, "MinHP":-1, "MinSP":-1,"BuffId": 1505 },
+        {"Name":"bread", "Id":8076, "MinHP":95, "MinSP":-1,"BuffId": -1 },
+        {"Name":"bluepot", "Id":505, "MinHP":-1, "MinSP":30,"BuffId": -1 }
     ],
     "SKillSelf":[
         {"Name":"adrenaline rush","Lv":5, "Id":111,     "MinHP": -1, "MinSP": 10, "BuffId": 23},
         {"Name":"maximize","Lv":5, "Id":114,     "MinHP": -1, "MinSP": 10, "BuffId": 26},
         {"Name":"crazy upraor","Lv":1, "Id":155,            "MinHP": -1, "MinSP": 10, "BuffId": 30},
-        {"Name":"weap perfe","Lv":5, "Id":112,            "MinHP": -1, "MinSP": 10, "BuffId": 24},
         {"Name":"over trust","Lv":5, "Id":113,    "MinHP": -1, "MinSP": 10, "BuffId": 25}
     ]
 }

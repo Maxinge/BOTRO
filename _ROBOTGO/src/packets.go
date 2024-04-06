@@ -29,7 +29,7 @@ func parsePacket(bb []byte){
         timers.TuseSkillSelf = 400
         timers.TuseSkill = 400
         timers.TuseItem = 400
-        timers.TclickMove = 400
+        timers.TclickMove = 500
         timers.TloadTP = 400
 
         SSphere = 0
@@ -102,21 +102,24 @@ func parsePacket(bb []byte){
             if hexID == "0B0A" {
                 eqSlot = int(binary.LittleEndian.Uint16(bb[ii+11:ii+11+2]))
             }
-            if inventoryType == 0 {
-                MUinventoryItems.Lock()
-                inventoryItems[inventoryID] = Item{ ItemID:itemID, Amount:amount, EqSlot:eqSlot}
-                MUinventoryItems.Unlock()
-            }
-            if inventoryType == 1 {
-                MUcartItems.Lock()
-                cartItems[inventoryID] = Item{ ItemID:itemID, Amount:amount, EqSlot:eqSlot}
-                MUcartItems.Unlock()
-            }
-            if inventoryType == 2 {
-                MUstorageItems.Lock()
-                storageItems[inventoryID] = Item{ ItemID:itemID, Amount:amount, EqSlot:eqSlot}
-                MUstorageItems.Unlock()
-            }
+            go func() {
+                time.Sleep(time.Duration(50) * time.Millisecond)
+                if inventoryType == 0 {
+                    MUinventoryItems.Lock()
+                    inventoryItems[inventoryID] = Item{ ItemID:itemID, Amount:amount, EqSlot:eqSlot}
+                    MUinventoryItems.Unlock()
+                }
+                if inventoryType == 1 {
+                    MUcartItems.Lock()
+                    cartItems[inventoryID] = Item{ ItemID:itemID, Amount:amount, EqSlot:eqSlot}
+                    MUcartItems.Unlock()
+                }
+                if inventoryType == 2 {
+                    MUstorageItems.Lock()
+                    storageItems[inventoryID] = Item{ ItemID:itemID, Amount:amount, EqSlot:eqSlot}
+                    MUstorageItems.Unlock()
+                }
+            }()
         }
 
 
@@ -227,7 +230,7 @@ func parsePacket(bb []byte){
 
         if target == accountID && hexID == "0983"{
             if buffID == 46 {
-                if timeLeft != 0 { timers.TuseSkill = timeLeft }
+                if timeLeft != 0 { timers.TuseSkill = timeLeft +150 }
                 return
             }
             if timeLeft == 9999 { timeLeft = 9999999999999999 };

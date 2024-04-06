@@ -1,0 +1,70 @@
+{
+    "General":[
+        ["accountID",    2014282],
+
+        ["saveMap",      "xmas"],
+        ["lockMap",      "xmas_dun01"],
+        ["storageWeight",   100],
+        ["storageX",   141],
+        ["storageY",   172],
+        ["storageChoice",   2],
+
+        ["aspd",    165],
+
+        ["useTPNbAggro",    5],
+        ["useTPLockMap",    2],
+        ["useTPOnRoad",     2],
+        ["useTPDelay",      50],
+        ["useTPUnderHP",    40],
+
+        ["useSitUnderSP",   10],
+        ["useSitAboveSP",   100]
+
+    ],
+    "StorageRoute":[
+        {"Map":"xmas",    "X":141,    "Y":172}
+    ],
+    "Route":[
+        {"Map":"xmas",    "X":143,    "Y":314}
+    ],
+    "Storage":[
+        {"Name":"arrow", "Id":1750, "Min":20, "Max":800},
+        {"Name":"awakpot", "Id":656, "Min":0, "Max":5},
+        {"Name":"red herb", "Id":507, "Min":0, "Max":10},
+        {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":250}
+    ],
+    "ItemUse":[
+        {"Name":"awakpot", "Id":656, "MinHP":-1, "MinSP":-1,"BuffId": 38 },
+        {"Name":"greenpot", "Id":506, "MinHP":-1, "MinSP":-1,"DeBuffId": 440 },
+        {"Name":"bread", "Id":8076, "MinHP":95, "MinSP":-1,"BuffId": -1 }
+    ],
+    "ItemLoot":[
+        {"Id":914,   "Name":"Fluff"},
+        {"Id":919,   "Name":"Animalskin"},
+        {"Id":1026,   "Name":"Acorn"},
+        {"Id":516,   "Name":"Sweet_Potato"},
+        {"Id":692,   "Name":"Wind_Scroll_1_3"},
+        {"Id":712,   "Name":"Flower"},
+        {"Id":924,   "Name":"Powder_Of_Butterfly"},
+        {"Id":2207,   "Name":"Fancy_Flower"},
+        {"Id":529,   "Name":"Candy"},
+        {"Id":530,   "Name":"Candy_Striper"},
+        {"Id":909,   "Name":"jllopy"},
+        {"Id":938,   "Name":"stickymu"},
+        {"Id":508,   "Name":"Yellow_Herb"},
+        {"Id":511,   "Name":"Green_Herb"}
+    ],
+    "Mob":[
+        {"Priority":1, "Id":1031, "Name":"poporing",
+            "AtkName":"doubles", "AtkId":46,"AtkLv":10, "MinDist": 14, "MinHP": 0},
+        {"Priority":1, "Id":1265, "Name":"cookie",
+            "AtkName":"doubles", "AtkId":46,"AtkLv":10, "MinDist": 14, "MinHP": 0},
+        {"Priority":-4, "Id":1250, "Name":"chepiet","TPdist":8},
+        {"Priority":-4, "Id":1096, "Name":"angeling","TPdist":8}
+
+    ],
+    "SKillSelf":[
+        {"Name":"preserve","Lv":5, "Id":475,     "MinHP": -1, "MinSP": 10, "BuffId": 181}
+    ]
+}

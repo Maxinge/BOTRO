@@ -442,7 +442,15 @@ func botLoop() {
                         MUinventoryItems.Lock()
                         for kk,vv := range inventoryItems {
                             if vv.EqSlot <= 0 {
-                                putItemIn("inventory","storage", kk, vv.Amount)
+                                if vv.ItemID == 1750 || vv.ItemID == 1767 ||
+                                vv.ItemID == 1755 || vv.ItemID == 1754 ||
+                                vv.ItemID == 1759 || vv.ItemID == 1757 ||
+                                vv.ItemID == 1770 || vv.ItemID == 1751 ||
+                                vv.ItemID == 1756 {
+                                    putItemIn("inventory","storage", kk, vv.Amount-1)
+                                }else{
+                                    putItemIn("inventory","storage", kk, vv.Amount)
+                                }
                                 time.Sleep(time.Duration(500) * time.Millisecond)
                             }
                         }
@@ -451,10 +459,8 @@ func botLoop() {
 
                         MUcartItems.Lock()
                         for kk,vv := range cartItems {
-                            if vv.EqSlot <= 0 {
-                                putItemIn("cart","storage", kk, vv.Amount)
-                                time.Sleep(time.Duration(500) * time.Millisecond)
-                            }
+                            putItemIn("cart","storage", kk, vv.Amount)
+                            time.Sleep(time.Duration(500) * time.Millisecond)
                         }
                         cartItems = map[int]Item{}
                         MUcartItems.Unlock()
