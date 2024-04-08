@@ -14,7 +14,7 @@ import(
 var(
     servAddr = "51.81.56.97"
     exit = make(chan bool)
-    ports = []int{6900, 5121, 6121, 6666, 6667}
+    ports = []int{6900, 5121, 5131, 6121, 6666, 6667}
 
     sendConn net.Conn
     botConn net.Conn
@@ -199,7 +199,7 @@ func routeFromClient(tcpConn net.Conn, port int){
     serverConn, _ := net.Dial("tcp", servAddr+":"+Itos(port))
     defer serverConn.Close()
 
-    if port == 5121 { sendConn = serverConn; clientConn = tcpConn}
+    if port == 5131 { sendConn = serverConn; clientConn = tcpConn}
 
     go func() {
         recvbuffer := make([]byte, 100000)

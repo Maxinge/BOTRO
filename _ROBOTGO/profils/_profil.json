@@ -2,57 +2,61 @@
     "General":[
         ["accountID",    2014282],
 
-        ["saveMap",      "geffen"],
-        ["lockMap",      "mjolnir_01"],
+        ["saveMap",      "payon_in02"],
+        ["lockMap",      "pay_dun02"],
         ["storageWeight",   100],
-        ["storageX",   110],
-        ["storageY",   65],
-        ["storageChoice",   2],
+        ["storageX",   54],
+        ["storageY",   123],
+        ["storageChoice",   1],
 
         ["aspd",    165],
 
-        ["useTPNbAggro",    5],
+        ["useTPNbAggro",    7],
         ["useTPLockMap",    2],
         ["useTPOnRoad",     2],
         ["useTPDelay",      50],
-        ["useTPUnderHP",    40],
+        ["useTPUnderHP",    15],
 
         ["useSitUnderSP",   10],
         ["useSitAboveSP",   100]
 
     ],
     "StorageRoute":[
-        {"Map":"geffen",    "X":110,    "Y":65}
+        {"Map":"payon_in02",    "X":48,    "Y":4},
+        {"Map":"pay_arche",    "X":54,    "Y":123}
     ],
     "Route":[
-        {"Map":"geffen",    "X":119,    "Y":213},
-        {"Map":"gef_fild04",    "X":261,    "Y":362, "UseTPdist": 170}
+        {"Map":"payon_in02",    "X":48,    "Y":4},
+        {"Map":"pay_dun01",    "X":286,    "Y":25, "UseTPdist": 150},
+        {"Map":"pay_dun00",    "X":184,    "Y":33, "UseTPdist": 150},
+        {"Map":"pay_arche",    "X":36,    "Y":131, "UseTPdist": 150}
     ],
     "Storage":[
-        {"Name":"arrow", "Id":1750, "Min":20, "Max":800},
-        {"Name":"awakpot", "Id":656, "Min":0, "Max":5},
+        {"Name":"arrowsilver", "Id":1751, "Min":20, "Max":600},
+        {"Name":"zerkpot", "Id":657, "Min":0, "Max":5},
         {"Name":"red herb", "Id":507, "Min":0, "Max":10},
         {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
         {"Name":"fly wings", "Id":601, "Min":5, "Max":250}
     ],
     "ItemUse":[
-        {"Name":"awakpot", "Id":656, "MinHP":-1, "MinSP":-1,"BuffId": 38 },
+        {"Name":"zerkpot", "Id":657, "MinHP":-1, "MinSP":-1,"BuffId": 39 },
         {"Name":"greenpot", "Id":506, "MinHP":-1, "MinSP":-1,"DeBuffId": 440 },
         {"Name":"bread", "Id":8076, "MinHP":95, "MinSP":-1,"BuffId": -1 }
     ],
     "ItemLoot":[
-        {"Id":914,   "Name":"Fluff"},
-        {"Id":919,   "Name":"Animalskin"},
-        {"Id":1026,   "Name":"Acorn"},
-        {"Id":516,   "Name":"Sweet_Potato"},
-        {"Id":692,   "Name":"Wind_Scroll_1_3"},
-        {"Id":712,   "Name":"Flower"},
-        {"Id":924,   "Name":"Powder_Of_Butterfly"},
-        {"Id":2207,   "Name":"Fancy_Flower"}
+        {"Id":938,   "Name":"Sticky_Mucus"},
+        {"Id":517,   "Name":"Meat"},
+        {"Id":1011,   "Name":"Emveretarcon"},
+        {"Id":962,   "Name":"Tentacle"},
+        {"Id":901,   "Name":"Danggie"},
+        {"Id":1558,   "Name":"Girl"},
+        {"Id":2305,   "Name":"Adventure_Suit"}
     ],
     "Mob":[
-        {"Priority":1, "Id":1104, "Name":"coco",
-            "AtkName":"doubles", "AtkId":46,"AtkLv":10, "MinDist": 14, "MinHP": 0}
+
+        {"Priority":1, "Id":1026, "Name":"munak",
+            "AtkName":"doubles", "AtkId":46,"AtkLv":10, "MinDist": 14, "MinHP": 0},
+        {"Priority":-4, "Id":1068, "Name":"hydra","TPdist":8}
     ],
     "SKillSelf":[
         {"Name":"preserve","Lv":5, "Id":475,     "MinHP": -1, "MinSP": 10, "BuffId": 181}
