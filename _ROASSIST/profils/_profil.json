@@ -1,0 +1,15 @@
+{
+    "General":[
+        ["accountID",    2019326],
+        ["autoSkillAspd",    177],
+        ["useHpItem",    -1],
+        ["useHpId",    8081],
+        ["useSpItem",    -1],
+        ["useSpId",    -1],
+        ["autoGreenPot",    -1],
+        ["autolootkey",    1],
+
+        ["useStealAfter",   3],
+        ["useStealSP",   20]
+    ]
+}

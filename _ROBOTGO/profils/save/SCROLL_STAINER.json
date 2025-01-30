@@ -1,0 +1,38 @@
+{
+    "General":[
+        ["accountID",    2014282],
+
+        ["saveMap",      ""],
+        ["lockMap",      "mjolnir_06"],
+        ["storageWeight",   69],
+        ["storageX",   156],
+        ["storageY",   97],
+        ["innSP",   5],
+        ["innX",   80],
+        ["innY",   100],
+
+        ["useTPNbAggro",    5],
+        ["useTPLockMap",    1],
+        ["useTPOnRoad",     1],
+        ["useTPDelay",      50],
+        ["useTPUnderHP",    40],
+
+
+        ["useSitUnderSP",   10],
+        ["useSitAboveSP",   98]
+    ],
+    "Route":[
+    ],
+    "Mob":[
+        {"Priority":0, "Id":1174, "Name":"stainer", "AtkId":0,"AtkLv":1, "MinDist": 2, "MinHP": 0}
+    ],
+    "ItemLoot":[
+        { "Id":935,   "Name":"Shell"},
+        { "Id":910,   "Name":"garlet"}
+
+    ],
+    "SKillSelf":[
+        {"Name":"Blessing","Lv":10, "Id":34,            "MinHP": -1, "MinSP": 5, "BuffId": 10},
+        {"Name":"Increase Agility","Lv":10, "Id":29,    "MinHP": -1, "MinSP": 5, "BuffId": 12}
+    ]
+}

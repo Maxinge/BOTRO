@@ -1,0 +1,36 @@
+{
+    "General":[
+        ["accountID",    2019326],
+
+        ["saveMap",      ""],
+        ["lockMap",      "moc_fild08"],
+        ["storageWeight",   69],
+        ["storageX",   156],
+        ["storageY",   97],
+        ["innSP",   5],
+        ["innX",   80],
+        ["innY",   100],
+
+        ["aspd",    150],
+
+        ["useTPNbAggro",    5],
+        ["useTPLockMap",    2],
+        ["useTPOnRoad",     2],
+        ["useTPDelay",      20000],
+        ["useTPUnderHP",    40],
+
+
+        ["useSitUnderSP",   10],
+        ["useSitAboveSP",   98]
+    ],
+    "Mob":[
+        {"Priority":1, "Id":1001, "Name":"scorpion",
+        "AtkName":"bash", "AtkId":5,"AtkLv":7, "MinDist": 2, "MinHP": 0}
+    ],
+    "ItemLoot":[
+        { "Id":935,   "Name":"Shell"},
+        { "Id":910,   "Name":"garlet"}
+    ],
+    "SKillSelf":[
+    ]
+}

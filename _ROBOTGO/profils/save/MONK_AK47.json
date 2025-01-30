@@ -1,0 +1,64 @@
+{
+    "General":[
+        ["accountID",    2019326],
+
+        ["saveMap",      "morocc_in"],
+        ["lockMap",      "gl_knt01"],
+        ["storageWeight",   70],
+        ["storageX",   76],
+        ["storageY",   100],
+        ["storageChoice",   1],
+
+        ["innSP",   5],
+        ["innX",   80],
+        ["innY",   100],
+
+        ["useTPNbAggro",    5],
+        ["useTPLockMap",    2],
+        ["useTPOnRoad",     2],
+        ["useTPDelay",      50],
+        ["useTPUnderHP",    20],
+
+        ["useSphere",   5],
+        ["useSphereCombat",   2],
+
+        ["useSitUnderSP",   -1],
+        ["useSitAboveSP",   98]
+    ],
+    "StorageRoute":[
+        {"Map":"morocc_in",    "X":76,    "Y":100}
+    ],
+    "Route":[
+        {"Map":"morocc_in",     "WarpPortal":"glast_01.gat    "},
+        {"Map":"glast_01",    "X":77,    "Y":193}
+    ],
+    "Storage":[
+        {"Name":"blue gem", "Id":717, "Min":0, "Max":5},
+        {"Name":"red gem", "Id":716, "Min":0, "Max":5},
+        {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
+        {"Name":"red herb", "Id":507, "Min":0, "Max":5},
+        {"Name":"orange pot", "Id":502, "Min":5, "Max":200},
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":200},
+        {"Name":"greenpot", "Id":506, "Min":0, "Max":10}
+    ],
+    "ItemUse":[
+        {"Name":"greenpot", "Id":506, "MinHP":-1, "MinSP":-1,"DeBuffId": 440 },
+        {"Name":"lemon", "Id":568, "MinHP":-1, "MinSP":40,"BuffId": -1 },
+        {"Name":"straw", "Id":578, "MinHP":-1, "MinSP":40,"BuffId": -1 },
+        {"Name":"orange", "Id":582, "MinHP":-1, "MinSP":40,"BuffId": -1 },
+        {"Name":"bluepot", "Id":505, "MinHP":-1, "MinSP":40,"BuffId": -1 },
+        {"Name":"honey", "Id":518, "MinHP":-1, "MinSP":40,"BuffId": -1 },
+        {"Name":"bread", "Id":8076, "MinHP":97, "MinSP":-1,"BuffId": -1 },
+        {"Name":"orange pot", "Id":502, "MinHP":95, "MinSP":-1,"BuffId": -1 }
+    ],
+    "ItemLoot":[
+    ],
+    "Mob":[
+        {"Priority":1, "Id":1219, "Name":"AK",
+            "AtkName":"investigate", "AtkId":266,"AtkLv":5, "MinDist": 2, "MinHP": 0}
+    ],
+    "SKillSelf":[
+        {"Name":"Blessing","Lv":10, "Id":34,            "MinHP": -1, "MinSP": 5, "BuffId": 10},
+        {"Name":"Increase Agility","Lv":10, "Id":29,    "MinHP": -1, "MinSP": 5, "BuffId": 12}
+    ]
+}

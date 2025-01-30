@@ -1,0 +1,64 @@
+{
+    "General":[
+        ["accountID",    2019326],
+
+        ["saveMap",      "morocc_in"],
+        ["lockMap",      "moc_fild15"],
+
+        ["storageWeight",   100],
+
+        ["storageX",   76],
+        ["storageY",   100],
+        ["storageChoice",   1],
+
+        ["aspd",    150],
+
+
+        ["useTPNbAggro",    3],
+        ["useTPLockMap",    2],
+        ["useTPOnRoad",     2],
+        ["useTPDelay",      50],
+        ["useTPUnderHP",    20]
+
+    ],
+    "StorageRoute":[
+        {"Map":"morocc_in",    "X":76,    "Y":100}
+    ],
+    "Route":[
+        {"Map":"morocc_in",    "X":83,    "Y":91},
+        {"Map":"morocc",    "X":160,    "Y":18},
+        {"Map":"moc_fild11",    "X":378,    "Y":197, "UseTPdist": 140},
+        {"Map":"moc_fild14",    "X":17,    "Y":278, "UseTPdist": 140},
+        {"Map":"moc_fild16",    "X":334,    "Y":381, "UseTPdist": 140},
+        {"Map":"moc_fild09",    "X":126,    "Y":21, "UseTPdist": 140},
+        {"Map":"anthell02",    "X":171,    "Y":169, "UseTPdist": 140},
+        {"Map":"moc_fild12",    "X":288,    "Y":168, "UseTPdist": 140}
+    ],
+    "Storage":[
+        {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
+        {"Name":"red herb", "Id":507, "Min":0, "Max":5},
+        {"Name":"concentrpot", "Id":645, "Min":0, "Max":5},
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":160},
+        {"Name":"greenpot", "Id":506, "Min":1, "Max":8},
+        {"Name":"tuna", "Id":8081, "Min":5, "Max":80}
+    ],
+    "ItemUse":[
+        {"Name":"concentrpot", "Id":645, "MinHP":-1, "MinSP":-1,"BuffId": 37 },
+        {"Name":"greenpot", "Id":506, "MinHP":-1, "MinSP":-1,"DeBuffId": 440 },
+        {"Name":"tuna", "Id":8081, "MinHP":60, "MinSP":-1,"BuffId": -1 }
+    ],
+    "Mob":[
+        {"Priority":1, "Id":1138, "Name":"magnolia",
+            "AtkName":"", "AtkId":0,"AtkLv":5, "MinDist": 5, "MinHP": 0},
+        {"Priority":-4, "Id":1159, "Name":"phreoo","TPdist":20}
+    ],
+    "ItemLoot":[
+          { "Id":508,   "Name":"Yellow_Herb"},
+          { "Id":7031,   "Name":"Old_Frying_Pan"},
+          { "Id":910,   "Name":"Garlet"}
+    ],
+    "SKillSelf":[
+        {"Name":"Blessing","Lv":10, "Id":34,            "MinHP": -1, "MinSP": 5, "BuffId": 10},
+        {"Name":"Increase Agility","Lv":10, "Id":29,    "MinHP": -1, "MinSP": 5, "BuffId": 12}
+    ]
+}

@@ -1,0 +1,62 @@
+{
+    "General":[
+        ["accountID",    2019326],
+
+        ["saveMap",      "geffen"],
+        ["lockMap",      "mjolnir_02"],
+        ["storageWeight",   100],
+        ["storageX",   110],
+        ["storageY",   65],
+        ["storageChoice",   2],
+
+        ["aspd",    120],
+
+        ["useTPNbAggro",    5],
+        ["useTPLockMap",    2],
+        ["useTPOnRoad",     2],
+        ["useTPDelay",      50],
+        ["useTPUnderHP",    40],
+
+        ["useSitUnderSP",   10],
+        ["useSitAboveSP",   100]
+
+    ],
+    "StorageRoute":[
+        {"Map":"geffen",    "X":110,    "Y":65}
+    ],
+    "Route":[
+        {"Map":"geffen",    "X":110,    "Y":65,  "NPC": "N0 C3 N0 C6 N0"},
+        {"Map":"mjo_dun01",    "X":52,    "Y":16},
+        {"Map":"mjolnir_01",    "X":376,    "Y":256}
+    ],
+    "Storage":[
+        {"Name":"Converter fire", "Id":12114, "Min":0, "Max":20 },
+        {"Name":"red herb", "Id":507, "Min":0, "Max":10},
+        {"Name":"bread", "Id":8076, "Min":5, "Max":200},
+        {"Name":"awakpot", "Id":656, "Min":0, "Max":5},
+        {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":400}
+    ],
+    "ItemUse":[
+        {"Name":"Converter fire", "Id":12114, "MinHP":-1, "MinSP":-1,"BuffId": 1505 },
+        {"Name":"awakpot", "Id":656, "MinHP":-1, "MinSP":-1,"BuffId": 38 },
+        {"Name":"bread", "Id":8076, "MinHP":95, "MinSP":-1,"BuffId": -1 }
+    ],
+    "ItemLoot":[
+        {"Id":914,   "Name":"Fluff"},
+        {"Id":1027,   "Name":"Porcupine_Spike"},
+        {"Id":919,   "Name":"Animalskin"},
+        {"Id":1026,   "Name":"Acorn"},
+        {"Id":516,   "Name":"Sweet_Potato"},
+        {"Id":692,   "Name":"Wind_Scroll_1_3"},
+        {"Id":712,   "Name":"Flower"},
+        {"Id":924,   "Name":"Powder_Of_Butterfly"},
+        {"Id":2207,   "Name":"Fancy_Flower"}
+    ],
+    "Mob":[
+        {"Priority":1, "Id":1103, "Name":"caramel",
+            "AtkName":"bash", "AtkId":5,"AtkLv":7 , "MinDist": 1, "MinHP": 0}
+    ],
+    "SKillSelf":[
+    ]
+}

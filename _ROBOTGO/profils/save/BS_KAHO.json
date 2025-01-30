@@ -1,0 +1,70 @@
+{
+    "General":[
+        ["accountID",    2019326],
+
+        ["saveMap",      "yuno"],
+        ["lockMap",      "mag_dun01"],
+        ["storageWeight",   100],
+        ["storageX",   152],
+        ["storageY",   187],
+        ["storageChoice",   2],
+
+        ["aspd",    175],
+
+        ["useTPNbAggro",    8],
+        ["useTPLockMap",    2],
+        ["useTPOnRoad",     2],
+        ["useTPDelay",      60],
+        ["useTPUnderHP",    50],
+       
+        ["useSitUnderSP",   20],
+        ["useSitAboveSP",   98]
+       
+    ],
+    "StorageRoute":[
+        {"Map":"yuno",    "X":152,    "Y":187}
+    ],
+    "Route":[
+        {"Map":"yuno",    "X":160,    "Y":13},
+        {"Map":"yuno_fild04",    "X":374,    "Y":149, "UseTPdist": 150},
+        {"Map":"yuno_fild03",    "X":33,    "Y":140, "UseTPdist": 200},
+        {"Map":"mag_dun02",    "X":48,    "Y":33, "UseTPdist": 100}
+    ],
+    "Storage":[
+        {"Name":"Converter water", "Id":12115, "Min":0, "Max":20 },
+        {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
+        {"Name":"red herb", "Id":507, "Min":0, "Max":10},
+        {"Name":"zerk pot", "Id":657, "Min":0, "Max":5},
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":250},
+        {"Name":"tuna", "Id":8081, "Min":5, "Max":200}
+    ],
+    "StorageCart":[
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":350},
+        {"Name":"tuna", "Id":8081, "Min":5, "Max":400}
+    ],
+    "CartTransfert":[
+        {"Name":"rough elu", "Id":757, "Am":5, "From":true},
+        {"Name":"fly wings", "Id":601, "Am":50 },
+        {"Name":"tuna", "Id":8081, "Am":50 }
+    ],
+    "Mob":[
+        {"Priority":1, "Id":1072, "Name":"kaho",
+            "AtkName":"mamonite", "AtkId":42,"AtkLv":10, "MinDist": 2, "MinHP": 0}
+    ],
+    "ItemLoot":[
+        { "Id":508,   "Name":"Yellow_Herb"}
+    ],
+    "ItemUse":[
+        {"Name":"Converter water", "Id":12115, "MinHP":-1, "MinSP":-1,"BuffId": 1505 },
+        {"Name":"zerk pot", "Id":657, "MinHP":-1, "MinSP":-1,"BuffId": 39 },
+        {"Name":"tuna", "Id":8081, "MinHP":95, "MinSP":-1,"BuffId": -1 },
+        {"Name":"bluepot", "Id":505, "MinHP":-1, "MinSP":30,"BuffId": -1 }
+    ],
+    "SKillSelf":[
+        {"Name":"adrenaline rush","Lv":5, "Id":111,     "MinHP": -1, "MinSP": 10, "BuffId": 23},
+        {"Name":"maximize","Lv":5, "Id":114,     "MinHP": -1, "MinSP": 10, "BuffId": 26},
+        {"Name":"crazy upraor","Lv":1, "Id":155,            "MinHP": -1, "MinSP": 10, "BuffId": 30},
+        {"Name":"weap perfe","Lv":5, "Id":112,            "MinHP": -1, "MinSP": 10, "BuffId": 24},
+        {"Name":"over trust","Lv":5, "Id":113,    "MinHP": -1, "MinSP": 10, "BuffId": 25}
+    ]
+}

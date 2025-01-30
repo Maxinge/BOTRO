@@ -1,0 +1,71 @@
+{
+    "General":[
+        ["accountID",    2019326],
+
+        ["saveMap",      "morocc"],
+        ["lockMap",      "moc_pryd05"],
+
+        ["storageWeight",   70],
+        ["storageX",   156],
+        ["storageY",   97],
+        ["storageChoice",   2],
+
+        ["aspd",    162],
+
+        ["useSitUnderSP",   20],
+        ["useSitAboveSP",   99],
+
+        ["useTPNbAggro",    7],
+        ["useTPLockMap",    2],
+        ["useTPOnRoad",     2],
+        ["useTPDelay",      50],
+        ["useTPUnderHP",    40]
+
+    ],
+    "StorageRoute":[
+        {"Map":"morocc",    "X":156,    "Y":97}
+    ],
+    "Route":[
+        {"Map":"moc_prydb1",    "X":100,    "Y":55, "UseTPdist": 40},
+        {"Map":"moc_ruins",    "X":55,    "Y":161, "UseTPdist": 100},
+        {"Map":"morocc",    "X":25,    "Y":294 },
+        {"Map":"moc_pryd01",    "X":90,    "Y":109, "UseTPdist": 150},
+        {"Map":"moc_pryd06",    "X":195,    "Y":8,"UseTPdist": 150}
+    ],
+    "Storage":[
+        {"Name":"Converter water", "Id":12115, "Min":1, "Max":20 },
+        {"Name":"butt fly", "Id":602, "Min":1, "Max":5},
+        {"Name":"zerk pot", "Id":657, "Min":0, "Max":5},
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":350},
+        {"Name":"tun a", "Id":8081, "Min":5, "Max":125},
+        {"Name":"red herb", "Id":507, "Min":0, "Max":5}
+    ],
+    "ItemUse":[
+        {"Name":"lemon", "Id":568, "MinHP":-1, "MinSP":20,"BuffId": -1 },
+        {"Name":"zerk pot", "Id":657, "MinHP":-1, "MinSP":-1,"BuffId": 39 },
+        {"Name":"tun a", "Id":8081, "MinHP":95, "MinSP":-1,"BuffId": -1 },
+        {"Name":"Converter water", "Id":12115, "MinHP":-1, "MinSP":-1,"BuffId": 1505 }
+    ],
+    "Mob":[
+        {"Priority":1, "Id":1149, "Name":"mino",
+            "AtkName":"mamonite", "AtkId":56,"AtkLv":10, "MinDist": 2, "MinHP": 0},
+        {"Priority":-1, "Id":1032, "Name":"verit",
+            "AtkName":"mamonite", "AtkId":56,"AtkLv":10, "MinDist": 2, "MinHP": 0}
+    ],
+    "ItemLoot":[
+        {"Id":941,   "Name":"nosering"},
+        {"Id":930,   "Name":"bondage"},
+        {"Id":929,   "Name":"immo heart"},
+        {"Id":912,   "Name":"zargon"},
+        {"Id":508,   "Name":"Yellow_Herb"},
+        {"Id":511,   "Name":"Green_Herb"},
+        {"Id":949,   "Name":"feather"},
+        {"Id":2609,   "Name":"skullring"},
+        {"Id":2612,   "Name":"flowering"},
+        {"Id":1005,   "Name":"hammerof"},
+        {"Id":516,   "Name":"potato"},
+        {"Id":1301,   "Name":"axe"}
+    ],
+    "SKillSelf":[
+    ]
+}

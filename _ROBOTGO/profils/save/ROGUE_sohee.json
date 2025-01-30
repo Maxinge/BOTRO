@@ -1,0 +1,69 @@
+{
+    "General":[
+        ["accountID",    2019326],
+
+        ["saveMap",      "payon_in02"],
+        ["lockMap",      "pay_dun03"],
+        ["storageWeight",   100],
+        ["storageX",   54],
+        ["storageY",   123],
+        ["storageChoice",   1],
+
+        ["aspd",    150],
+
+        ["useTPNbAggro",    10],
+        ["useTPLockMap",    2],
+        ["useTPOnRoad",     2],
+        ["useTPDelay",      50],
+        ["useTPUnderHP",    15],
+
+        ["useSitUnderSP",   10],
+        ["useSitAboveSP",   100]
+
+    ],
+    "StorageRoute":[
+        {"Map":"payon_in02",    "X":48,    "Y":4},
+        {"Map":"pay_arche",    "X":54,    "Y":123}
+    ],
+    "Route":[
+        {"Map":"payon_in02",    "X":48,    "Y":4},
+        {"Map":"pay_dun02",    "X":137,    "Y":128, "UseTPdist": 120},
+        {"Map":"pay_dun01",    "X":286,    "Y":25, "UseTPdist": 150},
+        {"Map":"pay_dun00",    "X":184,    "Y":33, "UseTPdist": 150},
+        {"Map":"pay_dun04",    "X":202,    "Y":206, "UseTPdist": 150},
+        {"Map":"pay_arche",    "X":36,    "Y":131, "UseTPdist": 150}
+    ],
+    "Storage":[
+        {"Name":"arrowwind", "Id":1755, "Min":20, "Max":600},
+        {"Name":"awakpot", "Id":656, "Min":0, "Max":3},
+        {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
+        {"Name":"tuna", "Id":8081, "Min":5, "Max":15},
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":250},
+        {"Name":"red herb", "Id":507, "Min":0, "Max":5}
+    ],
+    "ItemUse":[
+        {"Name":"awakpot", "Id":656, "MinHP":-1, "MinSP":-1,"BuffId": 38 },
+        {"Name":"greenpot", "Id":506, "MinHP":-1, "MinSP":-1,"DeBuffId": 440 },
+        {"Name":"tuna", "Id":8081, "MinHP":95, "MinSP":-1,"BuffId": -1 }
+    ],
+    "ItemLoot":[
+        {"Id":938,   "Name":"Sticky_Mucus"},
+        {"Id":517,   "Name":"Meat"},
+        {"Id":1011,   "Name":"Emveretarcon"},
+        {"Id":962,   "Name":"Tentacle"},
+        {"Id":1020,   "Name":"Long_Hair"},
+        {"Id":507,   "Name":"Red_Herb"},
+        {"Id":1049,   "Name":"Skirt_Of_Virgin"},
+        {"Id":2277,   "Name":"Nurse_Cap"},
+        {"Id":1217,   "Name":"Stiletto_"}
+    ],
+    "Mob":[
+        {"Priority":1, "Id":1170, "Name":"sohee",
+            "AtkName":"doubles", "AtkId":46,"AtkLv":10, "MinDist": 15, "MinHP": 0},
+        {"Priority":1, "Id":1068, "Name":"hydra",
+            "AtkName":"doubles", "AtkId":46,"AtkLv":10, "MinDist": 15, "MinHP": 0}
+    ],
+    "SKillSelf":[
+        {"Name":"preserve","Lv":5, "Id":475,     "MinHP": -1, "MinSP": 10, "BuffId": 181}
+    ]
+}

@@ -12,7 +12,9 @@ import(
 )
 
 var(
-    servAddr = "51.81.56.97"
+    // servAddr = "51.81.56.97"
+    servAddr = "206.189.227.21"
+    
     exit = make(chan bool)
     ports = []int{6900, 5121, 5131, 6121, 6666, 6667}
 
@@ -77,11 +79,11 @@ func main() {
             result := string(buffer[:len(buffer)])
             foundAt := 0
 
-            for i := 0; i < len(result)- 12; i++ {
+            for i := 0; i < len(result)-(len(servAddr)); i++ {
                 if result[i:i+len(servAddr)] == servAddr {
                     foundAt = i
                     fmt.Printf("Found IP serv --[ %#x ]--",  baseAddress + uintptr(foundAt) )
-                    fmt.Printf("--[ %s ]-- \n", buffer[i:i+11])
+                    fmt.Printf("--[ %s ]-- \n", buffer[i:i+len(servAddr)])
                     bufferWrite := []byte("127.0.0.1")
                     bufferWrite = append(bufferWrite,0) // nul termined string
                 	err = windows.WriteProcessMemory(processHandle, baseAddress + uintptr(foundAt), &bufferWrite[0], uintptr(len(bufferWrite)), nil)
@@ -206,8 +208,10 @@ func routeFromClient(tcpConn net.Conn, port int){
         for {
             n, err := serverConn.Read(recvbuffer)
             if err != nil { fmt.Printf("err serverConn -- %v -- \n", err); return }
-            HexID := binary.LittleEndian.Uint16(recvbuffer[0:2]);
+            HexID := binary.LittleEndian.Uint16(recvbuffer[0:2])
+            HexIDS := fmt.Sprintf("%04X",HexID)
             fmt.Printf("recv : [%04X] len [%v] \n", HexID, len(recvbuffer[:n]))
+            if HexIDS == "0283" { fmt.Printf("### account ID ### [%v]\n", int(binary.LittleEndian.Uint32(recvbuffer[2:2+4]))) }
             tcpConn.Write(recvbuffer[:n])
             if botConn != nil { botConn.Write(recvbuffer[:n]) }
     	}
@@ -218,7 +222,7 @@ func routeFromClient(tcpConn net.Conn, port int){
 	for {
         n, err := tcpConn.Read(sendbuffer)
         if err != nil { fmt.Printf("err tcpConn -- %v -- \n", err); return }
-        HexID := binary.LittleEndian.Uint16(sendbuffer[0:2]);
+        HexID := binary.LittleEndian.Uint16(sendbuffer[0:2])
         fmt.Printf("send : [%04X] len [%v] \n", HexID, len(sendbuffer[:n]))
         if botConn != nil { botConn.Write(sendbuffer[:n]) }
         serverConn.Write(sendbuffer[:n])

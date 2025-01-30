@@ -1,0 +1,60 @@
+{
+    "General":[
+        ["accountID",    2019326],
+
+        ["saveMap",      "geffen"],
+        ["lockMap",      "mjo_dun03"],
+        ["storageWeight",   100],
+        ["storageX",   110],
+        ["storageY",   65],
+        ["storageChoice",   2],
+
+        ["aspd",    150],
+
+        ["useTPNbAggro",    7],
+        ["useTPLockMap",    2],
+        ["useTPOnRoad",     2],
+        ["useTPDelay",      50],
+        ["useTPUnderHP",    40],
+
+        ["useSitUnderSP",   10],
+        ["useSitAboveSP",   100]
+
+    ],
+    "StorageRoute":[
+        {"Map":"geffen",    "X":110,    "Y":65}
+    ],
+    "Route":[
+        {"Map":"geffen",    "X":110,    "Y":65,  "NPC": "N0 C3 N0 C6 N0"},
+        {"Map":"mjo_dun01",    "X":16,    "Y":283, "UseTPdist": 150},
+        {"Map":"mjo_dun02",    "X":40,    "Y":22, "UseTPdist": 250},
+        {"Map":"mjolnir_02",    "X":79,    "Y":364}
+    ],
+    "Storage":[
+        {"Name":"arrowsilver", "Id":1751, "Min":20, "Max":500},
+        {"Name":"awakpot", "Id":656, "Min":0, "Max":3},
+        {"Name":"tuna", "Id":8081, "Min":5, "Max":15},
+        {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":300},
+        {"Name":"red herb", "Id":507, "Min":0, "Max":5}
+    ],
+    "ItemUse":[
+        {"Name":"awakpot", "Id":656, "MinHP":-1, "MinSP":-1,"BuffId": 38 },
+        {"Name":"greenpot", "Id":506, "MinHP":-1, "MinSP":-1,"DeBuffId": 440 },
+        {"Name":"tuna", "Id":8081, "MinHP":95, "MinSP":-1,"BuffId": -1 }
+    ],
+    "ItemLoot":[
+        {"Id":998,   "Name":"Iron"},
+        {"Id":999,   "Name":"Steel"},
+        {"Id":1002,   "Name":"Iron_Ore"},
+        {"Id":1003,   "Name":"Coal"},
+        {"Id":1041,   "Name":"Lantern"}
+    ],
+    "Mob":[
+        {"Priority":1, "Id":1169, "Name":"skelworker",
+            "AtkName":"doubles", "AtkId":46,"AtkLv":10, "MinDist": 14, "MinHP": 0}
+    ],
+    "SKillSelf":[
+        {"Name":"preserve","Lv":5, "Id":475,     "MinHP": -1, "MinSP": 10, "BuffId": 181}
+    ]
+}

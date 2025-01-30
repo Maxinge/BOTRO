@@ -1,0 +1,56 @@
+{
+    "General":[
+        ["accountID",    2019326],
+
+        ["saveMap",      "geffen"],
+        ["lockMap",      "gef_fild06"],
+
+        ["storageWeight",   100],
+        ["storageX",   110],
+        ["storageY",   65],
+        ["storageChoice",   2],
+
+        ["aspd",    175],
+        ["useTPNbAggro",    3],
+        ["useTPLockMap",    2],
+        ["useTPOnRoad",     2],
+        ["useTPDelay",      20000],
+        ["useTPUnderHP",    20]
+
+    ],
+    "StorageRoute":[
+        {"Map":"geffen",    "X":110,    "Y":65}
+    ],
+    "Route":[
+        {"Map":"geffen",    "X":119,    "Y":213},
+        {"Map":"gef_fild05",    "X":17,    "Y":201, "UseTPdist": 150},
+        {"Map":"glast_01",    "X":374,    "Y":304, "UseTPdist": 150},
+        {"Map":"gef_fild07",    "X":64,    "Y":363, "UseTPdist": 150},
+        {"Map":"gef_fild08",    "X":200,    "Y":354, "UseTPdist": 150},
+        {"Map":"gef_fild04",    "X":16,    "Y":309, "UseTPdist": 150}
+    ],
+    "Storage":[
+        {"Name":"awakpot", "Id":656, "Min":0, "Max":5},
+        {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":75},
+        {"Name":"petfood", "Id":537, "Min":0, "Max":10},
+        {"Name":"bread", "Id":8076, "Min":5, "Max":200}
+    ],
+    "ItemUse":[
+        {"Name":"awakpot", "Id":656, "MinHP":-1, "MinSP":-1,"BuffId": 38 },
+        {"Name":"bread", "Id":8076, "MinHP":60, "MinSP":-1,"BuffId": -1 }
+    ],
+    "ItemLoot":[
+        {"Id":1767,   "Name":"Arrow_Of_Shadow"},
+        {"Id":5037,   "Name":"Fruit_Shell"},
+        {"Id":528,   "Name":"Monster"},
+        {"Id":2244,   "Name":"Big_Sis_Ribbon"}
+    ],
+    "Mob":[
+        {"Priority":1, "Id":1156, "Name":"skypetite",
+            "AtkName":"", "AtkId":0,"AtkLv":5, "MinDist": 5, "MinHP": 0}
+    ],
+    "SKillSelf":[
+        {"Name":"preserve","Lv":5, "Id":475,     "MinHP": -1, "MinSP": 10, "BuffId": 181}
+    ]
+}

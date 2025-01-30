@@ -1,0 +1,65 @@
+{
+    "General":[
+        ["accountID",    2019326],
+
+        ["saveMap",      "geffen"],
+        ["lockMap",      "gl_in01"],
+        ["storageWeight",   100],
+        ["storageX",   110],
+        ["storageY",   65],
+        ["storageChoice",   2],
+
+        ["aspd",    175],
+
+        ["useTPNbAggro",    8],
+        ["useTPLockMap",    2],
+        ["useTPOnRoad",     2],
+        ["useTPDelay",      50],
+        ["useTPUnderHP",    30],
+
+        ["useSitUnderSP",   20],
+        ["useSitAboveSP",   98]
+    ],
+    "StorageRoute":[
+        {"Map":"geffen",    "X":110,    "Y":65}
+    ],
+    "Route":[
+        {"Map":"gef_fild06",    "X":18,    "Y":304, "UseTPdist": 150},
+        {"Map":"gef_fild05",    "X":15,    "Y":201, "UseTPdist": 150},
+        {"Map":"gef_fild04",    "X":16,    "Y":309, "UseTPdist": 150},
+        {"Map":"geffen",    "X":119,    "Y":213},
+        {"Map":"glast_01",    "X":179,    "Y":360, "UseTPdist": 200}
+    ],
+    "Storage":[
+        {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
+        {"Name":"petfood", "Id":537, "Min":0, "Max":5},
+        {"Name":"zerk pot", "Id":657, "Min":0, "Max":5},
+        {"Name":"red herb", "Id":507, "Min":0, "Max":5},
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":300},
+        {"Name":"bread", "Id":8076, "Min":5, "Max":300}
+    ],
+    "StorageCart":[
+        {"Name":"wings", "Id":601, "Min":5, "Max":1400}
+    ],
+    "CartTransfert":[
+        {"Name":"fly wings", "Id":601, "Am":50 },
+        {"Name":"bread", "Id":8076, "Am":50 }
+    ],
+    "ItemUse":[
+        {"Name":"zerk pot", "Id":657, "MinHP":-1, "MinSP":-1,"BuffId": 39 },
+        {"Name":"bread", "Id":8076, "MinHP":90, "MinSP":-1,"BuffId": -1 }
+    ],
+    "ItemLoot":[
+    ],
+    "Mob":[
+        {"Priority":1, "Id":1275, "Name":"alice",
+            "AtkName":"mamonite", "AtkId":42,"AtkLv":9, "MinDist": 1, "MinHP": 0}
+    ],
+    "SKillSelf":[
+        {"Name":"adrenaline rush","Lv":5, "Id":111,     "MinHP": -1, "MinSP": 10, "BuffId": 23},
+        {"Name":"maximize","Lv":5, "Id":114,     "MinHP": -1, "MinSP": 10, "BuffId": 26},
+        {"Name":"crazy upraor","Lv":1, "Id":155,            "MinHP": -1, "MinSP": 10, "BuffId": 30},
+        {"Name":"weap perfe","Lv":5, "Id":112,            "MinHP": -1, "MinSP": 10, "BuffId": 24},
+        {"Name":"over trust","Lv":5, "Id":113,    "MinHP": -1, "MinSP": 10, "BuffId": 25}
+    ]
+}

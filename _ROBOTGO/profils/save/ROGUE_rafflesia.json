@@ -1,0 +1,67 @@
+{
+    "General":[
+        ["accountID",    2019326],
+
+        ["saveMap",      "prontera"],
+        ["lockMap",      "mjolnir_11"],
+        ["storageWeight",   70],
+        ["storageX",   282],
+        ["storageY",   200],
+        ["storageChoice",   2],
+
+        ["useSitUnderSP",   20],
+        ["useSitAboveSP",   100],
+
+        ["aspd",    150],
+
+        ["useTPNbAggro",    5],
+        ["useTPLockMap",    2],
+        ["useTPOnRoad",     2],
+        ["useTPDelay",      100],
+        ["useTPUnderHP",    40]
+
+    ],
+    "StorageRoute":[
+        {"Map":"prontera",    "X":282,    "Y":200}
+    ],
+    "Route":[
+        {"Map":"prt_fild02",    "X":173,    "Y":380, "UseTPdist": 200},
+        {"Map":"prt_monk",    "X":22,    "Y":248 },
+        {"Map":"prt_fild06",    "X":277,    "Y":320, "UseTPdist": 150},
+        {"Map":"prontera",    "X":289,    "Y":203 }
+    ],
+    "Storage":[
+        {"Name":"firearrow", "Id":1752, "Min":20, "Max":300},
+        {"Name":"awakpot", "Id":656, "Min":0, "Max":3},
+        {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
+        {"Name":"bread", "Id":8076, "Min":5, "Max":20},
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":300}
+    ],
+    "ItemUse":[
+        {"Name":"awakpot", "Id":656, "MinHP":-1, "MinSP":-1,"BuffId": 38 },
+        {"Name":"bread", "Id":8076, "MinHP":95, "MinSP":-1,"BuffId": -1 }
+    ],
+    "ItemLoot":[
+        {"Id":1033,   "Name":"Root_Of_Maneater"},
+        {"Id":711,   "Name":"Shoot"},
+        {"Id":911,   "Name":"Scell"},
+        {"Id":938,   "Name":"Sticky_Mucus"},
+        {"Id":517,   "Name":"Meat"},
+        {"Id":1011,   "Name":"Emveretarcon"},
+        {"Id":962,   "Name":"Tentacle"},
+        {"Id":1020,   "Name":"Long_Hair"},
+        {"Id":507,   "Name":"Red_Herb"},
+        {"Id":1049,   "Name":"Skirt_Of_Virgin"},
+        {"Id":2277,   "Name":"Nurse_Cap"},
+        {"Id":1217,   "Name":"Stiletto_"}
+    ],
+    "Mob":[
+        {"Priority":1, "Id":1162, "Name":"rafflesia",
+            "AtkName":"doubles", "AtkId":46,"AtkLv":10, "MinDist": 15, "MinHP": 0},
+        {"Priority":1, "Id":1068, "Name":"hydra",
+            "AtkName":"doubles", "AtkId":46,"AtkLv":10, "MinDist": 15, "MinHP": 0}
+    ],
+    "SKillSelf":[
+        {"Name":"preserve","Lv":5, "Id":475,     "MinHP": -1, "MinSP": 10, "BuffId": 181}
+    ]
+}

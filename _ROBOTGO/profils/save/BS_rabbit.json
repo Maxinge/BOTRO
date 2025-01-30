@@ -1,0 +1,72 @@
+{
+    "General":[
+        ["accountID",    2019326],
+
+        ["saveMap",      "aldebaran"],
+        ["lockMap",      "mjolnir_04"],
+        ["storageWeight",   68],
+        ["storageX",   143],
+        ["storageY",   119],
+        ["storageChoice",   2],
+
+        ["aspd",    175],
+
+        ["useTPNbAggro",    4],
+        ["useTPLockMap",    2],
+        ["useTPOnRoad",     2],
+        ["useTPDelay",      50],
+        ["useTPUnderHP",    20],
+
+        ["useSitUnderSP",   10],
+        ["useSitAboveSP",   95]
+    ],
+    "StorageRoute":[
+        {"Map":"aldebaran",    "X":136,    "Y":115}
+    ],
+    "Route":[
+        {"Map":"mjolnir_12",    "X":220,    "Y":27, "UseTPdist": 150},
+        {"Map":"mjolnir_05",    "X":17,    "Y":171, "UseTPdist": 150},
+        {"Map":"aldebaran",    "X":139,    "Y":36}
+    ],
+    "Storage":[
+        {"Name":"Converter fire", "Id":12114, "Min":0, "Max":20 },
+        {"Name":"butt fly", "Id":602, "Min":2, "Max":5},
+        {"Name":"red gem", "Id":716, "Min":0, "Max":10},
+        {"Name":"zerk pot", "Id":657, "Min":0, "Max":5},
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":250},
+        {"Name":"bread", "Id":8076, "Min":5, "Max":250}
+    ],
+    "StorageCart":[
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":400},
+        {"Name":"bread", "Id":8076, "Min":5, "Max":700}
+    ],
+    "CartTransfert":[
+        {"Name":"White_Herb", "Id":509, "Am":5, "From":true},
+        {"Name":"Blue_Herb", "Id":510, "Am":5, "From":true},
+        {"Name":"Brigan", "Id":7054, "Am":5, "From":true},
+        {"Name":"Cyfar", "Id":7053, "Am":5, "From":true},
+        {"Name":"fly wings", "Id":601, "Am":50 },
+        {"Name":"bread", "Id":8076, "Am":50 }
+    ],
+    "Mob":[
+        {"Priority":1, "Id":1322, "Name":"srabbit",
+            "AtkName":"mamonite", "AtkId":42,"AtkLv":10, "MinDist": 1, "MinHP": 0}
+    ],
+    "ItemLoot":[
+        { "Id":508,   "Name":"Yellow_Herb"},
+        {"Id":949,   "Name":"feather"},
+        {"Id":511,   "Name":"Green_Herb"}
+    ],
+    "ItemUse":[
+        {"Name":"Converter fire", "Id":12114, "MinHP":-1, "MinSP":-1,"BuffId": 1505 },
+        {"Name":"zerk pot", "Id":657, "MinHP":-1, "MinSP":-1,"BuffId": 39 },
+        {"Name":"bread", "Id":8076, "MinHP":90, "MinSP":-1,"BuffId": -1 }
+    ],
+    "SKillSelf":[
+        {"Name":"adrenaline rush","Lv":5, "Id":111,     "MinHP": -1, "MinSP": 10, "BuffId": 23},
+        {"Name":"maximize","Lv":5, "Id":114,     "MinHP": -1, "MinSP": 10, "BuffId": 26},
+        {"Name":"crazy upraor","Lv":1, "Id":155,            "MinHP": -1, "MinSP": 10, "BuffId": 30},
+        {"Name":"weap perfe","Lv":5, "Id":112,            "MinHP": -1, "MinSP": 10, "BuffId": 24},
+        {"Name":"over trust","Lv":5, "Id":113,    "MinHP": -1, "MinSP": 10, "BuffId": 25}
+    ]
+}

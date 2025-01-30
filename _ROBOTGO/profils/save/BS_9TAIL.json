@@ -1,0 +1,79 @@
+{
+    "General":[
+        ["accountID",    2014282],
+
+        ["saveMap",      "oldnewpayon"],
+        ["lockMap",      "pay_dun04"],
+
+        ["storageWeight",   69],
+        ["storageX",   54],
+        ["storageY",   123],
+        ["storageChoice",   1],
+
+        ["useTPNbAggro",    8],
+        ["useTPLockMap",    2],
+        ["useTPOnRoad",     2],
+        ["useTPDelay",      50],
+        ["useTPUnderHP",    40],
+
+        ["useSitUnderSP",   10],
+        ["useSitAboveSP",   98]
+    ],
+    "StorageRoute":[
+        {"Map":"oldnewpayon",    "X":175,    "Y":189},
+        {"Map":"pay_arche",    "X":54,    "Y":123}
+    ],
+    "Route":[
+        {"Map":"oldnewpayon",    "X":175,    "Y":189},
+        {"Map":"pay_dun03",    "X":127,    "Y":62, "UseTPdist": 120},
+        {"Map":"pay_dun02",    "X":137,    "Y":128, "UseTPdist": 120},
+        {"Map":"pay_dun01",    "X":286,    "Y":25, "UseTPdist": 120},
+        {"Map":"pay_dun00",    "X":184,    "Y":33, "UseTPdist": 120},
+        {"Map":"pay_arche",    "X":36,    "Y":131, "UseTPdist": 120}
+    ],
+    "CartTransfert":[
+        {"Name":"rough elu", "Id":757, "Am":5, "From":true},
+        {"Name":"fly wings", "Id":601, "Am":50 },
+        {"Name":"bread", "Id":8076, "Am":50 }
+    ],
+    "StorageCart":[
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":700},
+        {"Name":"bread", "Id":8076, "Min":5, "Max":300}
+    ],
+    "Storage":[
+        {"Name":"Converter water", "Id":12115, "Min":0, "Max":20 },
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":250},
+        {"Name":"bread", "Id":8076, "Min":5, "Max":250},
+        {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
+        {"Name":"iron ore", "Id":1002, "Min":0, "Max":10},
+        {"Name":"red herb", "Id":507, "Min":0, "Max":10},
+        {"Name":"zerk pot", "Id":657, "Min":0, "Max":5}
+    ],
+    "ItemUse":[
+        {"Name":"Converter water", "Id":12115, "MinHP":-1, "MinSP":-1,"BuffId": 1505 },
+        {"Name":"zerk pot", "Id":657, "MinHP":-1, "MinSP":-1,"BuffId": 39 },
+        {"Name":"greenpot", "Id":506, "MinHP":-1, "MinSP":-1,"DeBuffId": 440 },
+        {"Name":"lemon", "Id":568, "MinHP":-1, "MinSP":40,"BuffId": -1 },
+        {"Name":"straw", "Id":578, "MinHP":-1, "MinSP":40,"BuffId": -1 },
+        {"Name":"orange", "Id":582, "MinHP":-1, "MinSP":40,"BuffId": -1 },
+        {"Name":"bluepot", "Id":505, "MinHP":-1, "MinSP":40,"BuffId": -1 },
+        {"Name":"honey", "Id":518, "MinHP":-1, "MinSP":40,"BuffId": -1 },
+        {"Name":"bread", "Id":8076, "MinHP":95, "MinSP":-1,"BuffId": -1 }
+    ],
+    "ItemLoot":[
+        {"Id":8068,   "Name":"chalice"}
+    ],
+    "Mob":[
+        {"Priority":1, "Id":1180, "Name":"ninetail",
+            "AtkName":"mamonite", "AtkId":42,"AtkLv":5, "MinDist": 2, "MinHP": 0},
+        {"Priority":-4, "Id":1150, "Name":"moonlight","TPdist":8},
+        {"Priority":-4, "Id":1307, "Name":"cato","TPdist":8}
+    ],
+    "SKillSelf":[
+        {"Name":"adrenaline rush","Lv":5, "Id":111,     "MinHP": -1, "MinSP": 10, "BuffId": 23},
+        {"Name":"maximize","Lv":5, "Id":114,     "MinHP": -1, "MinSP": 10, "BuffId": 26},
+        {"Name":"crazy upraor","Lv":1, "Id":155,            "MinHP": -1, "MinSP": 10, "BuffId": 30},
+        {"Name":"weap perfe","Lv":5, "Id":112,            "MinHP": -1, "MinSP": 10, "BuffId": 24},
+        {"Name":"over trust","Lv":5, "Id":113,    "MinHP": -1, "MinSP": 10, "BuffId": 25}
+    ]
+}

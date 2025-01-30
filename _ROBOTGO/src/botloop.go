@@ -82,6 +82,12 @@ func initConf(){
     if exist := getConf(conf["General"],"Key","aspd"); exist != nil {
         aspd = exist.(struct{Key string; Val int}).Val
     }
+    if exist := getConf(conf["General"],"Key","useStealAfter"); exist != nil {
+        useStealAfter = exist.(struct{Key string; Val int}).Val
+    }
+    if exist := getConf(conf["General"],"Key","useStealSP"); exist != nil {
+        useStealSP = exist.(struct{Key string; Val int}).Val
+    }
 
 }
 
@@ -215,24 +221,26 @@ func botLoop() {
         if targetItemID < 0 { targetItemID = pickItemTarget() }
         MUgroundItems.Unlock()
 
-        MUmobList.Lock()
+        if targetMobID < 0 { targetStealed = -1; nbAuto = 0}
 
+        MUmobList.Lock()
         if (float32(HPLEFT)/float32(HPMAX)*100) > float32(useHeal) {
         if countAggro < useTPNbAggro {
         if SSphere >= useSphereCombat {
         if targetMobID < 0 {
         if !innRun {
         if !townRun {
-        if len(playerList) <= 0 {
+        // if len(playerList) <= 0 {
             targetMobID = pickMobTarget()
-        }}}}}}}
+        // }
+        }}}}}}
         mob := mobList[targetMobID]
         if targetMobID > 0 && len(playerList) > 0 {
             MUplayerList.Lock()
             for _,vv := range playerList {
-                if int(getDist(vv.Coords, mob.CoordsFrom)) <= 6{
+                if int(getDist(vv.Coords, mob.CoordsFrom)) <= 8{
                     delete(mobList,targetMobID)
-                    timers.TnoMob = 1000
+                    targetMobID = -1; break
                 }
             }
             MUplayerList.Unlock()
@@ -245,6 +253,8 @@ func botLoop() {
             }
         }
         MUmobList.Unlock()
+
+        
 
         bannedCells := []Coord{}
         MUtrapList.Lock()
@@ -269,6 +279,11 @@ func botLoop() {
         if SIT && countAggro > 0{
             sendToServer("0437", []byte{0,0,0,0,3})
             useTeleport(); continue
+        }
+
+        if SIT && targetItemID > 0{
+            sendToServer("0437", []byte{0,0,0,0,3})
+            continue
         }
 
         if (float32(SPLEFT)/float32(SPMAX)*100) <= float32(useSitUnderSP) {
@@ -428,7 +443,17 @@ func botLoop() {
                     }
                     MUnpcList.Unlock()
                     if ActorID != 0 {
+                        
+
+                        // ### storage must be clean here because game can keep
+                        // in memory some items et resend some items when opening second time 
+                        // for the same town run
+                        // MUstorageItems.Lock()
+                        // storageItems = map[int]Item{}
+                        // MUstorageItems.Unlock()
+
                         sendToServer("035F",coordsTo24Bits(ccTo.X,ccTo.Y))
+
                         time.Sleep(time.Duration(500) * time.Millisecond)
                         talkNpc(ActorID)
                         time.Sleep(time.Duration(500) * time.Millisecond)
@@ -446,7 +471,7 @@ func botLoop() {
                                 vv.ItemID == 1755 || vv.ItemID == 1754 ||
                                 vv.ItemID == 1759 || vv.ItemID == 1757 ||
                                 vv.ItemID == 1770 || vv.ItemID == 1751 ||
-                                vv.ItemID == 1756 {
+                                vv.ItemID == 1756 || vv.ItemID == 1752 {
                                     putItemIn("inventory","storage", kk, vv.Amount-1)
                                 }else{
                                     putItemIn("inventory","storage", kk, vv.Amount)
@@ -468,7 +493,7 @@ func botLoop() {
                         closeStorage()
                         time.Sleep(time.Duration(500) * time.Millisecond)
                         // #######################
-                        storageItems = map[int]Item{}
+                        
                         talkNpc(ActorID)
                         time.Sleep(time.Duration(500) * time.Millisecond)
                         talkNpcNext(ActorID)
@@ -476,8 +501,8 @@ func botLoop() {
                         talkNpcChoice(ActorID, storageChoice)
                         time.Sleep(time.Duration(500) * time.Millisecond)
                         talkNpcClose(ActorID)
-                        time.Sleep(time.Duration(500) * time.Millisecond)
-
+                        time.Sleep(time.Duration(1000) * time.Millisecond)
+                        
                         for _,vv := range conf["Storage"] {
                             it := vv.(CStorage)
                             am, itId := itemInStorage(it.Id, 1)
@@ -723,7 +748,8 @@ func botLoop() {
             MUmobList.Lock();
             mob := mobList[targetMobID];
             if !isInArray(targetMobID, keyMap(mobList)) || mob.DeathTime > 0 || mob.IsNotValid{
-                targetMobID = -1; resetPath(); MUmobList.Unlock(); continue  // ## !! ##
+                targetMobID = -1;  timers.TnoMob = useTPDelay; resetPath(); MUmobList.Unlock();  // ## !! ##
+                continue 
             }
             MUmobList.Unlock()
             resetPath()
@@ -761,11 +787,19 @@ func botLoop() {
                 if AtkId != 0 {
                     if timers.TuseSkill <= 0 {
                         sendUseSkill(AtkId, AtkLv, targetMobID)
+                        timers.TclickMove = 100
                         timers.TuseSkill = TBA
                         timers.TuseSkillSelf = TBA + 200
                     }
                 }else{
                     if timers.TuseSkill <= 0 {
+                        if useStealSP > 0 {
+                        if (float32(SPLEFT)/float32(SPMAX)*100) >= float32(useStealSP) {
+                        if targetStealed < 0 {
+                            if nbAuto >= useStealAfter {
+                                sendUseSkill(50, 10, targetMobID) // steal
+                            }
+                        }}}
                         arrayBin := []byte{}
                         mobBin := make([]byte, 4)
                         binary.LittleEndian.PutUint32(mobBin, uint32(targetMobID))
@@ -1108,6 +1142,7 @@ func itemInInventory(id int, amount int)  (int,int){
 func itemInStorage(id int, amount int)  (int,int){
     MUstorageItems.Lock()
     for kk,ii := range storageItems {
+        
         if ii.ItemID == id && ii.Amount >= amount { MUstorageItems.Unlock(); return ii.Amount, kk  }
     }
     MUstorageItems.Unlock()
@@ -1169,8 +1204,12 @@ func sendWarpPortalConfirm(choice string){
     Id := []byte{27, 0}
     byteStr := []byte(choice)
     arrayBin = append(arrayBin, Id...)
-    arrayBin = append(arrayBin, byteStr[0:16]...)
-    sendToServer("011B", arrayBin)
+    arrayBin = append(arrayBin, byteStr...)
+    arrayBin = append(arrayBin, []byte{'\x00','\x00','\x00','\x00'}...)
+    arrayBin = append(arrayBin, []byte{'\x00','\x00','\x00','\x00'}...)
+    arrayBin = append(arrayBin, []byte{'\x00','\x00','\x00','\x00'}...)
+    arrayBin = append(arrayBin, []byte{'\x00','\x00','\x00','\x00'}...)
+    sendToServer("011B", arrayBin[0:18])
 }
 
 func cleanBuffList()  {

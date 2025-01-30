@@ -13,6 +13,8 @@ libs=(
     # "github.com/go-gl/glfw/v3.3/glfw"
     # "github.com/AllenDang/cimgui-go"
     # "github.com/go-gl/gl/v2.1/gl"
+    # "github.com/nfnt/resize"
+    # "github.com/disintegration/imaging"
 )
 export go="/c/Program Files/Go/bin/go.exe"
 # export go="/usr/local/go/bin/go"
@@ -20,7 +22,6 @@ export GOPATH=$DIR/LIB/temp
 
 rm -r -f $DIR/LIB/temp/*
 mkdir -p $DIR/LIB/temp
-
 
 
 function install_lib {
@@ -36,6 +37,5 @@ function install_lib {
     done
 }
 
-rm -r -f $DIR/LIB/temp/
 
 install_lib

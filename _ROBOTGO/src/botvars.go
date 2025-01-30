@@ -143,6 +143,11 @@ var(
     innY = -1
     aspd = 150
 
+    useStealAfter = 999
+    nbAuto =- 1
+    useStealSP = -1 
+    targetStealed = -1
+
 
     // ##### BOT
     lastMoveTime = time.Now().Unix()

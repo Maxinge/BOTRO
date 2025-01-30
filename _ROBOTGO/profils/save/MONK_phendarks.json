@@ -1,0 +1,70 @@
+{
+    "General":[
+        ["accountID",    2019326],
+
+        ["saveMap",      "alberta_in"],
+        ["lockMap",      "gl_prison1"],
+        ["storageWeight",   70],
+        ["storageX",   28],
+        ["storageY",   138],
+        ["storageChoice",   1],
+
+
+        ["useTPNbAggro",    6],
+        ["useTPLockMap",    2],
+        ["useTPOnRoad",     2],
+        ["useTPDelay",      50],
+        ["useTPUnderHP",    40],
+
+        ["useSphere",   5],
+        ["useSphereCombat",   1],
+
+    
+
+        ["useSitUnderSP",   10],
+        ["useSitAboveSP",   95]
+
+    ],
+    "StorageRoute":[
+        {"Map":"alberta_in",    "X":28,    "Y":138}
+    ],
+    "Route":[
+        {"Map":"alberta_in",      "WarpPortal":"glast_01.gat"},
+        {"Map":"gl_sew01",    "X":258,    "Y":258, "UseTPdist": 150},
+        {"Map":"gl_prison",    "X":149,    "Y":183, "UseTPdist": 150},
+        {"Map":"gl_cas01",    "X":370,    "Y":302, "UseTPdist": 150},
+        {"Map":"glast_01",    "X":200,    "Y":296, "UseTPdist": 150}
+    ],
+    "Storage":[
+        {"Name":"blue gem", "Id":717, "Min":0, "Max":5},
+        {"Name":"iron ore", "Id":1002, "Min":0, "Max":5},
+        {"Name":"red gem", "Id":716, "Min":0, "Max":5},
+        {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
+        {"Name":"red herb", "Id":507, "Min":0, "Max":5},
+        {"Name":"tuna", "Id":8081, "Min":5, "Max":100},
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":300},
+        {"Name":"greenpot", "Id":506, "Min":0, "Max":10}
+    ],
+    "ItemUse":[
+        {"Name":"greenpot", "Id":506, "MinHP":-1, "MinSP":-1,"DeBuffId": 440 },
+        {"Name":"lemon", "Id":568, "MinHP":-1, "MinSP":40,"BuffId": -1 },
+        {"Name":"straw", "Id":578, "MinHP":-1, "MinSP":40,"BuffId": -1 },
+        {"Name":"orange", "Id":582, "MinHP":-1, "MinSP":40,"BuffId": -1 },
+        {"Name":"bluepot", "Id":505, "MinHP":-1, "MinSP":40,"BuffId": -1 },
+        {"Name":"honey", "Id":518, "MinHP":-1, "MinSP":40,"BuffId": -1 },
+        {"Name":"bread", "Id":8076, "MinHP":90, "MinSP":-1,"BuffId": -1 },
+        {"Name":"tuna", "Id":8081, "MinHP":80, "MinSP":-1,"BuffId": -1 }
+    ],
+    "ItemLoot":[
+        {"Id":1971,   "Name":"electric wire"},
+        {"Id":1015,   "Name":"tongue"}
+    ],
+    "Mob":[
+        {"Priority":1, "Id":1202, "Name":"phendark",
+            "AtkName":"investigate", "AtkId":266,"AtkLv":5, "MinDist": 2, "MinHP": 0}
+    ],
+    "SKillSelf":[
+        {"Name":"Blessing","Lv":10, "Id":34,            "MinHP": -1, "MinSP": 5, "BuffId": 10},
+        {"Name":"Increase Agility","Lv":10, "Id":29,    "MinHP": -1, "MinSP": 5, "BuffId": 12}
+    ]
+}

@@ -1,0 +1,48 @@
+{
+    "General":[
+        ["accountID",    2019326],
+
+        ["saveMap",      "morocc_in"],
+        ["lockMap",      "job_monk"],
+
+        ["storageWeight",   100],
+
+        ["storageX",   76],
+        ["storageY",   100],
+        ["storageChoice",   1],
+
+        ["aspd",    150],
+
+
+        ["useTPNbAggro",    3],
+        ["useTPOnRoad",     2],
+        ["useTPDelay",      10000],
+        ["useTPUnderHP",    20]
+
+    ],
+    "StorageRoute":[
+    ],
+    "Route":[
+    ],
+    "Storage":[
+    ],
+    "ItemUse":[
+        {"Name":"concentrpot", "Id":645, "MinHP":-1, "MinSP":-1,"BuffId": 37 },
+        {"Name":"greenpot", "Id":506, "MinHP":-1, "MinSP":-1,"DeBuffId": 440 },
+        {"Name":"tuna", "Id":8081, "MinHP":60, "MinSP":-1,"BuffId": -1 }
+    ],
+    "Mob":[
+        {"Priority":1, "Id":1182, "Name":"mush",
+            "AtkName":"", "AtkId":0,"AtkLv":5, "MinDist": 5, "MinHP": 0},
+        {"Priority":-1, "Id":1051, "Name":"thiefbug",
+            "AtkName":"", "AtkId":0,"AtkLv":5, "MinDist": 5, "MinHP": 0}
+    ],
+    "ItemLoot":[
+          { "Id":508,   "Name":"Yellow_Herb"},
+          { "Id":7031,   "Name":"Old_Frying_Pan"},
+          { "Id":910,   "Name":"Garlet"}
+    ],
+    "SKillSelf":[
+        {"Name":"Increase Agility","Lv":10, "Id":29,    "MinHP": -1, "MinSP": 5, "BuffId": 12}
+    ]
+}

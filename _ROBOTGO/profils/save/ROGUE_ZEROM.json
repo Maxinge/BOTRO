@@ -1,0 +1,93 @@
+{
+    "General":[
+        ["accountID",    2019326],
+
+
+        ["saveMap",      "morocc"],
+        ["lockMap",      "in_sphinx1"],
+        ["storageWeight",   100],
+        ["storageX",   156],
+        ["storageY",   97],
+        ["storageChoice",   2],
+
+        ["aspd",    164],
+
+        ["useTPNbAggro",    5],
+        ["useTPLockMap",    2],
+        ["useTPOnRoad",     2],
+        ["useTPDelay",      50],
+        ["useTPUnderHP",    15],
+
+        ["useSitUnderSP",   10],
+        ["useSitAboveSP",   95]
+
+    ],
+    "StorageRoute":[
+        {"Map":"morocc",    "X":156,    "Y":97}
+    ],
+    "Route":[
+        {"Map":"in_sphinx2",    "X":149,    "Y":79},
+        {"Map":"moc_fild19",    "X":99,    "Y":99 },
+        {"Map":"morocc",    "X":25,    "Y":164}
+    ],
+    "Storage":[
+        {"Name":"arrow", "Id":1750, "Min":20, "Max":400},
+        {"Name":"awakpot", "Id":656, "Min":0, "Max":3},
+        {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":320},
+        {"Name":"petfood", "Id":537, "Min":0, "Max":5}
+    ],
+    "ItemUse":[
+        {"Name":"awakpot", "Id":656, "MinHP":-1, "MinSP":-1,"BuffId": 38 },
+        {"Name":"greenpot", "Id":506, "MinHP":-1, "MinSP":-1,"DeBuffId": 440 },
+        {"Name":"bread", "Id":8076, "MinHP":95, "MinSP":-1,"BuffId": -1 }
+    ],
+    "ItemLoot":[
+        {"Id":1002,   "Name":"Iron_Ore"},
+        {"Id":1011,   "Name":"Emveretarcon"},
+        {"Id":2339,   "Name":"G_Strings"},
+        {"Id":2408,   "Name":"Cuffs"},
+        {"Id":998,   "Name":"Iron"},
+        {"Id":924,   "Name":"Powder_Of_Butterfly"},
+        {"Id":712,   "Name":"Flower"},
+        {"Id":1502,   "Name":"Club_"},
+        {"Id":1501,   "Name":"Club"},
+        {"Id":705,   "Name":"Clover"},
+        {"Id":914,   "Name":"Fluff"},
+        {"Id":949,   "Name":"Feather"},
+        {"Id":7032,   "Name":"Piece_Of_Egg_Shell"},
+        {"Id":507,   "Name":"Red_Herb"},
+        {"Id":645,   "Name":"Center_Potion"},
+        {"Id":911,   "Name":"Scell"},
+        {"Id":7032,   "Name":"Piece_Of_Egg_Shell"},
+        {"Id":909,   "Name":"jllopy"},
+        {"Id":938,   "Name":"stickymu"},
+        {"Id":508,   "Name":"Yellow_Herb"},
+        {"Id":511,   "Name":"Green_Herb"},
+        {"Id":949,   "Name":"feather"},
+        {"Id":2609,   "Name":"skullring"},
+        {"Id":2612,   "Name":"flowering"},
+        {"Id":1005,   "Name":"hammerof"},
+        {"Id":516,   "Name":"potato"},
+        {"Id":517,   "Name":"meat"},
+        {"Id":919,   "Name":"animalskin"},
+        {"Id":2306,   "Name":"adventuresuit"},
+        {"Id":942,   "Name":"yoyotail"},
+        {"Id":2301,   "Name":"cotonshirt"},
+        {"Id":513,   "Name":"banana"},
+        {"Id":507,   "Name":"Red_Herb"},
+        {"Id":935,   "Name":"Shell"},
+        {"Id":1301,   "Name":"axe"}
+    ],
+    "Mob":[
+        {"Priority":1, "Id":1007, "Name":"fabre",
+            "AtkName":"", "AtkId":0,"AtkLv":10, "MinDist": 12, "MinHP": 0},
+        {"Priority":1, "Id":1018, "Name":"creamy",
+            "AtkName":"doubles", "AtkId":46,"AtkLv":10, "MinDist": 12, "MinHP": 0},
+        {"Priority":1, "Id":1178, "Name":"zerom",
+            "AtkName":"doubles", "AtkId":46,"AtkLv":10, "MinDist": 12, "MinHP": 0}
+    ],
+    "SKillSelf":[
+        {"Name":"preserve","Lv":5, "Id":475,     "MinHP": -1, "MinSP": 10, "BuffId": 181}
+    ]
+}

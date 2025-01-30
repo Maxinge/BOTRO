@@ -16,7 +16,7 @@ func parsePacket(bb []byte){
     switch hexID {
     default:
         // fmt.Printf("### no_fct ### [%v][%v] -> [%v] \n", hexID, len(bb),bb)
-
+    
 
     case "0091","0092":  //map_change
         resetInventoryList()
@@ -29,7 +29,7 @@ func parsePacket(bb []byte){
         timers.TuseSkillSelf = 400
         timers.TuseSkill = 400
         timers.TuseItem = 400
-        timers.TclickMove = 500
+        timers.TclickMove = 600
         timers.TloadTP = 400
 
         SSphere = 0
@@ -84,7 +84,7 @@ func parsePacket(bb []byte){
         CARTMAX = int(binary.LittleEndian.Uint32(bb[ii:ii+4]));        ii += 4
 
     case "0B09", "0B0A":  //inventory_info
-
+    
         inventoryType := bb[2]
         pad := 34
         if hexID == "0B09" { pad = 34 }
@@ -95,6 +95,7 @@ func parsePacket(bb []byte){
             itemID := int(binary.LittleEndian.Uint32(bb[ii+2:ii+2+4]))
             amount := 1
             eqSlot := 0
+
             if hexID == "0B09" {
                 amount = int(binary.LittleEndian.Uint16(bb[ii+7:ii+7+2]))
 
@@ -121,6 +122,7 @@ func parsePacket(bb []byte){
                 }
             }()
         }
+
 
 
     case "01C8":  //item_use
@@ -301,12 +303,17 @@ func parsePacket(bb []byte){
                     pauseLoop(100)
                 }
                 mobList[mapID] = mm
+            }else{
+                if mapID == targetMobID {  nbAuto += 1 }
             }
         }}
         MUmobList.Unlock()
 
+    
+        
     case "0080":  //actor_dead_disappear
         mapID := int(binary.LittleEndian.Uint32(bb[0:0+4]))
+
         MUmobList.Lock()
         if _, exist := mobList[mapID]; exist {
             if bb[4] != 1 { //  1 = ded
@@ -352,7 +359,9 @@ func parsePacket(bb []byte){
         actorID := int(binary.LittleEndian.Uint16(bb[21:21+4]))
         moveSpeed := int(binary.LittleEndian.Uint16(bb[11:11+2]))
         actorType := byte(bb[2])
-        if bb[17] == 4 || bb[17] == 2 { return } // hided
+
+        if bb[17] == 4 || bb[17] == 2 { return }
+       
         mccFrom := Coord{X:0,Y:0}
         mccTo := Coord{X:0,Y:0}
         mpathTo := []Coord{}
@@ -432,29 +441,33 @@ func parsePacket(bb []byte){
         targetID := int(binary.LittleEndian.Uint32(bb[targetii:targetii+4]))
         dmg := int(binary.LittleEndian.Uint32(bb[20:20+4]))
 
-
+        if hexID == "09CB"{ //skill_no_dmg
+            SkillID := int(binary.LittleEndian.Uint16(bb[0:0+2]))
+            if sourceID == accountID && SkillID == 50 { //steal success
+                targetStealed = 1
+            }
+        }
 
         if hexID == "08C8" && bb[27] != 1 {
             if targetID == accountID && dmg > 0{
                 timers.TclickMove = 30
             }
             return
-        } //autoattack
-
-
-
+        } //autoattack from mob
+        
+     
         if targetID == targetMobID {
         if sourceID == accountID {
             timers.TsameMob += 300
         }}
 
         MUmobList.Lock()
-        if mm, exist := mobList[targetID]; exist {
-            if sourceID != accountID {
-                mm.IsNotValid = true;
-                mobList[targetID] = mm
-            }
-        }
+        if mm, exist := mobList[sourceID]; exist {
+        if _, pexist := playerList[targetID]; pexist {
+            mm.IsNotValid = true;
+            mobList[targetID] = mm
+        }}
+
         if targetID == accountID {
             if mm, exist := mobList[sourceID]; exist {
                     mm.IsNotValid = false;
@@ -468,6 +481,8 @@ func parsePacket(bb []byte){
 
     // #######################
 
+    case "00B0":  //???
+        // fmt.Printf("### 00B0 ### [%v][%v] -> [%v] \n", hexID, len(bb),bb)
     case "6847":  //???
     case "00C0":  //emote
     case "0438":  //skill_use_send
@@ -482,7 +497,9 @@ func parsePacket(bb []byte){
     case "035F":  //send_self_move_to
     // case "0087":  //recv_self_move_to
     case "011B":  //warp_portal_choice_send
+    // fmt.Printf("### warp_portal_choice_send ### [%v][%v] -> [%v] \n", hexID, len(bb),bb)
     case "0ABE":  //warp_portal_choice_recv
+    // fmt.Printf("### warp_portal_choice_recv ### [%v][%v] -> [%v] \n", hexID, len(bb),string(bb))
     case "0AF4":  //skill_use_aoe_recv
     case "0110":  //skill_use_failed
     case "0118":  //stop_attack

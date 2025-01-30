@@ -1,0 +1,53 @@
+{
+    "General":[
+        ["accountID",    2014282],
+
+        ["saveMap",      "geffen"],
+        ["lockMap",      "gef_fild05"],
+        ["storageWeight",   100],
+        ["storageX",   110],
+        ["storageY",   65],
+        ["storageChoice",   2],
+
+
+        ["useTPNbAggro",    5],
+        ["useTPLockMap",    2],
+        ["useTPOnRoad",     2],
+        ["useTPDelay",      100],
+        ["useTPUnderHP",    40]
+
+    ],
+    "StorageRoute":[
+        {"Map":"geffen",    "X":110,    "Y":65}
+    ],
+    "Route":[
+        {"Map":"geffen",    "X":119,    "Y":213},
+        {"Map":"gef_fild06",    "X":382,    "Y":211, "UseTPdist": 150},
+        {"Map":"gef_fild07",    "X":64,    "Y":363, "UseTPdist": 150},
+        {"Map":"gef_fild04",    "X":16,    "Y":309, "UseTPdist": 150}
+    ],
+    "Storage":[
+        {"Name":"awakpot", "Id":656, "Min":0, "Max":5},
+        {"Name":"red herb", "Id":507, "Min":0, "Max":10},
+        {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":160},
+        {"Name":"bread", "Id":8076, "Min":5, "Max":100}
+    ],
+    "ItemUse":[
+        {"Name":"awakpot", "Id":656, "MinHP":-1, "MinSP":-1,"BuffId": 38 },
+        {"Name":"greenpot", "Id":506, "MinHP":-1, "MinSP":-1,"DeBuffId": 440 },
+        {"Name":"bread", "Id":8076, "MinHP":60, "MinSP":-1,"BuffId": -1 }
+    ],
+    "ItemLoot":[
+          {"Id":1767,   "Name":"Arrow_Of_Shadow"},
+          {"Id":5037,   "Name":"Fruit_Shell"},
+          {"Id":528,   "Name":"Monster"},
+          {"Id":2244,   "Name":"Big_Sis_Ribbon"}
+    ],
+    "Mob":[
+        {"Priority":1, "Id":1261, "Name":"wildrose",
+            "AtkName":"", "AtkId":0,"AtkLv":5, "MinDist": 5, "MinHP": 0}
+    ],
+    "SKillSelf":[
+    ]
+}

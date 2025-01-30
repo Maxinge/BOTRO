@@ -57,6 +57,15 @@ func main() {
         lgatMaps["moc_pryd01"] = mm
     }
 
+    if mm, exist := lgatMaps["gl_church"]; exist {
+        mm.cells[173][97] = 1
+        mm.cells[173][98] = 1
+        mm.cells[173][99] = 1
+        mm.cells[172][101] = 1
+        mm.cells[172][102] = 1
+        lgatMaps["gl_church"] = mm
+    }
+
     if mm, exist := lgatMaps["gef_fild05"]; exist {
         mm.cells[54][298] = 1
         lgatMaps["gef_fild05"] = mm
@@ -79,7 +88,7 @@ func main() {
 
 
     go func() {
-        buffer := make([]byte, 100000)
+        buffer := make([]byte, 1000000)
         for {
             n ,_ := proxyCo.Read(buffer)
             if n < 2 { continue }
@@ -96,7 +105,7 @@ func main() {
                     ii += plen-1;
                     continue
                 }
-                fmt.Printf("####### uknw_pck [%v][%v] -> [%v] \n", HexID, plen, buffer[ii:ii+plen])
+                // fmt.Printf("####### uknw_pck [%v][%v] -> [%v] \n", HexID, plen, buffer[ii:ii+plen])
                 break;
             }
         }

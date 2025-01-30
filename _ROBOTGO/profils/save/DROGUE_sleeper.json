@@ -1,0 +1,62 @@
+{
+    "General":[
+        ["accountID",    2019326],
+
+        ["saveMap",      "yuno"],
+        ["lockMap",      "yuno_fild03"],
+        ["storageWeight",   70],
+        ["storageX",   152],
+        ["storageY",   187],
+        ["storageChoice",   2],
+
+        ["aspd",    175],
+
+        ["useTPNbAggro",    5],
+        ["useTPLockMap",    2],
+        ["useTPOnRoad",     2],
+        ["useTPDelay",      50],
+        ["useTPUnderHP",    40],
+
+        ["useStealAfter",   5],
+        ["useStealSP",   30]
+
+    ],
+    "StorageRoute":[
+        {"Map":"yuno",    "X":152,    "Y":187}
+    ],
+    "Route":[
+        {"Map":"yuno",    "X":160,    "Y":13},
+        {"Map":"yuno_fild04",    "X":374,    "Y":149, "UseTPdist": 150}
+    ],
+    "Storage":[
+        {"Name":"Converter fire", "Id":12114, "Min":0, "Max":10 },
+        {"Name":"zerk pot", "Id":657, "Min":0, "Max":5},
+        {"Name":"blue gem", "Id":717, "Min":0, "Max":5},
+        {"Name":"iron ore", "Id":1002, "Min":0, "Max":5},
+        {"Name":"red gem", "Id":716, "Min":0, "Max":5},
+        {"Name":"butt fly", "Id":602, "Min":0, "Max":5},
+        {"Name":"red herb", "Id":507, "Min":0, "Max":5},
+        {"Name":"tuna", "Id":8081, "Min":5, "Max":75},
+        {"Name":"fly wings", "Id":601, "Min":5, "Max":100},
+        {"Name":"greenpot", "Id":506, "Min":0, "Max":5}
+    ],
+    "ItemUse":[
+        {"Name":"Converter fire", "Id":12114, "MinHP":-1, "MinSP":-1,"BuffId": 1505 },
+        {"Name":"zerk pot", "Id":657, "MinHP":-1, "MinSP":-1,"BuffId": 39 },
+        {"Name":"greenpot", "Id":506, "MinHP":-1, "MinSP":-1,"DeBuffId": 440 },
+        {"Name":"bread", "Id":8076, "MinHP":90, "MinSP":-1,"BuffId": -1 },
+        {"Name":"tuna", "Id":8081, "MinHP":90, "MinSP":-1,"BuffId": -1 }
+    ],
+    "ItemLoot":[
+        {"Id":7043,   "Name":"finesand"}
+    ],
+    "Mob":[
+        {"Priority":1, "Id":1386, "Name":"sleeper",
+            "AtkName":"", "AtkId":0,"AtkLv":1, "MinDist": 2},
+        {"Priority":1, "Id":1091, "Name":"dragon fly",
+            "AtkName":"", "AtkId":0,"AtkLv":1, "MinDist": 2}
+    ],
+    "SKillSelf":[
+        {"Name":"preserve","Lv":5, "Id":475,     "MinHP": -1, "MinSP": 10, "BuffId": 181}
+    ]
+}
